@@ -1,0 +1,20 @@
+# Local + API laptop. BERT training runs on Colab (see bottom).
+
+# Data
+datasets          # HuggingFace loaders for HellaSwag, ARC, CommonsenseQA, SWAG
+pandas
+numpy
+
+# OpenRouter calls
+httpx             # HTTP client
+tenacity          # retry with backoff
+python-dotenv     # loads OPENROUTER_API_KEY from .env
+tqdm              # progress bars
+
+# Analysis
+scipy             # CIs
+statsmodels       # McNemar
+matplotlib
+
+# Colab only (preinstalled there; don't install locally):
+# torch, transformers, accelerate
