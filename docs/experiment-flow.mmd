@@ -25,7 +25,7 @@ flowchart TD
     VPARA --> TRAINSET["BERT training set<br/>originals + paraphrases<br/>train 11,000 · val 2,000"]
 
     %% ---------- Synthetic: brand-new questions ----------
-    GEN["SYNTHETIC: generate_new.py (API laptop)<br/>LLM drafts new questions in each<br/>paper dataset's style"] --> HNEW["Human check<br/>answer correct · exactly one right option<br/>not a near-copy · light rewording to match style"]
+    GEN["SYNTHETIC: generate_new.py (API laptop)<br/>Claude Sonnet 5.5 drafts new questions<br/>in each paper dataset's style"] --> HNEW["Human check<br/>answer correct · exactly one right option<br/>not a near-copy · light rewording to match style"]
     HNEW --> L3["Level 3<br/>400 brand-new<br/>100 x 4 paper datasets"]
 
     %% ---------- Synthetic: memorisation quiz ----------
@@ -42,7 +42,7 @@ flowchart TD
         BERTFT["Fine-tuned bert-base-uncased<br/>5 seeds (Colab T4)"]
         OPT["Optional: BERT-large 1 seed ·<br/>RoBERTa-base · RACE pre-training"]
         JEV["Jev typesafe/jev-1.13<br/>(API laptop)"]
-        LLM["LLM baselines: Qwen3.8-27B,<br/>Gemma-4-E4B (API laptop)"]
+        LLM["LLM baselines: Qwen3.8-27B,<br/>Gemma-4-26B-A4B (API laptop)"]
     end
     TRAINSET --> BERTFT
     TRAINSET -.-> OPT

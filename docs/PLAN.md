@@ -74,7 +74,7 @@ flowchart TD
     VPARA --> TRAINSET["BERT training set<br/>originals + paraphrases<br/>train 11,000 · val 2,000"]
 
     %% ---------- Synthetic: brand-new questions ----------
-    GEN["SYNTHETIC: generate_new.py (API laptop)<br/>LLM drafts new questions in each<br/>paper dataset's style"] --> HNEW["Human check<br/>answer correct · exactly one right option<br/>not a near-copy · light rewording to match style"]
+    GEN["SYNTHETIC: generate_new.py (API laptop)<br/>Claude Sonnet 5.5 drafts new questions<br/>in each paper dataset's style"] --> HNEW["Human check<br/>answer correct · exactly one right option<br/>not a near-copy · light rewording to match style"]
     HNEW --> L3["Level 3<br/>400 brand-new<br/>100 x 4 paper datasets"]
 
     %% ---------- Synthetic: memorisation quiz ----------
@@ -91,7 +91,7 @@ flowchart TD
         BERTFT["Fine-tuned bert-base-uncased<br/>5 seeds (Colab T4)"]
         OPT["Optional: BERT-large 1 seed ·<br/>RoBERTa-base · RACE pre-training"]
         JEV["Jev typesafe/jev-1.13<br/>(API laptop)"]
-        LLM["LLM baselines: Qwen3.8-27B,<br/>Gemma-4-E4B (API laptop)"]
+        LLM["LLM baselines: Qwen3.8-27B,<br/>Gemma-4-26B-A4B (API laptop)"]
     end
     TRAINSET --> BERTFT
     TRAINSET -.-> OPT
@@ -168,11 +168,13 @@ Three LLM-generated datasets. All scripts run on the API laptop, are resumable a
 - Input: all 8,500 sampled questions (train, val and test).
 - Output: question rephrased, options rephrased where sensible, options reshuffled. Meaning and correct answer preserved.
 - Used for two separate things, from separate questions: (a) train/val paraphrases → BERT training data; (b) test paraphrases → Level 2. Same script, model and prompt for both, so BERT is used to the paraphrase style.
-- Model: **pilot 2 candidate models on the same 30 questions**, pick on meaning preservation in the manual check. Must not be the same family as any LLM baseline. Confirm prices on the API laptop. Estimated cost for the whole project (~6M tokens): under $3 for budget models, ~$20 for Claude Haiku 4.5.
+- Model: **pilot 2 candidate models on the same 30 questions**, pick on meaning preservation in the manual check. Must not be the same family as any LLM baseline (no Qwen, Gemma or Gemini). Candidates: `openai/gpt-6-luna` ($0.10 / $0.50 per M in/out) and `mistralai/mistral-small-2603` ($0.15 / $0.60); backup `deepseek/deepseek-v4.1-flash` ($0.055 / $1.32). Prices checked on OpenRouter 2026-10-06. Estimated cost for the whole project (~6M tokens): ~$2, half that with the `:batch` variants.
+- The winner is also used for `swap.py` (A3.3) and the IPIP paraphrases (B1 step 4).
 - Validation (`validate.py`): automatic checks (answer still present, option count unchanged, text actually changed) + manual review of a random 50, rating meaning preserved and whether the paraphrase made the question easier / harder / same.
 
 **A3.2 Brand-new questions — `generate_new.py`**
 - An LLM drafts new questions in the style of each paper dataset: 100 × 4 = **400**.
+- Model: **`anthropic/claude-sonnet-5.5`** ($2 / $10 per M in/out, checked 2026-10-06). A stronger model than the paraphraser on purpose: small volume, and better drafts mean less human fixing. Not Jev's or a baseline's family.
 - Human check on every question: correct answer is right, exactly one option is right, not a near-copy of a benchmark item. Lightly reword so the text reads like the human-written originals (matters for the quiz control).
 - Used as **Level 3** (all 400) and as the **quiz control items** (100 of them).
 
@@ -187,7 +189,7 @@ Three LLM-generated datasets. All scripts run on the API laptop, are resumable a
 | `bert-base-uncased` — untrained | Multiple-choice head randomly initialised, no fine-tuning | Chance floor |
 | `bert-base-uncased` — fine-tuned | See A5 | Main baseline + **control** for paraphrase difficulty |
 | Jev (`typesafe/jev-1.13`) | None | Subject |
-| LLM baselines: Qwen3.8-27B, Gemma-4-E4B (pending check) | None. As in the paper: one prompt, read the next-token probabilities of the option letters, renormalise | Added **after** Jev; same models as the paper so its LLM numbers can be reproduced too |
+| LLM baselines: `qwen/qwen3.8-27b`, `google/gemma-4-26b-a4b-it` | None. As in the paper: one prompt, read the next-token probabilities of the option letters, renormalise | Added **after** Jev; same models as the paper so its LLM numbers can be reproduced too |
 | *Optional:* `bert-large-uncased`, 1 seed | As A5 | Only if BERT-base is weak; the model HellaSwag was filtered against |
 | *Optional:* `roberta-base` | As A5 | Stronger encoder for the accuracy comparison only (see below) |
 
@@ -330,9 +332,21 @@ Two conditions per benchmark: **no persona** (actual ability) and **"pretend to 
 - Re-render the flow diagram after editing A0 (needs Node):
   `sed -n '/^```mermaid/,/^```$/p' docs/PLAN.md | sed '1d;$d' > docs/experiment-flow.mmd && npx -y @mermaid-js/mermaid-cli -i docs/experiment-flow.mmd -o docs/experiment-flow.png -s 2 -b white`
 
+## Decided
+
+Model lineup (OpenRouter listing checked 2026-10-06; pin these IDs, no `~…-latest` aliases, no `:free` variants):
+
+| Role | Model | $/M in / out | Notes |
+|---|---|---|---|
+| Subject | `typesafe/jev-1.13` | 0.042 / free | 32k context. Not in the default `/api/v1/models` list (its output type is `decisions`, not text); use `?output_modalities=all`. Avoid `typesafe/jev-router` (picks a model per request). |
+| LLM baseline | `qwen/qwen3.8-27b` | 0.425 / 2.55 | The paper's model; logprobs listed |
+| LLM baseline | `google/gemma-4-26b-a4b-it` | 0.09 / 0.30 | Gemma-4-E4B is not on OpenRouter. 26B-A4B has the same ~4B active parameters but more in total; report this difference. Chosen over running E4B on Colab, which stays reserved for BERT. Logprobs listed |
+| New questions (A3.2) | `anthropic/claude-sonnet-5.5` | 2 / 10 | |
+| Paraphrases + swaps (A3.1, A3.3) | Pilot pending | | See Open questions |
+
 ## Open questions
 
-- Paraphrasing model: pilot 2 candidates on the API laptop (candidates: `openai/gpt-5-nano`, `google/gemini-2.0-flash-001`, `mistralai/mistral-small-3.1-24b-instruct`, `anthropic/claude-haiku-4.5`; prices to confirm). No Qwen or Gemma, since those are the LLM baselines.
-- LLM baselines: **Qwen3.8-27B and Gemma-4-E4B** (the paper's comparison models), pending the API-laptop check in [`api-laptop-checks.md`](api-laptop-checks.md): available on OpenRouter? logprobs supported? Fallback: same family, nearest size that has logprobs.
+- Paraphrasing model: pilot `openai/gpt-6-luna` vs `mistralai/mistral-small-2603` (A3.1).
+- Live checks still to run once `OPENROUTER_API_KEY` is set (steps 3–4 of [`api-laptop-checks.md`](api-laptop-checks.md)): logprobs actually return A–D probabilities for both baselines; Jev smoke test.
 - Confirm the memorisation threshold in A8 (log-odds, CI above 0 and ≥ 2× BERT's drop) before running Jev.
 - Add an MMLU math slice to test number-swapping (relevant to the paper's math anomaly)?
