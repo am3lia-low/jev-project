@@ -1,0 +1,77 @@
+flowchart TD
+    %% ---------- Source datasets (human-written) ----------
+    subgraph SRC["Source datasets (human-written, public)"]
+        HS["HellaSwag<br/>train 39,905 · val 10,042<br/>4 options"]
+        AE["ARC-Easy<br/>train 2,251 · test 2,376<br/>3-5 options"]
+        AC["ARC-Challenge<br/>train 1,119 · val 299 · test 1,172<br/>3-5 options"]
+        CQ["CommonsenseQA<br/>train 9,741 · val 1,221<br/>5 options"]
+        SW["SWAG (BERT-fair control)<br/>train 73,546 · val 20,006<br/>4 options"]
+    end
+
+    %% ---------- Sampling (scripted) ----------
+    SRC --> SAMPLE["sample.py (work laptop)<br/>sample · split by question · stable IDs<br/>labels to A-E · dedupe SWAG vs HellaSwag<br/>store original + balanced-shuffle order"]
+    SAMPLE --> TRV["Train 1,100 + Val 200 per dataset<br/>5,500 + 1,000 in total"]
+    SAMPLE --> TEST["Test 400 per dataset<br/>2,000 in total"]
+
+    %% ---------- Levels 0 and 1 (scripted) ----------
+    TEST --> L0["Level 0<br/>original wording + original order"]
+    TEST --> L1["Level 1<br/>original wording, balanced shuffle"]
+
+    %% ---------- Synthetic: paraphrases ----------
+    TRV --> PARA["SYNTHETIC: paraphrase.py (API laptop)<br/>cheap OpenRouter LLM, chosen by pilot<br/>not the same family as any LLM baseline<br/>rephrase question + options, reshuffle"]
+    TEST --> PARA
+    PARA --> VPARA["validate.py<br/>auto: answer kept, option count, text changed<br/>manual: 50 items, meaning + difficulty rating"]
+    VPARA --> L2["Level 2<br/>paraphrased + shuffled<br/>2,000"]
+    VPARA --> TRAINSET["BERT training set<br/>originals + paraphrases<br/>train 11,000 · val 2,000"]
+
+    %% ---------- Synthetic: brand-new questions ----------
+    GEN["SYNTHETIC: generate_new.py (API laptop)<br/>LLM drafts new questions in each<br/>paper dataset's style"] --> HNEW["Human check<br/>answer correct · exactly one right option<br/>not a near-copy · light rewording to match style"]
+    HNEW --> L3["Level 3<br/>400 brand-new<br/>100 x 4 paper datasets"]
+
+    %% ---------- Synthetic: memorisation quiz ----------
+    TEST --> QSEL["Quiz benchmark items<br/>400 = 100 x 4 paper datasets<br/>Level 0 wording"]
+    L3 --> QCTRL["Quiz control items<br/>100 = 25 x 4, taken from Level 3"]
+    QSEL --> SWAP["SYNTHETIC: swap.py (API laptop)<br/>3 synonym-swap versions per item<br/>word-level only, same structure + answer"]
+    QCTRL --> SWAP
+    SWAP --> VSWAP["validate_swaps.py<br/>auto: all distinct, word count within 2,<br/>word-level edits only · manual: 30 items"]
+    VSWAP --> QUIZ["Quiz, 500 items<br/>A-D = original + 3 swaps, position balanced<br/>E = none of the provided options"]
+
+    %% ---------- Models ----------
+    subgraph MODELS["Models"]
+        BERTU["Untrained BERT-base<br/>chance floor"]
+        BERTFT["Fine-tuned bert-base-uncased<br/>5 seeds (Colab T4)"]
+        OPT["Optional: BERT-large 1 seed ·<br/>RoBERTa-base · RACE pre-training"]
+        JEV["Jev typesafe/jev-1.13<br/>(API laptop)"]
+        LLM["1-2 LLM baselines<br/>(API laptop)"]
+    end
+    TRAINSET --> BERTFT
+    TRAINSET -.-> OPT
+
+    L0 --> MODELS
+    L1 --> MODELS
+    L2 --> MODELS
+    L3 --> MODELS
+    QUIZ --> JEV
+    QUIZ --> LLM
+
+    %% ---------- Results ----------
+    MODELS --> R1["Accuracy + 95% CI · ECE · latency · cost<br/>per model x dataset x level"]
+    R1 --> R2["Paired McNemar between levels<br/>Jev vs BERT drop in log-odds<br/>pooled over SWAG, ARC-E, ARC-C, CSQA if BERT valid<br/>HellaSwag reported separately"]
+    JEV --> R3["Quiz: % original picked vs 25%<br/>benchmark items vs control items"]
+    LLM --> R3
+    R1 --> R4["Level 3 accuracy<br/>vs Level 0"]
+    R2 --> FINAL["Memorisation verdict<br/>ladder + quiz + Level 3"]
+    R3 --> FINAL
+    R4 --> FINAL
+
+    %% ---------- Styles ----------
+    classDef human fill:#dbeafe,stroke:#2563eb,color:#1e3a8a
+    classDef synth fill:#ffedd5,stroke:#ea580c,color:#7c2d12
+    classDef script fill:#f3f4f6,stroke:#6b7280,color:#111827
+    classDef model fill:#dcfce7,stroke:#16a34a,color:#14532d
+    classDef result fill:#ede9fe,stroke:#7c3aed,color:#4c1d95
+    class HS,AE,AC,CQ,SW human
+    class PARA,GEN,SWAP synth
+    class SAMPLE,TRV,TEST,L0,L1,L2,L3,TRAINSET,VPARA,HNEW,QSEL,QCTRL,VSWAP,QUIZ script
+    class BERTU,BERTFT,OPT,JEV,LLM model
+    class R1,R2,R3,R4,FINAL result
