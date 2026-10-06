@@ -44,7 +44,7 @@ No prior work found on: BERT vs Jev on MCQ reasoning, paraphrase-based memorisat
 
 Legend: **blue** = original human-written data · **orange** = synthetic (LLM-generated) · **grey** = scripted step / derived set · **green** = models · **purple** = results. Dashed = optional.
 
-A rendered copy for reference is in [`docs/experiment-flow.png`](docs/experiment-flow.png). It is generated from this diagram; re-render it after any change (see [Environment](#environment)).
+A rendered copy for reference is in [`docs/experiment-flow.png`](experiment-flow.png). It is generated from this diagram; re-render it after any change (see [Environment](#environment)).
 
 ```mermaid
 flowchart TD
@@ -91,7 +91,7 @@ flowchart TD
         BERTFT["Fine-tuned bert-base-uncased<br/>5 seeds (Colab T4)"]
         OPT["Optional: BERT-large 1 seed ·<br/>RoBERTa-base · RACE pre-training"]
         JEV["Jev typesafe/jev-1.13<br/>(API laptop)"]
-        LLM["1-2 LLM baselines<br/>(API laptop)"]
+        LLM["LLM baselines: Qwen3.8-27B,<br/>Gemma-4-E4B (API laptop)"]
     end
     TRAINSET --> BERTFT
     TRAINSET -.-> OPT
@@ -187,7 +187,7 @@ Three LLM-generated datasets. All scripts run on the API laptop, are resumable a
 | `bert-base-uncased` — untrained | Multiple-choice head randomly initialised, no fine-tuning | Chance floor |
 | `bert-base-uncased` — fine-tuned | See A5 | Main baseline + **control** for paraphrase difficulty |
 | Jev (`typesafe/jev-1.13`) | None | Subject |
-| 1–2 OpenRouter LLMs | None (zero/few-shot prompting) | Added **after** Jev |
+| LLM baselines: Qwen3.8-27B, Gemma-4-E4B (pending check) | None. As in the paper: one prompt, read the next-token probabilities of the option letters, renormalise | Added **after** Jev; same models as the paper so its LLM numbers can be reproduced too |
 | *Optional:* `bert-large-uncased`, 1 seed | As A5 | Only if BERT-base is weak; the model HellaSwag was filtered against |
 | *Optional:* `roberta-base` | As A5 | Stronger encoder for the accuracy comparison only (see below) |
 
@@ -328,11 +328,11 @@ Two conditions per benchmark: **no persona** (actual ability) and **"pretend to 
 - Python ≥ 3.12, managed with `uv`.
 - API keys via environment variables (`OPENROUTER_API_KEY`), never committed.
 - Re-render the flow diagram after editing A0 (needs Node):
-  `sed -n '/^```mermaid/,/^```$/p' PLAN.md | sed '1d;$d' > docs/experiment-flow.mmd && npx -y @mermaid-js/mermaid-cli -i docs/experiment-flow.mmd -o docs/experiment-flow.png -s 2 -b white`
+  `sed -n '/^```mermaid/,/^```$/p' docs/PLAN.md | sed '1d;$d' > docs/experiment-flow.mmd && npx -y @mermaid-js/mermaid-cli -i docs/experiment-flow.mmd -o docs/experiment-flow.png -s 2 -b white`
 
 ## Open questions
 
-- Paraphrasing model: pilot 2 candidates on the API laptop (candidates: `openai/gpt-5-nano`, `google/gemini-2.0-flash-001`, `qwen/qwen3-235b-a22b-2507`, `mistralai/mistral-small-3.1-24b-instruct`, `anthropic/claude-haiku-4.5`; prices to confirm).
-- Which 1–2 LLMs for baselines (must differ in family from the paraphraser)?
+- Paraphrasing model: pilot 2 candidates on the API laptop (candidates: `openai/gpt-5-nano`, `google/gemini-2.0-flash-001`, `mistralai/mistral-small-3.1-24b-instruct`, `anthropic/claude-haiku-4.5`; prices to confirm). No Qwen or Gemma, since those are the LLM baselines.
+- LLM baselines: **Qwen3.8-27B and Gemma-4-E4B** (the paper's comparison models), pending the API-laptop check in [`api-laptop-checks.md`](api-laptop-checks.md): available on OpenRouter? logprobs supported? Fallback: same family, nearest size that has logprobs.
 - Confirm the memorisation threshold in A8 (log-odds, CI above 0 and ≥ 2× BERT's drop) before running Jev.
 - Add an MMLU math slice to test number-swapping (relevant to the paper's math anomaly)?

@@ -42,7 +42,7 @@ flowchart TD
         BERTFT["Fine-tuned bert-base-uncased<br/>5 seeds (Colab T4)"]
         OPT["Optional: BERT-large 1 seed ·<br/>RoBERTa-base · RACE pre-training"]
         JEV["Jev typesafe/jev-1.13<br/>(API laptop)"]
-        LLM["1-2 LLM baselines<br/>(API laptop)"]
+        LLM["LLM baselines: Qwen3.8-27B,<br/>Gemma-4-E4B (API laptop)"]
     end
     TRAINSET --> BERTFT
     TRAINSET -.-> OPT
