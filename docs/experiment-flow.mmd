@@ -9,7 +9,7 @@ flowchart TD
     end
 
     %% ---------- Sampling (scripted) ----------
-    SRC --> SAMPLE["sample.py (work laptop)<br/>sample · split by question · stable IDs<br/>labels to A-E · dedupe SWAG vs HellaSwag<br/>store original + balanced-shuffle order"]
+    SRC --> SAMPLE["02_sample.py (API laptop)<br/>sample · split by question · stable IDs<br/>labels to A-E · dedupe SWAG vs HellaSwag<br/>store original + balanced-shuffle order"]
     SAMPLE --> TRV["Train 1,100 + Val 200 per dataset<br/>5,500 + 1,000 in total"]
     SAMPLE --> TEST["Test 400 per dataset<br/>2,000 in total"]
 
@@ -18,22 +18,22 @@ flowchart TD
     TEST --> L1["Level 1<br/>original wording, balanced shuffle"]
 
     %% ---------- Synthetic: paraphrases ----------
-    TRV --> PARA["SYNTHETIC: paraphrase.py (API laptop)<br/>cheap OpenRouter LLM, chosen by pilot<br/>not the same family as any LLM baseline<br/>rephrase question + options, reshuffle"]
+    TRV --> PARA["SYNTHETIC: 03_paraphrase.py (API laptop)<br/>cheap OpenRouter LLM, chosen by pilot<br/>not the same family as any LLM baseline<br/>rephrase question + options, reshuffle"]
     TEST --> PARA
-    PARA --> VPARA["validate.py<br/>auto: answer kept, option count, text changed<br/>manual: 50 items, meaning + difficulty rating"]
+    PARA --> VPARA["04_validate.py<br/>auto: answer kept, option count, text changed<br/>manual: 50 items, meaning + difficulty rating"]
     VPARA --> L2["Level 2<br/>paraphrased + shuffled<br/>2,000"]
     VPARA --> TRAINSET["BERT training set<br/>originals + paraphrases<br/>train 11,000 · val 2,000"]
 
     %% ---------- Synthetic: brand-new questions ----------
-    GEN["SYNTHETIC: generate_new.py (API laptop)<br/>Claude Sonnet 5.5 drafts new questions<br/>in each paper dataset's style"] --> HNEW["Human check<br/>answer correct · exactly one right option<br/>not a near-copy · light rewording to match style"]
+    GEN["SYNTHETIC: 05_generate_new.py (API laptop)<br/>Claude Sonnet 5.5 drafts new questions<br/>in each paper dataset's style"] --> HNEW["Human check<br/>answer correct · exactly one right option<br/>not a near-copy · light rewording to match style"]
     HNEW --> L3["Level 3<br/>400 brand-new<br/>100 x 4 paper datasets"]
 
     %% ---------- Synthetic: memorisation quiz ----------
     TEST --> QSEL["Quiz benchmark items<br/>400 = 100 x 4 paper datasets<br/>Level 0 wording"]
     L3 --> QCTRL["Quiz control items<br/>100 = 25 x 4, taken from Level 3"]
-    QSEL --> SWAP["SYNTHETIC: swap.py (API laptop)<br/>3 synonym-swap versions per item<br/>word-level only, same structure + answer"]
+    QSEL --> SWAP["SYNTHETIC: 06a_swap.py (API laptop)<br/>3 synonym-swap versions per item<br/>word-level only, same structure + answer"]
     QCTRL --> SWAP
-    SWAP --> VSWAP["validate_swaps.py<br/>auto: all distinct, word count within 2,<br/>word-level edits only · manual: 30 items"]
+    SWAP --> VSWAP["06b_validate_swaps.py<br/>auto: all distinct, word count within 2,<br/>word-level edits only · manual: 30 items"]
     VSWAP --> QUIZ["Quiz, 500 items<br/>A-D = original + 3 swaps, position balanced<br/>E = none of the provided options"]
 
     %% ---------- Models ----------

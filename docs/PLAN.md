@@ -40,7 +40,7 @@ No prior work found on: BERT vs Jev on MCQ reasoning, paraphrase-based memorisat
 
 ## Part A — Jev benchmarks
 
-Code: [`01-jev-benchmarks/`](../01-jev-benchmarks/) (see its README for layout and the helper build list).
+Code: [`01-jev-benchmarks/`](../01-jev-benchmarks/) (see its README for the folder layout). Scripts are numbered by their step in [A10](#a10-order-of-work).
 
 ### A0. Experiment flow
 
@@ -60,7 +60,7 @@ flowchart TD
     end
 
     %% ---------- Sampling (scripted) ----------
-    SRC --> SAMPLE["sample.py (work laptop)<br/>sample · split by question · stable IDs<br/>labels to A-E · dedupe SWAG vs HellaSwag<br/>store original + balanced-shuffle order"]
+    SRC --> SAMPLE["02_sample.py (API laptop)<br/>sample · split by question · stable IDs<br/>labels to A-E · dedupe SWAG vs HellaSwag<br/>store original + balanced-shuffle order"]
     SAMPLE --> TRV["Train 1,100 + Val 200 per dataset<br/>5,500 + 1,000 in total"]
     SAMPLE --> TEST["Test 400 per dataset<br/>2,000 in total"]
 
@@ -69,22 +69,22 @@ flowchart TD
     TEST --> L1["Level 1<br/>original wording, balanced shuffle"]
 
     %% ---------- Synthetic: paraphrases ----------
-    TRV --> PARA["SYNTHETIC: paraphrase.py (API laptop)<br/>cheap OpenRouter LLM, chosen by pilot<br/>not the same family as any LLM baseline<br/>rephrase question + options, reshuffle"]
+    TRV --> PARA["SYNTHETIC: 03_paraphrase.py (API laptop)<br/>cheap OpenRouter LLM, chosen by pilot<br/>not the same family as any LLM baseline<br/>rephrase question + options, reshuffle"]
     TEST --> PARA
-    PARA --> VPARA["validate.py<br/>auto: answer kept, option count, text changed<br/>manual: 50 items, meaning + difficulty rating"]
+    PARA --> VPARA["04_validate.py<br/>auto: answer kept, option count, text changed<br/>manual: 50 items, meaning + difficulty rating"]
     VPARA --> L2["Level 2<br/>paraphrased + shuffled<br/>2,000"]
     VPARA --> TRAINSET["BERT training set<br/>originals + paraphrases<br/>train 11,000 · val 2,000"]
 
     %% ---------- Synthetic: brand-new questions ----------
-    GEN["SYNTHETIC: generate_new.py (API laptop)<br/>Claude Sonnet 5.5 drafts new questions<br/>in each paper dataset's style"] --> HNEW["Human check<br/>answer correct · exactly one right option<br/>not a near-copy · light rewording to match style"]
+    GEN["SYNTHETIC: 05_generate_new.py (API laptop)<br/>Claude Sonnet 5.5 drafts new questions<br/>in each paper dataset's style"] --> HNEW["Human check<br/>answer correct · exactly one right option<br/>not a near-copy · light rewording to match style"]
     HNEW --> L3["Level 3<br/>400 brand-new<br/>100 x 4 paper datasets"]
 
     %% ---------- Synthetic: memorisation quiz ----------
     TEST --> QSEL["Quiz benchmark items<br/>400 = 100 x 4 paper datasets<br/>Level 0 wording"]
     L3 --> QCTRL["Quiz control items<br/>100 = 25 x 4, taken from Level 3"]
-    QSEL --> SWAP["SYNTHETIC: swap.py (API laptop)<br/>3 synonym-swap versions per item<br/>word-level only, same structure + answer"]
+    QSEL --> SWAP["SYNTHETIC: 06a_swap.py (API laptop)<br/>3 synonym-swap versions per item<br/>word-level only, same structure + answer"]
     QCTRL --> SWAP
-    SWAP --> VSWAP["validate_swaps.py<br/>auto: all distinct, word count within 2,<br/>word-level edits only · manual: 30 items"]
+    SWAP --> VSWAP["06b_validate_swaps.py<br/>auto: all distinct, word count within 2,<br/>word-level edits only · manual: 30 items"]
     VSWAP --> QUIZ["Quiz, 500 items<br/>A-D = original + 3 swaps, position balanced<br/>E = none of the provided options"]
 
     %% ---------- Models ----------
@@ -142,7 +142,7 @@ The four MCQ datasets from the arXiv paper, so results are comparable, plus SWAG
 
 - Paper datasets use the split the paper evaluated on (inferred from its question counts: HellaSwag 10,042; ARC 3,548 = 2,376 + 1,172; CommonsenseQA 1,221). SWAG has no paper number.
 - **Why SWAG:** HellaSwag's wrong answers were filtered with BERT-Large as the adversary, so BERT-Large only reached 47.3% ([HellaSwag paper](https://arxiv.org/pdf/1905.07830)). SWAG is the same kind of task without that anti-BERT filtering, and BERT scored >86% on it ([SWAG paper](https://arxiv.org/pdf/1808.05326)). SWAG gives BERT a fair dataset for the difficulty control. HellaSwag is still used for Jev (comparability with the paper); BERT's HellaSwag score is reported with this caveat.
-- **SWAG ↔ HellaSwag overlap:** both draw on ActivityNet Captions. `sample.py` must drop SWAG training questions that share a video ID or context text with any HellaSwag test question.
+- **SWAG ↔ HellaSwag overlap:** both draw on ActivityNet Captions. `02_sample.py` must drop SWAG training questions that share a video ID or context text with any HellaSwag test question.
 - SWAG is used in Levels 0–2 only. Level 3 and the memorisation quiz cover the four paper datasets.
 
 ### A2. Sampling and splitting
@@ -166,23 +166,23 @@ Rules:
 
 Three LLM-generated datasets. All scripts run on the API laptop, are resumable and cache every response.
 
-**A3.1 Paraphrases — `paraphrase.py`**
+**A3.1 Paraphrases — `03_paraphrase.py`**
 - Input: all 8,500 sampled questions (train, val and test).
 - Output: question rephrased, options rephrased where sensible, options reshuffled. Meaning and correct answer preserved.
 - Used for two separate things, from separate questions: (a) train/val paraphrases → BERT training data; (b) test paraphrases → Level 2. Same script, model and prompt for both, so BERT is used to the paraphrase style.
 - Model: **pilot 2 candidate models on the same 30 questions**, pick on meaning preservation in the manual check. Must not be the same family as any LLM baseline (no Qwen, Gemma or Gemini). Candidates: `openai/gpt-6-luna` ($0.10 / $0.50 per M in/out) and `mistralai/mistral-small-2603` ($0.15 / $0.60); backup `deepseek/deepseek-v4.1-flash` ($0.055 / $1.32). Prices checked on OpenRouter 2026-10-06. Estimated cost for the whole project (~6M tokens): ~$2, half that with the `:batch` variants.
-- The winner is also used for `swap.py` (A3.3) and the IPIP paraphrases (B1 step 4).
-- Validation (`validate.py`): automatic checks (answer still present, option count unchanged, text actually changed) + manual review of a random 50, rating meaning preserved and whether the paraphrase made the question easier / harder / same.
+- The winner is also used for `06a_swap.py` (A3.3) and the IPIP paraphrases (B1 step 4).
+- Validation (`04_validate.py`): automatic checks (answer still present, option count unchanged, text actually changed) + manual review of a random 50, rating meaning preserved and whether the paraphrase made the question easier / harder / same.
 
-**A3.2 Brand-new questions — `generate_new.py`**
+**A3.2 Brand-new questions — `05_generate_new.py`**
 - An LLM drafts new questions in the style of each paper dataset: 100 × 4 = **400**.
 - Model: **`anthropic/claude-sonnet-5.5`** ($2 / $10 per M in/out, checked 2026-10-06). A stronger model than the paraphraser on purpose: small volume, and better drafts mean less human fixing. Not Jev's or a baseline's family.
 - Human check on every question: correct answer is right, exactly one option is right, not a near-copy of a benchmark item. Lightly reword so the text reads like the human-written originals (matters for the quiz control).
 - Used as **Level 3** (all 400) and as the **quiz control items** (100 of them).
 
-**A3.3 Synonym swaps — `swap.py`** (see A7 for the full quiz)
+**A3.3 Synonym swaps — `06a_swap.py`** (see A7 for the full quiz)
 - For each of the 500 quiz items, an LLM makes **3 versions** that only replace words with context-fitting synonyms. Sentence structure, word order, meaning and answer unchanged. 1,500 versions in total.
-- Validation (`validate_swaps.py`): all 4 versions distinct; word count within ±2; edits are word-level only; option count unchanged; manual check of 30 (meaning kept, no version sounds obviously off). Regenerate failures.
+- Validation (`06b_validate_swaps.py`): all 4 versions distinct; word count within ±2; edits are word-level only; option count unchanged; manual check of 30 (meaning kept, no version sounds obviously off). Regenerate failures.
 
 ### A4. Models
 
@@ -234,9 +234,9 @@ Purpose: test whether Jev recognises the **exact wording** of benchmark question
 
 Steps:
 1. **Pick items:** 100 test questions per paper dataset (original wording and option order); 25 Level 3 questions per paper dataset. Level 3 must be built first.
-2. **Make swaps:** `swap.py` makes 3 synonym-swap versions of each item (A3.3).
-3. **Validate:** `validate_swaps.py` (A3.3).
-4. **Build quiz:** options A–D = original + 3 swaps, original's position balanced across A–D; option E = "None of the provided options". Prompt adapted from the DCQ repo to Jev's `choice` type, tested on 20 *training* questions, then frozen.
+2. **Make swaps:** `06a_swap.py` makes 3 synonym-swap versions of each item (A3.3).
+3. **Validate:** `06b_validate_swaps.py` (A3.3).
+4. **Build quiz** (`06c_build_quiz.py`): options A–D = original + 3 swaps, original's position balanced across A–D; option E = "None of the provided options". Prompt adapted from the DCQ repo to Jev's `choice` type, tested on 20 *training* questions, then frozen.
 5. **Run:** Jev, then the LLM baselines on the same 500 items. Log all returned probabilities.
 6. **Score:** % original picked; binomial test vs 25% (per dataset and pooled); benchmark vs control with a two-proportion test; pick rate per position A–D to check position bias.
 
@@ -273,15 +273,17 @@ Comparisons:
 ### A10. Order of work
 
 1. [ ] Repo setup (this plan, project structure, dependencies)
-2. [ ] `sample.py` — download 5 datasets, dedupe SWAG vs HellaSwag, sample, split, normalise labels, store original + shuffled orders, assign IDs
-3. [ ] `paraphrase.py` — pilot 2 models on 30 questions, choose, full run (API laptop)
-4. [ ] `validate.py` — automatic checks + manual 50
-5. [ ] `generate_new.py` — 400 Level 3 questions + human check (API laptop)
-6. [ ] `swap.py` + `validate_swaps.py` — quiz versions for 400 benchmark + 100 control items (API laptop)
-7. [ ] Colab notebook — untrained BERT; fine-tune BERT-base (5 seeds); above-chance rule; evaluate Levels 0–3; optional fallbacks
-8. [ ] Jev (API laptop): 8a sanity check · 8b repeatability · 8c Levels 0–3 · 8d quiz
-9. [ ] LLM baselines (API laptop): Levels 0–3 + quiz
-10. [ ] Analysis — tables, plots, McNemar, log-odds comparison, quiz scoring, verdict
+2. [ ] `02_sample.py` — download 5 datasets, dedupe SWAG vs HellaSwag, sample, split, normalise labels, store original + shuffled orders, assign IDs
+3. [ ] `03_paraphrase.py` — pilot 2 models on 30 questions, choose, full run (API laptop)
+4. [ ] `04_validate.py` — automatic checks + manual 50
+5. [ ] `05_generate_new.py` — 400 Level 3 questions + human check (API laptop)
+6. [ ] `06a_swap.py` + `06b_validate_swaps.py` — quiz versions for 400 benchmark + 100 control items (API laptop); `06c_build_quiz.py` — assemble the 500-item quiz
+7. [ ] `07a_build_bert_data.py` — originals + paraphrases for Colab; `notebooks/07b_bert_colab.ipynb` — untrained BERT; fine-tune BERT-base (5 seeds); above-chance rule; evaluate Levels 0–3; optional fallbacks
+8. [ ] `08_run_jev.py` (API laptop): 8a sanity check · 8b repeatability · 8c Levels 0–3 · 8d quiz
+9. [ ] `09_run_llm.py` (API laptop): LLM baselines, Levels 0–3 + quiz
+10. [ ] `10_analyse.py` — tables, plots, McNemar, log-odds comparison, quiz scoring, verdict
+
+Script files are named by their step number above (`06a`, `06b`, … when a step has several), so the folder lists them in run order.
 
 ---
 

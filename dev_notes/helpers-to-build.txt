@@ -1,45 +1,49 @@
 JEV BENCHMARKS - HELPER FILES TO BUILD
 ======================================
-Shared code for the jev benchmarks scripts. Goes in 01-jev-benchmarks/helpers/.
+Shared code for the jev benchmarks scripts. Goes in 01-jev-benchmarks/helpers/
+(cache.py, stats.py and openrouter.py move to src/jev_common/; see TODO.md).
 Section references (A1, A2, ...) are to docs/PLAN.md, Part A.
 Build order: 1-4 and 11 first (sample.py needs them), then 5-6, then the rest.
+Item 7 is on hold (API laptop). No tests are being written for the helpers.
 Tick [x] when done.
 
 CORE DATA (needed by every script)
-[ ] 1. schema.py      One question format shared by all scripts: id, dataset, split,
+[x] 1. schema.py      One question format shared by all scripts: id, dataset, split,
                       question, options, answer letter, original order, shuffled
                       order, version. Plus JSONL read/write.
-[ ] 2. ids.py         Stable IDs like "arcc-test-0417", shared by every version of
+[x] 2. ids.py         Stable IDs like "arcc-test-0417", shared by every version of
                       a question (A2 rule 5).
-[ ] 3. labels.py      Normalise answer labels to A-E (ARC uses 1/2/3/4); convert
+[x] 3. labels.py      Normalise answer labels to A-E (ARC uses 1/2/3/4); convert
                       between letters and positions (A2 rule 4).
-[ ] 4. shuffle.py     Seeded balanced shuffle: correct position balanced within each
+[x] 4. shuffle.py     Seeded balanced shuffle: correct position balanced within each
                       option-count group of 3, 4, 5 (A2 rule 3). Also reused to
                       balance the original's position in the quiz (A7).
 
 DATASETS
-[ ] 5. loaders.py     Load the 5 datasets from HuggingFace into the shared format (A1).
+[x] 5. loaders.py     Load the 5 datasets from HuggingFace into the shared format (A1).
                       Written here; run on the API laptop if HuggingFace needs a
                       login or is blocked on the work network.
-[ ] 6. dedupe.py      Drop SWAG training questions that share a video ID or context
+[x] 6. dedupe.py      Drop SWAG training questions that share a video ID or context
                       with any HellaSwag test question (A1).
 
 WRITTEN HERE, RUN ON THE API LAPTOP
-[ ] 7. openrouter.py  API client: pinned model IDs, retry with backoff, log everything
-                      (A9). Test here with fake responses.
-[ ] 8. cache.py       On-disk cache keyed by a hash of each request, so API scripts
+[ ] 7. openrouter.py  ON HOLD: write this on the API laptop. The work network blocks
+                      the OpenRouter docs, so Jev's request/response format can't be
+                      checked from here. API client: pinned model IDs, retry with
+                      backoff, log everything (A9). Use cache.py (8) for caching.
+[x] 8. cache.py       On-disk cache keyed by a hash of each request, so API scripts
                       can resume where they stopped (A3).
 
 VALIDATION AND ANALYSIS
-[ ] 9. text_checks.py Automatic checks for validate.py and validate_swaps.py: answer
+[x] 9. text_checks.py Automatic checks for validate.py and validate_swaps.py: answer
                       still present, option count unchanged, text actually changed,
                       all versions distinct, word count within +/-2, word-level
                       edits only (A3.1, A3.3).
-[ ] 10. stats.py      Bootstrap 95% CI, paired McNemar, log-odds drop, ECE, binomial
+[x] 10. stats.py      Bootstrap 95% CI, paired McNemar, log-odds drop, ECE, binomial
                       test vs 25%, two-proportion test (A7, A8).
 
 SETUP
-[ ] 11. config.py     Paths, seeds, sample sizes (1,100 / 200 / 400) and every pinned
+[x] 11. config.py     Paths, seeds, sample sizes (1,100 / 200 / 400) and every pinned
                       model ID in one place (no ~...-latest aliases, no :free):
                         - Subject:        typesafe/jev-1.13
                         - LLM baselines:  qwen/qwen3.8-27b, google/gemma-4-26b-a4b-it
