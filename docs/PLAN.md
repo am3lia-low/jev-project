@@ -4,10 +4,10 @@ Evaluating TypeSafe's **Jev** (a "System One" decision model) against BERT basel
 
 The project has two independent parts:
 
-- **Part A — Experiment:** Jev vs BERT on MCQ, and how deep Jev's memorisation of public benchmarks goes.
-- **Part B — Personality:** can Jev adopt behavioural (Big Five) and intellectual personas, compared to LLMs?
+- **Part A — Jev benchmarks** ([`01-jev-benchmarks/`](../01-jev-benchmarks/)): Jev vs BERT on MCQ, and how deep Jev's memorisation of public benchmarks goes.
+- **Part B — Jevlet personas** ([`02-jevlet-personas/`](../02-jevlet-personas/)): can Jev adopt behavioural (Big Five) and intellectual personas, compared to LLMs?
 
-Last updated: 2026-10-06
+Last updated: 2026-10-07
 
 ---
 
@@ -38,7 +38,9 @@ No prior work found on: BERT vs Jev on MCQ reasoning, paraphrase-based memorisat
 
 ---
 
-## Part A — Experiment
+## Part A — Jev benchmarks
+
+Code: [`01-jev-benchmarks/`](../01-jev-benchmarks/) (see its README for layout and the helper build list).
 
 ### A0. Experiment flow
 
@@ -283,7 +285,9 @@ Comparisons:
 
 ---
 
-## Part B — Personality
+## Part B — Jevlet personas
+
+Code: [`02-jevlet-personas/`](../02-jevlet-personas/) (see its README).
 
 Separate from Part A. Jev calls are stateless (no conversation history), so classic multi-turn persona drift should not apply; the risk is a **weak pull** (persona barely shifts answers away from defaults). LLMs are the baseline throughout.
 
