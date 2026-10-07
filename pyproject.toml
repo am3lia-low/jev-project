@@ -1,10 +1,32 @@
 [project]
 name = "jev-project"
 version = "0.1.0"
-description = "Add your description here"
+description = "Evaluating TypeSafe's Jev against BERT baselines on multiple-choice questions, and probing how far it can be steered into personas."
 readme = "README.md"
 authors = [
     { name = "am3lia-low", email = "amelia.low@gmail.com" }
 ]
 requires-python = ">=3.12"
-dependencies = []
+# Local + API laptop. BERT training runs on Colab, where torch, transformers
+# and accelerate are preinstalled; don't add them here.
+dependencies = [
+    # Data
+    "datasets",          # HuggingFace loaders for HellaSwag, ARC, CommonsenseQA, SWAG
+    "pandas",
+    "numpy",
+    # OpenRouter calls
+    "httpx",             # HTTP client
+    "tenacity",          # retry with backoff
+    "python-dotenv",     # loads OPENROUTER_API_KEY from .env
+    "tqdm",              # progress bars
+    # Analysis
+    "scipy",             # CIs, McNemar, binomial and z-tests
+    "matplotlib",
+]
+
+[build-system]
+requires = ["uv_build>=0.9.22,<0.10.0"]
+build-backend = "uv_build"
+
+[tool.uv.build-backend]
+module-name = "jev_common"

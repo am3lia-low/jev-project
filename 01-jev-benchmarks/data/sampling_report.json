@@ -1,0 +1,437 @@
+{
+  "hs": {
+    "name": "HellaSwag",
+    "pool_sizes": {
+      "test": 10042,
+      "train": 39905
+    },
+    "dropped_duplicate_options": {
+      "test": [],
+      "train": []
+    },
+    "dropped_same_text_as_test": {
+      "train": []
+    },
+    "sizes": {
+      "train": 1100,
+      "val": 200,
+      "test": 400
+    },
+    "correct_position_counts": {
+      "train": {
+        "4": {
+          "0": 275,
+          "1": 275,
+          "2": 275,
+          "3": 275
+        }
+      },
+      "val": {
+        "4": {
+          "0": 50,
+          "1": 50,
+          "2": 50,
+          "3": 50
+        }
+      },
+      "test": {
+        "4": {
+          "0": 100,
+          "1": 100,
+          "2": 100,
+          "3": 100
+        }
+      }
+    }
+  },
+  "arce": {
+    "name": "ARC-Easy",
+    "pool_sizes": {
+      "test": 2376,
+      "train": 2251
+    },
+    "dropped_duplicate_options": {
+      "test": [],
+      "train": []
+    },
+    "dropped_same_text_as_test": {
+      "train": [
+        "arce-train-2246"
+      ]
+    },
+    "sizes": {
+      "train": 1100,
+      "val": 200,
+      "test": 400
+    },
+    "correct_position_counts": {
+      "train": {
+        "4": {
+          "0": 274,
+          "1": 274,
+          "2": 274,
+          "3": 273
+        },
+        "3": {
+          "0": 1,
+          "1": 1,
+          "2": 1
+        },
+        "5": {
+          "3": 1,
+          "4": 1
+        }
+      },
+      "val": {
+        "4": {
+          "0": 49,
+          "1": 50,
+          "2": 50,
+          "3": 49
+        },
+        "5": {
+          "3": 1,
+          "4": 1
+        }
+      },
+      "test": {
+        "4": {
+          "0": 99,
+          "1": 99,
+          "2": 99,
+          "3": 99
+        },
+        "5": {
+          "4": 1
+        },
+        "3": {
+          "0": 1,
+          "1": 1,
+          "2": 1
+        }
+      }
+    }
+  },
+  "arcc": {
+    "name": "ARC-Challenge",
+    "pool_sizes": {
+      "test": 1172,
+      "train": 1119,
+      "val": 299
+    },
+    "dropped_duplicate_options": {
+      "test": [],
+      "train": [],
+      "val": []
+    },
+    "dropped_same_text_as_test": {
+      "train": [
+        "arcc-train-0790",
+        "arcc-train-0941",
+        "arcc-train-1038"
+      ],
+      "val": []
+    },
+    "sizes": {
+      "train": 1100,
+      "val": 200,
+      "test": 400
+    },
+    "correct_position_counts": {
+      "train": {
+        "4": {
+          "0": 274,
+          "1": 275,
+          "2": 275,
+          "3": 274
+        },
+        "3": {
+          "0": 1
+        },
+        "5": {
+          "4": 1
+        }
+      },
+      "val": {
+        "4": {
+          "0": 49,
+          "1": 50,
+          "2": 49,
+          "3": 49
+        },
+        "3": {
+          "0": 1,
+          "1": 1
+        },
+        "5": {
+          "4": 1
+        }
+      },
+      "test": {
+        "4": {
+          "0": 99,
+          "1": 100,
+          "2": 99,
+          "3": 99
+        },
+        "3": {
+          "0": 1,
+          "1": 1
+        },
+        "5": {
+          "4": 1
+        }
+      }
+    }
+  },
+  "csqa": {
+    "name": "CommonsenseQA",
+    "pool_sizes": {
+      "test": 1221,
+      "train": 9741
+    },
+    "dropped_duplicate_options": {
+      "test": [
+        "csqa-val-0022",
+        "csqa-val-0024",
+        "csqa-val-0046",
+        "csqa-val-0131",
+        "csqa-val-0177",
+        "csqa-val-0214",
+        "csqa-val-0247",
+        "csqa-val-0306",
+        "csqa-val-0426",
+        "csqa-val-0467",
+        "csqa-val-0510",
+        "csqa-val-0525",
+        "csqa-val-0661",
+        "csqa-val-0721",
+        "csqa-val-0818",
+        "csqa-val-0840",
+        "csqa-val-0890",
+        "csqa-val-0952",
+        "csqa-val-1043",
+        "csqa-val-1085",
+        "csqa-val-1106",
+        "csqa-val-1114",
+        "csqa-val-1120",
+        "csqa-val-1178"
+      ],
+      "train": [
+        "csqa-train-0069",
+        "csqa-train-0091",
+        "csqa-train-0118",
+        "csqa-train-0142",
+        "csqa-train-0196",
+        "csqa-train-0208",
+        "csqa-train-0228",
+        "csqa-train-0271",
+        "csqa-train-0333",
+        "csqa-train-0374",
+        "csqa-train-0462",
+        "csqa-train-0527",
+        "csqa-train-0750",
+        "csqa-train-0996",
+        "csqa-train-1007",
+        "csqa-train-1008",
+        "csqa-train-1068",
+        "csqa-train-1126",
+        "csqa-train-1293",
+        "csqa-train-1304",
+        "csqa-train-1312",
+        "csqa-train-1343",
+        "csqa-train-1406",
+        "csqa-train-1407",
+        "csqa-train-1699",
+        "csqa-train-1967",
+        "csqa-train-1979",
+        "csqa-train-2103",
+        "csqa-train-2190",
+        "csqa-train-2226",
+        "csqa-train-2340",
+        "csqa-train-2342",
+        "csqa-train-2348",
+        "csqa-train-2571",
+        "csqa-train-2585",
+        "csqa-train-2794",
+        "csqa-train-2888",
+        "csqa-train-2919",
+        "csqa-train-3040",
+        "csqa-train-3099",
+        "csqa-train-3130",
+        "csqa-train-3212",
+        "csqa-train-3285",
+        "csqa-train-3483",
+        "csqa-train-3585",
+        "csqa-train-3624",
+        "csqa-train-3768",
+        "csqa-train-3904",
+        "csqa-train-3966",
+        "csqa-train-4061",
+        "csqa-train-4145",
+        "csqa-train-4257",
+        "csqa-train-4490",
+        "csqa-train-4649",
+        "csqa-train-4779",
+        "csqa-train-4833",
+        "csqa-train-4870",
+        "csqa-train-4973",
+        "csqa-train-5225",
+        "csqa-train-5339",
+        "csqa-train-5382",
+        "csqa-train-5392",
+        "csqa-train-5433",
+        "csqa-train-5434",
+        "csqa-train-5672",
+        "csqa-train-5682",
+        "csqa-train-5686",
+        "csqa-train-5809",
+        "csqa-train-5842",
+        "csqa-train-5872",
+        "csqa-train-5996",
+        "csqa-train-6236",
+        "csqa-train-6290",
+        "csqa-train-6361",
+        "csqa-train-6426",
+        "csqa-train-6473",
+        "csqa-train-6491",
+        "csqa-train-6503",
+        "csqa-train-6515",
+        "csqa-train-6592",
+        "csqa-train-6621",
+        "csqa-train-6624",
+        "csqa-train-6810",
+        "csqa-train-6853",
+        "csqa-train-6871",
+        "csqa-train-7010",
+        "csqa-train-7142",
+        "csqa-train-7283",
+        "csqa-train-7312",
+        "csqa-train-7343",
+        "csqa-train-7379",
+        "csqa-train-7543",
+        "csqa-train-7547",
+        "csqa-train-7558",
+        "csqa-train-7565",
+        "csqa-train-8064",
+        "csqa-train-8076",
+        "csqa-train-8103",
+        "csqa-train-8154",
+        "csqa-train-8171",
+        "csqa-train-8389",
+        "csqa-train-8457",
+        "csqa-train-8553",
+        "csqa-train-8581",
+        "csqa-train-8659",
+        "csqa-train-8735",
+        "csqa-train-8786",
+        "csqa-train-8797",
+        "csqa-train-8823",
+        "csqa-train-8833",
+        "csqa-train-8921",
+        "csqa-train-8968",
+        "csqa-train-9012",
+        "csqa-train-9047",
+        "csqa-train-9108",
+        "csqa-train-9119",
+        "csqa-train-9120",
+        "csqa-train-9310",
+        "csqa-train-9401",
+        "csqa-train-9487",
+        "csqa-train-9551",
+        "csqa-train-9554"
+      ]
+    },
+    "dropped_same_text_as_test": {
+      "train": []
+    },
+    "sizes": {
+      "train": 1100,
+      "val": 200,
+      "test": 400
+    },
+    "correct_position_counts": {
+      "train": {
+        "5": {
+          "0": 220,
+          "1": 220,
+          "2": 220,
+          "3": 220,
+          "4": 220
+        }
+      },
+      "val": {
+        "5": {
+          "0": 40,
+          "1": 40,
+          "2": 40,
+          "3": 40,
+          "4": 40
+        }
+      },
+      "test": {
+        "5": {
+          "0": 80,
+          "1": 80,
+          "2": 80,
+          "3": 80,
+          "4": 80
+        }
+      }
+    }
+  },
+  "swag": {
+    "name": "SWAG",
+    "pool_sizes": {
+      "test": 20006,
+      "train": 73546
+    },
+    "dropped_duplicate_options": {
+      "test": [
+        "swag-val-14608"
+      ],
+      "train": []
+    },
+    "dedupe": {
+      "dropped_by_video": 324,
+      "dropped_by_context": 0,
+      "kept": 73222
+    },
+    "dropped_same_text_as_test": {
+      "train": [
+        "swag-train-38590"
+      ]
+    },
+    "sizes": {
+      "train": 1100,
+      "val": 200,
+      "test": 400
+    },
+    "correct_position_counts": {
+      "train": {
+        "4": {
+          "0": 275,
+          "1": 275,
+          "2": 275,
+          "3": 275
+        }
+      },
+      "val": {
+        "4": {
+          "0": 50,
+          "1": 50,
+          "2": 50,
+          "3": 50
+        }
+      },
+      "test": {
+        "4": {
+          "0": 100,
+          "1": 100,
+          "2": 100,
+          "3": 100
+        }
+      }
+    }
+  }
+}

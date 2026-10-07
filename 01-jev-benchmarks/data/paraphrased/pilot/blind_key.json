@@ -1,0 +1,122 @@
+{
+ "hs-train-0255": {
+  "X": "mistralai/mistral-small-2603",
+  "Y": "openai/gpt-6-luna"
+ },
+ "hs-train-0837": {
+  "X": "openai/gpt-6-luna",
+  "Y": "mistralai/mistral-small-2603"
+ },
+ "hs-train-21103": {
+  "X": "mistralai/mistral-small-2603",
+  "Y": "openai/gpt-6-luna"
+ },
+ "hs-train-30035": {
+  "X": "openai/gpt-6-luna",
+  "Y": "mistralai/mistral-small-2603"
+ },
+ "hs-train-24841": {
+  "X": "openai/gpt-6-luna",
+  "Y": "mistralai/mistral-small-2603"
+ },
+ "hs-train-15499": {
+  "X": "mistralai/mistral-small-2603",
+  "Y": "openai/gpt-6-luna"
+ },
+ "arce-train-1270": {
+  "X": "mistralai/mistral-small-2603",
+  "Y": "openai/gpt-6-luna"
+ },
+ "arce-train-1469": {
+  "X": "mistralai/mistral-small-2603",
+  "Y": "openai/gpt-6-luna"
+ },
+ "arce-train-1981": {
+  "X": "openai/gpt-6-luna",
+  "Y": "mistralai/mistral-small-2603"
+ },
+ "arce-train-2093": {
+  "X": "mistralai/mistral-small-2603",
+  "Y": "openai/gpt-6-luna"
+ },
+ "arce-train-1209": {
+  "X": "openai/gpt-6-luna",
+  "Y": "mistralai/mistral-small-2603"
+ },
+ "arce-train-2108": {
+  "X": "mistralai/mistral-small-2603",
+  "Y": "openai/gpt-6-luna"
+ },
+ "arcc-train-0490": {
+  "X": "openai/gpt-6-luna",
+  "Y": "mistralai/mistral-small-2603"
+ },
+ "arcc-train-0590": {
+  "X": "openai/gpt-6-luna",
+  "Y": "mistralai/mistral-small-2603"
+ },
+ "arcc-train-0029": {
+  "X": "openai/gpt-6-luna",
+  "Y": "mistralai/mistral-small-2603"
+ },
+ "arcc-train-0949": {
+  "X": "mistralai/mistral-small-2603",
+  "Y": "openai/gpt-6-luna"
+ },
+ "arcc-train-0269": {
+  "X": "openai/gpt-6-luna",
+  "Y": "mistralai/mistral-small-2603"
+ },
+ "arcc-train-0123": {
+  "X": "openai/gpt-6-luna",
+  "Y": "mistralai/mistral-small-2603"
+ },
+ "csqa-train-2116": {
+  "X": "openai/gpt-6-luna",
+  "Y": "mistralai/mistral-small-2603"
+ },
+ "csqa-train-7575": {
+  "X": "mistralai/mistral-small-2603",
+  "Y": "openai/gpt-6-luna"
+ },
+ "csqa-train-3235": {
+  "X": "openai/gpt-6-luna",
+  "Y": "mistralai/mistral-small-2603"
+ },
+ "csqa-train-4987": {
+  "X": "mistralai/mistral-small-2603",
+  "Y": "openai/gpt-6-luna"
+ },
+ "csqa-train-7080": {
+  "X": "openai/gpt-6-luna",
+  "Y": "mistralai/mistral-small-2603"
+ },
+ "csqa-train-3502": {
+  "X": "openai/gpt-6-luna",
+  "Y": "mistralai/mistral-small-2603"
+ },
+ "swag-train-49974": {
+  "X": "mistralai/mistral-small-2603",
+  "Y": "openai/gpt-6-luna"
+ },
+ "swag-train-0687": {
+  "X": "mistralai/mistral-small-2603",
+  "Y": "openai/gpt-6-luna"
+ },
+ "swag-train-20303": {
+  "X": "mistralai/mistral-small-2603",
+  "Y": "openai/gpt-6-luna"
+ },
+ "swag-train-49938": {
+  "X": "openai/gpt-6-luna",
+  "Y": "mistralai/mistral-small-2603"
+ },
+ "swag-train-70455": {
+  "X": "openai/gpt-6-luna",
+  "Y": "mistralai/mistral-small-2603"
+ },
+ "swag-train-12498": {
+  "X": "mistralai/mistral-small-2603",
+  "Y": "openai/gpt-6-luna"
+ }
+}

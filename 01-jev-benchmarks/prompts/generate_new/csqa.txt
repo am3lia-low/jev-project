@@ -1,0 +1,1 @@
+CommonsenseQA questions test everyday common sense about how concepts relate (where things are found, why people do things, what happens next). Options are short, usually one to three words, and several are related to the same concept, so only common sense picks the right one.

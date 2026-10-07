@@ -1,0 +1,2 @@
+Which continuation is most plausible?
+$question

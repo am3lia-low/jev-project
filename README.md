@@ -51,9 +51,8 @@ jev-project/
 Python ≥ 3.12, managed with [`uv`](https://docs.astral.sh/uv/).
 
 ```
-uv venv
-uv pip install -r requirements.txt
+uv sync                 # creates .venv, installs dependencies + src/jev_common
 cp .env.example .env    # then add OPENROUTER_API_KEY (API laptop only)
 ```
 
-Once `src/jev_common/` is installable (see [`dev_notes/TODO.md`](dev_notes/TODO.md)), `uv sync` will replace the `pip install` step.
+Dependencies live in `pyproject.toml`. After changing them, regenerate `requirements.txt` (used on Colab) with `uv export --no-hashes -o requirements.txt`.

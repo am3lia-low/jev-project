@@ -4,6 +4,10 @@ Correctness is passed around as arrays with one entry per question: 1/0 (or
 True/False) for a single run. BERT's per-question correctness may be averaged
 over its 5 seeds, giving fractions in [0, 1]; the bootstrap and log-odds
 functions accept that, the paired tests do not.
+
+Generic defaults live here. Thresholds that belong to one part's design (e.g.
+Part A's quiz chance rate and memorisation drop ratio) are required arguments,
+passed in from that part's config.
 """
 
 from collections.abc import Callable, Sequence
@@ -13,14 +17,10 @@ import numpy as np
 from numpy.typing import ArrayLike, NDArray
 from scipy import stats as scipy_stats
 
-from .config import (
-    BOOTSTRAP_SEED,
-    CONFIDENCE,
-    ECE_BINS,
-    MEMORISATION_DROP_RATIO,
-    N_BOOTSTRAP,
-    QUIZ_CHANCE,
-)
+N_BOOTSTRAP = 10_000
+CONFIDENCE = 0.95
+ECE_BINS = 10
+BOOTSTRAP_SEED = 20261010
 
 _CHUNK = 500  # bootstrap resamples drawn at once, to bound memory
 
@@ -150,7 +150,7 @@ def compare_drops(
     subject_b: ArrayLike,
     reference_a: ArrayLike,
     reference_b: ArrayLike,
-    ratio: float = MEMORISATION_DROP_RATIO,
+    ratio: float,
     n_boot: int = N_BOOTSTRAP,
     confidence: float = CONFIDENCE,
     seed: int = BOOTSTRAP_SEED,
@@ -161,7 +161,9 @@ def compare_drops(
     B = Level 2, all arrays over the same questions in the same order (pool
     datasets by concatenating). Supported if the bootstrap CI of the
     difference is entirely above 0 and the subject's drop is at least
-    `ratio` times the reference's.
+    `ratio` times the reference's. A negative reference drop (the reference
+    did better on B) makes the ratio condition hold for any subject drop >= 0,
+    so the CI condition decides.
     """
 
     def difference(sa: NDArray, sb: NDArray, ra: NDArray, rb: NDArray) -> float:
@@ -201,9 +203,9 @@ def mcnemar_exact(correct_a: ArrayLike, correct_b: ArrayLike) -> McNemarResult:
 
 
 def binomial_test_vs_chance(
-    successes: int, n: int, chance: float = QUIZ_CHANCE, alternative: str = "greater"
+    successes: int, n: int, chance: float, alternative: str = "greater"
 ) -> float:
-    """p-value that the success rate differs from `chance` (default: above 25%)."""
+    """p-value that the success rate differs from `chance` (default: is above it)."""
     return float(scipy_stats.binomtest(successes, n, chance, alternative=alternative).pvalue)
 
 
@@ -211,6 +213,8 @@ def two_proportion_test(
     successes_1: int, n_1: int, successes_2: int, n_2: int
 ) -> ProportionTestResult:
     """Two-sided pooled z-test that two proportions are equal."""
+    if n_1 <= 0 or n_2 <= 0:
+        raise ValueError(f"both groups need at least one trial, got n_1={n_1}, n_2={n_2}")
     pooled = (successes_1 + successes_2) / (n_1 + n_2)
     standard_error = np.sqrt(pooled * (1 - pooled) * (1 / n_1 + 1 / n_2))
     if standard_error == 0:  # both groups are all-success or all-failure

@@ -1,0 +1,16 @@
+Your task is to create three versions of the INPUT TEXT by replacing some of its words with contextually relevant synonyms.
+The meaning and sentence structure of every version MUST EXACTLY match every detail in the INPUT TEXT.
+You MUST NOT include the INPUT TEXT unchanged as a version.
+
+You MUST make sure that:
+(1) The three versions are DISTINCT from the INPUT TEXT and from each other;
+(2) The ONLY difference from the INPUT TEXT is WORD-LEVEL PERTURBATIONS: replace single words with synonyms, keep word order, punctuation, numbers and names;
+(3) Every version keeps the question and all $n_options options, in the same order, and each option keeps its meaning, so the correct answer does not change;
+(4) There is NOT any extra explanation; and
+(5) You follow the FORMAT below.
+---
+INPUT TEXT (JSON):
+$item_json
+---
+FORMAT (JSON only):
+{"versions": [{"question": "...", "options": ["...", "..."]}, {"question": "...", "options": ["...", "..."]}, {"question": "...", "options": ["...", "..."]}]}

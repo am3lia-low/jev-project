@@ -1,10 +1,11 @@
 JEV BENCHMARKS - HELPER FILES TO BUILD
 ======================================
-Shared code for the jev benchmarks scripts. Goes in 01-jev-benchmarks/helpers/
-(cache.py, stats.py and openrouter.py move to src/jev_common/; see TODO.md).
+Shared code for the jev benchmarks scripts. Goes in 01-jev-benchmarks/helpers/,
+except cache.py, stats.py, openrouter.py and models.py, which are in
+src/jev_common/ (shared with Part B).
 Section references (A1, A2, ...) are to docs/PLAN.md, Part A.
-Build order: 1-4 and 11 first (sample.py needs them), then 5-6, then the rest.
-Item 7 is on hold (API laptop). No tests are being written for the helpers.
+Build order: 1-4 and 11 first (02_sample.py needs them), then 5-6, then the rest.
+No tests are being written for the helpers.
 Tick [x] when done.
 
 CORE DATA (needed by every script)
@@ -21,36 +22,44 @@ CORE DATA (needed by every script)
 
 DATASETS
 [x] 5. loaders.py     Load the 5 datasets from HuggingFace into the shared format (A1).
-                      Written here; run on the API laptop if HuggingFace needs a
-                      login or is blocked on the work network.
+                      Field names checked on the API laptop 2026-10-07.
 [x] 6. dedupe.py      Drop SWAG training questions that share a video ID or context
                       with any HellaSwag test question (A1).
 
-WRITTEN HERE, RUN ON THE API LAPTOP
-[ ] 7. openrouter.py  ON HOLD: write this on the API laptop. The work network blocks
-                      the OpenRouter docs, so Jev's request/response format can't be
-                      checked from here. API client: pinned model IDs, retry with
-                      backoff, log everything (A9). Use cache.py (8) for caching.
-[x] 8. cache.py       On-disk cache keyed by a hash of each request, so API scripts
-                      can resume where they stopped (A3).
+WRITTEN ON THE API LAPTOP
+[x] 7. openrouter.py  src/jev_common/. Written on the API laptop from the OpenRouter
+                      docs: Jev on POST /api/alpha/decisions, LLMs on chat completions.
+                      Retry with backoff, JSONL call log, cache via cache.py (8),
+                      per-run spending cap (max_cost_usd). Tested live 2026-10-08:
+                      Jev decisions, Qwen and Gemma logprobs, generator models.
+[x] 8. cache.py       src/jev_common/. On-disk cache keyed by a hash of each request,
+                      so API scripts can resume (A3).
 
 VALIDATION AND ANALYSIS
-[x] 9. text_checks.py Automatic checks for validate.py and validate_swaps.py: answer
-                      still present, option count unchanged, text actually changed,
-                      all versions distinct, word count within +/-2, word-level
-                      edits only (A3.1, A3.3).
-[x] 10. stats.py      Bootstrap 95% CI, paired McNemar, log-odds drop, ECE, binomial
-                      test vs 25%, two-proportion test (A7, A8).
+[x] 9. text_checks.py Automatic checks for 04_validate.py and 06b_validate_swaps.py:
+                      answer still present, option count unchanged, text actually
+                      changed, all versions distinct, word count within +/-2,
+                      word-level edits only (A3.1, A3.3).
+[x] 10. stats.py      src/jev_common/. Bootstrap 95% CI, paired McNemar, log-odds
+                      drop, ECE, binomial test vs 25%, two-proportion test (A7, A8).
 
 SETUP
-[x] 11. config.py     Paths, seeds, sample sizes (1,100 / 200 / 400) and every pinned
-                      model ID in one place (no ~...-latest aliases, no :free):
-                        - Subject:        typesafe/jev-1.13
-                        - LLM baselines:  qwen/qwen3.8-27b, google/gemma-4-26b-a4b-it
-                        - New questions:  anthropic/claude-sonnet-5.5
-                        - Paraphrases + swaps: pilot pending between
-                          openai/gpt-6-luna and mistralai/mistral-small-2603
-                          (leave as a placeholder until the pilot picks one)
-                        - BERT: bert-base-uncased (optional: bert-large-uncased,
-                          roberta-base)
-                      Source of truth: "Decided" table in docs/PLAN.md.
+[x] 11. config.py     Paths, seeds, sample sizes (1,100 / 200 / 400) and thresholds.
+[x] 11b. models.py    src/jev_common/. Every pinned model ID (no ~...-latest aliases,
+                      no :free). Source of truth: "Decided" table in docs/PLAN.md.
+
+LEVELS AND PROMPTS
+[x] 12. levels.py     Level 0-3 views of the test set (A6): Level 0 = original order,
+                      Level 1 = balanced shuffle, Level 2 = paraphrased + shuffled,
+                      Level 3 = reviewed new questions.
+[x] 13. prompts.py    Load and fill the frozen templates in prompts/ ($name
+                      placeholders), and build Jev eval requests in decision-index's
+                      format (A9). Eval templates are in prompts/eval/.
+
+[x] 13b. generation.py LLM calls that answer in JSON, parallel runs with a spending
+                      cap, review sheets (never overwritten) for 03, 04, 05, 06a/b.
+
+PART B (02-jevlet-personas/helpers/)
+[x] 14. ipip.py       IPIP-NEO-120 items (data/ipip/ipip_neo_120.json), scoring key,
+                      reverse keying, domain/facet scores, Jev score questions.
+[x] 15. reliability.py Cronbach's alpha per trait, acquiescence check (B1 step 2).

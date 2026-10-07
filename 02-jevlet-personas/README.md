@@ -47,4 +47,5 @@ To be detailed when Part B starts. Shared code (pinned model IDs, OpenRouter cli
 
 ## Status
 
-Nothing built yet.
+- Helpers: `ipip.py` and `reliability.py` built; IPIP-NEO-120 items in `data/ipip/ipip_neo_120.json`.
+- No scripts yet.

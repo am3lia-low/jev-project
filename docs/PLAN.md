@@ -161,6 +161,7 @@ Rules:
 4. Normalise answer labels to letters A–E (some ARC items use `1/2/3/4`).
 5. Every question gets a stable ID (e.g. `arcc-test-0417`), shared by all its versions (original, shuffled, paraphrased, synonym-swapped).
 6. Variable option counts (ARC 3–5, HellaSwag/SWAG 4, CommonsenseQA 5): pad to 5 with masked dummy options for BERT.
+7. Drop questions that list the same option twice (some CommonsenseQA items; case-sensitive, so ARC genotypes like "WW or Ww" stay), and train/val candidates whose question text matches a sampled test question (ARC repeats a few stems across splits). Counts are in `data/sampling_report.json`.
 
 ### A3. Synthetic data
 
@@ -177,6 +178,7 @@ Three LLM-generated datasets. All scripts run on the API laptop, are resumable a
 **A3.2 Brand-new questions — `05_generate_new.py`**
 - An LLM drafts new questions in the style of each paper dataset: 100 × 4 = **400**.
 - Model: **`anthropic/claude-sonnet-5.5`** ($2 / $10 per M in/out, checked 2026-10-06). A stronger model than the paraphraser on purpose: small volume, and better drafts mean less human fixing. Not Jev's or a baseline's family.
+- Near-copy screen: each draft is compared with every labelled question of its dataset; drafts with similarity ≥ 0.75 are discarded and replaced automatically (the model reproduces textbook questions ARC already contains), 0.6–0.75 are flagged for the human check.
 - Human check on every question: correct answer is right, exactly one option is right, not a near-copy of a benchmark item. Lightly reword so the text reads like the human-written originals (matters for the quiz control).
 - Used as **Level 3** (all 400) and as the **quiz control items** (100 of them).
 
@@ -236,7 +238,7 @@ Steps:
 1. **Pick items:** 100 test questions per paper dataset (original wording and option order); 25 Level 3 questions per paper dataset. Level 3 must be built first.
 2. **Make swaps:** `06a_swap.py` makes 3 synonym-swap versions of each item (A3.3).
 3. **Validate:** `06b_validate_swaps.py` (A3.3).
-4. **Build quiz** (`06c_build_quiz.py`): options A–D = original + 3 swaps, original's position balanced across A–D; option E = "None of the provided options". Prompt adapted from the DCQ repo to Jev's `choice` type, tested on 20 *training* questions, then frozen.
+4. **Build quiz** (`06c_build_quiz.py`): options A–D = original + 3 swaps, original's position balanced across A–D; option E = "None of the provided options". Each option is a whole item (question + its options as a), b), …). The prompt names the dataset and the split its benchmark items come from, for control items too. Prompt adapted from the DCQ repo to Jev's `choice` type, tested on 20 *training* questions, then frozen.
 5. **Run:** Jev, then the LLM baselines on the same 500 items. Log all returned probabilities.
 6. **Score:** % original picked; binomial test vs 25% (per dataset and pooled); benchmark vs control with a two-proportion test; pick rate per position A–D to check position bias.
 
@@ -265,7 +267,7 @@ Comparisons:
 
 ### A9. Running Jev and LLMs
 
-- **Prompt format:** reuse decision-index's frozen per-dataset templates, single-token option codes A–E (no numeric keys).
+- **Prompt format:** reuse decision-index's frozen per-dataset templates, single-token option codes A–E (no numeric keys). Checked 2026-10-08: decision-index sends an empty `state` and one `choice` question whose instructions are the bare question (ARC) or "Which continuation is most plausible?" + the context (HellaSwag), with options keyed A–E. It has no CommonsenseQA or SWAG template; ours copy ARC's and HellaSwag's respectively (`prompts/eval/`).
 - **Sanity check first:** Level 0 accuracy on the sample must fall within the CI of the paper's numbers. If not, debug the client/template before running other levels.
 - **Repeatability:** run 200 test questions 3 times; report agreement. ~100% → single runs; otherwise run each level 2–3 times and take the majority.
 - **Errors:** retry with backoff, log everything, score unrecoverable failures as wrong and report the failure rate.
@@ -300,7 +302,7 @@ Separate from Part A. Jev calls are stateless (no conversation history), so clas
 - Precedent: [Serapio-García et al.](https://www.nature.com/articles/s42256-025-01115-6) measured and shaped Big Five traits in LLMs, and found reliable measurement only in large, instruction-tuned models.
 - Steps:
   1. **Baseline:** no persona, 5 runs, item order shuffled each run.
-  2. **Reliability check first:** Cronbach's α per trait; only interpret traits with α ≥ 0.70 (the usual threshold for exploratory work). Use reverse-keyed items to check for a bias towards agreeing.
+  2. **Reliability check first:** Cronbach's α per trait; only interpret traits with α ≥ 0.70 (the usual threshold for exploratory work). Use reverse-keyed items to check for a bias towards agreeing. α needs response sets that differ in the trait, so compute it over all conditions × runs (baseline + personas), not over the 5 baseline runs alone (those differ only by noise, giving α ≈ 0 even for a perfectly consistent model). *Open: confirm this, or add varied persona prompts as Serapio-García et al. did.*
   3. **Personas:** high/low on **one trait at a time**, 5 runs each. The scoring key gives the expected direction for each item. Test persona placement: in question instructions vs in the state.
   4. **Contamination check:** run a paraphrased version of the IPIP items and compare with the originals.
   5. **Behaviour check:** a short set of scenario questions per trait (Jev `choice`, options reflecting high/low trait). Self-reports often fail to predict LLM behaviour ([The Personality Illusion](https://arxiv.org/html/2509.03730v1)), so report whether the persona moves self-report, behaviour, or both.

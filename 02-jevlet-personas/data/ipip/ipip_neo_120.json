@@ -1,0 +1,975 @@
+{
+ "instrument": "IPIP-NEO-120 (Johnson 2014), public domain",
+ "source": "https://ipip.ori.org/ ; items transcribed from @alheimsins/b5-johnson-120-ipip-neo-pi-r 6.0.13 (MIT), data/en/questions.json",
+ "retrieved": "2026-10-08",
+ "instructions": "Describe yourself as you generally are now, not as you wish to be in the future.",
+ "scale": [
+  "Very Inaccurate",
+  "Moderately Inaccurate",
+  "Neither Accurate Nor Inaccurate",
+  "Moderately Accurate",
+  "Very Accurate"
+ ],
+ "items": [
+  {
+   "id": "ipip-001",
+   "text": "Worry about things",
+   "domain": "N",
+   "facet": 1,
+   "facet_name": "Anxiety",
+   "keyed": "plus"
+  },
+  {
+   "id": "ipip-002",
+   "text": "Make friends easily",
+   "domain": "E",
+   "facet": 1,
+   "facet_name": "Friendliness",
+   "keyed": "plus"
+  },
+  {
+   "id": "ipip-003",
+   "text": "Have a vivid imagination",
+   "domain": "O",
+   "facet": 1,
+   "facet_name": "Imagination",
+   "keyed": "plus"
+  },
+  {
+   "id": "ipip-004",
+   "text": "Trust others",
+   "domain": "A",
+   "facet": 1,
+   "facet_name": "Trust",
+   "keyed": "plus"
+  },
+  {
+   "id": "ipip-005",
+   "text": "Complete tasks successfully",
+   "domain": "C",
+   "facet": 1,
+   "facet_name": "Self-Efficacy",
+   "keyed": "plus"
+  },
+  {
+   "id": "ipip-006",
+   "text": "Get angry easily",
+   "domain": "N",
+   "facet": 2,
+   "facet_name": "Anger",
+   "keyed": "plus"
+  },
+  {
+   "id": "ipip-007",
+   "text": "Love large parties",
+   "domain": "E",
+   "facet": 2,
+   "facet_name": "Gregariousness",
+   "keyed": "plus"
+  },
+  {
+   "id": "ipip-008",
+   "text": "Believe in the importance of art",
+   "domain": "O",
+   "facet": 2,
+   "facet_name": "Artistic Interests",
+   "keyed": "plus"
+  },
+  {
+   "id": "ipip-009",
+   "text": "Use others for my own ends",
+   "domain": "A",
+   "facet": 2,
+   "facet_name": "Morality",
+   "keyed": "minus"
+  },
+  {
+   "id": "ipip-010",
+   "text": "Like to tidy up",
+   "domain": "C",
+   "facet": 2,
+   "facet_name": "Orderliness",
+   "keyed": "plus"
+  },
+  {
+   "id": "ipip-011",
+   "text": "Often feel blue",
+   "domain": "N",
+   "facet": 3,
+   "facet_name": "Depression",
+   "keyed": "plus"
+  },
+  {
+   "id": "ipip-012",
+   "text": "Take charge",
+   "domain": "E",
+   "facet": 3,
+   "facet_name": "Assertiveness",
+   "keyed": "plus"
+  },
+  {
+   "id": "ipip-013",
+   "text": "Experience my emotions intensely",
+   "domain": "O",
+   "facet": 3,
+   "facet_name": "Emotionality",
+   "keyed": "plus"
+  },
+  {
+   "id": "ipip-014",
+   "text": "Love to help others",
+   "domain": "A",
+   "facet": 3,
+   "facet_name": "Altruism",
+   "keyed": "plus"
+  },
+  {
+   "id": "ipip-015",
+   "text": "Keep my promises",
+   "domain": "C",
+   "facet": 3,
+   "facet_name": "Dutifulness",
+   "keyed": "plus"
+  },
+  {
+   "id": "ipip-016",
+   "text": "Find it difficult to approach others",
+   "domain": "N",
+   "facet": 4,
+   "facet_name": "Self-Consciousness",
+   "keyed": "plus"
+  },
+  {
+   "id": "ipip-017",
+   "text": "Am always busy",
+   "domain": "E",
+   "facet": 4,
+   "facet_name": "Activity Level",
+   "keyed": "plus"
+  },
+  {
+   "id": "ipip-018",
+   "text": "Prefer variety to routine",
+   "domain": "O",
+   "facet": 4,
+   "facet_name": "Adventurousness",
+   "keyed": "plus"
+  },
+  {
+   "id": "ipip-019",
+   "text": "Love a good fight",
+   "domain": "A",
+   "facet": 4,
+   "facet_name": "Cooperation",
+   "keyed": "minus"
+  },
+  {
+   "id": "ipip-020",
+   "text": "Work hard",
+   "domain": "C",
+   "facet": 4,
+   "facet_name": "Achievement-Striving",
+   "keyed": "plus"
+  },
+  {
+   "id": "ipip-021",
+   "text": "Go on binges",
+   "domain": "N",
+   "facet": 5,
+   "facet_name": "Immoderation",
+   "keyed": "plus"
+  },
+  {
+   "id": "ipip-022",
+   "text": "Love excitement",
+   "domain": "E",
+   "facet": 5,
+   "facet_name": "Excitement-Seeking",
+   "keyed": "plus"
+  },
+  {
+   "id": "ipip-023",
+   "text": "Love to read challenging material",
+   "domain": "O",
+   "facet": 5,
+   "facet_name": "Intellect",
+   "keyed": "plus"
+  },
+  {
+   "id": "ipip-024",
+   "text": "Believe that I am better than others",
+   "domain": "A",
+   "facet": 5,
+   "facet_name": "Modesty",
+   "keyed": "minus"
+  },
+  {
+   "id": "ipip-025",
+   "text": "Am always prepared",
+   "domain": "C",
+   "facet": 5,
+   "facet_name": "Self-Discipline",
+   "keyed": "plus"
+  },
+  {
+   "id": "ipip-026",
+   "text": "Panic easily",
+   "domain": "N",
+   "facet": 6,
+   "facet_name": "Vulnerability",
+   "keyed": "plus"
+  },
+  {
+   "id": "ipip-027",
+   "text": "Radiate joy",
+   "domain": "E",
+   "facet": 6,
+   "facet_name": "Cheerfulness",
+   "keyed": "plus"
+  },
+  {
+   "id": "ipip-028",
+   "text": "Tend to vote for liberal political candidates",
+   "domain": "O",
+   "facet": 6,
+   "facet_name": "Liberalism",
+   "keyed": "plus"
+  },
+  {
+   "id": "ipip-029",
+   "text": "Sympathize with the homeless",
+   "domain": "A",
+   "facet": 6,
+   "facet_name": "Sympathy",
+   "keyed": "plus"
+  },
+  {
+   "id": "ipip-030",
+   "text": "Jump into things without thinking",
+   "domain": "C",
+   "facet": 6,
+   "facet_name": "Cautiousness",
+   "keyed": "minus"
+  },
+  {
+   "id": "ipip-031",
+   "text": "Fear for the worst",
+   "domain": "N",
+   "facet": 1,
+   "facet_name": "Anxiety",
+   "keyed": "plus"
+  },
+  {
+   "id": "ipip-032",
+   "text": "Feel comfortable around people",
+   "domain": "E",
+   "facet": 1,
+   "facet_name": "Friendliness",
+   "keyed": "plus"
+  },
+  {
+   "id": "ipip-033",
+   "text": "Enjoy wild flights of fantasy",
+   "domain": "O",
+   "facet": 1,
+   "facet_name": "Imagination",
+   "keyed": "plus"
+  },
+  {
+   "id": "ipip-034",
+   "text": "Believe that others have good intentions",
+   "domain": "A",
+   "facet": 1,
+   "facet_name": "Trust",
+   "keyed": "plus"
+  },
+  {
+   "id": "ipip-035",
+   "text": "Excel in what I do",
+   "domain": "C",
+   "facet": 1,
+   "facet_name": "Self-Efficacy",
+   "keyed": "plus"
+  },
+  {
+   "id": "ipip-036",
+   "text": "Get irritated easily",
+   "domain": "N",
+   "facet": 2,
+   "facet_name": "Anger",
+   "keyed": "plus"
+  },
+  {
+   "id": "ipip-037",
+   "text": "Talk to a lot of different people at parties",
+   "domain": "E",
+   "facet": 2,
+   "facet_name": "Gregariousness",
+   "keyed": "plus"
+  },
+  {
+   "id": "ipip-038",
+   "text": "See beauty in things that others might not notice",
+   "domain": "O",
+   "facet": 2,
+   "facet_name": "Artistic Interests",
+   "keyed": "plus"
+  },
+  {
+   "id": "ipip-039",
+   "text": "Cheat to get ahead",
+   "domain": "A",
+   "facet": 2,
+   "facet_name": "Morality",
+   "keyed": "minus"
+  },
+  {
+   "id": "ipip-040",
+   "text": "Often forget to put things back in their proper place",
+   "domain": "C",
+   "facet": 2,
+   "facet_name": "Orderliness",
+   "keyed": "minus"
+  },
+  {
+   "id": "ipip-041",
+   "text": "Dislike myself",
+   "domain": "N",
+   "facet": 3,
+   "facet_name": "Depression",
+   "keyed": "plus"
+  },
+  {
+   "id": "ipip-042",
+   "text": "Try to lead others",
+   "domain": "E",
+   "facet": 3,
+   "facet_name": "Assertiveness",
+   "keyed": "plus"
+  },
+  {
+   "id": "ipip-043",
+   "text": "Feel others' emotions",
+   "domain": "O",
+   "facet": 3,
+   "facet_name": "Emotionality",
+   "keyed": "plus"
+  },
+  {
+   "id": "ipip-044",
+   "text": "Am concerned about others",
+   "domain": "A",
+   "facet": 3,
+   "facet_name": "Altruism",
+   "keyed": "plus"
+  },
+  {
+   "id": "ipip-045",
+   "text": "Tell the truth",
+   "domain": "C",
+   "facet": 3,
+   "facet_name": "Dutifulness",
+   "keyed": "plus"
+  },
+  {
+   "id": "ipip-046",
+   "text": "Am afraid to draw attention to myself",
+   "domain": "N",
+   "facet": 4,
+   "facet_name": "Self-Consciousness",
+   "keyed": "plus"
+  },
+  {
+   "id": "ipip-047",
+   "text": "Am always on the go",
+   "domain": "E",
+   "facet": 4,
+   "facet_name": "Activity Level",
+   "keyed": "plus"
+  },
+  {
+   "id": "ipip-048",
+   "text": "Prefer to stick with things that I know",
+   "domain": "O",
+   "facet": 4,
+   "facet_name": "Adventurousness",
+   "keyed": "minus"
+  },
+  {
+   "id": "ipip-049",
+   "text": "Yell at people",
+   "domain": "A",
+   "facet": 4,
+   "facet_name": "Cooperation",
+   "keyed": "minus"
+  },
+  {
+   "id": "ipip-050",
+   "text": "Do more than what's expected of me",
+   "domain": "C",
+   "facet": 4,
+   "facet_name": "Achievement-Striving",
+   "keyed": "plus"
+  },
+  {
+   "id": "ipip-051",
+   "text": "Rarely overindulge",
+   "domain": "N",
+   "facet": 5,
+   "facet_name": "Immoderation",
+   "keyed": "minus"
+  },
+  {
+   "id": "ipip-052",
+   "text": "Seek adventure",
+   "domain": "E",
+   "facet": 5,
+   "facet_name": "Excitement-Seeking",
+   "keyed": "plus"
+  },
+  {
+   "id": "ipip-053",
+   "text": "Avoid philosophical discussions",
+   "domain": "O",
+   "facet": 5,
+   "facet_name": "Intellect",
+   "keyed": "minus"
+  },
+  {
+   "id": "ipip-054",
+   "text": "Think highly of myself",
+   "domain": "A",
+   "facet": 5,
+   "facet_name": "Modesty",
+   "keyed": "minus"
+  },
+  {
+   "id": "ipip-055",
+   "text": "Carry out my plans",
+   "domain": "C",
+   "facet": 5,
+   "facet_name": "Self-Discipline",
+   "keyed": "plus"
+  },
+  {
+   "id": "ipip-056",
+   "text": "Become overwhelmed by events",
+   "domain": "N",
+   "facet": 6,
+   "facet_name": "Vulnerability",
+   "keyed": "plus"
+  },
+  {
+   "id": "ipip-057",
+   "text": "Have a lot of fun",
+   "domain": "E",
+   "facet": 6,
+   "facet_name": "Cheerfulness",
+   "keyed": "plus"
+  },
+  {
+   "id": "ipip-058",
+   "text": "Believe that there is no absolute right and wrong",
+   "domain": "O",
+   "facet": 6,
+   "facet_name": "Liberalism",
+   "keyed": "plus"
+  },
+  {
+   "id": "ipip-059",
+   "text": "Feel sympathy for those who are worse off than myself",
+   "domain": "A",
+   "facet": 6,
+   "facet_name": "Sympathy",
+   "keyed": "plus"
+  },
+  {
+   "id": "ipip-060",
+   "text": "Make rash decisions",
+   "domain": "C",
+   "facet": 6,
+   "facet_name": "Cautiousness",
+   "keyed": "minus"
+  },
+  {
+   "id": "ipip-061",
+   "text": "Am afraid of many things",
+   "domain": "N",
+   "facet": 1,
+   "facet_name": "Anxiety",
+   "keyed": "plus"
+  },
+  {
+   "id": "ipip-062",
+   "text": "Avoid contacts with others",
+   "domain": "E",
+   "facet": 1,
+   "facet_name": "Friendliness",
+   "keyed": "minus"
+  },
+  {
+   "id": "ipip-063",
+   "text": "Love to daydream",
+   "domain": "O",
+   "facet": 1,
+   "facet_name": "Imagination",
+   "keyed": "plus"
+  },
+  {
+   "id": "ipip-064",
+   "text": "Trust what people say",
+   "domain": "A",
+   "facet": 1,
+   "facet_name": "Trust",
+   "keyed": "plus"
+  },
+  {
+   "id": "ipip-065",
+   "text": "Handle tasks smoothly",
+   "domain": "C",
+   "facet": 1,
+   "facet_name": "Self-Efficacy",
+   "keyed": "plus"
+  },
+  {
+   "id": "ipip-066",
+   "text": "Lose my temper",
+   "domain": "N",
+   "facet": 2,
+   "facet_name": "Anger",
+   "keyed": "plus"
+  },
+  {
+   "id": "ipip-067",
+   "text": "Prefer to be alone",
+   "domain": "E",
+   "facet": 2,
+   "facet_name": "Gregariousness",
+   "keyed": "minus"
+  },
+  {
+   "id": "ipip-068",
+   "text": "Do not like poetry",
+   "domain": "O",
+   "facet": 2,
+   "facet_name": "Artistic Interests",
+   "keyed": "minus"
+  },
+  {
+   "id": "ipip-069",
+   "text": "Take advantage of others",
+   "domain": "A",
+   "facet": 2,
+   "facet_name": "Morality",
+   "keyed": "minus"
+  },
+  {
+   "id": "ipip-070",
+   "text": "Leave a mess in my room",
+   "domain": "C",
+   "facet": 2,
+   "facet_name": "Orderliness",
+   "keyed": "minus"
+  },
+  {
+   "id": "ipip-071",
+   "text": "Am often down in the dumps",
+   "domain": "N",
+   "facet": 3,
+   "facet_name": "Depression",
+   "keyed": "plus"
+  },
+  {
+   "id": "ipip-072",
+   "text": "Take control of things",
+   "domain": "E",
+   "facet": 3,
+   "facet_name": "Assertiveness",
+   "keyed": "plus"
+  },
+  {
+   "id": "ipip-073",
+   "text": "Rarely notice my emotional reactions",
+   "domain": "O",
+   "facet": 3,
+   "facet_name": "Emotionality",
+   "keyed": "minus"
+  },
+  {
+   "id": "ipip-074",
+   "text": "Am indifferent to the feelings of others",
+   "domain": "A",
+   "facet": 3,
+   "facet_name": "Altruism",
+   "keyed": "minus"
+  },
+  {
+   "id": "ipip-075",
+   "text": "Break rules",
+   "domain": "C",
+   "facet": 3,
+   "facet_name": "Dutifulness",
+   "keyed": "minus"
+  },
+  {
+   "id": "ipip-076",
+   "text": "Only feel comfortable with friends",
+   "domain": "N",
+   "facet": 4,
+   "facet_name": "Self-Consciousness",
+   "keyed": "plus"
+  },
+  {
+   "id": "ipip-077",
+   "text": "Do a lot in my spare time",
+   "domain": "E",
+   "facet": 4,
+   "facet_name": "Activity Level",
+   "keyed": "plus"
+  },
+  {
+   "id": "ipip-078",
+   "text": "Dislike changes",
+   "domain": "O",
+   "facet": 4,
+   "facet_name": "Adventurousness",
+   "keyed": "minus"
+  },
+  {
+   "id": "ipip-079",
+   "text": "Insult people",
+   "domain": "A",
+   "facet": 4,
+   "facet_name": "Cooperation",
+   "keyed": "minus"
+  },
+  {
+   "id": "ipip-080",
+   "text": "Do just enough work to get by",
+   "domain": "C",
+   "facet": 4,
+   "facet_name": "Achievement-Striving",
+   "keyed": "minus"
+  },
+  {
+   "id": "ipip-081",
+   "text": "Easily resist temptations",
+   "domain": "N",
+   "facet": 5,
+   "facet_name": "Immoderation",
+   "keyed": "minus"
+  },
+  {
+   "id": "ipip-082",
+   "text": "Enjoy being reckless",
+   "domain": "E",
+   "facet": 5,
+   "facet_name": "Excitement-Seeking",
+   "keyed": "plus"
+  },
+  {
+   "id": "ipip-083",
+   "text": "Have difficulty understanding abstract ideas",
+   "domain": "O",
+   "facet": 5,
+   "facet_name": "Intellect",
+   "keyed": "minus"
+  },
+  {
+   "id": "ipip-084",
+   "text": "Have a high opinion of myself",
+   "domain": "A",
+   "facet": 5,
+   "facet_name": "Modesty",
+   "keyed": "minus"
+  },
+  {
+   "id": "ipip-085",
+   "text": "Waste my time",
+   "domain": "C",
+   "facet": 5,
+   "facet_name": "Self-Discipline",
+   "keyed": "minus"
+  },
+  {
+   "id": "ipip-086",
+   "text": "Feel that I'm unable to deal with things",
+   "domain": "N",
+   "facet": 6,
+   "facet_name": "Vulnerability",
+   "keyed": "plus"
+  },
+  {
+   "id": "ipip-087",
+   "text": "Love life",
+   "domain": "E",
+   "facet": 6,
+   "facet_name": "Cheerfulness",
+   "keyed": "plus"
+  },
+  {
+   "id": "ipip-088",
+   "text": "Tend to vote for conservative political candidates",
+   "domain": "O",
+   "facet": 6,
+   "facet_name": "Liberalism",
+   "keyed": "minus"
+  },
+  {
+   "id": "ipip-089",
+   "text": "Am not interested in other people's problems",
+   "domain": "A",
+   "facet": 6,
+   "facet_name": "Sympathy",
+   "keyed": "minus"
+  },
+  {
+   "id": "ipip-090",
+   "text": "Rush into things",
+   "domain": "C",
+   "facet": 6,
+   "facet_name": "Cautiousness",
+   "keyed": "minus"
+  },
+  {
+   "id": "ipip-091",
+   "text": "Get stressed out easily",
+   "domain": "N",
+   "facet": 1,
+   "facet_name": "Anxiety",
+   "keyed": "plus"
+  },
+  {
+   "id": "ipip-092",
+   "text": "Keep others at a distance",
+   "domain": "E",
+   "facet": 1,
+   "facet_name": "Friendliness",
+   "keyed": "minus"
+  },
+  {
+   "id": "ipip-093",
+   "text": "Like to get lost in thought",
+   "domain": "O",
+   "facet": 1,
+   "facet_name": "Imagination",
+   "keyed": "plus"
+  },
+  {
+   "id": "ipip-094",
+   "text": "Distrust people",
+   "domain": "A",
+   "facet": 1,
+   "facet_name": "Trust",
+   "keyed": "minus"
+  },
+  {
+   "id": "ipip-095",
+   "text": "Know how to get things done",
+   "domain": "C",
+   "facet": 1,
+   "facet_name": "Self-Efficacy",
+   "keyed": "plus"
+  },
+  {
+   "id": "ipip-096",
+   "text": "Am not easily annoyed",
+   "domain": "N",
+   "facet": 2,
+   "facet_name": "Anger",
+   "keyed": "minus"
+  },
+  {
+   "id": "ipip-097",
+   "text": "Avoid crowds",
+   "domain": "E",
+   "facet": 2,
+   "facet_name": "Gregariousness",
+   "keyed": "minus"
+  },
+  {
+   "id": "ipip-098",
+   "text": "Do not enjoy going to art museums",
+   "domain": "O",
+   "facet": 2,
+   "facet_name": "Artistic Interests",
+   "keyed": "minus"
+  },
+  {
+   "id": "ipip-099",
+   "text": "Obstruct others' plans",
+   "domain": "A",
+   "facet": 2,
+   "facet_name": "Morality",
+   "keyed": "minus"
+  },
+  {
+   "id": "ipip-100",
+   "text": "Leave my belongings around",
+   "domain": "C",
+   "facet": 2,
+   "facet_name": "Orderliness",
+   "keyed": "minus"
+  },
+  {
+   "id": "ipip-101",
+   "text": "Feel comfortable with myself",
+   "domain": "N",
+   "facet": 3,
+   "facet_name": "Depression",
+   "keyed": "minus"
+  },
+  {
+   "id": "ipip-102",
+   "text": "Wait for others to lead the way",
+   "domain": "E",
+   "facet": 3,
+   "facet_name": "Assertiveness",
+   "keyed": "minus"
+  },
+  {
+   "id": "ipip-103",
+   "text": "Don't understand people who get emotional",
+   "domain": "O",
+   "facet": 3,
+   "facet_name": "Emotionality",
+   "keyed": "minus"
+  },
+  {
+   "id": "ipip-104",
+   "text": "Take no time for others",
+   "domain": "A",
+   "facet": 3,
+   "facet_name": "Altruism",
+   "keyed": "minus"
+  },
+  {
+   "id": "ipip-105",
+   "text": "Break my promises",
+   "domain": "C",
+   "facet": 3,
+   "facet_name": "Dutifulness",
+   "keyed": "minus"
+  },
+  {
+   "id": "ipip-106",
+   "text": "Am not bothered by difficult social situations",
+   "domain": "N",
+   "facet": 4,
+   "facet_name": "Self-Consciousness",
+   "keyed": "minus"
+  },
+  {
+   "id": "ipip-107",
+   "text": "Like to take it easy",
+   "domain": "E",
+   "facet": 4,
+   "facet_name": "Activity Level",
+   "keyed": "minus"
+  },
+  {
+   "id": "ipip-108",
+   "text": "Am attached to conventional ways",
+   "domain": "O",
+   "facet": 4,
+   "facet_name": "Adventurousness",
+   "keyed": "minus"
+  },
+  {
+   "id": "ipip-109",
+   "text": "Get back at others",
+   "domain": "A",
+   "facet": 4,
+   "facet_name": "Cooperation",
+   "keyed": "minus"
+  },
+  {
+   "id": "ipip-110",
+   "text": "Put little time and effort into my work",
+   "domain": "C",
+   "facet": 4,
+   "facet_name": "Achievement-Striving",
+   "keyed": "minus"
+  },
+  {
+   "id": "ipip-111",
+   "text": "Am able to control my cravings",
+   "domain": "N",
+   "facet": 5,
+   "facet_name": "Immoderation",
+   "keyed": "minus"
+  },
+  {
+   "id": "ipip-112",
+   "text": "Act wild and crazy",
+   "domain": "E",
+   "facet": 5,
+   "facet_name": "Excitement-Seeking",
+   "keyed": "plus"
+  },
+  {
+   "id": "ipip-113",
+   "text": "Am not interested in theoretical discussions",
+   "domain": "O",
+   "facet": 5,
+   "facet_name": "Intellect",
+   "keyed": "minus"
+  },
+  {
+   "id": "ipip-114",
+   "text": "Boast about my virtues",
+   "domain": "A",
+   "facet": 5,
+   "facet_name": "Modesty",
+   "keyed": "minus"
+  },
+  {
+   "id": "ipip-115",
+   "text": "Have difficulty starting tasks",
+   "domain": "C",
+   "facet": 5,
+   "facet_name": "Self-Discipline",
+   "keyed": "minus"
+  },
+  {
+   "id": "ipip-116",
+   "text": "Remain calm under pressure",
+   "domain": "N",
+   "facet": 6,
+   "facet_name": "Vulnerability",
+   "keyed": "minus"
+  },
+  {
+   "id": "ipip-117",
+   "text": "Look at the bright side of life",
+   "domain": "E",
+   "facet": 6,
+   "facet_name": "Cheerfulness",
+   "keyed": "plus"
+  },
+  {
+   "id": "ipip-118",
+   "text": "Believe that we should be tough on crime",
+   "domain": "O",
+   "facet": 6,
+   "facet_name": "Liberalism",
+   "keyed": "minus"
+  },
+  {
+   "id": "ipip-119",
+   "text": "Try not to think about the needy",
+   "domain": "A",
+   "facet": 6,
+   "facet_name": "Sympathy",
+   "keyed": "minus"
+  },
+  {
+   "id": "ipip-120",
+   "text": "Act without thinking",
+   "domain": "C",
+   "facet": 6,
+   "facet_name": "Cautiousness",
+   "keyed": "minus"
+  }
+ ]
+}

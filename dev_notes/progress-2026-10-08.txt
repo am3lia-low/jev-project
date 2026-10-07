@@ -1,0 +1,112 @@
+JEV PROJECT - PROGRESS LOG
+==========================
+Session: 2026-10-07 evening to 2026-10-08 01:24 (MPST), on the API laptop.
+Detailed checklist: dev_notes/TODO.md. Build list: dev_notes/helpers-to-build.txt.
+Nothing is committed yet; everything is staged (git add -A). .env is not staged.
+
+
+SPEND
+-----
+OpenRouter credit: $10.00. Spent about $1.07 (from logs/openrouter.jsonl);
+about $8.93 left. The OpenRouter balance page showed $0.77 at the time, but it
+can lag behind.
+  - Live checks (Jev, Qwen, Gemma: 1 call each) .......... $0.00003
+  - Paraphrase pilot (30 questions x 2 models) ............ $0.005
+  - Level 3 drafts (400 new questions; run twice) ......... $1.07
+Every API script has a hard spending cap (--max-cost).
+
+
+DONE
+----
+1. Code review of the helpers (TODO section 1)
+   - HuggingFace field names checked against the live datasets: all correct.
+   - BUG FIXED: the SWAG vs HellaSwag video-ID dedupe never matched anything.
+     SWAG stores "anetv_<id>" in lower case; HellaSwag stores
+     "activitynet~v_<ID>". Both now become the bare lower-case YouTube ID.
+   - Small fixes in stats.py (empty-group guard, documented an edge case).
+
+2. Repo layout (TODO section 2)
+   - src/jev_common/ created and installable with uv (uv sync).
+     cache.py and stats.py moved there; model IDs moved to models.py.
+   - sample.py renamed 02_sample.py; output goes to data/sampled/.
+   - Part A and Part B folders created. requirements.txt is generated with
+     `uv export --no-hashes -o requirements.txt`. statsmodels dropped (unused).
+
+3. Helpers written
+   - jev_common/openrouter.py: API client. Jev uses its own endpoint
+     (POST /api/alpha/decisions), not chat completions. Retries, call log,
+     cache, spending cap. Tested live.
+   - helpers/levels.py (Level 0-3 views), helpers/prompts.py (templates and
+     Jev request builders), helpers/generation.py (LLM calls, review sheets).
+   - Part B: helpers/ipip.py, helpers/reliability.py, and the 120 IPIP-NEO-120
+     items in 02-jevlet-personas/data/ipip/ipip_neo_120.json.
+
+4. Dataset sampled (02_sample.py)
+   - 8,500 questions in 01-jev-benchmarks/data/sampled/:
+     5 datasets x (1,100 train + 200 val + 400 test).
+   - Splits never overlap; re-running gives byte-identical files; correct
+     answer positions are balanced in the shuffled order.
+
+5. Synthetic-data scripts written and dry-run end to end with a fake model
+   - 03_paraphrase.py, 04_validate.py, 05_generate_new.py, 06a_swap.py,
+     06b_validate_swaps.py, 06c_build_quiz.py, plus their prompts.
+   - Paraphrase pilot run: both candidate models passed all automatic checks;
+     either would cost about $0.70-0.80 for all 8,500 questions.
+   - Level 3 drafts run: 400 new questions (100 each for HellaSwag, ARC-Easy,
+     ARC-Challenge, CommonsenseQA).
+
+
+FINDINGS
+--------
+- Test questions leaked into training data. ARC's official splits repeat a
+  few questions (1 exact copy, 3 with different options). Sampling now drops
+  train/val questions whose text matches a test question (4 ARC, 4 SWAG).
+- Some CommonsenseQA questions list the same option twice, sometimes the
+  correct one (ambiguous). Sampling now drops them (24 test-pool, 122
+  train-pool; 1 in SWAG). The check is case-sensitive so ARC genotype options
+  like "WW or Ww" vs "WW or ww" are kept.
+- SWAG dedupe does NOT cause class imbalance: questions are dropped from the
+  73,546-question pool before drawing, so every split is still full size and
+  answer positions are balanced.
+- decision-index (the Jev prompt format we reuse) has no template for
+  CommonsenseQA or SWAG; ours copy ARC's and HellaSwag's. Noted in PLAN A9.
+- Claude Sonnet 5.5 tends to write textbook questions that ARC already
+  contains (e.g. "Which material is the best conductor of electricity?").
+  Drafts with similarity >= 0.75 to a real benchmark question are now
+  discarded and replaced automatically (24 replaced). 60 more (0.6-0.75) are
+  flagged in the review sheet; most look like false alarms.
+- Qwen and Gemma both return letter probabilities (logprobs) when reasoning
+  is switched off. OpenRouter sent them to different providers, so
+  09_run_llm.py should pin one provider per model.
+- Part B: Cronbach's alpha over 5 repeat runs of one condition comes out near
+  0 even for a perfectly consistent model. It has to be computed across
+  conditions (baseline + personas) x runs. Noted in PLAN B1 as open.
+- The pilot already caught a meaning error: one model rewrote a wrong option
+  ("The water will melt") so it became a second correct answer.
+
+
+NEXT (needs you)
+----------------
+1. Pilot blind rating: open 01-jev-benchmarks/data/reviews/pilot_30.csv.
+   Each of the 30 questions appears twice, paraphrased by two models labelled
+   X and Y (hidden so the rating is fair; do not open
+   data/paraphrased/pilot/blind_key.json). For each row fill in
+   meaning_preserved (yes/no) and difficulty (easier/same/harder). Then run
+   `python 03_paraphrase.py --pilot-results` and set PARAPHRASE_MODEL in
+   src/jev_common/models.py to the winner.
+2. Level 3 review: open 01-jev-benchmarks/data/reviews/new_questions_400.csv.
+   Check every new question: is the marked answer right, is exactly one
+   option right, is it not a near-copy of a real benchmark question. Fix
+   wording in place if needed, fill in the yes/no columns. Then run
+   `python 05_generate_new.py --apply-review`.
+3. Then, in order: 03_paraphrase.py -> 04_validate.py (retry loop, fill
+   paraphrase_50.csv) -> 06a_swap.py -> 06b_validate_swaps.py (retry loop,
+   fill swaps_30.csv) -> 06c_build_quiz.py. Expected cost about $0.90.
+
+Decisions still open:
+- Part B alpha computation (see FINDINGS).
+- Commit the staged work.
+
+Not built yet (needed for the experiment, not the datasets):
+07a_build_bert_data.py, notebooks/07b_bert_colab.ipynb, 08_run_jev.py,
+09_run_llm.py (pin providers), 10_analyse.py.

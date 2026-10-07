@@ -4,8 +4,9 @@ Each dataset has a pure `parse_*` function (one raw row -> `Question`) and
 `load_questions` does the download. Run the download on the API laptop if
 HuggingFace needs a login or is blocked on the work network.
 
-Row fields below follow the HuggingFace dataset cards. If a dataset changes its
-schema, `_require` fails with the missing field name rather than guessing.
+Row fields below were checked against the HuggingFace datasets on 2026-10-07.
+If a dataset changes its schema, `_require` fails with the missing field name
+rather than guessing.
 """
 
 from collections.abc import Callable, Mapping
@@ -29,9 +30,20 @@ def _clean(text: str) -> str:
     return " ".join(str(text).split())
 
 
-def _video_id(source_id: str) -> str:
-    """HellaSwag source IDs look like "activitynet~v_abc"; SWAG uses "v_abc"."""
-    return source_id.split("~")[-1].strip()
+def _hellaswag_video_id(source_id: str) -> str:
+    """"activitynet~v_-JhWjGDPHMY" -> "-jhwjgdphmy"; "" for WikiHow rows (no video).
+
+    Casefolded because SWAG stores the same YouTube IDs lowercased.
+    """
+    source, _, video = source_id.strip().partition("~")
+    if source != "activitynet":
+        return ""
+    return video.removeprefix("v_").casefold()
+
+
+def _swag_video_id(video_id: str) -> str:
+    """"anetv_jkn6uvmqwh4" -> "jkn6uvmqwh4"; LSMDC (movie) IDs are only casefolded."""
+    return video_id.strip().removeprefix("anetv_").casefold()
 
 
 def parse_hellaswag(row: Row, index: int, source_split: str, role: str) -> Question:
@@ -46,7 +58,7 @@ def parse_hellaswag(row: Row, index: int, source_split: str, role: str) -> Quest
         options=tuple(_clean(ending) for ending in row["endings"]),
         answer=letter_from_position(int(row["label"])),
         meta={
-            "video_id": _video_id(row["source_id"]),
+            "video_id": _hellaswag_video_id(row["source_id"]),
             "context": _clean(row["ctx"]),
             "source_id": row["source_id"],
             "activity_label": row.get("activity_label", ""),
@@ -94,7 +106,7 @@ def parse_swag(row: Row, index: int, source_split: str, role: str) -> Question:
         options=tuple(_clean(row[f"ending{i}"]) for i in range(4)),
         answer=letter_from_position(int(row["label"])),
         meta={
-            "video_id": row["video-id"].strip(),
+            "video_id": _swag_video_id(row["video-id"]),
             "context": _clean(row["startphrase"]),
             "source_split": source_split,
         },

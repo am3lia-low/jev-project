@@ -1,0 +1,1 @@
+HellaSwag questions describe the start of an everyday activity (from a video caption or a WikiHow article) and ask for the most plausible continuation. The "question" is the context, usually ending mid-sentence; the four options are endings. Wrong endings are fluent but physically or logically odd.

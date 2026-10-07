@@ -1,13 +1,14 @@
 """Download the 5 datasets, dedupe SWAG vs HellaSwag, sample, split and save (A2).
 
-For each dataset this writes `data/<dataset>/{train,val,test}.jsonl`, with
+For each dataset this writes `data/sampled/<dataset>/{train,val,test}.jsonl`, with
 labels as letters A-E, stable IDs, and the balanced-shuffle order stored next
 to the original order. Splitting happens here, by original question, before
-any LLM step. A summary goes to `data/sampling_report.json`.
+any LLM step. Questions that list the same option twice are dropped, and so
+are train/val candidates whose question text matches a sampled test question. A summary goes to `data/sampling_report.json`.
 
 Run from this folder (needs HuggingFace access, e.g. on the API laptop):
-    python sample.py
-    python sample.py --datasets arce arcc
+    python 02_sample.py
+    python 02_sample.py --datasets arce arcc
 """
 
 import argparse
@@ -17,10 +18,11 @@ from dataclasses import replace
 from pathlib import Path
 
 from helpers import config
-from helpers.dedupe import dedupe_swag
+from helpers.dedupe import dedupe_swag, drop_test_overlap
 from helpers.loaders import load_questions
 from helpers.schema import Question, write_jsonl
 from helpers.shuffle import balanced_shuffle, position_counts
+from helpers.text_checks import duplicate_options
 
 # SWAG is deduped against the sampled HellaSwag test questions, so HellaSwag goes first.
 ORDER = ("hs", "arce", "arcc", "csqa", "swag")
@@ -32,6 +34,12 @@ def draw(pool: list[Question], n: int, dataset: str, label: str) -> list[Questio
         raise ValueError(f"{dataset}: need {n} {label} questions but the pool has only {len(pool)}")
     rng = random.Random(f"{config.SAMPLE_SEED}:{dataset}:{label}")
     return rng.sample(sorted(pool, key=lambda q: q.id), n)
+
+
+def drop_duplicate_options(pool: list[Question]) -> tuple[list[Question], list[str]]:
+    """Drop questions that list the same option twice (some CommonsenseQA items do)."""
+    kept = [q for q in pool if not duplicate_options(q)]
+    return kept, [q.id for q in pool if duplicate_options(q)]
 
 
 def as_split(questions: list[Question], split: str) -> list[Question]:
@@ -48,6 +56,9 @@ def sample_dataset(
     test_pool = load_questions(key, spec.test_source, "test")
     train_pool = load_questions(key, config.TRAIN_SOURCE, "train")
     report["pool_sizes"] = {"test": len(test_pool), "train": len(train_pool)}
+    test_pool, dropped_test = drop_duplicate_options(test_pool)
+    train_pool, dropped_train = drop_duplicate_options(train_pool)
+    report["dropped_duplicate_options"] = {"test": dropped_test, "train": dropped_train}
 
     if key == "swag":
         if hellaswag_test is None:
@@ -61,6 +72,8 @@ def sample_dataset(
         }
 
     test = draw(test_pool, config.N_TEST, key, "test")
+    train_pool, dropped = drop_test_overlap(train_pool, test)
+    report["dropped_same_text_as_test"] = {"train": [q.id for q in dropped]}
 
     if spec.val_source == config.TRAIN_SOURCE:
         # One pool, two disjoint draws: sample both at once, then split.
@@ -69,6 +82,9 @@ def sample_dataset(
     else:
         val_pool = load_questions(key, spec.val_source, "val")
         report["pool_sizes"]["val"] = len(val_pool)
+        val_pool, report["dropped_duplicate_options"]["val"] = drop_duplicate_options(val_pool)
+        val_pool, dropped = drop_test_overlap(val_pool, test)
+        report["dropped_same_text_as_test"]["val"] = [q.id for q in dropped]
         train, val = draw(train_pool, config.N_TRAIN, key, "train"), draw(val_pool, config.N_VAL, key, "val")
 
     splits = {"train": train, "val": val, "test": test}
@@ -86,7 +102,7 @@ def sample_dataset(
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     parser.add_argument("--datasets", nargs="+", choices=ORDER, default=list(ORDER))
-    parser.add_argument("--out", type=Path, default=config.DATA_DIR, help="output folder")
+    parser.add_argument("--out", type=Path, default=config.SAMPLED_DIR, help="output folder")
     args = parser.parse_args()
 
     report: dict = {}
@@ -102,7 +118,7 @@ def main() -> None:
             hellaswag_test = splits["test"]
         print(f"  {report[key]['sizes']}")
 
-    report_path = args.out / "sampling_report.json"
+    report_path = config.DATA_DIR / "sampling_report.json"
     report_path.parent.mkdir(parents=True, exist_ok=True)
     report_path.write_text(json.dumps(report, indent=2), encoding="utf-8")
     print(f"Wrote {report_path}")

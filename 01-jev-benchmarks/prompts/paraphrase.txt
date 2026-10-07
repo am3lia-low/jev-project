@@ -1,0 +1,14 @@
+Paraphrase the multiple-choice question below.
+
+Rules:
+1. Rewrite the question and each option in different words. Change wording and sentence structure, not just single words.
+2. Keep the exact meaning, every fact and number, and the difficulty. Do not add hints, explanations or new information.
+3. Keep exactly $n_options options, in the same order: your option 1 must be the paraphrase of option 1, and so on. Do not say which option is correct.
+4. If an option is too short to rephrase (a name, a number, a single common word), keep it as it is.
+5. If the question is an unfinished sentence that the options complete, keep it unfinished, so every option still completes it naturally.
+
+Question (JSON):
+$item_json
+
+Answer with JSON only, in this format:
+{"question": "...", "options": ["...", "..."]}

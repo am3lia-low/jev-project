@@ -1,6 +1,7 @@
 """On-disk cache keyed by a hash of each request, so API scripts can resume (A3).
 
-One JSON file per request under `CACHE_DIR/<namespace>/<hash prefix>/<hash>.json`.
+One JSON file per request under `<root>/<namespace>/<hash prefix>/<hash>.json`,
+where `root` is the calling part's `cache/` folder (gitignored).
 The key hashes the request payload only, so API keys and headers never reach
 the cache. Delete a file (or a namespace folder) to force a re-run.
 """
@@ -12,8 +13,6 @@ import os
 from collections.abc import Callable
 from pathlib import Path
 from typing import Any
-
-from .config import CACHE_DIR
 
 logger = logging.getLogger(__name__)
 
@@ -27,7 +26,7 @@ def request_key(request: Any) -> str:
 class DiskCache:
     """Cache of responses for one script or purpose (`namespace`)."""
 
-    def __init__(self, namespace: str, root: str | Path = CACHE_DIR) -> None:
+    def __init__(self, namespace: str, root: str | Path) -> None:
         self.directory = Path(root) / namespace
 
     def _path(self, key: str) -> Path:

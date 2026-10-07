@@ -1,4 +1,4 @@
-"""Automatic checks for validate.py and validate_swaps.py (A3.1, A3.3).
+"""Automatic checks for 04_validate.py and 06b_validate_swaps.py (A3.1, A3.3).
 
 Every check returns a list of problems; an empty list means it passed. The
 `check_paraphrase`, `check_swap` and `check_swap_set` functions combine the
@@ -27,6 +27,23 @@ def word_count(text: str) -> int:
     return sum(1 for token in _TOKEN.findall(text) if _WORD.match(token))
 
 
+def option_key(text: str) -> str:
+    """Whitespace-collapsed option text, case kept: "WW or Ww" and "WW or ww" differ (genotypes)."""
+    return " ".join(text.split())
+
+
+def duplicate_options(question: Question) -> list[str]:
+    """Letters of options whose text repeats an earlier option's."""
+    seen: set[str] = set()
+    duplicates = []
+    for i, option in enumerate(question.options):
+        key = option_key(option)
+        if key in seen:
+            duplicates.append(letter_from_position(i))
+        seen.add(key)
+    return duplicates
+
+
 def _fields(question: Question) -> list[tuple[str, str]]:
     """(label, text) for the question followed by each option, in original order."""
     options = [(f"option {letter_from_position(i)}", text) for i, text in enumerate(question.options)]
@@ -51,15 +68,16 @@ def _paired_fields(original: Question, candidate: Question) -> list[tuple[str, s
 def check_answer_present(question: Question) -> list[str]:
     """The answer points at a non-empty option that no other option duplicates.
 
-    A duplicated correct option would make the item ambiguous.
+    A duplicated correct option would make the item ambiguous. Case counts
+    (see `option_key`).
     """
-    correct = normalise_text(question.options[question.answer_position])
+    correct = option_key(question.options[question.answer_position])
     if not correct:
         return [f"correct option {question.answer} is empty"]
     duplicates = [
         letter_from_position(i)
         for i, option in enumerate(question.options)
-        if i != question.answer_position and normalise_text(option) == correct
+        if i != question.answer_position and option_key(option) == correct
     ]
     if duplicates:
         return [f"correct option {question.answer} is duplicated by option(s) {', '.join(duplicates)}"]
@@ -134,13 +152,13 @@ def _punctuation(tokens: list[str]) -> list[str]:
 # What the scripts call
 # ---------------------------------------------------------------------------
 def check_paraphrase(original: Question, paraphrase: Question) -> list[str]:
-    """validate.py: answer kept, option count unchanged, text actually changed (A3.1)."""
+    """04_validate.py: answer kept, option count unchanged, text actually changed (A3.1)."""
     problems = [*check_answer_present(paraphrase), *check_option_count(original, paraphrase)]
     return problems + check_text_changed(original, paraphrase)
 
 
 def check_swap(original: Question, swap: Question) -> list[str]:
-    """validate_swaps.py: one swap against its original (A3.3)."""
+    """06b_validate_swaps.py: one swap against its original (A3.3)."""
     problems = [*check_answer_present(swap), *check_option_count(original, swap)]
     if original.n_options != swap.n_options:
         return problems  # the field-by-field checks below need matching option counts
@@ -153,7 +171,7 @@ def check_swap(original: Question, swap: Question) -> list[str]:
 
 
 def check_swap_set(original: Question, swaps: Sequence[Question]) -> list[str]:
-    """validate_swaps.py: the original plus all its swaps; each swap valid, all distinct."""
+    """06b_validate_swaps.py: the original plus all its swaps; each swap valid, all distinct."""
     problems = []
     for swap in swaps:
         problems += [f"{swap.version}: {problem}" for problem in check_swap(original, swap)]

@@ -31,7 +31,8 @@ Scripts are numbered by their step in [A10](../docs/PLAN.md#a10-order-of-work) a
 │   ├── dedupe.py             # SWAG vs HellaSwag overlap
 │   ├── text_checks.py        # automatic checks for 04 and 06b
 │   ├── levels.py             # Level 0-3 views of the test set
-│   └── prompts.py            # loads and fills the templates in prompts/
+│   ├── prompts.py            # loads and fills the templates in prompts/; Jev request builders
+│   └── generation.py         # LLM calls returning JSON, parallel runs, review sheets
 ├── prompts/                  # frozen prompt text
 │   ├── paraphrase.txt
 │   ├── swap.txt
@@ -56,11 +57,14 @@ Scripts are numbered by their step in [A10](../docs/PLAN.md#a10-order-of-work) a
 ├── data/                     # committed
 │   ├── sampled/<dataset>/{train,val,test}.jsonl     # 02
 │   ├── sampling_report.json                         # 02
-│   ├── paraphrased/pilot/                           # 03 --pilot: 30 questions x 2 models
-│   ├── paraphrased/<dataset>/{train,val,test}.jsonl # 03, filtered by 04
+│   ├── paraphrased/pilot/                           # 03 --pilot: 30 questions x 2 models + blind key
+│   ├── paraphrased/raw/<dataset>/{train,val,test}.jsonl  # 03
+│   ├── paraphrased/<dataset>/{train,val,test}.jsonl # 04: passed checks, shuffled
+│   ├── paraphrased/{failed,validation_report}.json  # 04 (03 --retry-failed reads failed.json)
 │   ├── new/drafts.jsonl                             # 05
-│   ├── new/reviewed.jsonl                           # human check of 05 = Level 3
-│   ├── swaps/swaps.jsonl                            # 06a, filtered by 06b
+│   ├── new/reviewed.jsonl                           # 05 --apply-review = Level 3
+│   ├── swaps/{items,raw}.jsonl                      # 06a: quiz items, their 3 swaps
+│   ├── swaps/swaps.jsonl, swaps/failed.json         # 06b: swaps that passed / rejected
 │   ├── quiz/quiz.jsonl                              # 06c
 │   ├── bert/{train,val}.jsonl                       # 07a
 │   └── reviews/              # manual-check sheets you fill in (CSV)
@@ -83,6 +87,7 @@ Levels 0 and 1 are not separate files: they are the original and shuffled orders
 
 ## Status
 
-- Helpers: built except `openrouter.py` (on hold, to be written on the API laptop). Build list: [`dev_notes/helpers-to-build.txt`](../dev_notes/helpers-to-build.txt).
-- `sample.py`: written, not yet run on real data; still to be renamed `02_sample.py` and pointed at `data/sampled/`.
-- The folder doesn't match this layout yet; see [`dev_notes/TODO.md`](../dev_notes/TODO.md).
+- Helpers: all built and tested live. Build list: [`dev_notes/helpers-to-build.txt`](../dev_notes/helpers-to-build.txt).
+- `02_sample.py`: run 2026-10-08; `data/sampled/` holds the 8,500 sampled questions.
+- `03`-`06c` written and dry-run end to end. Run so far: the paraphrase pilot (`data/reviews/pilot_30.csv` waits for your ratings) and the Level 3 drafts (`data/reviews/new_questions_400.csv` waits for your review).
+- `07a`-`10` not written yet.

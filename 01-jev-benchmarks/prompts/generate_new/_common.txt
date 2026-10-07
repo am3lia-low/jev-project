@@ -1,0 +1,16 @@
+Write $n brand-new multiple-choice questions in the style of the $dataset_name dataset.
+
+$style
+
+Here are $n_examples real questions from the dataset, only to show the style. Do NOT copy, reword or reuse them, or any other question you know from $dataset_name or another benchmark:
+$examples
+
+Rules:
+1. Each question is new: a situation, fact or topic you have not seen as a benchmark question.
+2. Each has exactly $n_options options and exactly one correct option. Wrong options must be clearly wrong to an expert, but plausible to someone guessing.
+3. Match the dataset's length, vocabulary and tone, including its quirks (e.g. lower-case starts, unfinished sentences), so a reader cannot tell your questions from the real ones.
+4. Vary the topics and the position of the correct answer.
+5. Avoid these topics, already used: $avoid
+
+Answer with JSON only, in this format:
+{"questions": [{"question": "...", "options": ["...", "..."], "answer": "A"}]}
