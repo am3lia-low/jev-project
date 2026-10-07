@@ -26,7 +26,7 @@ flowchart TD
 
     %% ---------- Synthetic: brand-new questions ----------
     GEN["SYNTHETIC: 05_generate_new.py (API laptop)<br/>Claude Sonnet 5.5 drafts new questions<br/>in each paper dataset's style"] --> HNEW["Human check<br/>answer correct · exactly one right option<br/>not a near-copy · light rewording to match style"]
-    HNEW --> L3["Level 3<br/>400 brand-new<br/>100 x 4 paper datasets"]
+    HNEW --> L3["Level 3<br/>200 brand-new<br/>50 x 4 paper datasets"]
 
     %% ---------- Synthetic: memorisation quiz ----------
     TEST --> QSEL["Quiz benchmark items<br/>400 = 100 x 4 paper datasets<br/>Level 0 wording"]

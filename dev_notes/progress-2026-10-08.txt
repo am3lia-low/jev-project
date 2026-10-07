@@ -110,3 +110,16 @@ Decisions still open:
 Not built yet (needed for the experiment, not the datasets):
 07a_build_bert_data.py, notebooks/07b_bert_colab.ipynb, 08_run_jev.py,
 09_run_llm.py (pin providers), 10_analyse.py.
+
+
+ADDENDUM (2026-10-08 01:40)
+---------------------------
+- Level 3 cut from 100 to 50 questions per dataset (200 in total) to halve the
+  review. The 400 drafts stay as they are: the review sheet
+  (data/reviews/new_questions.csv, renamed from new_questions_400.csv) lists
+  each dataset's drafts in a random order (review_order). Work down it and stop
+  at 50 kept per dataset; --apply-review takes the first 50 kept. Cost of the
+  change: $0 (all responses cached). Per-dataset 95% CI about +/-8 points
+  instead of +/-6; pooled about +/-4. PLAN, diagram, READMEs and TODO updated.
+- BUG FIXED: 40 HellaSwag drafts had "A. ", "B. " ... inside every option
+  (copied from the style examples). 05_generate_new.py now strips them.

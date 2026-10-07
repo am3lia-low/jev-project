@@ -43,7 +43,7 @@ Scripts are numbered by their step in [A10](../docs/PLAN.md#a10-order-of-work) a
 ├── 02_sample.py              # A2: download, dedupe, sample, split, shuffle  [API laptop]
 ├── 03_paraphrase.py          # A3.1: pilot (--pilot) and full run         [API laptop]
 ├── 04_validate.py            # A3.1: automatic checks + manual 50
-├── 05_generate_new.py        # A3.2: 400 Level 3 drafts                  [API laptop]
+├── 05_generate_new.py        # A3.2: 400 drafts -> 200 Level 3 questions  [API laptop]
 ├── 06a_swap.py               # A3.3: 3 synonym swaps per quiz item         [API laptop]
 ├── 06b_validate_swaps.py     # A3.3: automatic checks + manual 30
 ├── 06c_build_quiz.py         # A7: original + 3 swaps, balanced positions, option E
@@ -70,7 +70,7 @@ Scripts are numbered by their step in [A10](../docs/PLAN.md#a10-order-of-work) a
 │   └── reviews/              # manual-check sheets you fill in (CSV)
 │       ├── pilot_30.csv
 │       ├── paraphrase_50.csv
-│       ├── new_questions_400.csv
+│       ├── new_questions.csv
 │       └── swaps_30.csv
 ├── results/                  # committed
 │   ├── raw/<model>/{level0,level1,level2,level3,quiz,repeat_1,repeat_2,repeat_3}.jsonl
@@ -89,5 +89,5 @@ Levels 0 and 1 are not separate files: they are the original and shuffled orders
 
 - Helpers: all built and tested live. Build list: [`dev_notes/helpers-to-build.txt`](../dev_notes/helpers-to-build.txt).
 - `02_sample.py`: run 2026-10-08; `data/sampled/` holds the 8,500 sampled questions.
-- `03`-`06c` written and dry-run end to end. Run so far: the paraphrase pilot (`data/reviews/pilot_30.csv` waits for your ratings) and the Level 3 drafts (`data/reviews/new_questions_400.csv` waits for your review).
+- `03`-`06c` written and dry-run end to end. Run so far: the paraphrase pilot (`data/reviews/pilot_30.csv` waits for your ratings) and the Level 3 drafts (`data/reviews/new_questions.csv` waits for your review: 50 kept per dataset).
 - `07a`-`10` not written yet.

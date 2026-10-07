@@ -77,7 +77,7 @@ flowchart TD
 
     %% ---------- Synthetic: brand-new questions ----------
     GEN["SYNTHETIC: 05_generate_new.py (API laptop)<br/>Claude Sonnet 5.5 drafts new questions<br/>in each paper dataset's style"] --> HNEW["Human check<br/>answer correct · exactly one right option<br/>not a near-copy · light rewording to match style"]
-    HNEW --> L3["Level 3<br/>400 brand-new<br/>100 x 4 paper datasets"]
+    HNEW --> L3["Level 3<br/>200 brand-new<br/>50 x 4 paper datasets"]
 
     %% ---------- Synthetic: memorisation quiz ----------
     TEST --> QSEL["Quiz benchmark items<br/>400 = 100 x 4 paper datasets<br/>Level 0 wording"]
@@ -176,11 +176,11 @@ Three LLM-generated datasets. All scripts run on the API laptop, are resumable a
 - Validation (`04_validate.py`): automatic checks (answer still present, option count unchanged, text actually changed) + manual review of a random 50, rating meaning preserved and whether the paraphrase made the question easier / harder / same.
 
 **A3.2 Brand-new questions — `05_generate_new.py`**
-- An LLM drafts new questions in the style of each paper dataset: 100 × 4 = **400**.
+- An LLM drafts new questions in the style of each paper dataset: 100 × 4 = 400 drafts, of which **50 × 4 = 200** are kept after the human check. Drafts are reviewed in a seeded random order per dataset and the review stops at 50 kept, so the other drafts are spares for rejected ones. (Cut from 100 per dataset on 2026-10-08 to halve the review: per-dataset 95% CI about ±8 points instead of ±6; pooled over the 4 datasets about ±4.)
 - Model: **`anthropic/claude-sonnet-5.5`** ($2 / $10 per M in/out, checked 2026-10-06). A stronger model than the paraphraser on purpose: small volume, and better drafts mean less human fixing. Not Jev's or a baseline's family.
 - Near-copy screen: each draft is compared with every labelled question of its dataset; drafts with similarity ≥ 0.75 are discarded and replaced automatically (the model reproduces textbook questions ARC already contains), 0.6–0.75 are flagged for the human check.
 - Human check on every question: correct answer is right, exactly one option is right, not a near-copy of a benchmark item. Lightly reword so the text reads like the human-written originals (matters for the quiz control).
-- Used as **Level 3** (all 400) and as the **quiz control items** (100 of them).
+- Used as **Level 3** (all 200) and as the **quiz control items** (100 of them, 25 per dataset).
 
 **A3.3 Synonym swaps — `06a_swap.py`** (see A7 for the full quiz)
 - For each of the 500 quiz items, an LLM makes **3 versions** that only replace words with context-fitting synonyms. Sentence structure, word order, meaning and answer unchanged. 1,500 versions in total.
@@ -221,7 +221,7 @@ Every model is run on the same test questions in each version:
 | 0 | Original wording, original option order (reproduces the paper) | 2,000 (5 datasets) | Anything, incl. "the answer is C" |
 | 1 | Original wording, balanced shuffle | 2,000 | Recall of answer text, not position |
 | 2 | Paraphrased + shuffled | 2,000 | Recall of what the question is about |
-| 3 | Brand-new questions (A3.2) | 400 (4 paper datasets) | Nothing — true ability |
+| 3 | Brand-new questions (A3.2) | 200 (50 × 4 paper datasets) | Nothing — true ability |
 
 Reading the results: BERT never saw any test question, so its drop between levels is the **difficulty baseline** (on datasets where it passes the above-chance rule). Jev's drop *beyond* BERT's suggests memorisation. Memorisation can survive paraphrasing ([Yang et al., "Rephrased Samples"](https://arxiv.org/html/2311.04850v2)), hence Level 3 and the quiz (A7).
 
@@ -278,7 +278,7 @@ Comparisons:
 2. [ ] `02_sample.py` — download 5 datasets, dedupe SWAG vs HellaSwag, sample, split, normalise labels, store original + shuffled orders, assign IDs
 3. [ ] `03_paraphrase.py` — pilot 2 models on 30 questions, choose, full run (API laptop)
 4. [ ] `04_validate.py` — automatic checks + manual 50
-5. [ ] `05_generate_new.py` — 400 Level 3 questions + human check (API laptop)
+5. [ ] `05_generate_new.py` — 400 drafts, 200 Level 3 questions kept after the human check (API laptop)
 6. [ ] `06a_swap.py` + `06b_validate_swaps.py` — quiz versions for 400 benchmark + 100 control items (API laptop); `06c_build_quiz.py` — assemble the 500-item quiz
 7. [ ] `07a_build_bert_data.py` — originals + paraphrases for Colab; `notebooks/07b_bert_colab.ipynb` — untrained BERT; fine-tune BERT-base (5 seeds); above-chance rule; evaluate Levels 0–3; optional fallbacks
 8. [ ] `08_run_jev.py` (API laptop): 8a sanity check · 8b repeatability · 8c Levels 0–3 · 8d quiz
