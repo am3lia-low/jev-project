@@ -56,6 +56,17 @@ Create the folders the layout needs, delete the ones it doesn't, and move every 
 - [ ] Review the Level 3 drafts: `data/reviews/new_questions.csv`. Work down each dataset in `review_order` and stop at 50 kept per dataset (200 in total; the other drafts are spares). Then `python 05_generate_new.py --apply-review`.
 - [ ] Then: `03_paraphrase.py` → `04_validate.py` (+ `--retry-failed` loop, fill `paraphrase_50.csv`) → `06a_swap.py` → `06b_validate_swaps.py` (+ retry loop, fill `swaps_30.csv`) → `06c_build_quiz.py`.
 
-## 6. [ ] Docs out of date
+## 6. [x] Docs out of date
 
-- [ ] `docs/api-laptop-checks.md` still lists the old candidates; the checks it describes are now done (see 3). Replace it with a short record of the results, or delete it.
+- [x] `docs/api-laptop-checks.md` replaced with a record of the done checks and the on-hold list (2026-10-08).
+
+## 7. [x] Experiment scripts (2026-10-08, work laptop)
+
+- [x] `helpers/evaluation.py` (tasks, LLM prompt rendering copied from decision-index, run loop, result records), `prompts/llm_system.txt`.
+- [x] `07a_build_bert_data.py`, `notebooks/07b_bert_colab.ipynb`, `08_run_jev.py`, `09_run_llm.py`, `10_analyse.py`. 08/09 dry-run with a fake API; 10 run on synthetic results (recovers planted effects). Notebook syntax-checked only.
+- [x] `PAPER_JEV_ACCURACY` in `config.py`, incl. CommonsenseQA 0.882 (paper Table 2).
+- [x] Decided 2026-10-09: LLM baselines stay on OpenRouter (top-20 logprobs; a letter outside them counts as 0%), no self-hosting for full probabilities. BERT's above-chance rule uses val originals only. Both recorded in PLAN A5/A9.
+
+## 8. [ ] On hold for the API laptop / Colab
+
+See [`docs/api-laptop-checks.md`](../docs/api-laptop-checks.md#on-hold-written-on-the-work-laptop-not-verifiable-there-2026-10-08): pin LLM providers, confirm the reasoning-off and provider-routing fields, check Jev's `usage.cost`, smoke-test 08/09, first Colab run of 07b.

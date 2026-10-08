@@ -1,0 +1,60 @@
+JEV PROJECT - TO DO ON THE API LAPTOP
+====================================
+Written: 2026-10-09 00:18 (MPST), on the work laptop.
+Why: these items were written on the work laptop but need OpenRouter,
+HuggingFace or a GPU to check. Review them first, then do them on the API
+laptop (Colab for item 5). Same list, with more detail: docs/api-laptop-checks.md.
+Do not start full runs until items 1-4 are done.
+
+
+ON HOLD (checks before anything runs)
+-------------------------------------
+[ ] 1. Pin one provider per LLM baseline.
+       File: src/jev_common/models.py -> LLM_PROVIDERS (both None; 09_run_llm.py
+       refuses to start until set).
+       The live check was served by DekaLLM and Makora, but which served Qwen
+       and which served Gemma was not recorded. Find out from the cached
+       live-check responses (01-jev-benchmarks/cache/) or logs/openrouter.jsonl
+       ("served_by"), or list the providers that support logprobs:
+       GET https://openrouter.ai/api/v1/models/{author}/{slug}/endpoints
+
+[ ] 2. Confirm the request settings written from memory.
+       File: src/jev_common/models.py -> LLM_EVAL_PARAMS, llm_eval_params().
+       - reasoning off:  "reasoning": {"enabled": false}
+       - provider pin:   "provider": {"order": [...], "allow_fallbacks": false,
+                                      "require_parameters": true}
+       Compare with what the live check actually sent (the "request" field in
+       its cache file) and with the OpenRouter docs.
+
+[ ] 3. Check that Jev responses include a cost.
+       Open one cached Jev response and look for usage.cost. If it is missing,
+       the cost column in 10_analyse.py's tables will show $0 for Jev, and
+       openrouter.py needs another way to read the cost.
+
+[ ] 4. Smoke-test 08 and 09 on Level 0 (about $0.25 in total).
+       The scripts have no "first N questions" option, and a run stopped by
+       --max-cost writes nothing, so the smoke test is one full Level 0 run:
+            python 08_run_jev.py sanity                                  (~$0.01)
+            python 09_run_llm.py levels --models qwen/qwen3.8-27b --levels 0   (~$0.2)
+       Check that results/raw/<model>/level0.jsonl has probabilities and few
+       or no errors, and that sanity says OK. These runs are real (cached),
+       so the full runs later reuse them for free.
+
+[ ] 5. First run of notebooks/07b_bert_colab.ipynb on Colab (T4).
+       Needs a GPU and the bert-base-uncased download. Try a small slice
+       first: check the truncation count, that the loss falls, and that val
+       accuracy is above chance.
+
+
+AFTER THAT, IN ORDER (needs the two reviews finished first)
+-----------------------------------------------------------
+[ ] 6. 03_paraphrase.py -> 04_validate.py (retry loop; fill paraphrase_50.csv)
+       -> 06a_swap.py -> 06b_validate_swaps.py (retry loop; fill swaps_30.csv)
+       -> 06c_build_quiz.py.  About $0.90.
+[ ] 7. 07a_build_bert_data.py; copy data/bert/ to MyDrive/jev-bert/data/;
+       run the notebook on Colab; download MyDrive/jev-bert/results/ into
+       01-jev-benchmarks/results/bert/.
+[ ] 8. 08_run_jev.py sanity -> repeat -> levels -> quiz.  Under $0.10.
+       sanity must say OK for the paper datasets before going on.
+[ ] 9. 09_run_llm.py levels -> quiz.  About $1.
+[ ] 10. 10_analyse.py (either laptop).

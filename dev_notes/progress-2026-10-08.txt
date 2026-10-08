@@ -94,7 +94,7 @@ NEXT (needs you)
    meaning_preserved (yes/no) and difficulty (easier/same/harder). Then run
    `python 03_paraphrase.py --pilot-results` and set PARAPHRASE_MODEL in
    src/jev_common/models.py to the winner.
-2. Level 3 review: open 01-jev-benchmarks/data/reviews/new_questions_400.csv.
+2. Level 3 review: open 01-jev-benchmarks/data/reviews/new_questions.csv.
    Check every new question: is the marked answer right, is exactly one
    option right, is it not a near-copy of a real benchmark question. Fix
    wording in place if needed, fill in the yes/no columns. Then run

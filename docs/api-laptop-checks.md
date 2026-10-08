@@ -1,47 +1,29 @@
 # API-laptop checks (OpenRouter)
 
-**For the Claude agent on the API laptop.** The work laptop's network blocks openrouter.ai, so these checks could not be done there. Read `docs/PLAN.md` first for context (Part A, sections A3, A4, A9 and "Open questions").
+**For the Claude agent on the API laptop.** The work laptop's network blocks openrouter.ai and huggingface.co, so anything below that touches them is done there. Read `docs/PLAN.md` first (Part A, A3, A4, A9).
 
-Written 2026-10-06. Do not spend money beyond the tiny test calls in step 3 without asking the user.
+Do not spend money beyond the tiny test calls listed without asking the user, and **show the user the code changes before any full run**.
 
-## Goal
+## Done (2026-10-07/08, $0.00003)
 
-Confirm which models the experiment can actually use on OpenRouter, at what price, and whether each one returns **token log-probabilities** (needed to read option-letter probabilities, as the arXiv paper did).
+- Model IDs, prices and logprobs support checked; the lineup is in PLAN.md → Decided.
+- Jev (`typesafe/jev-1.13`) on `POST /api/alpha/decisions` returns a probability per option.
+- Qwen (`qwen/qwen3.8-27b`) and Gemma (`google/gemma-4-26b-a4b-it`) return option-letter logprobs with `max_tokens=1` and reasoning off. OpenRouter routed them to different providers (DekaLLM, Makora), so each baseline must be pinned to one provider.
 
-## Models to check
+## On hold: written on the work laptop, not verifiable there (2026-10-08)
 
-| Role | Model | What we need to know |
-|---|---|---|
-| Subject | `typesafe/jev-1.13` | Still listed? Price still $0.042/M input, output free? Context 32k? |
-| LLM baseline | **Qwen3.8-27B** (paper's model) | Exact OpenRouter ID, if listed. Price. Logprobs supported? |
-| LLM baseline | **Gemma-4-E4B** (paper's model) | Exact OpenRouter ID, if listed. Price. Logprobs supported? |
-| Paraphraser candidate | `openai/gpt-5-nano` | Listed? Price |
-| Paraphraser candidate | `google/gemini-2.0-flash-001` | Listed? Price |
-| Paraphraser candidate | `mistralai/mistral-small-3.1-24b-instruct` | Listed? Price |
-| Paraphraser candidate | `anthropic/claude-haiku-4.5` | Listed? Price |
+| # | What | Where | How to check |
+|---|---|---|---|
+| 1 | **Pin a provider per baseline.** Which of DekaLLM / Makora served which model was not recorded. | `LLM_PROVIDERS` in `src/jev_common/models.py` (both `None`; `09_run_llm.py` refuses to run until set) | Look in `01-jev-benchmarks/cache/` (or `logs/openrouter.jsonl`) for the live-check responses; or `GET /api/v1/models/{author}/{slug}/endpoints` and pick a provider that lists `logprobs` + `top_logprobs`. |
+| 2 | **Request fields written from memory:** `"reasoning": {"enabled": false}` and provider routing `{"order": [...], "allow_fallbacks": false, "require_parameters": true}`. | `LLM_EVAL_PARAMS` / `llm_eval_params` in `src/jev_common/models.py` | Compare with the request the live check sent (cache file `request` field) and the OpenRouter docs (reasoning tokens, provider routing). |
+| 3 | **Does a Jev decisions response carry `usage.cost`?** `CallResult.cost_usd` reads it; if absent, cost per 1,000 questions shows $0. | `src/jev_common/openrouter.py` | Look at one cached Jev response. |
+| 4 | **Smoke test 08 and 09 on Level 0** before the other runs. There is no "first N questions" option and a run stopped by `--max-cost` writes nothing, so run `08_run_jev.py sanity` (~$0.01) and `09_run_llm.py levels --models qwen/qwen3.8-27b --levels 0` (~$0.2); check `results/raw/<model>/level0.jsonl` has probabilities, few or no errors, and sanity says OK. The calls are cached, so later full runs reuse them. | `08_run_jev.py`, `09_run_llm.py` | ~$0.25 |
+| 5 | **First run of the Colab notebook** (needs a GPU and the HuggingFace model download). | `notebooks/07b_bert_colab.ipynb` | Run on Colab T4 with a small data set first; check the truncation count, loss falls, val accuracy above chance. |
 
-Prices in PLAN.md for the paraphraser candidates came from a third-party tracker with no date, so treat them as unconfirmed.
+## Run order once the reviews are in (needs you)
 
-## Steps
-
-1. **List models** (no API key needed): `GET https://openrouter.ai/api/v1/models`.
-   For each model above, record: `id`, `pricing.prompt` and `pricing.completion` (per token → convert to $ per million), `context_length`, and whether `supported_parameters` contains `logprobs` / `top_logprobs`.
-   For Qwen and Gemma, search the list for `qwen3.8` and `gemma-4`; record every close match if the exact model is missing.
-2. **Check providers** for the two baselines: `GET https://openrouter.ai/api/v1/models/{author}/{slug}/endpoints`. Logprobs support can differ by provider; note which providers support it.
-3. **Live logprobs test** (needs `OPENROUTER_API_KEY`; costs fractions of a cent). For each baseline that claims logprobs support, send one MCQ prompt with options A–D, `max_tokens: 1`, `logprobs: true`, `top_logprobs: 10`. Confirm the response actually contains probabilities for the letters A–D. If it doesn't, try pinning a provider that claims support.
-4. **Jev smoke test**: one `choice` question to `typesafe/jev-1.13` with 4 options; confirm it returns a probability per option.
-
-## Fallbacks (if a paper model is missing or has no logprobs)
-
-- Pick the nearest model in the **same family** (Qwen / Gemma) that does support logprobs, and record the size difference.
-- If no option in a family has logprobs on OpenRouter: report it. The user will decide between generated-letter answers (accuracy only, no like-for-like ECE) or running the model on Colab (Gemma-4-E4B may fit a T4 with 4-bit quantisation; unverified).
-- The paraphraser must **not** be a Qwen or Gemma model.
-
-## Report back
-
-Write the results to `docs/openrouter-check.md`:
-- one table: model · OpenRouter ID · $/M input · $/M output · context · logprobs (listed / tested OK / failed) · notes
-- the date checked
-- a short recommendation: final baseline IDs, and 2 paraphraser candidates for the pilot
-
-Then update the "Open questions" section of `docs/PLAN.md` to match, and tell the user before committing.
+1. `03_paraphrase.py` → `04_validate.py` (retry loop; fill `paraphrase_50.csv`) → `06a_swap.py` → `06b_validate_swaps.py` (retry loop; fill `swaps_30.csv`) → `06c_build_quiz.py`. About $0.90.
+2. `07a_build_bert_data.py`, copy `data/bert/` to `MyDrive/jev-bert/data/`, run the notebook on Colab, download results into `results/bert/`.
+3. `08_run_jev.py sanity` → `repeat` → `levels` → `quiz`. Under $0.10.
+4. `09_run_llm.py levels` → `quiz`. About $1.
+5. `10_analyse.py` (any laptop).

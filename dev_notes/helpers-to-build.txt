@@ -59,6 +59,11 @@ LEVELS AND PROMPTS
 [x] 13b. generation.py LLM calls that answer in JSON, parallel runs with a spending
                       cap, review sheets (never overwritten) for 03, 04, 05, 06a/b.
 
+RUNNING MODELS
+[x] 16. evaluation.py Tasks for Levels 0-3, quiz and repeatability; the LLM chat
+                      prompt (decision-index's rendering); parallel run loop; the
+                      per-question result record shared by 07b, 08, 09 and 10.
+
 PART B (02-jevlet-personas/helpers/)
 [x] 14. ipip.py       IPIP-NEO-120 items (data/ipip/ipip_neo_120.json), scoring key,
                       reverse keying, domain/facet scores, Jev score questions.

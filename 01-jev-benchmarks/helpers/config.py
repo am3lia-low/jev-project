@@ -23,7 +23,14 @@ NEW_REVIEWED_PATH = NEW_DIR / "reviewed.jsonl"  # human-checked 05 output = Leve
 SWAPS_DIR = DATA_DIR / "swaps"
 QUIZ_DIR = DATA_DIR / "quiz"
 REVIEW_DIR = DATA_DIR / "reviews"  # manual-check sheets (CSV) you fill in
+BERT_DATA_DIR = DATA_DIR / "bert"  # 07a: flat files for the Colab notebook
 PROMPTS_DIR = BENCH_DIR / "prompts"
+RESULTS_DIR = BENCH_DIR / "results"
+RAW_RESULTS_DIR = RESULTS_DIR / "raw"  # 08, 09: <model slug>/<run>.jsonl
+BERT_RESULTS_DIR = RESULTS_DIR / "bert"  # 07b, downloaded from Colab: <seed_n | untrained>/<run>.jsonl
+TABLES_DIR = RESULTS_DIR / "tables"  # 10
+FIGURES_DIR = RESULTS_DIR / "figures"  # 10
+VERDICT_PATH = RESULTS_DIR / "verdict.md"  # 10
 CACHE_DIR = BENCH_DIR / "cache"  # gitignored; raw API responses
 LOG_DIR = BENCH_DIR / "logs"
 
@@ -111,4 +118,12 @@ NEAR_COPY_REJECT = 0.75  # 05: discard and replace a draft this similar (clear n
 QUIZ_CHANCE = 0.25  # original is one of 4 options, A-D
 ABOVE_CHANCE_MARGIN = 0.10  # BERT control valid if CI lower bound >= chance + this
 MEMORISATION_DROP_RATIO = 2.0  # Jev's log-odds drop must be >= this x BERT's
+SIGNIFICANCE = 0.05  # two-sided tests in 10_analyse.py's verdict
+REPEAT_AGREEMENT_SINGLE_RUN = 0.99  # 8b: at or above this, one run per level is enough (A9)
+
+# Jev accuracy reported by Deußer et al. (arXiv 2609.37647), for the Level 0
+# sanity check (A9). HellaSwag and CommonsenseQA: Table 2; ARC-Easy and
+# ARC-Challenge: section 4.1 (Table 2 only has ARC E+C combined, 0.988).
+# Checked 2026-10-08.
+PAPER_JEV_ACCURACY = {"hs": 0.955, "arce": 0.993, "arcc": 0.977, "csqa": 0.882}
 

@@ -32,11 +32,13 @@ Scripts are numbered by their step in [A10](../docs/PLAN.md#a10-order-of-work) a
 │   ├── text_checks.py        # automatic checks for 04 and 06b
 │   ├── levels.py             # Level 0-3 views of the test set
 │   ├── prompts.py            # loads and fills the templates in prompts/; Jev request builders
-│   └── generation.py         # LLM calls returning JSON, parallel runs, review sheets
+│   ├── generation.py         # LLM calls returning JSON, parallel runs, review sheets
+│   └── evaluation.py         # tasks, LLM prompt, run loop, result records (08, 09, 10)
 ├── prompts/                  # frozen prompt text
 │   ├── paraphrase.txt
 │   ├── swap.txt
 │   ├── quiz.txt
+│   ├── llm_system.txt        # decision-index's system line for the LLM baselines
 │   ├── generate_new/<dataset>.txt
 │   └── eval/<dataset>.txt    # decision-index templates (A9)
 │
@@ -90,4 +92,4 @@ Levels 0 and 1 are not separate files: they are the original and shuffled orders
 - Helpers: all built and tested live. Build list: [`dev_notes/helpers-to-build.txt`](../dev_notes/helpers-to-build.txt).
 - `02_sample.py`: run 2026-10-08; `data/sampled/` holds the 8,500 sampled questions.
 - `03`-`06c` written and dry-run end to end. Run so far: the paraphrase pilot (`data/reviews/pilot_30.csv` waits for your ratings) and the Level 3 drafts (`data/reviews/new_questions.csv` waits for your review: 50 kept per dataset).
-- `07a`-`10` not written yet.
+- `07a`-`10` written 2026-10-08 on the work laptop: 08/09 dry-run with a fake API, 10 tested on synthetic results, the notebook only syntax-checked. On hold for the API laptop / Colab: see [`docs/api-laptop-checks.md`](../docs/api-laptop-checks.md).

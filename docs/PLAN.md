@@ -7,7 +7,7 @@ The project has two independent parts:
 - **Part A — Jev benchmarks** ([`01-jev-benchmarks/`](../01-jev-benchmarks/)): Jev vs BERT on MCQ, and how deep Jev's memorisation of public benchmarks goes.
 - **Part B — Jevlet personas** ([`02-jevlet-personas/`](../02-jevlet-personas/)): can Jev adopt behavioural (Big Five) and intellectual personas, compared to LLMs?
 
-Last updated: 2026-10-07
+Last updated: 2026-10-09
 
 ---
 
@@ -193,7 +193,7 @@ Three LLM-generated datasets. All scripts run on the API laptop, are resumable a
 | `bert-base-uncased` — untrained | Multiple-choice head randomly initialised, no fine-tuning | Chance floor |
 | `bert-base-uncased` — fine-tuned | See A5 | Main baseline + **control** for paraphrase difficulty |
 | Jev (`typesafe/jev-1.13`) | None | Subject |
-| LLM baselines: `qwen/qwen3.8-27b`, `google/gemma-4-26b-a4b-it` | None. As in the paper: one prompt, read the next-token probabilities of the option letters, renormalise | Added **after** Jev; same models as the paper so its LLM numbers can be reproduced too |
+| LLM baselines: `qwen/qwen3.8-27b`, `google/gemma-4-26b-a4b-it` | None. As in the paper: one prompt, read the next-token probabilities of the option letters, renormalise. Run through the OpenRouter API (see A9 for how this differs from the paper) | Added **after** Jev; same models as the paper so its LLM numbers can be reproduced too |
 | *Optional:* `bert-large-uncased`, 1 seed | As A5 | Only if BERT-base is weak; the model HellaSwag was filtered against |
 | *Optional:* `roberta-base` | As A5 | Stronger encoder for the accuracy comparison only (see below) |
 
@@ -206,7 +206,7 @@ Three LLM-generated datasets. All scripts run on the API laptop, are resumable a
 - **Main run: one model trained on both versions** of every training question across all 5 datasets (originals + paraphrases → 11,000 examples). BERT then has no style advantage on either test version, so its drop from original → paraphrased measures only how much harder paraphrasing made the questions.
 - Validation set (both versions, 2,000) for early stopping and choosing settings.
 - **5 random seeds**; report mean ± SD. BERT fine-tuning on small datasets varies a lot between seeds ([Dodge et al. 2020](https://arxiv.org/pdf/2002.06305), [Zhang et al. 2021](https://arxiv.org/pdf/2006.05987)).
-- **Above-chance rule** (per dataset, on val): BERT counts as a valid difficulty control only if the lower bound of its val accuracy 95% CI is ≥ chance + 10 points. Datasets that fail are marked "BERT control uninformative".
+- **Above-chance rule** (per dataset, on val): BERT counts as a valid difficulty control only if the lower bound of its val accuracy 95% CI is ≥ chance + 10 points. Datasets that fail are marked "BERT control uninformative". Computed on the original wording only (200 per dataset): a question and its paraphrase are near-duplicates, so counting both would make the CI look narrower than it is (decided 2026-10-09).
 - **Fallbacks if BERT is near chance (e.g. ARC-Challenge):** RACE pre-training first (RACE: ~98k exam MCQs, [Lai et al. 2017](https://aclanthology.org/D17-1082.pdf); BERT-base reached ~44% on ARC-Challenge this way, [intersun/ARC-Challenge](https://github.com/intersun/ARC-Challenge)), and/or BERT-large with 1 seed.
 - Optional ablations (cheap on Colab): train on original only; train on paraphrased only.
 - Hardware: Google Colab (free T4). Neither local laptop has an NVIDIA GPU.
@@ -268,6 +268,8 @@ Comparisons:
 ### A9. Running Jev and LLMs
 
 - **Prompt format:** reuse decision-index's frozen per-dataset templates, single-token option codes A–E (no numeric keys). Checked 2026-10-08: decision-index sends an empty `state` and one `choice` question whose instructions are the bare question (ARC) or "Which continuation is most plausible?" + the context (HellaSwag), with options keyed A–E. It has no CommonsenseQA or SWAG template; ours copy ARC's and HellaSwag's respectively (`prompts/eval/`).
+- **LLM baselines** get the same request rendered as decision-index's `transformers` engine does (its system line, then "State / Question / Options" and "Reply with exactly one option key."; `prompts/llm_system.txt`, `helpers/evaluation.py`), thinking off, one token; letter probabilities from the first token's top-20 logprobs, renormalised. Each baseline is pinned to one provider.
+  - **Difference from the paper (accepted 2026-10-09):** the paper ran the models itself, so it had a probability for every option letter. OpenRouter only returns the 20 most likely next tokens, so a letter outside them is recorded as 0%. Accuracy is unaffected (the pick is the top token); ECE can be very slightly off. Running the models ourselves for full probabilities would need a paid GPU (27B / 26B parameters do not fit a free T4 alongside BERT), so the baselines stay on OpenRouter. State this in the write-up.
 - **Sanity check first:** Level 0 accuracy on the sample must fall within the CI of the paper's numbers. If not, debug the client/template before running other levels.
 - **Repeatability:** run 200 test questions 3 times; report agreement. ~100% → single runs; otherwise run each level 2–3 times and take the majority.
 - **Errors:** retry with backoff, log everything, score unrecoverable failures as wrong and report the failure rate.
@@ -347,7 +349,7 @@ Model lineup (OpenRouter listing checked 2026-10-06; pin these IDs, no `~…-lat
 | Role | Model | $/M in / out | Notes |
 |---|---|---|---|
 | Subject | `typesafe/jev-1.13` | 0.042 / free | 32k context. Not in the default `/api/v1/models` list (its output type is `decisions`, not text); use `?output_modalities=all`. Avoid `typesafe/jev-router` (picks a model per request). |
-| LLM baseline | `qwen/qwen3.8-27b` | 0.425 / 2.55 | The paper's model; logprobs listed |
+| LLM baseline | `qwen/qwen3.8-27b` | 0.425 / 2.55 | The paper's model; logprobs listed. Both baselines run via OpenRouter, not self-hosted (A9) |
 | LLM baseline | `google/gemma-4-26b-a4b-it` | 0.09 / 0.30 | Gemma-4-E4B is not on OpenRouter. 26B-A4B has the same ~4B active parameters but more in total; report this difference. Chosen over running E4B on Colab, which stays reserved for BERT. Logprobs listed |
 | New questions (A3.2) | `anthropic/claude-sonnet-5.5` | 2 / 10 | |
 | Paraphrases + swaps (A3.1, A3.3) | Pilot pending | | See Open questions |
@@ -355,6 +357,6 @@ Model lineup (OpenRouter listing checked 2026-10-06; pin these IDs, no `~…-lat
 ## Open questions
 
 - Paraphrasing model: pilot `openai/gpt-6-luna` vs `mistralai/mistral-small-2603` (A3.1).
-- Live checks still to run once `OPENROUTER_API_KEY` is set (steps 3–4 of [`api-laptop-checks.md`](api-laptop-checks.md)): logprobs actually return A–D probabilities for both baselines; Jev smoke test.
+- Live checks done 2026-10-08. Still on hold for the API laptop: pin one provider per LLM baseline and confirm the request fields (see [`api-laptop-checks.md`](api-laptop-checks.md)).
 - Confirm the memorisation threshold in A8 (log-odds, CI above 0 and ≥ 2× BERT's drop) before running Jev.
 - Add an MMLU math slice to test number-swapping (relevant to the paper's math anomaly)?
