@@ -11,7 +11,7 @@ NEW_QUESTION_MODEL = "anthropic/claude-sonnet-5.5"
 # Paraphrases (A3.1), swaps (A3.3) and IPIP paraphrases (B1). Placeholder until
 # the pilot picks one of PARAPHRASE_CANDIDATES.
 PARAPHRASE_CANDIDATES = ("openai/gpt-6-luna", "mistralai/mistral-small-2603")
-PARAPHRASE_MODEL: str | None = None
+PARAPHRASE_MODEL: str | None = "openai/gpt-6-luna"
 
 # Request settings for the generator models, checked against each model's
 # `supported_parameters` on OpenRouter (2026-10-08). gpt-6-luna takes no

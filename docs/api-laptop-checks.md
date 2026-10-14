@@ -28,7 +28,7 @@ Do not spend money beyond the tiny test calls listed without asking the user, an
 | 4 | **Smoke test 08 and 09 on Level 0** before the other runs. There is no "first N questions" option and a run stopped by `--max-cost` writes nothing, so run `08_run_jev.py sanity` (~$0.01) and `09_run_llm.py levels --models qwen/qwen3.8-27b --levels 0` (~$0.2); check `results/raw/<model>/level0.jsonl` has probabilities, few or no errors, and sanity says OK. The calls are cached, so later full runs reuse them. | `08_run_jev.py`, `09_run_llm.py` | ~$0.25 |
 | 5 | **First run of the Colab notebook** (needs a GPU and the HuggingFace model download). | `notebooks/07b_bert_colab.ipynb` | Run on Colab T4 with a small data set first; check the truncation count, loss falls, val accuracy above chance. |
 
-## Run order once the reviews are in (needs you)
+## Run order (both reviews done 2026-10-14; `PARAPHRASE_MODEL` = gpt-6-luna)
 
 1. `03_paraphrase.py` → `04_validate.py` (retry loop; fill `paraphrase_50.csv`) → `06a_swap.py` → `06b_validate_swaps.py` (retry loop; fill `swaps_30.csv`) → `06c_build_quiz.py`. About $0.90.
 2. `07a_build_bert_data.py`, copy `data/bert/` to `MyDrive/jev-bert/data/`, run the notebook on Colab, download results into `results/bert/`.
