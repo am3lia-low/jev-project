@@ -7,9 +7,12 @@ laptop (Colab for item 5). Same list, with more detail: docs/api-laptop-checks.m
 Do not start full runs until items 1-4 are done.
 
 
+DONE 2026-10-09 (API laptop): items 1-4, $0.054 in total. Details in
+docs/api-laptop-checks.md. Item 5 needs Colab (notebook now has SMOKE_TEST).
+
 ON HOLD (checks before anything runs)
 -------------------------------------
-[ ] 1. Pin one provider per LLM baseline.
+[x] 1. Pin one provider per LLM baseline.
        File: src/jev_common/models.py -> LLM_PROVIDERS (both None; 09_run_llm.py
        refuses to start until set).
        The live check was served by DekaLLM and Makora, but which served Qwen
@@ -18,7 +21,7 @@ ON HOLD (checks before anything runs)
        ("served_by"), or list the providers that support logprobs:
        GET https://openrouter.ai/api/v1/models/{author}/{slug}/endpoints
 
-[ ] 2. Confirm the request settings written from memory.
+[x] 2. Confirm the request settings written from memory.
        File: src/jev_common/models.py -> LLM_EVAL_PARAMS, llm_eval_params().
        - reasoning off:  "reasoning": {"enabled": false}
        - provider pin:   "provider": {"order": [...], "allow_fallbacks": false,
@@ -26,12 +29,12 @@ ON HOLD (checks before anything runs)
        Compare with what the live check actually sent (the "request" field in
        its cache file) and with the OpenRouter docs.
 
-[ ] 3. Check that Jev responses include a cost.
+[x] 3. Check that Jev responses include a cost.
        Open one cached Jev response and look for usage.cost. If it is missing,
        the cost column in 10_analyse.py's tables will show $0 for Jev, and
        openrouter.py needs another way to read the cost.
 
-[ ] 4. Smoke-test 08 and 09 on Level 0 (about $0.25 in total).
+[x] 4. Smoke-test 08 and 09 on Level 0 (about $0.25 in total).
        The scripts have no "first N questions" option, and a run stopped by
        --max-cost writes nothing, so the smoke test is one full Level 0 run:
             python 08_run_jev.py sanity                                  (~$0.01)

@@ -221,7 +221,8 @@ class OpenRouterClient:
             "status": status,
             "latency_s": round(latency_s, 3),
             "id": (payload or {}).get("id"),
-            "served_by": (payload or {}).get("model"),
+            "served_by": (payload or {}).get("model"),  # dated model version, not the provider
+            "provider": (payload or {}).get("provider"),
             "cost_usd": usage.get("cost"),
             "error": error or None,
         }

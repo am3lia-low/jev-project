@@ -349,14 +349,14 @@ Model lineup (OpenRouter listing checked 2026-10-06; pin these IDs, no `~…-lat
 | Role | Model | $/M in / out | Notes |
 |---|---|---|---|
 | Subject | `typesafe/jev-1.13` | 0.042 / free | 32k context. Not in the default `/api/v1/models` list (its output type is `decisions`, not text); use `?output_modalities=all`. Avoid `typesafe/jev-router` (picks a model per request). |
-| LLM baseline | `qwen/qwen3.8-27b` | 0.425 / 2.55 | The paper's model; logprobs listed. Both baselines run via OpenRouter, not self-hosted (A9) |
-| LLM baseline | `google/gemma-4-26b-a4b-it` | 0.09 / 0.30 | Gemma-4-E4B is not on OpenRouter. 26B-A4B has the same ~4B active parameters but more in total; report this difference. Chosen over running E4B on Colab, which stays reserved for BERT. Logprobs listed |
+| LLM baseline | `qwen/qwen3.8-27b` | 0.049 / 3.00 (pinned `dekallm`; list price 0.425 / 2.55) | The paper's model; logprobs listed. Both baselines run via OpenRouter, not self-hosted (A9). Provider quantization "unknown" |
+| LLM baseline | `google/gemma-4-26b-a4b-it` | 0.08 / 0.32 (pinned `makora`) | Gemma-4-E4B is not on OpenRouter. 26B-A4B has the same ~4B active parameters but more in total; report this difference. Chosen over running E4B on Colab, which stays reserved for BERT. Logprobs listed |
 | New questions (A3.2) | `anthropic/claude-sonnet-5.5` | 2 / 10 | |
 | Paraphrases + swaps (A3.1, A3.3) | Pilot pending | | See Open questions |
 
 ## Open questions
 
 - Paraphrasing model: pilot `openai/gpt-6-luna` vs `mistralai/mistral-small-2603` (A3.1).
-- Live checks done 2026-10-08. Still on hold for the API laptop: pin one provider per LLM baseline and confirm the request fields (see [`api-laptop-checks.md`](api-laptop-checks.md)).
+- Live checks done 2026-10-08; providers pinned, request fields confirmed and Level 0 smoke-tested 2026-10-09 (see [`api-laptop-checks.md`](api-laptop-checks.md)). Open: keep the pinned providers (quantization unknown) or switch to a listed full-precision one (e.g. Qwen `cerebras/fp16`, Gemma `dekallm/bf16`) before the full runs?
 - Confirm the memorisation threshold in A8 (log-odds, CI above 0 and ≥ 2× BERT's drop) before running Jev.
 - Add an MMLU math slice to test number-swapping (relevant to the paper's math anomaly)?

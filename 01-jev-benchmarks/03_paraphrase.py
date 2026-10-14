@@ -202,7 +202,7 @@ def run_full(datasets: list[str], workers: int, max_cost: float, retry_failed: b
     if retry_failed:
         if not FAILED_PATH.exists():
             raise SystemExit(f"{FAILED_PATH} not found; run 04_validate.py first")
-        failed_ids = {qid: info.get("attempt", -1) for qid, info in json.loads(FAILED_PATH.read_text()).items()}
+        failed_ids = {qid: info.get("attempt", -1) for qid, info in json.loads(FAILED_PATH.read_text(encoding="utf-8")).items()}
 
     with make_client("paraphrase", max_cost) as client:
         stopped = any(

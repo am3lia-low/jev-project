@@ -25,20 +25,22 @@ GENERATION_PARAMS: dict[str, dict] = {
 # LLM baselines (A4, A9): one generated token, the top-20 first-token logprobs,
 # thinking off, one pinned provider per model (OpenRouter routed the live check
 # to different providers).
-# ON HOLD for the API laptop: fill in LLM_PROVIDERS with the providers the
-# live check used (DekaLLM, Makora; which served which is not recorded), and
-# confirm the reasoning-off and provider-routing fields below against the
-# OpenRouter docs. They were written from memory on the work laptop.
+# Providers are OpenRouter slugs (lowercase, as in the endpoints list), the ones
+# the 2026-10-08 live check used: Makora serves only Gemma, so DekaLLM served
+# Qwen. Re-checked live 2026-10-09 with the routing below: both return letter
+# logprobs. Quantization is listed as "unknown" for both endpoints.
+# Reasoning off: `effort: "none"` is the documented switch (OpenRouter docs,
+# reasoning tokens); both models then report 0 reasoning tokens.
 LLM_PROVIDERS: dict[str, str | None] = {
-    "qwen/qwen3.8-27b": None,
-    "google/gemma-4-26b-a4b-it": None,
+    "qwen/qwen3.8-27b": "dekallm",
+    "google/gemma-4-26b-a4b-it": "makora",
 }
 LLM_EVAL_PARAMS: dict = {
     "max_tokens": 1,
     "temperature": 0,
     "logprobs": True,
     "top_logprobs": 20,
-    "reasoning": {"enabled": False},
+    "reasoning": {"effort": "none"},
 }
 
 

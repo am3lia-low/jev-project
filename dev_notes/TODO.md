@@ -67,6 +67,6 @@ Create the folders the layout needs, delete the ones it doesn't, and move every 
 - [x] `PAPER_JEV_ACCURACY` in `config.py`, incl. CommonsenseQA 0.882 (paper Table 2).
 - [x] Decided 2026-10-09: LLM baselines stay on OpenRouter (top-20 logprobs; a letter outside them counts as 0%), no self-hosting for full probabilities. BERT's above-chance rule uses val originals only. Both recorded in PLAN A5/A9.
 
-## 8. [ ] On hold for the API laptop / Colab
+## 8. [ ] On hold for the API laptop / Colab (1-4 done 2026-10-09; Colab run left)
 
 See [`docs/api-laptop-checks.md`](../docs/api-laptop-checks.md#on-hold-written-on-the-work-laptop-not-verifiable-there-2026-10-08): pin LLM providers, confirm the reasoning-off and provider-routing fields, check Jev's `usage.cost`, smoke-test 08/09, first Colab run of 07b.

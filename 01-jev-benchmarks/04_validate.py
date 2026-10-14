@@ -47,8 +47,15 @@ def main() -> None:
     parser.add_argument("--datasets", nargs="+", choices=list(config.DATASETS), default=list(config.DATASETS))
     args = parser.parse_args()
 
+    # Keep other datasets' entries when only some are validated (--datasets).
     failed: dict[str, dict] = {}
     report: dict[str, dict] = {}
+    if FAILED_PATH.exists():
+        failed = {qid: info for qid, info in json.loads(FAILED_PATH.read_text(encoding="utf-8")).items()
+                  if info["dataset"] not in args.datasets}
+    if REPORT_PATH.exists():
+        report = {key: value for key, value in json.loads(REPORT_PATH.read_text(encoding="utf-8"))["datasets"].items()
+                  if key not in args.datasets}
     passed_test = []
     for key in args.datasets:
         report[key] = {}

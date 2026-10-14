@@ -103,7 +103,7 @@ def main() -> None:
     if args.retry_failed:
         if not FAILED_PATH.exists():
             raise SystemExit(f"{FAILED_PATH} not found; run 06b_validate_swaps.py first")
-        failed = {qid: info.get("attempt", -1) for qid, info in json.loads(FAILED_PATH.read_text()).items()}
+        failed = {qid: info.get("attempt", -1) for qid, info in json.loads(FAILED_PATH.read_text(encoding="utf-8")).items()}
     todo = []
     for item in items:
         if item.id in failed:

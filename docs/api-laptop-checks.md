@@ -10,7 +10,15 @@ Do not spend money beyond the tiny test calls listed without asking the user, an
 - Jev (`typesafe/jev-1.13`) on `POST /api/alpha/decisions` returns a probability per option.
 - Qwen (`qwen/qwen3.8-27b`) and Gemma (`google/gemma-4-26b-a4b-it`) return option-letter logprobs with `max_tokens=1` and reasoning off. OpenRouter routed them to different providers (DekaLLM, Makora), so each baseline must be pinned to one provider.
 
-## On hold: written on the work laptop, not verifiable there (2026-10-08)
+## Done (2026-10-09, $0.054)
+
+1. **Providers pinned** (`LLM_PROVIDERS`): Qwen → `dekallm`, Gemma → `makora`. The live-check responses were never cached or logged (the log's `served_by` is the model, not the provider), but Makora serves only Gemma, so DekaLLM served Qwen. Both endpoints list quantization as "unknown". `order` takes lowercase slugs, not display names. DekaLLM's Qwen price is $0.049 / $3.00 per M, not the $0.425 / $2.55 list price. The call log now records `provider`.
+2. **Request fields:** provider routing (`order`, `allow_fallbacks`, `require_parameters`) matches the docs. Reasoning off is documented as `{"effort": "none"}`; `{"enabled": false}` is not documented for chat completions. Both gave 0 reasoning tokens live; switched to `effort: "none"`.
+3. **Jev `usage.cost`:** present (`usage: {input_tokens, output_tokens, cost}`), plus `provider: "TypeSafe"`. Jev rounds probabilities to 2 decimals, so `helpers/evaluation.py` now breaks ties with Jev's own `choice`. 1,745 of 2,000 Level 0 answers have some letter at exactly 0. Bear this in mind when reading ECE.
+4. **Smoke test:** `08_run_jev.py sanity` 2,000/2,000, 0 failed, $0.033, every paper dataset OK (hs 94.0, arce 99.2, arcc 97.5, csqa 88.5; swag 85.0). `09_run_llm.py levels --models qwen/qwen3.8-27b --levels 0`: 2,000/2,000, 0 failed, $0.021, all served by DekaLLM. 6 rows had a letter outside the top 20 and 4 rows tied (falls back to the earlier letter).
+5. Not done (Colab). The notebook now has `SMOKE_TEST = True` for the small first run (1 seed, 2,000 train rows, 1 epoch, into `results_smoke/`). `data/bert/` is built with `--originals-only`; rebuild it without the flag after 04.
+
+## On hold: written on the work laptop, not verifiable there (2026-10-08). Items 1-4 done 2026-10-09, see above
 
 | # | What | Where | How to check |
 |---|---|---|---|

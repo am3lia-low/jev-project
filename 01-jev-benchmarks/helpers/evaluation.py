@@ -14,7 +14,7 @@ Records: one JSON object per question per line in
 
     id, dataset, run, quiz_set (quiz only, else null), n_options,
     answer         correct letter as shown (quiz: where the original sits)
-    pred           letter with the highest probability; null if the call failed
+    pred           letter with the highest probability (ties: Jev's `choice`); null if the call failed
     probabilities  {letter: p}, renormalised; null if the call failed
     correct        pred == answer; a failed call counts as wrong (A9)
     latency_s, cost_usd, cached, error
@@ -133,9 +133,26 @@ def run_path(model: str, run: str) -> Path:
     return RAW_RESULTS_DIR / model_slug(model) / f"{run}.jsonl"
 
 
+def _pred(task: Task, probabilities: dict[str, float] | None, result: CallResult | None) -> str | None:
+    """Letter with the highest probability; on a tie, Jev's own `choice`.
+
+    Jev rounds probabilities to 2 decimals (seen live 2026-10-09), so two
+    options can tie; `max` alone would then always favour the earlier letter.
+    """
+    if not probabilities:
+        return None
+    best = max(probabilities.get(k, 0.0) for k in task.letters)
+    tied = [k for k in task.letters if probabilities.get(k, 0.0) == best]
+    if len(tied) > 1 and result is not None:
+        choice = ((result.response.get("answers") or {}).get(EVAL_QUESTION_KEY) or {}).get("choice")
+        if choice in tied:
+            return choice
+    return tied[0]
+
+
 def _record(task: Task, run: str, probabilities: dict[str, float] | None,
             result: CallResult | None, error: str | None) -> dict[str, Any]:
-    pred = max(task.letters, key=lambda k: probabilities.get(k, 0.0)) if probabilities else None
+    pred = _pred(task, probabilities, result)
     return {
         "id": task.id,
         "dataset": task.dataset,
