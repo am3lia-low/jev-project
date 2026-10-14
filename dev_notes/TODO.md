@@ -14,7 +14,7 @@ Done 2026-10-07 on the API laptop:
 - [x] **Fixed: SWAG vs HellaSwag video-ID dedupe never matched.** SWAG stores `anetv_<id>` lowercased, HellaSwag `activitynet~v_<ID>` in original case, so 0 SWAG questions were dropped by video. Both are now normalised to the bare, casefolded YouTube ID; HellaSwag WikiHow rows get no video ID. Result: 324 SWAG training questions dropped against the 400 sampled HellaSwag test questions.
 - [x] `stats.two_proportion_test` now rejects empty groups instead of dividing by zero.
 - [x] `stats.compare_drops`: documented that a negative BERT drop makes the 2× rule pass trivially, leaving the CI to decide.
-- [ ] Decide: dedupe SWAG against the 400 sampled HellaSwag test questions (current, matches PLAN A1 wording) or against the full HellaSwag validation split (drops 3,489 + 31 by context of 73,546; removes any chance of related ActivityNet clips leaking into BERT's training set). Either way the pool is ample.
+- [x] Decided 2026-10-14: dedupe SWAG against the 400 sampled HellaSwag test questions (current behaviour, PLAN A1), not the full HellaSwag validation split (which would drop 3,489 + 31 by context of 73,546).
 
 ## 2. [x] Match the repo to the planned layout
 
@@ -50,7 +50,7 @@ Create the folders the layout needs, delete the ones it doesn't, and move every 
 - [x] Paraphrase pilot run ($0.005). Both candidates passed all automatic checks; ~$0.70–0.80 for the full 8,500.
 - [x] Level 3 drafts run ($1.07 incl. a first attempt). Sonnet tends to write textbook questions ARC already contains, so drafts with similarity ≥ 0.75 to any benchmark question are now discarded and replaced (24); 60 more (0.6–0.75) are flagged for review.
 
-## 5. [ ] Waiting on you
+## 5. [ ] Reviews, then the synthetic-data runs
 
 - [x] Rate the pilot blind (`data/reviews/pilot_30.csv`, 2026-10-14): both models kept meaning 30/30; gpt-6-luna 30 same difficulty, Mistral 29 same + 1 harder. `PARAPHRASE_MODEL = "openai/gpt-6-luna"`.
 - [x] Review the Level 3 drafts (`data/reviews/new_questions.csv`, 2026-10-14): 272 of 400 reviewed, no text edits. `arcc-new-0095` and `csqa-new-0048` had keep=yes with a failed check, set to keep=no. `--apply-review` wrote `data/new/reviewed.jsonl`: 50 per dataset, 200 in total.
@@ -59,6 +59,7 @@ Create the folders the layout needs, delete the ones it doesn't, and move every 
 ## 6. [x] Docs out of date
 
 - [x] `docs/api-laptop-checks.md` replaced with a record of the done checks and the on-hold list (2026-10-08).
+- [x] All Markdown files brought in line with each other after merging both laptops' work (2026-10-14).
 
 ## 7. [x] Experiment scripts (2026-10-08, work laptop)
 
@@ -69,4 +70,23 @@ Create the folders the layout needs, delete the ones it doesn't, and move every 
 
 ## 8. [ ] On hold for the API laptop / Colab (1-4 done 2026-10-09; Colab run left)
 
-See [`docs/api-laptop-checks.md`](../docs/api-laptop-checks.md#on-hold-written-on-the-work-laptop-not-verifiable-there-2026-10-08): pin LLM providers, confirm the reasoning-off and provider-routing fields, check Jev's `usage.cost`, smoke-test 08/09, first Colab run of 07b.
+Details in [`docs/api-laptop-checks.md`](../docs/api-laptop-checks.md).
+
+- [x] Pin LLM providers (Qwen → `dekallm`, Gemma → `makora`).
+- [x] Confirm the request fields (reasoning off is now `effort: "none"`).
+- [x] Check Jev's `usage.cost` (present).
+- [x] Smoke-test 08/09 on Level 0 ($0.054): Jev sanity OK on every paper dataset; Qwen 2,000/2,000.
+- [ ] First Colab run of `07b_bert_colab.ipynb` with `SMOKE_TEST = True` (`data/bert/` is built `--originals-only`).
+
+## 9. [ ] Full runs (after 5 and 8)
+
+Same order as [`docs/api-laptop-checks.md` → Run order](../docs/api-laptop-checks.md#run-order-both-reviews-done-2026-10-14-paraphrase_model--gpt-6-luna) and PLAN A10:
+
+- [ ] `07a_build_bert_data.py` without `--originals-only`, then the full notebook on Colab (5 seeds); results into `results/bert/`.
+- [ ] `08_run_jev.py` repeat → levels → quiz.
+- [ ] `09_run_llm.py` levels → quiz (Qwen and Gemma).
+- [ ] `10_analyse.py`, then the final verdict by hand.
+
+## 10. [ ] Open decisions
+
+See PLAN.md → Open questions: confirm the memorisation threshold (before Jev's Level 2 run), and whether to add an MMLU math number-swap slice.

@@ -7,7 +7,7 @@ The project has two independent parts:
 - **Part A — Jev benchmarks** ([`01-jev-benchmarks/`](../01-jev-benchmarks/)): Jev vs BERT on MCQ, and how deep Jev's memorisation of public benchmarks goes.
 - **Part B — Jevlet personas** ([`02-jevlet-personas/`](../02-jevlet-personas/)): can Jev adopt behavioural (Big Five) and intellectual personas, compared to LLMs?
 
-Last updated: 2026-10-09
+Last updated: 2026-10-14
 
 ---
 
@@ -142,7 +142,7 @@ The four MCQ datasets from the arXiv paper, so results are comparable, plus SWAG
 
 - Paper datasets use the split the paper evaluated on (inferred from its question counts: HellaSwag 10,042; ARC 3,548 = 2,376 + 1,172; CommonsenseQA 1,221). SWAG has no paper number.
 - **Why SWAG:** HellaSwag's wrong answers were filtered with BERT-Large as the adversary, so BERT-Large only reached 47.3% ([HellaSwag paper](https://arxiv.org/pdf/1905.07830)). SWAG is the same kind of task without that anti-BERT filtering, and BERT scored >86% on it ([SWAG paper](https://arxiv.org/pdf/1808.05326)). SWAG gives BERT a fair dataset for the difficulty control. HellaSwag is still used for Jev (comparability with the paper); BERT's HellaSwag score is reported with this caveat.
-- **SWAG ↔ HellaSwag overlap:** both draw on ActivityNet Captions. `02_sample.py` must drop SWAG training questions that share a video ID or context text with any HellaSwag test question.
+- **SWAG ↔ HellaSwag overlap:** both draw on ActivityNet Captions. `02_sample.py` drops SWAG training questions that share a video ID or context text with any of the 400 sampled HellaSwag test questions (324 dropped by video, 0 by context). Decided 2026-10-14 to keep this rather than dedupe against the full HellaSwag validation split.
 - SWAG is used in Levels 0–2 only. Level 3 and the memorisation quiz cover the four paper datasets.
 
 ### A2. Sampling and splitting
@@ -262,7 +262,7 @@ Per model × dataset × level:
 
 Comparisons:
 - **Between levels:** paired McNemar tests (same questions in every level), pooled as the main test and per dataset as secondary.
-- **Memorisation hypothesis (fixed before any Jev run):** compare each model's Level 0 → Level 2 drop in **log-odds** (accuracy near 100% cannot drop as many points as accuracy near 50%; e.g. Jev 97→94% is a log-odds drop of 0.72, BERT 60→55% is 0.21). Memorisation is supported if the bootstrap 95% CI of (Jev drop − BERT drop) is entirely above 0 **and** Jev's drop is at least 2× BERT's. Pooled over SWAG, ARC-Easy, ARC-Challenge and CommonsenseQA where BERT passes the above-chance rule; HellaSwag reported separately.
+- **Memorisation hypothesis (fixed before any Jev run):** compare each model's Level 0 → Level 2 drop in **log-odds** (accuracy near 100% cannot drop as many points as accuracy near 50%; e.g. Jev 97→94% is a log-odds drop of 0.72, BERT 60→55% is 0.21). Memorisation is supported if the bootstrap 95% CI of (Jev drop − BERT drop) is entirely above 0 **and** Jev's drop is at least 2× BERT's. If BERT's drop is negative (paraphrasing made the questions easier for BERT), the 2× condition passes trivially and the CI decides alone. Pooled over SWAG, ARC-Easy, ARC-Challenge and CommonsenseQA where BERT passes the above-chance rule; HellaSwag reported separately.
 - **Final verdict** combines three signals: the ladder (above), the quiz (A7) and Level 3 accuracy vs Level 0.
 
 ### A9. Running Jev and LLMs
@@ -276,15 +276,15 @@ Comparisons:
 
 ### A10. Order of work
 
-1. [ ] Repo setup (this plan, project structure, dependencies)
-2. [ ] `02_sample.py` — download 5 datasets, dedupe SWAG vs HellaSwag, sample, split, normalise labels, store original + shuffled orders, assign IDs
+1. [x] Repo setup (this plan, project structure, dependencies)
+2. [x] `02_sample.py` — download 5 datasets, dedupe SWAG vs HellaSwag, sample, split, normalise labels, store original + shuffled orders, assign IDs (run 2026-10-08)
 3. [ ] `03_paraphrase.py` — pilot 2 models on 30 questions, choose (done 2026-10-14: gpt-6-luna), full run (API laptop)
 4. [ ] `04_validate.py` — automatic checks + manual 50
 5. [x] `05_generate_new.py` — 400 drafts, 200 Level 3 questions kept after the human check (API laptop)
 6. [ ] `06a_swap.py` + `06b_validate_swaps.py` — quiz versions for 400 benchmark + 100 control items (API laptop); `06c_build_quiz.py` — assemble the 500-item quiz
-7. [ ] `07a_build_bert_data.py` — originals + paraphrases for Colab; `notebooks/07b_bert_colab.ipynb` — untrained BERT; fine-tune BERT-base (5 seeds); above-chance rule; evaluate Levels 0–3; optional fallbacks
-8. [ ] `08_run_jev.py` (API laptop): 8a sanity check · 8b repeatability · 8c Levels 0–3 · 8d quiz
-9. [ ] `09_run_llm.py` (API laptop): LLM baselines, Levels 0–3 + quiz
+7. [ ] `07a_build_bert_data.py` — originals + paraphrases for Colab; `notebooks/07b_bert_colab.ipynb` — untrained BERT; fine-tune BERT-base (5 seeds); above-chance rule; evaluate Levels 0–3; optional fallbacks (so far: built with `--originals-only` for the Colab smoke test, which has not run yet)
+8. [ ] `08_run_jev.py` (API laptop): 8a sanity check · 8b repeatability · 8c Levels 0–3 · 8d quiz (8a done 2026-10-09: Level 0 within the paper's CI on all 4 paper datasets)
+9. [ ] `09_run_llm.py` (API laptop): LLM baselines, Levels 0–3 + quiz (so far: Qwen Level 0 as a smoke test)
 10. [ ] `10_analyse.py` — tables, plots, McNemar, log-odds comparison, quiz scoring, verdict
 
 Script files are named by their step number above (`06a`, `06b`, … when a step has several), so the folder lists them in run order.
@@ -356,6 +356,5 @@ Model lineup (OpenRouter listing checked 2026-10-06; pin these IDs, no `~…-lat
 
 ## Open questions
 
-- Live checks done 2026-10-08. Still on hold for the API laptop: pin one provider per LLM baseline and confirm the request fields (see [`api-laptop-checks.md`](api-laptop-checks.md)).
-- Confirm the memorisation threshold in A8 (log-odds, CI above 0 and ≥ 2× BERT's drop) before running Jev.
-- Add an MMLU math slice to test number-swapping (relevant to the paper's math anomaly)?
+- Confirm the memorisation threshold in A8 (log-odds, CI above 0 and ≥ 2× BERT's drop) before running Jev on Level 2. Jev's Level 0 sanity run is done, but no Level 2 results exist yet, so the rule can still be fixed in advance.
+- Add an MMLU math slice to test number-swapping (relevant to the paper's math anomaly)? This means changing the numbers in calculation questions so the correct answer changes: a model that memorised the original would keep picking the old answer.

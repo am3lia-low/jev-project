@@ -14,7 +14,7 @@ The full design is in [`docs/PLAN.md` → Part A](../docs/PLAN.md#part-a--jev-be
 
 Code that needs the API laptop is still written on the work laptop; it just gets run there. Results come back through git.
 
-## Layout (planned)
+## Layout
 
 Scripts are numbered by their step in [A10](../docs/PLAN.md#a10-order-of-work) and run from this folder, e.g. `python 02_sample.py`.
 
@@ -68,14 +68,14 @@ Scripts are numbered by their step in [A10](../docs/PLAN.md#a10-order-of-work) a
 │   ├── swaps/{items,raw}.jsonl                      # 06a: quiz items, their 3 swaps
 │   ├── swaps/swaps.jsonl, swaps/failed.json         # 06b: swaps that passed / rejected
 │   ├── quiz/quiz.jsonl                              # 06c
-│   ├── bert/{train,val}.jsonl                       # 07a
+│   ├── bert/{train,val,level0..level3}.jsonl, manifest.json  # 07a
 │   └── reviews/              # manual-check sheets you fill in (CSV)
 │       ├── pilot_30.csv
 │       ├── paraphrase_50.csv
 │       ├── new_questions.csv
 │       └── swaps_30.csv
 ├── results/                  # committed
-│   ├── raw/<model>/{level0,level1,level2,level3,quiz,repeat_1,repeat_2,repeat_3}.jsonl
+│   ├── raw/<author>__<model>/{level0,level1,level2,level3,quiz,repeat_1,repeat_2,repeat_3}.jsonl
 │   │                         # per question: answer, probabilities, latency, cost
 │   ├── bert/seed_<n>/        # downloaded from Colab
 │   ├── tables/
@@ -85,11 +85,13 @@ Scripts are numbered by their step in [A10](../docs/PLAN.md#a10-order-of-work) a
 └── logs/                     # not committed: API call logs
 ```
 
-Levels 0 and 1 are not separate files: they are the original and shuffled orders of `data/sampled/<dataset>/test.jsonl`, built by `helpers/levels.py`.
+Levels 0 and 1 are not separate files in `data/`: they are the original and shuffled orders of `data/sampled/<dataset>/test.jsonl`, built by `helpers/levels.py`. Only `07a` writes them out, into `data/bert/` for the Colab notebook.
 
-## Status
+## Status (2026-10-14)
 
 - Helpers: all built and tested live. Build list: [`dev_notes/helpers-to-build.txt`](../dev_notes/helpers-to-build.txt).
 - `02_sample.py`: run 2026-10-08; `data/sampled/` holds the 8,500 sampled questions.
-- `03`-`06c` written and dry-run end to end. Run so far: the paraphrase pilot (`data/reviews/pilot_30.csv` waits for your ratings) and the Level 3 drafts (`data/reviews/new_questions.csv` waits for your review: 50 kept per dataset).
-- `07a`-`10` written 2026-10-08 on the work laptop: 08/09 dry-run with a fake API, 10 tested on synthetic results, the notebook only syntax-checked. On hold for the API laptop / Colab: see [`docs/api-laptop-checks.md`](../docs/api-laptop-checks.md).
+- `03`-`06c` written and dry-run end to end. Both reviews done 2026-10-14: the paraphrase pilot (`pilot_30.csv`; gpt-6-luna chosen) and Level 3 (`new_questions.csv`; 200 kept in `data/new/reviewed.jsonl`). Next: the full `03` → `06c` run.
+- `07a` run with `--originals-only` for the Colab smoke test; the notebook has not been run on Colab yet.
+- `08_run_jev.py sanity` and `09_run_llm.py levels --models qwen/qwen3.8-27b --levels 0` run 2026-10-09 (Level 0 only); `10_analyse.py` run on those, so `results/tables/` and `results/figures/` cover Level 0 only and `verdict.md` has no signals yet.
+- Remaining work, in order: [`docs/api-laptop-checks.md` → Run order](../docs/api-laptop-checks.md).

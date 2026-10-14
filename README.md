@@ -11,7 +11,7 @@ The full design is in [`docs/PLAN.md`](docs/PLAN.md). The project has two indepe
 
 ## Layout
 
-The planned layout. Each part's README has its own folder in full. [`dev_notes/TODO.md`](dev_notes/TODO.md) tracks moving the repo into this shape.
+Each part's README has its own folder in full. [`dev_notes/TODO.md`](dev_notes/TODO.md) tracks work on the repo; progress on the experiment is in [PLAN A10](docs/PLAN.md#a10-order-of-work).
 
 ```
 jev-project/
@@ -20,8 +20,8 @@ jev-project/
 ├── requirements.txt         # generated from pyproject.toml (uv export), for Colab
 ├── .env.example             # copy to .env and add OPENROUTER_API_KEY
 ├── src/jev_common/          # code shared by both parts
-│   ├── models.py            # pinned model IDs
-│   ├── openrouter.py        # API client (to be written on the API laptop)
+│   ├── models.py            # pinned model IDs, LLM providers and request settings
+│   ├── openrouter.py        # OpenRouter client (Jev decisions + chat completions), call log
 │   ├── cache.py             # on-disk response cache, so API scripts can resume
 │   └── stats.py             # bootstrap CI, McNemar, log-odds, ECE, binomial, two-proportion
 ├── docs/                    # PLAN.md, experiment flow diagram, API-laptop checklist

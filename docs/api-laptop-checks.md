@@ -20,6 +20,8 @@ Do not spend money beyond the tiny test calls listed without asking the user, an
 
 ## On hold: written on the work laptop, not verifiable there (2026-10-08). Items 1-4 done 2026-10-09, see above
 
+Kept as the original brief. Only item 5 is still open.
+
 | # | What | Where | How to check |
 |---|---|---|---|
 | 1 | **Pin a provider per baseline.** Which of DekaLLM / Makora served which model was not recorded. | `LLM_PROVIDERS` in `src/jev_common/models.py` (both `None`; `09_run_llm.py` refuses to run until set) | Look in `01-jev-benchmarks/cache/` (or `logs/openrouter.jsonl`) for the live-check responses; or `GET /api/v1/models/{author}/{slug}/endpoints` and pick a provider that lists `logprobs` + `top_logprobs`. |
@@ -30,8 +32,9 @@ Do not spend money beyond the tiny test calls listed without asking the user, an
 
 ## Run order (both reviews done 2026-10-14; `PARAPHRASE_MODEL` = gpt-6-luna)
 
+0. Item 5 above: Colab smoke test of the notebook.
 1. `03_paraphrase.py` → `04_validate.py` (retry loop; fill `paraphrase_50.csv`) → `06a_swap.py` → `06b_validate_swaps.py` (retry loop; fill `swaps_30.csv`) → `06c_build_quiz.py`. About $0.90.
-2. `07a_build_bert_data.py`, copy `data/bert/` to `MyDrive/jev-bert/data/`, run the notebook on Colab, download results into `results/bert/`.
-3. `08_run_jev.py sanity` → `repeat` → `levels` → `quiz`. Under $0.10.
+2. `07a_build_bert_data.py` (without `--originals-only`), copy `data/bert/` to `MyDrive/jev-bert/data/`, run the notebook on Colab, download results into `results/bert/`.
+3. `08_run_jev.py sanity` (cached, free) → `repeat` → `levels` → `quiz`. Under $0.10.
 4. `09_run_llm.py levels` → `quiz`. About $1.
 5. `10_analyse.py` (any laptop).
