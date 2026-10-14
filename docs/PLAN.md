@@ -171,7 +171,7 @@ Three LLM-generated datasets. All scripts run on the API laptop, are resumable a
 - Input: all 8,500 sampled questions (train, val and test).
 - Output: question rephrased, options rephrased where sensible, options reshuffled. Meaning and correct answer preserved.
 - Used for two separate things, from separate questions: (a) train/val paraphrases → BERT training data; (b) test paraphrases → Level 2. Same script, model and prompt for both, so BERT is used to the paraphrase style.
-- Model: **pilot 2 candidate models on the same 30 questions**, pick on meaning preservation in the manual check. Must not be the same family as any LLM baseline (no Qwen, Gemma or Gemini). Candidates: `openai/gpt-6-luna` ($0.10 / $0.50 per M in/out) and `mistralai/mistral-small-2603` ($0.15 / $0.60); backup `deepseek/deepseek-v4.1-flash` ($0.055 / $1.32). Prices checked on OpenRouter 2026-10-06. Estimated cost for the whole project (~6M tokens): ~$2, half that with the `:batch` variants.
+- Model: **pilot 2 candidate models on the same 30 questions**, pick on meaning preservation in the manual check. Must not be the same family as any LLM baseline (no Qwen, Gemma or Gemini). Candidates: `openai/gpt-6-luna` ($0.10 / $0.50 per M in/out) and `mistralai/mistral-small-2603` ($0.15 / $0.60); backup `deepseek/deepseek-v4.1-flash` ($0.055 / $1.32). Prices checked on OpenRouter 2026-10-06. **Chosen 2026-10-14: `openai/gpt-6-luna`** (pilot: both kept meaning 30/30; gpt-6-luna rated same difficulty 30/30, Mistral made 1 harder; gpt-6-luna is cheaper). Estimated cost for the whole project (~6M tokens): ~$2, half that with the `:batch` variants.
 - The winner is also used for `06a_swap.py` (A3.3) and the IPIP paraphrases (B1 step 4).
 - Validation (`04_validate.py`): automatic checks (answer still present, option count unchanged, text actually changed) + manual review of a random 50, rating meaning preserved and whether the paraphrase made the question easier / harder / same.
 
@@ -278,9 +278,9 @@ Comparisons:
 
 1. [ ] Repo setup (this plan, project structure, dependencies)
 2. [ ] `02_sample.py` — download 5 datasets, dedupe SWAG vs HellaSwag, sample, split, normalise labels, store original + shuffled orders, assign IDs
-3. [ ] `03_paraphrase.py` — pilot 2 models on 30 questions, choose, full run (API laptop)
+3. [ ] `03_paraphrase.py` — pilot 2 models on 30 questions, choose (done 2026-10-14: gpt-6-luna), full run (API laptop)
 4. [ ] `04_validate.py` — automatic checks + manual 50
-5. [ ] `05_generate_new.py` — 400 drafts, 200 Level 3 questions kept after the human check (API laptop)
+5. [x] `05_generate_new.py` — 400 drafts, 200 Level 3 questions kept after the human check (API laptop)
 6. [ ] `06a_swap.py` + `06b_validate_swaps.py` — quiz versions for 400 benchmark + 100 control items (API laptop); `06c_build_quiz.py` — assemble the 500-item quiz
 7. [ ] `07a_build_bert_data.py` — originals + paraphrases for Colab; `notebooks/07b_bert_colab.ipynb` — untrained BERT; fine-tune BERT-base (5 seeds); above-chance rule; evaluate Levels 0–3; optional fallbacks
 8. [ ] `08_run_jev.py` (API laptop): 8a sanity check · 8b repeatability · 8c Levels 0–3 · 8d quiz
@@ -352,11 +352,10 @@ Model lineup (OpenRouter listing checked 2026-10-06; pin these IDs, no `~…-lat
 | LLM baseline | `qwen/qwen3.8-27b` | 0.425 / 2.55 | The paper's model; logprobs listed. Both baselines run via OpenRouter, not self-hosted (A9) |
 | LLM baseline | `google/gemma-4-26b-a4b-it` | 0.09 / 0.30 | Gemma-4-E4B is not on OpenRouter. 26B-A4B has the same ~4B active parameters but more in total; report this difference. Chosen over running E4B on Colab, which stays reserved for BERT. Logprobs listed |
 | New questions (A3.2) | `anthropic/claude-sonnet-5.5` | 2 / 10 | |
-| Paraphrases + swaps (A3.1, A3.3) | Pilot pending | | See Open questions |
+| Paraphrases + swaps (A3.1, A3.3) | `openai/gpt-6-luna` | 0.10 / 0.50 | Chosen by the pilot 2026-10-14 (A3.1) |
 
 ## Open questions
 
-- Paraphrasing model: pilot `openai/gpt-6-luna` vs `mistralai/mistral-small-2603` (A3.1).
 - Live checks done 2026-10-08. Still on hold for the API laptop: pin one provider per LLM baseline and confirm the request fields (see [`api-laptop-checks.md`](api-laptop-checks.md)).
 - Confirm the memorisation threshold in A8 (log-odds, CI above 0 and ≥ 2× BERT's drop) before running Jev.
 - Add an MMLU math slice to test number-swapping (relevant to the paper's math anomaly)?

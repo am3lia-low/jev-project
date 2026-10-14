@@ -46,7 +46,7 @@ ON HOLD (checks before anything runs)
        accuracy is above chance.
 
 
-AFTER THAT, IN ORDER (needs the two reviews finished first)
+AFTER THAT, IN ORDER (both reviews done 2026-10-14; PARAPHRASE_MODEL set)
 -----------------------------------------------------------
 [ ] 6. 03_paraphrase.py -> 04_validate.py (retry loop; fill paraphrase_50.csv)
        -> 06a_swap.py -> 06b_validate_swaps.py (retry loop; fill swaps_30.csv)

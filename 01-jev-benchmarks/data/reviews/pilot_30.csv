@@ -7,7 +7,7 @@ D. switch to a black and white image.","A BMX rider is positioned at the startin
 A. observe riders executing aerial maneuvers and cyclists in motion.
 B. then view a closing credits sequence.
 C. watch him clear a jump, followed by performing stunts as he navigates through various barriers.
-D. transition to a monochrome visual.",,,,
+D. transition to a monochrome visual.",,yes,harder,
 hs-train-0255,Y,A,"We see a bmx biker as he prepares to to ride. We see the gate open and see the field. The rider takes off down the course. we
 A. see riders perform jumps and people riding bikes.
 B. then see a closing title screen.
@@ -16,7 +16,7 @@ D. switch to a black and white image.","A BMX rider gets ready to begin his run.
 A. watch riders make jumps and people ride their bikes.
 B. next see a title screen appear as the video ends.
 C. watch him clear a bar, then begin performing tricks while going over obstacles.
-D. cut to a black-and-white shot.",,,,
+D. cut to a black-and-white shot.",,yes,same,
 hs-train-0837,X,C,"The woman holds up some sort of tool while talking to the camera. The woman uses the tool to brush the dog while talking. the woman
 A. uses a brush to brush the dogs tail.
 B. keeps brushing and puts the tool down.
@@ -25,7 +25,7 @@ D. shows an access point to sponge bath while talking.","A woman raises some kin
 A. brushes the dog's tail with a brush.
 B. continues brushing, then sets the tool down.
 C. puts the tool down and pets the dog while speaking to the camera.
-D. shows an access point for sponge bathing while talking.",,,,
+D. shows an access point for sponge bathing while talking.",,yes,same,
 hs-train-0837,Y,C,"The woman holds up some sort of tool while talking to the camera. The woman uses the tool to brush the dog while talking. the woman
 A. uses a brush to brush the dogs tail.
 B. keeps brushing and puts the tool down.
@@ -34,7 +34,7 @@ D. shows an access point to sponge bath while talking.","A woman is seen holding
 A. grooms the dog’s tail with a brush.
 B. continues grooming before placing the object aside.
 C. places the object down and pets the dog while addressing the camera.
-D. demonstrates a sponge bath location while speaking.",,,,
+D. demonstrates a sponge bath location while speaking.",,yes,same,
 hs-train-21103,X,D,"[header] How to connect ceiling fan wires [title] Turn off the power from the circuit or breaker box. [step] Read the inside of your breaker or circuit box and locate the switch that controls the power to your fan. Once you find the right switch, flip it to the off position.
 A. [substeps] Turn on the power to both the circuit and the outlet. If the switch does not turn on its own, run your wires through the circuit.
 B. However, do not turn it off until you're sure the circuit is completed and nothing is contributing to your fan's vibration. [substeps] Unless you're using an emergency screw-on, you may find just enough slack to move the switch to a new position, in which case turn it back on.
@@ -43,7 +43,7 @@ D. It's important that the power running to the wires in your ceiling is off or 
 A. Activate the power for both the circuit and the outlet. If the switch does not activate automatically, thread the wires through the circuit.
 B. Nevertheless, avoid turning it off until you confirm the circuit is intact and no factors are causing the fan to vibrate.
 C. Once it deactivates, you can utilize it as a power source for your fan. There are specific spots on the circuit intended to hide wires rather than fully cover them.
-D. It is crucial that the electricity flowing to the ceiling wires is disconnected to prevent electric shock. Usually, the inside of the circuit breaker panel includes a diagram or chart indicating which circuits control which areas of the house.",,,,
+D. It is crucial that the electricity flowing to the ceiling wires is disconnected to prevent electric shock. Usually, the inside of the circuit breaker panel includes a diagram or chart indicating which circuits control which areas of the house.",,yes,same,
 hs-train-21103,Y,D,"[header] How to connect ceiling fan wires [title] Turn off the power from the circuit or breaker box. [step] Read the inside of your breaker or circuit box and locate the switch that controls the power to your fan. Once you find the right switch, flip it to the off position.
 A. [substeps] Turn on the power to both the circuit and the outlet. If the switch does not turn on its own, run your wires through the circuit.
 B. However, do not turn it off until you're sure the circuit is completed and nothing is contributing to your fan's vibration. [substeps] Unless you're using an emergency screw-on, you may find just enough slack to move the switch to a new position, in which case turn it back on.
@@ -52,7 +52,7 @@ D. It's important that the power running to the wires in your ceiling is off or 
 A. [substeps] Switch on the power for both the circuit and the outlet. If the switch doesn't activate by itself, route your wires through the circuit.
 B. Still, leave it on until you have confirmed the circuit is complete and nothing is causing your fan to vibrate. [substeps] If you aren't using an emergency screw-on, there may be enough slack to shift the switch to another position; if so, switch it back on.
 C. Once it switches off, you can use it as an outlet for your fan. [substeps] Some sections of the circuit are intended to hide the wires without fully enclosing them.
-D. Make sure the electricity flowing to the wires in your ceiling is switched off, or you might be electrocuted. [substeps] The inside of your circuit breaker panel generally has a diagram or chart indicating which area of the house is controlled by each circuit.",,,,
+D. Make sure the electricity flowing to the wires in your ceiling is switched off, or you might be electrocuted. [substeps] The inside of your circuit breaker panel generally has a diagram or chart indicating which area of the house is controlled by each circuit.",,yes,same,
 hs-train-30035,X,C,"[header] How to save for a new car (for teens ) [title] Start early. [step] It's never too early to start saving money. If you think you might want to buy your own car, start putting aside birthday money and earnings from summer jobs.
 A. That way you can keep the entire summer, or maybe even just a few more months, leftover. [substeps] This amount of money isn't really any more than you need to start saving for one year.
 B. Give yourself the same amount of cash each week, and estimate how much time it'll take you to save on necessities. [substeps] You may not be able to save everything that you spend on auto insurance, or you might just need more cash to pay for your car.
@@ -61,7 +61,7 @@ D. You can just drop by a retail store or purchase one at a grocery store, or yo
 A. This will leave you with the whole summer, or perhaps even a few extra months, to spare. [substeps] This sum is not really more than what you need to begin saving for a year.
 B. Set aside an equal amount of money each week, and work out how long it will take you to save for necessities. [substeps] You might not be able to save all the money you spend on car insurance, or you may simply need more money to pay for your car.
 C. Starting sooner gives you the chance to save more by the time you are old enough to drive. [substeps] Think about the age when you are eligible to get a driver's license.
-D. You can stop at a retail shop or buy one at a grocery store, or you can simply wait until you purchase it for the first time. When you first get there to pick up your car, see whether it has enough gas to get you there.",,,,
+D. You can stop at a retail shop or buy one at a grocery store, or you can simply wait until you purchase it for the first time. When you first get there to pick up your car, see whether it has enough gas to get you there.",,yes,same,
 hs-train-30035,Y,C,"[header] How to save for a new car (for teens ) [title] Start early. [step] It's never too early to start saving money. If you think you might want to buy your own car, start putting aside birthday money and earnings from summer jobs.
 A. That way you can keep the entire summer, or maybe even just a few more months, leftover. [substeps] This amount of money isn't really any more than you need to start saving for one year.
 B. Give yourself the same amount of cash each week, and estimate how much time it'll take you to save on necessities. [substeps] You may not be able to save everything that you spend on auto insurance, or you might just need more cash to pay for your car.
@@ -70,7 +70,7 @@ D. You can just drop by a retail store or purchase one at a grocery store, or yo
 A. This approach allows you to retain the entire summer period, or even just a few additional months, in surplus. [substeps] This sum is not significantly greater than what you would need to save over one year.
 B. Allocate a fixed weekly amount and calculate how long it will take you to accumulate sufficient funds for essential expenses. [substeps] You may find it difficult to save enough for auto insurance or may require additional funds to cover the full cost of your car.
 C. The sooner you begin saving, the greater the potential amount you could accumulate by the time you are legally permitted to drive. [substeps] Take into account the minimum age required to obtain a driver's license.
-D. You can easily visit a retail outlet or grocery store to purchase one, or simply wait until your initial acquisition. Upon picking up your vehicle for the first time, ensure it has adequate fuel for the journey home.",,,,
+D. You can easily visit a retail outlet or grocery store to purchase one, or simply wait until your initial acquisition. Upon picking up your vehicle for the first time, ensure it has adequate fuel for the journey home.",,yes,same,
 hs-train-24841,X,B,"[header] How to cite an essay [title] Make sure mla is the correct style for your document. [step] Mla is the formatting style of the modern language association. It's used in humanities areas like english studies, comparative literature, foreign language and literature, or cultural studies.
 A. It is verbose when it describes the subject, and it uses the formatting rules in other styles such as citations and subscripts. [substeps] Consider typing the formatting color code in bold, if you make it much easier to understand.
 B. If you are writing for a class or to publish, check the teacher or publisher's preference for formatting style. Students should read assignment sheets and course syllabi.
@@ -79,7 +79,7 @@ D. [substeps] Mla is used when using words that you find important but not overl
 A. It gives a lengthy description of the subject and applies formatting conventions found in other styles, including citations and subscripts. [substeps] Think about entering the formatting color code in bold if doing so would make it much easier to understand.
 B. When preparing work for a course or publication, find out which formatting style the instructor or publisher prefers. Students should consult assignment handouts and course syllabi.
 C. [title] Apply MLA informally while preparing an essay draft. [step] Writers often make the mistake of treating an MLA style as a problem when drafting an essay in writing, as a computer programmer would.
-D. [substeps] Use MLA for words you consider important, but not excessively important, in your language or field (e.g., academic or scientific). [title] Put a period following the author's name.",,,,
+D. [substeps] Use MLA for words you consider important, but not excessively important, in your language or field (e.g., academic or scientific). [title] Put a period following the author's name.",,yes,same,
 hs-train-24841,Y,B,"[header] How to cite an essay [title] Make sure mla is the correct style for your document. [step] Mla is the formatting style of the modern language association. It's used in humanities areas like english studies, comparative literature, foreign language and literature, or cultural studies.
 A. It is verbose when it describes the subject, and it uses the formatting rules in other styles such as citations and subscripts. [substeps] Consider typing the formatting color code in bold, if you make it much easier to understand.
 B. If you are writing for a class or to publish, check the teacher or publisher's preference for formatting style. Students should read assignment sheets and course syllabi.
@@ -88,7 +88,7 @@ D. [substeps] Mla is used when using words that you find important but not overl
 A. It tends to be overly detailed in describing the topic and incorporates formatting elements from other styles, such as citation formats and subscript rules. If this makes it clearer, you may choose to highlight the formatting color code in bold.
 B. Before finalizing your document, verify the preferred citation style with your instructor or the publisher, especially if you are submitting work for a class or publication. Reviewing assignment instructions and course outlines can help.
 C. During the drafting phase of an essay, avoid treating MLA style as an obstacle. Writers, particularly those with programming backgrounds, sometimes mistakenly view MLA formatting as a problem.
-D. It is applied when emphasizing words that carry significance but do not require excessive emphasis in your writing, such as in academic or technical contexts. Use a period after the author's name.",,,,
+D. It is applied when emphasizing words that carry significance but do not require excessive emphasis in your writing, such as in academic or technical contexts. Use a period after the author's name.",,yes,same,
 hs-train-15499,X,C,"[header] How to prove the angle sum property of a triangle [title] Draw a line parallel to side bc of the triangle that passes through the vertex a. [step] Label the line pq. Construct this line parallel to the bottom of the triangle. [title] Write the equation angle pab + angle bac + angle caq = 180 degrees.
 A. [step] Use [substeps] 2 indentations; overlap two indentations. [title] Describe the angle relative to the angle to which the triangle rose.
 B. [step] Write the equation angle pac on the bottom, a and b but that's all you need to know for a point. [title] Separate the bottom lines of the triangle.
@@ -97,7 +97,7 @@ D. [step] Draw diagonal lines across the angle 4v of the triangle directly at bo
 A. [step] Employ [substeps] 2 indentations; overlap two indentations. [title] Explain the angle in relation to the angle formed by the triangle's rise.
 B. [step] Note the equation angle pac on the bottom, a and b but that's all you need to know for a point. [title] Divide the triangle's base lines.
 C. [step] Recall that angles forming a straight line always total 180 degrees. Since angle pab, angle bac, and angle caq form line pq, their sum must equal 180 degrees.
-D. [step] Draw diagonal lines across angle 4v of the triangle directly toward both shape lines. [substeps] When they cross, ensure they do not intersect.",,,,
+D. [step] Draw diagonal lines across angle 4v of the triangle directly toward both shape lines. [substeps] When they cross, ensure they do not intersect.",,yes,same,
 hs-train-15499,Y,C,"[header] How to prove the angle sum property of a triangle [title] Draw a line parallel to side bc of the triangle that passes through the vertex a. [step] Label the line pq. Construct this line parallel to the bottom of the triangle. [title] Write the equation angle pab + angle bac + angle caq = 180 degrees.
 A. [step] Use [substeps] 2 indentations; overlap two indentations. [title] Describe the angle relative to the angle to which the triangle rose.
 B. [step] Write the equation angle pac on the bottom, a and b but that's all you need to know for a point. [title] Separate the bottom lines of the triangle.
@@ -106,7 +106,7 @@ D. [step] Draw diagonal lines across the angle 4v of the triangle directly at bo
 A. [step] Apply [substeps] 2 indentations; place two indentations over one another. [title] Explain the angle in relation to the angle that the triangle rose to.
 B. [step] Put angle pac on the bottom, a and b, but that is all you need to know for a point. [title] Divide the triangle's bottom lines apart.
 C. [step] Keep in mind that the angles making up a straight line have a total of 180 °. Since angle pab, angle bac, and angle caq together form line pq, their measures must add up to 180 °.
-D. [step] Make diagonal strokes across angle 4v of the triangle, right at both shape lines. [substeps] At the point where they meet, be sure not to make them intersect.",,,,
+D. [step] Make diagonal strokes across angle 4v of the triangle, right at both shape lines. [substeps] At the point where they meet, be sure not to make them intersect.",,yes,same,
 arce-train-1270,X,B,"Where are proteins synthesized?
 A. mitochondria
 B. ribosomes
@@ -115,7 +115,7 @@ D. lysosomes","In which cellular structures does the production of proteins take
 A. mitochondria
 B. ribosomes
 C. centrioles
-D. lysosomes",,,,
+D. lysosomes",,yes,same,
 arce-train-1270,Y,B,"Where are proteins synthesized?
 A. mitochondria
 B. ribosomes
@@ -124,7 +124,7 @@ D. lysosomes","In which parts of a cell are proteins made?
 A. mitochondria
 B. ribosomes
 C. centrioles
-D. lysosomes",,,,
+D. lysosomes",,yes,same,
 arce-train-1469,X,C,"Jake is testing how light affects plant growth. He grows two plants in identical pots with the same amount of water and fertilizer. Jake grows one of the plants in the sun, and the other in the shade. Which part of Jake's process indicates that there is a control for this investigation?
 A. He is growing plants in identical pots.
 B. He is using the same amount of water.
@@ -133,7 +133,7 @@ D. He is using the same amount of fertilizer.","Jake is examining the impact of 
 A. He cultivates plants in identical containers.
 B. He applies the same volume of water to both plants.
 C. He keeps one plant away from direct sunlight.
-D. He provides both plants with the same amount of nutrients.",,,,
+D. He provides both plants with the same amount of nutrients.",,yes,same,
 arce-train-1469,Y,C,"Jake is testing how light affects plant growth. He grows two plants in identical pots with the same amount of water and fertilizer. Jake grows one of the plants in the sun, and the other in the shade. Which part of Jake's process indicates that there is a control for this investigation?
 A. He is growing plants in identical pots.
 B. He is using the same amount of water.
@@ -142,7 +142,7 @@ D. He is using the same amount of fertilizer.","Jake is investigating the effect
 A. He grows the plants in matching pots.
 B. He gives both plants an equal amount of water.
 C. He grows one plant away from the sunlight.
-D. He gives both plants an equal amount of fertilizer.",,,,
+D. He gives both plants an equal amount of fertilizer.",,yes,same,
 arce-train-1981,X,B,"Which of the following helps the body to cool down?
 A. shivering
 B. sweating
@@ -151,7 +151,7 @@ D. taking deep breaths","Which of these allows the body to lower its temperature
 A. trembling from cold
 B. perspiring
 C. developing a fever
-D. breathing deeply",,,,
+D. breathing deeply",,yes,same,
 arce-train-1981,Y,B,"Which of the following helps the body to cool down?
 A. shivering
 B. sweating
@@ -160,7 +160,7 @@ D. taking deep breaths","What bodily response assists in lowering body temperatu
 A. shivering
 B. sweating
 C. developing a fever
-D. inhaling deeply",,,,
+D. inhaling deeply",,yes,same,
 arce-train-2093,X,D,"If a student gets a chemical splashed into an eye, what is the most appropriate first action to be taken?
 A. wipe it with a paper towel
 B. call 911 for emergency services
@@ -169,7 +169,7 @@ D. flush the eye with water at an eyewash station","After a student experiences 
 A. use a paper towel to clean the eye
 B. dial 911 to request emergency assistance
 C. ask another person to bring the school nurse
-D. rinse the eye with water using an eyewash station",,,,
+D. rinse the eye with water using an eyewash station",,yes,same,
 arce-train-2093,Y,D,"If a student gets a chemical splashed into an eye, what is the most appropriate first action to be taken?
 A. wipe it with a paper towel
 B. call 911 for emergency services
@@ -178,7 +178,7 @@ D. flush the eye with water at an eyewash station","If a student gets a chemical
 A. Blot the eye with a paper towel
 B. Contact emergency services by calling 911
 C. Ask someone to fetch the school nurse
-D. Rinse the eye with water at an eyewash station",,,,
+D. Rinse the eye with water at an eyewash station",,yes,same,
 arce-train-1209,X,C,"Which of the following is one reason that quartz is classified as a mineral?
 A. It can be manufactured.
 B. It comes in different colors.
@@ -187,7 +187,7 @@ D. It can be melted at high temperatures.","Which statement gives a reason quart
 A. It is possible to produce it artificially.
 B. It occurs in a variety of colors.
 C. It possesses a definite crystalline structure.
-D. It can be liquefied at very high temperatures.",,,,
+D. It can be liquefied at very high temperatures.",,yes,same,
 arce-train-1209,Y,C,"Which of the following is one reason that quartz is classified as a mineral?
 A. It can be manufactured.
 B. It comes in different colors.
@@ -196,7 +196,7 @@ D. It can be melted at high temperatures.","What is one characteristic that clas
 A. It can be produced artificially.
 B. It displays various hues.
 C. It possesses a distinct crystalline arrangement.
-D. It liquefies when exposed to extreme heat.",,,,
+D. It liquefies when exposed to extreme heat.",,yes,same,
 arce-train-2108,X,D,"Which of the following is most likely to make a rock crack and crumble?
 A. dew evaporating on the rock
 B. leaves decaying on the rock
@@ -205,7 +205,7 @@ D. water freezing in a crack in the rock","Which situation is most probable to c
 A. moisture on the rock's surface disappearing
 B. plant matter decomposing on the rock
 C. ice thawing inside a rock's fracture
-D. water turning to ice within a rock's crevice",,,,
+D. water turning to ice within a rock's crevice",,yes,same,
 arce-train-2108,Y,D,"Which of the following is most likely to make a rock crack and crumble?
 A. dew evaporating on the rock
 B. leaves decaying on the rock
@@ -214,7 +214,7 @@ D. water freezing in a crack in the rock","Which of these is most likely to caus
 A. dew drying up on the rock
 B. leaves decomposing on the rock
 C. snow thawing inside a crack in the rock
-D. water freezing inside a crack in the rock",,,,
+D. water freezing inside a crack in the rock",,yes,same,
 arcc-train-0490,X,B,"James put some water in a pan. He put the pan on a stove and turned the stove on low. What will happen to the water?
 A. The water will melt.
 B. The water will evaporate.
@@ -223,7 +223,7 @@ D. The water will condense into tiny droplets.","James poured some water into a 
 A. The water will become liquid.
 B. The water will turn into vapor.
 C. The water will become solid.
-D. The water will change into small droplets.",,,,
+D. The water will change into small droplets.",,yes,same,
 arcc-train-0490,Y,B,"James put some water in a pan. He put the pan on a stove and turned the stove on low. What will happen to the water?
 A. The water will melt.
 B. The water will evaporate.
@@ -232,7 +232,7 @@ D. The water will condense into tiny droplets.","James poured water into a conta
 A. The water will transition from a liquid to a gas.
 B. The water will gradually disappear as it turns into vapor.
 C. The water will transform into a hardened state.
-D. The water will gather into small visible beads on a surface.",,,,
+D. The water will gather into small visible beads on a surface.",,yes,same,
 arcc-train-0590,X,C,"Tigers and household cats are members of the same family; however, their sizes are vastly different. What is the cause of this difference?
 A. biochemical makeup
 B. behavioral makeup
@@ -241,7 +241,7 @@ D. habitat size","Tigers and domestic cats belong to the same family, but they d
 A. biochemical composition
 B. behavioral characteristics
 C. genetic makeup
-D. the size of their habitat",,,,
+D. the size of their habitat",,yes,same,
 arcc-train-0590,Y,C,"Tigers and household cats are members of the same family; however, their sizes are vastly different. What is the cause of this difference?
 A. biochemical makeup
 B. behavioral makeup
@@ -250,7 +250,7 @@ D. habitat size","Both tigers and domestic cats belong to the same biological gr
 A. chemical composition
 B. behavioral traits
 C. genetics
-D. living environment size",,,,
+D. living environment size",,yes,same,
 arcc-train-0029,X,C,"What characteristic of DNA results in cell differentiation in developing embryos?
 A. which genes are present
 B. how many copies of each gene are present
@@ -259,7 +259,7 @@ D. what protein is produced by a gene","Which property of DNA causes cells to di
 A. the genes that are present
 B. the number of copies of each gene
 C. the genes that are turned on
-D. the protein that a gene makes",,,,
+D. the protein that a gene makes",,yes,same,
 arcc-train-0029,Y,C,"What characteristic of DNA results in cell differentiation in developing embryos?
 A. which genes are present
 B. how many copies of each gene are present
@@ -268,7 +268,7 @@ D. what protein is produced by a gene","Which feature of DNA causes cells in a g
 A. the genes that exist in the cell
 B. the quantity of each gene copy in the cell
 C. the genes that are expressed in the cell
-D. the protein synthesized from a gene",,,,
+D. the protein synthesized from a gene",,yes,same,
 arcc-train-0949,X,B,"Below is an advertisement found in a local newspaper. As shiny as diamonds at a fraction of the price! Buy ""Simu-Gems"" at Cost-Rite Jewelers. This advertisement suggests that Cost-Rite Jewelers' supplier
 A. found a less expensive way to mine and process diamonds.
 B. manufactured artificial stones that resemble diamonds.
@@ -277,7 +277,7 @@ D. started providing small diamonds instead of large ones.","A local newspaper c
 A. discovered a more affordable method to extract and refine diamonds.
 B. created synthetic gems that mimic the look of diamonds.
 C. lowered diamond prices to boost sales volume.
-D. began offering tiny diamonds rather than larger ones.",,,,
+D. began offering tiny diamonds rather than larger ones.",,yes,same,
 arcc-train-0949,Y,B,"Below is an advertisement found in a local newspaper. As shiny as diamonds at a fraction of the price! Buy ""Simu-Gems"" at Cost-Rite Jewelers. This advertisement suggests that Cost-Rite Jewelers' supplier
 A. found a less expensive way to mine and process diamonds.
 B. manufactured artificial stones that resemble diamonds.
@@ -286,7 +286,7 @@ D. started providing small diamonds instead of large ones.","The following adver
 A. discovered a cheaper method for mining and processing diamonds.
 B. created imitation stones designed to look like diamonds.
 C. lowered diamond prices to increase sales.
-D. began supplying smaller diamonds rather than larger ones.",,,,
+D. began supplying smaller diamonds rather than larger ones.",,yes,same,
 arcc-train-0269,X,B,"The chemical symbol for niobium is Nb. Based on its symbol, what can be concluded about niobium?
 A. Niobium is a compound.
 B. Niobium is an element.
@@ -295,7 +295,7 @@ D. Niobium is a mixture.","Niobium's chemical symbol is Nb. What does this symbo
 A. Niobium consists of a compound.
 B. Niobium is a chemical element.
 C. Niobium belongs to the metals.
-D. Niobium is a mixture of substances.",,,,
+D. Niobium is a mixture of substances.",,yes,same,
 arcc-train-0269,Y,B,"The chemical symbol for niobium is Nb. Based on its symbol, what can be concluded about niobium?
 A. Niobium is a compound.
 B. Niobium is an element.
@@ -304,7 +304,7 @@ D. Niobium is a mixture.","Given that niobium is represented by the chemical sym
 A. Niobium consists of multiple elements combined.
 B. Niobium is a single, distinct substance.
 C. Niobium belongs to the category of metals.
-D. Niobium is composed of different substances combined.",,,,
+D. Niobium is composed of different substances combined.",,yes,same,
 arcc-train-0123,X,B,"What is the frequency of ocean waves that have a speed of 18 m/s and a wavelength of 50 m?
 A. 0.18 Hz
 B. 0.36 Hz
@@ -313,7 +313,7 @@ D. 9.0 Hz","Ocean waves travel at 18 m/s and have a wavelength of 50 m. What is 
 A. 0.18 Hz
 B. 0.36 Hz
 C. 2.8 Hz
-D. 9.0 Hz",,,,
+D. 9.0 Hz",,yes,same,
 arcc-train-0123,Y,B,"What is the frequency of ocean waves that have a speed of 18 m/s and a wavelength of 50 m?
 A. 0.18 Hz
 B. 0.36 Hz
@@ -322,7 +322,7 @@ D. 9.0 Hz","How often do ocean waves with a velocity of 18 meters per second and
 A. 0.18 Hz
 B. 0.36 Hz
 C. 2.8 Hz
-D. 9.0 Hz",,,,
+D. 9.0 Hz",,yes,same,
 csqa-train-2116,X,D,"Joe was gentle when he was setting the cup on the table, because it didn't want to make any what?
 A. distractions
 B. water mark
@@ -333,7 +333,7 @@ A. disturbances
 B. water mark
 C. set down
 D. sound
-E. lifts up",,,,
+E. lifts up",,yes,same,
 csqa-train-2116,Y,D,"Joe was gentle when he was setting the cup on the table, because it didn't want to make any what?
 A. distractions
 B. water mark
@@ -344,7 +344,7 @@ A. distractions
 B. water mark
 C. put down
 D. noise
-E. picks up",,,,
+E. picks up",,yes,same,
 csqa-train-7575,X,C,"If I have an excess ottoman with no place to put it, where should it go?
 A. furniture store
 B. living room
@@ -355,7 +355,7 @@ A. a furniture shop
 B. the main sitting area
 C. a storage room below ground level
 D. a formal sitting room
-E. Turkey",,,,
+E. Turkey",,yes,same,
 csqa-train-7575,Y,C,"If I have an excess ottoman with no place to put it, where should it go?
 A. furniture store
 B. living room
@@ -366,7 +366,7 @@ A. furniture shop
 B. living area
 C. cellar
 D. sitting room
-E. turkey",,,,
+E. turkey",,yes,same,
 csqa-train-3235,X,D,"James drove down the thoroughfare though his home what?
 A. house
 B. country
@@ -377,7 +377,7 @@ A. house
 B. country
 C. city
 D. town
-E. traffic",,,,
+E. traffic",,yes,same,
 csqa-train-3235,Y,D,"James drove down the thoroughfare though his home what?
 A. house
 B. country
@@ -388,7 +388,7 @@ A. house
 B. country
 C. city
 D. town
-E. traffic",,,,
+E. traffic",,yes,same,
 csqa-train-4987,X,C,"What does a birthday do to someone?
 A. regret
 B. indoor plumbing
@@ -399,7 +399,7 @@ A. remorse
 B. running water in a building
 C. experience a sense of uniqueness
 D. possess a residence
-E. power supply",,,,
+E. power supply",,yes,same,
 csqa-train-4987,Y,C,"What does a birthday do to someone?
 A. regret
 B. indoor plumbing
@@ -410,7 +410,7 @@ A. regret
 B. plumbing inside the home
 C. make them feel special
 D. a house of their own
-E. electricity",,,,
+E. electricity",,yes,same,
 csqa-train-7080,X,A,"The nightclub owner wasn't a very good businessperson, but the club still did well thanks to its prime location where?
 A. downtown area
 B. building
@@ -421,7 +421,7 @@ A. city center
 B. structure
 C. have drinks and dance
 D. Manhattan
-E. inside",,,,
+E. inside",,yes,same,
 csqa-train-7080,Y,A,"The nightclub owner wasn't a very good businessperson, but the club still did well thanks to its prime location where?
 A. downtown area
 B. building
@@ -432,7 +432,7 @@ A. the city center
 B. structure
 C. socializing and entertainment
 D. Manhattan
-E. inside",,,,
+E. inside",,yes,same,
 csqa-train-3502,X,D,"The weasel was scavenging in the cold winter on a farmer's land, where was he likely?
 A. fairytale
 B. mountain
@@ -443,7 +443,7 @@ A. fairytale
 B. mountain
 C. the open countryside
 D. corn fields
-E. chicken coop",,,,
+E. chicken coop",,yes,same,
 csqa-train-3502,Y,D,"The weasel was scavenging in the cold winter on a farmer's land, where was he likely?
 A. fairytale
 B. mountain
@@ -454,7 +454,7 @@ A. fairytale
 B. mountain
 C. great outdoors
 D. corn fields
-E. chicken coop",,,,
+E. chicken coop",,yes,same,
 swag-train-49974,X,B,"Then he walks towards a metal piece laying on the grass which has been spray painted with the enamel coating. There
 A. is the man karateka the car with short so, taking it a few times and tilting it for a final time.
 B. are several others vehicles like a bus, truck and a car parked in the same yard.
@@ -463,7 +463,7 @@ D. sits on a chair in the back part of the room.","After that, he approaches a p
 A. is the man, a karate practitioner, near the car with a short so, picking it up repeatedly and tilting it for the last time.
 B. are multiple other vehicles such as a bus, a truck, and a car parked in the same yard.
 C. is a drawing behind someone.
-D. is a person seated on a chair in the rear section of the room.",,,,
+D. is a person seated on a chair in the rear section of the room.",,yes,same,
 swag-train-49974,Y,B,"Then he walks towards a metal piece laying on the grass which has been spray painted with the enamel coating. There
 A. is the man karateka the car with short so, taking it a few times and tilting it for a final time.
 B. are several others vehicles like a bus, truck and a car parked in the same yard.
@@ -472,7 +472,7 @@ D. sits on a chair in the back part of the room.","Next, he heads toward a metal
 A. is the man karateka the car with short so, lifting it a few times and tipping it one final time.
 B. are a number of other vehicles, including a bus, a truck, and a car, parked in that same yard.
 C. is a drawing behind someone.
-D. is seated on a chair at the rear of the room.",,,,
+D. is seated on a chair at the rear of the room.",,yes,same,
 swag-train-0687,X,B,"The Young Man stops and looks at her. Pulling herself together she
 A. lets her head fall.
 B. goes off down the hallway.
@@ -481,7 +481,7 @@ D. makes it to the laptop.","The Young Man halts and observes her. Composing her
 A. drops her head.
 B. exits along the corridor.
 C. flings her handbag onto the divan.
-D. reaches the laptop.",,,,
+D. reaches the laptop.",,yes,same,
 swag-train-0687,Y,B,"The Young Man stops and looks at her. Pulling herself together she
 A. lets her head fall.
 B. goes off down the hallway.
@@ -490,7 +490,7 @@ D. makes it to the laptop.","The Young Man pauses and gazes at her. Composing he
 A. allows her head to droop.
 B. walks away along the corridor.
 C. tosses her handbag onto the divan.
-D. manages to reach the laptop.",,,,
+D. manages to reach the laptop.",,yes,same,
 swag-train-20303,X,A,"Boys bend his body backwards until the feet reach the ground. Teens
 A. twist their bodies and bend to the other end.
 B. see four paint showers in various white flashes.
@@ -499,7 +499,7 @@ D. signs in between the tiny goals.","Boys arch their bodies backward until thei
 A. rotate their bodies and bend to the opposite side.
 B. observe four bursts of paint in different white flashes.
 C. strikes a firm boxing coach inside a ring.
-D. signal between the small goalposts.",,,,
+D. signal between the small goalposts.",,yes,same,
 swag-train-20303,Y,A,"Boys bend his body backwards until the feet reach the ground. Teens
 A. twist their bodies and bend to the other end.
 B. see four paint showers in various white flashes.
@@ -508,7 +508,7 @@ D. signs in between the tiny goals.","Boys arch his body backward until the feet
 A. rotate their bodies and lean toward the opposite side.
 B. observe four paint sprays amid different white flashes.
 C. strikes a tough boxing trainer inside a dancing ring.
-D. puts signatures between the small goals.",,,,
+D. puts signatures between the small goals.",,yes,same,
 swag-train-49938,X,B,"In the cottage, someone pours two drinks. She
 A. shuts the door, then bathes her hand.
 B. checks her clock and someone stirs.
@@ -517,7 +517,7 @@ D. fires in a deep try.","Inside the cottage, a person pours two beverages. She
 A. closes the door before soaking her hand.
 B. looks at her clock while someone stirs.
 C. gives someone a fragment of the photos of samantha.
-D. takes a deep shot.",,,,
+D. takes a deep shot.",,yes,same,
 swag-train-49938,Y,B,"In the cottage, someone pours two drinks. She
 A. shuts the door, then bathes her hand.
 B. checks her clock and someone stirs.
@@ -526,7 +526,7 @@ D. fires in a deep try.","Inside the cottage, a person serves two beverages. She
 A. closes the door before washing her hand.
 B. looks at her watch while another person mixes.
 C. gives someone a small piece of Samantha's photographs.
-D. attempts a challenging shot.",,,,
+D. attempts a challenging shot.",,yes,same,
 swag-train-70455,X,B,"A man is running water in a sink. He
 A. is washing a bottle of water on a water cooler.
 B. picks up the soap to wash a dish and glances at the camera.
@@ -535,7 +535,7 @@ D. pours water onto a board, using it to clean the floor.","A man is letting wat
 A. cleans a bottle of water at a water cooler.
 B. takes the soap to wash a dish and looks toward the camera.
 C. picks up a spray bottle and brings it into view by his mouth.
-D. uses water poured onto a board to clean the floor.",,,,
+D. uses water poured onto a board to clean the floor.",,yes,same,
 swag-train-70455,Y,B,"A man is running water in a sink. He
 A. is washing a bottle of water on a water cooler.
 B. picks up the soap to wash a dish and glances at the camera.
@@ -544,7 +544,7 @@ D. pours water onto a board, using it to clean the floor.","A man turns on the f
 A. is rinsing a water bottle at a water dispenser.
 B. grabs the soap to clean a plate and looks toward the camera.
 C. takes a spray bottle and brings it close to his lips.
-D. lets water flow onto a surface, using it to scrub the floor.",,,,
+D. lets water flow onto a surface, using it to scrub the floor.",,yes,same,
 swag-train-12498,X,B,"Two individuals, one seated and one standing, talk to each other at a bar. The standing individual
 A. moves the floor over the head four times.
 B. stops while people continue to stare at him.
@@ -553,7 +553,7 @@ D. stops across the tires and switches off the camera and the man continues talk
 A. swings his leg over the other person’s head four times.
 B. freezes as the crowd keeps watching him.
 C. remains behind a drum kit while speaking.
-D. steps over the equipment and turns off the recording device as the seated man continues talking.",,,,
+D. steps over the equipment and turns off the recording device as the seated man continues talking.",,yes,same,
 swag-train-12498,Y,B,"Two individuals, one seated and one standing, talk to each other at a bar. The standing individual
 A. moves the floor over the head four times.
 B. stops while people continue to stare at him.
@@ -562,4 +562,4 @@ D. stops across the tires and switches off the camera and the man continues talk
 A. shifts the floor above the head four times.
 B. comes to a halt as people keep looking at him.
 C. talks while standing behind a drum kit.
-D. stops on the far side of the tires and turns off the camera while the man keeps talking.",,,,
+D. stops on the far side of the tires and turns off the camera while the man keeps talking.",,yes,same,

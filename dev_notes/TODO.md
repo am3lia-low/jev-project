@@ -52,8 +52,8 @@ Create the folders the layout needs, delete the ones it doesn't, and move every 
 
 ## 5. [ ] Waiting on you
 
-- [ ] Rate the pilot blind: `data/reviews/pilot_30.csv` (meaning_preserved yes/no, difficulty easier/same/harder), then `python 03_paraphrase.py --pilot-results`, then set `PARAPHRASE_MODEL` in `src/jev_common/models.py`.
-- [ ] Review the Level 3 drafts: `data/reviews/new_questions.csv`. Work down each dataset in `review_order` and stop at 50 kept per dataset (200 in total; the other drafts are spares). Then `python 05_generate_new.py --apply-review`.
+- [x] Rate the pilot blind (`data/reviews/pilot_30.csv`, 2026-10-14): both models kept meaning 30/30; gpt-6-luna 30 same difficulty, Mistral 29 same + 1 harder. `PARAPHRASE_MODEL = "openai/gpt-6-luna"`.
+- [x] Review the Level 3 drafts (`data/reviews/new_questions.csv`, 2026-10-14): 272 of 400 reviewed, no text edits. `arcc-new-0095` and `csqa-new-0048` had keep=yes with a failed check, set to keep=no. `--apply-review` wrote `data/new/reviewed.jsonl`: 50 per dataset, 200 in total.
 - [ ] Then: `03_paraphrase.py` → `04_validate.py` (+ `--retry-failed` loop, fill `paraphrase_50.csv`) → `06a_swap.py` → `06b_validate_swaps.py` (+ retry loop, fill `swaps_30.csv`) → `06c_build_quiz.py`.
 
 ## 6. [x] Docs out of date
