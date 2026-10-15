@@ -1,0 +1,137 @@
+{
+ "source": "Goldberg (1992), 'The development of markers for the Big-Five factor structure', Psychological Assessment 4(1), 26-42: the 100 unipolar markers, by factor and pole. Factor IV is scored here as Neuroticism (Goldberg: Emotional Stability, reversed); factor V (Intellect/Imagination) as Openness.",
+ "verified": true,
+ "note": "Verified 2026-10-15 against two independent secondary sources (the original paper is paywalled): the 100-adjective list at https://psytests.org/big5/umen-bl.html and the psychTools scoring key (BFI.adjectives.dictionary, https://rdrr.io/cran/psychTools/man/BFI.adjectives.dictionary.html), whose item numbers follow the alphabetical list. All 100 words are used; poles have 6-14 markers.",
+ "markers": {
+  "N": {
+   "high": [
+    "anxious",
+    "emotional",
+    "envious",
+    "fearful",
+    "fretful",
+    "high-strung",
+    "insecure",
+    "irritable",
+    "jealous",
+    "moody",
+    "nervous",
+    "self-pitying",
+    "temperamental",
+    "touchy"
+   ],
+   "low": [
+    "imperturbable",
+    "relaxed",
+    "undemanding",
+    "unemotional",
+    "unenvious",
+    "unexcitable"
+   ]
+  },
+  "E": {
+   "high": [
+    "active",
+    "assertive",
+    "bold",
+    "daring",
+    "energetic",
+    "extraverted",
+    "talkative",
+    "unrestrained",
+    "verbal",
+    "vigorous"
+   ],
+   "low": [
+    "bashful",
+    "inhibited",
+    "introverted",
+    "quiet",
+    "reserved",
+    "shy",
+    "timid",
+    "unadventurous",
+    "untalkative",
+    "withdrawn"
+   ]
+  },
+  "O": {
+   "high": [
+    "artistic",
+    "bright",
+    "complex",
+    "creative",
+    "deep",
+    "imaginative",
+    "innovative",
+    "intellectual",
+    "introspective",
+    "philosophical"
+   ],
+   "low": [
+    "imperceptive",
+    "shallow",
+    "simple",
+    "uncreative",
+    "unimaginative",
+    "uninquisitive",
+    "unintellectual",
+    "unintelligent",
+    "unreflective",
+    "unsophisticated"
+   ]
+  },
+  "A": {
+   "high": [
+    "agreeable",
+    "considerate",
+    "cooperative",
+    "generous",
+    "helpful",
+    "kind",
+    "pleasant",
+    "sympathetic",
+    "trustful",
+    "warm"
+   ],
+   "low": [
+    "cold",
+    "demanding",
+    "distrustful",
+    "harsh",
+    "rude",
+    "selfish",
+    "uncharitable",
+    "uncooperative",
+    "unkind",
+    "unsympathetic"
+   ]
+  },
+  "C": {
+   "high": [
+    "careful",
+    "conscientious",
+    "efficient",
+    "neat",
+    "organized",
+    "practical",
+    "prompt",
+    "steady",
+    "systematic",
+    "thorough"
+   ],
+   "low": [
+    "careless",
+    "disorganized",
+    "haphazard",
+    "impractical",
+    "inconsistent",
+    "inefficient",
+    "negligent",
+    "sloppy",
+    "undependable",
+    "unsystematic"
+   ]
+  }
+ }
+}

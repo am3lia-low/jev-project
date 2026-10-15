@@ -1,0 +1,2 @@
+model,n_runs,mean_item_sd,N_sd,E_sd,O_sd,A_sd,C_sd
+typesafe/jev-1.13,5,0.0419,0.0075,0.0058,0.0037,0.0078,0.0102

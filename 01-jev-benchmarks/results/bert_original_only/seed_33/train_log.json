@@ -1,0 +1,43 @@
+{
+ "epochs": [
+  {
+   "epoch": 1,
+   "train_loss": 1.3619850873947144,
+   "val_accuracy": 0.447
+  },
+  {
+   "epoch": 2,
+   "train_loss": 1.07413911819458,
+   "val_accuracy": 0.46
+  },
+  {
+   "epoch": 3,
+   "train_loss": 0.7904761433601379,
+   "val_accuracy": 0.461
+  }
+ ],
+ "seed": 33,
+ "best_epoch": 3,
+ "train_seconds": 676.1,
+ "gpu": "Tesla T4",
+ "train_rows": 5500,
+ "train_versions": [
+  "original"
+ ],
+ "settings": {
+  "model": "bert-base-uncased",
+  "max_length": 192,
+  "batch_size": 16,
+  "epochs": 3,
+  "learning_rate": 2e-05,
+  "weight_decay": 0.01,
+  "warmup": 0.1,
+  "precision": "float16"
+ },
+ "accuracy": {
+  "val": 0.461,
+  "level0": 0.464,
+  "level1": 0.464,
+  "level3": 0.525
+ }
+}

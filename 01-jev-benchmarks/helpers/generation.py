@@ -2,8 +2,8 @@
 
 - `make_client`: OpenRouter client with this part's cache, call log and a cap.
 - `chat_json`: one chat request that must answer with a JSON object.
-- `run_parallel`: run a function over many items in threads, keep going past
-  single failures, stop on the spending cap.
+- `run_parallel` (re-exported from jev_common.parallel): run a function over
+  many items in threads, keep going past single failures, stop on the spending cap.
 - Review sheets: the CSVs in data/reviews/ that you fill in by hand. They are
   never overwritten once written, so a filled-in sheet cannot be lost.
 """
@@ -11,23 +11,18 @@
 import csv
 import json
 import re
-from collections.abc import Callable, Iterable, Sequence
-from concurrent.futures import ThreadPoolExecutor, as_completed
+from collections.abc import Iterable, Sequence
 from pathlib import Path
-from typing import Any, TypeVar
-
-from tqdm import tqdm
+from typing import Any
 
 from jev_common.cache import DiskCache
 from jev_common.models import GENERATION_PARAMS
-from jev_common.openrouter import BudgetExceeded, CallResult, OpenRouterClient
+from jev_common.openrouter import CallResult, OpenRouterClient
+from jev_common.parallel import run_parallel  # noqa: F401 - re-exported for the scripts
 
 from .config import CACHE_DIR, LOG_DIR
 from .labels import letter_from_position
 from .schema import Question
-
-T = TypeVar("T")
-R = TypeVar("R")
 
 _FENCE = re.compile(r"^```(?:json)?\s*|\s*```$")
 
@@ -72,35 +67,6 @@ def chat_json(
     )
     message = result.response["choices"][0]["message"]
     return parse_json_reply(message.get("content")), result
-
-
-def run_parallel(
-    function: Callable[[T], R], items: Sequence[T], workers: int, description: str
-) -> tuple[list[tuple[T, R]], list[tuple[T, str]], bool]:
-    """Apply `function` to every item in `workers` threads.
-
-    Returns (successes, failures as (item, error message), stopped_by_budget).
-    Successes keep the input order. After the spending cap is hit, the
-    remaining items are skipped, not counted as failures.
-    """
-    results: dict[int, R] = {}
-    failures: list[tuple[T, str]] = []
-    stopped = False
-    with ThreadPoolExecutor(max_workers=workers) as pool:
-        futures = {pool.submit(function, item): index for index, item in enumerate(items)}
-        for future in tqdm(as_completed(futures), total=len(futures), desc=description):
-            index = futures[future]
-            try:
-                results[index] = future.result()
-            except BudgetExceeded:
-                if not stopped:
-                    stopped = True
-                    for other in futures:
-                        other.cancel()
-            except Exception as error:  # noqa: BLE001 - one bad item must not stop the run
-                failures.append((items[index], f"{type(error).__name__}: {error}"))
-    successes = [(items[i], results[i]) for i in sorted(results)]
-    return successes, failures, stopped
 
 
 # ---------------------------------------------------------------------------

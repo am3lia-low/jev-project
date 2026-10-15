@@ -7,7 +7,7 @@ The project has two independent parts:
 - **Part A — Jev benchmarks** ([`01-jev-benchmarks/`](../01-jev-benchmarks/)): Jev vs BERT on MCQ, and how deep Jev's memorisation of public benchmarks goes.
 - **Part B — Jevlet personas** ([`02-jevlet-personas/`](../02-jevlet-personas/)): can Jev adopt behavioural (Big Five) and intellectual personas, compared to LLMs?
 
-Last updated: 2026-10-14
+Last updated: 2026-10-15
 
 ---
 
@@ -303,9 +303,9 @@ Separate from Part A. Jev calls are stateless (no conversation history), so clas
 - Chosen over 16 Personalities/MBTI because 39–76% of people get a different MBTI type after ~5 weeks (Pittenger 2005), while Big Five retest correlations typically exceed 0.80.
 - Precedent: [Serapio-García et al.](https://www.nature.com/articles/s42256-025-01115-6) measured and shaped Big Five traits in LLMs, and found reliable measurement only in large, instruction-tuned models.
 - Steps:
-  1. **Baseline:** no persona, 5 runs, item order shuffled each run.
-  2. **Reliability check first:** Cronbach's α per trait; only interpret traits with α ≥ 0.70 (the usual threshold for exploratory work). Use reverse-keyed items to check for a bias towards agreeing. α needs response sets that differ in the trait, so compute it over all conditions × runs (baseline + personas), not over the 5 baseline runs alone (those differ only by noise, giving α ≈ 0 even for a perfectly consistent model). *Open: confirm this, or add varied persona prompts as Serapio-García et al. did.*
-  3. **Personas:** high/low on **one trait at a time**, 5 runs each. The scoring key gives the expected direction for each item. Test persona placement: in question instructions vs in the state.
+  1. **Baseline:** no persona. Each item is its own stateless request, so item order cannot matter and is not shuffled. Jev: 5 fresh repeats, to measure its run-to-run noise. LLMs: 1 run, since at temperature 0 a repeat returns the same answer (decided 2026-10-15). LLMs answer with the scale labels keyed 1–5; their answer is the probability-weighted mean of the keys from the first-token logprobs, so it is fractional like Jev's `score`.
+  2. **Reliability check first:** Cronbach's α per trait; only interpret traits with α ≥ 0.70 (the usual threshold for exploratory work). Use reverse-keyed items to check for a bias towards agreeing. α needs response sets that differ in the trait, so compute it over all conditions × runs (baseline + personas), not over the 5 baseline runs alone (those differ only by noise, giving α ≈ 0 even for a perfectly consistent model). Varied persona wordings (step 3) add trait variance, as in Serapio-García et al. (decided 2026-10-15).
+  3. **Personas:** high/low on **one trait at a time**. The scoring key gives the expected direction for each item. Test persona placement: in question instructions vs in the state. Written as Goldberg (1992) marker adjectives, not the trait name, as Serapio-García et al. did: "You are a person who is very talkative, very bold, …" (decided 2026-10-15). Each condition has 5 wordings (a seeded draw of 5 of Goldberg's 100 unipolar markers for that pole; 6–14 per pole), answered once each by every model; the wordings also give α the trait variance it needs (step 2). 20 conditions (5 traits × 2 poles × 2 placements) × 5 wordings × 120 items = 12,000 calls per model.
   4. **Contamination check:** run a paraphrased version of the IPIP items and compare with the originals.
   5. **Behaviour check:** a short set of scenario questions per trait (Jev `choice`, options reflecting high/low trait). Self-reports often fail to predict LLM behaviour ([The Personality Illusion](https://arxiv.org/html/2509.03730v1)), so report whether the persona moves self-report, behaviour, or both.
   6. Same steps for the LLM baselines.
@@ -326,6 +326,15 @@ Two conditions per benchmark: **no persona** (actual ability) and **"pretend to 
 - Compare against published human accuracy for each benchmark and the LLM baselines.
 - No-persona row: where does Jev fall to chance?
 - Persona row: does accuracy move towards the requested level? Prior work found capable LLMs barely lower their accuracy when asked to act less able ([arXiv 2608.30033](https://arxiv.org/pdf/2608.30033), [arXiv 2507.08232](https://arxiv.org/pdf/2507.08232)).
+
+### B3. Order of work
+
+1. [x] Helpers: `ipip.py`, `reliability.py`, IPIP-NEO-120 items
+2. [x] `01_run_bigfive.py` (API laptop; baseline + personas run 2026-10-15, $0.49): `check` (done 2026-10-15: Jev's `score` is a probability-weighted 0–4 position) → `baseline` → `personas`, Jev + LLMs (B1 steps 1–3). Written and dry-run 2026-10-15; persona adjectives verified against Goldberg's 100 unipolar markers; baseline run 2026-10-15
+3. [x] `02_analyse_bigfive.py`: scores, α, acquiescence, Jev's baseline noise, persona shifts (B1 steps 1–3). Dry-run on fake results 2026-10-15
+4. [ ] IPIP paraphrases for the contamination check (B1 step 4)
+5. [ ] Scenario questions per trait for the behaviour check (B1 step 5)
+6. [ ] Difficulty ladder (B2): loaders, HLE text-only MCQ filter, persona prompts, runs, analysis
 
 ---
 

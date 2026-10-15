@@ -7,7 +7,9 @@ scores 6 - answer.
 
 Jev asks each item as a `score` question over the 5 scale labels. Its answer
 `score` is a probability-weighted position 0-4, so the 1-5 answer is
-`score + 1` (fractional answers are kept, not rounded).
+`score + 1` (fractional answers are kept, not rounded). Checked live
+2026-10-15: the answer also has `probabilities` per position ("0".."4"), a
+`legend` (position -> label) and `confidence`.
 """
 
 import json

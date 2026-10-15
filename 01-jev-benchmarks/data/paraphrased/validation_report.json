@@ -1,0 +1,90 @@
+{
+ "datasets": {
+  "hs": {
+   "train": {
+    "total": 1100,
+    "passed": 1100,
+    "problems": {}
+   },
+   "val": {
+    "total": 200,
+    "passed": 200,
+    "problems": {}
+   },
+   "test": {
+    "total": 400,
+    "passed": 400,
+    "problems": {}
+   }
+  },
+  "arce": {
+   "train": {
+    "total": 1100,
+    "passed": 1100,
+    "problems": {}
+   },
+   "val": {
+    "total": 200,
+    "passed": 200,
+    "problems": {}
+   },
+   "test": {
+    "total": 400,
+    "passed": 400,
+    "problems": {}
+   }
+  },
+  "arcc": {
+   "train": {
+    "total": 1100,
+    "passed": 1100,
+    "problems": {}
+   },
+   "val": {
+    "total": 200,
+    "passed": 200,
+    "problems": {}
+   },
+   "test": {
+    "total": 400,
+    "passed": 400,
+    "problems": {}
+   }
+  },
+  "csqa": {
+   "train": {
+    "total": 1100,
+    "passed": 1100,
+    "problems": {}
+   },
+   "val": {
+    "total": 200,
+    "passed": 200,
+    "problems": {}
+   },
+   "test": {
+    "total": 400,
+    "passed": 400,
+    "problems": {}
+   }
+  },
+  "swag": {
+   "train": {
+    "total": 1100,
+    "passed": 1100,
+    "problems": {}
+   },
+   "val": {
+    "total": 200,
+    "passed": 200,
+    "problems": {}
+   },
+   "test": {
+    "total": 400,
+    "passed": 400,
+    "problems": {}
+   }
+  }
+ },
+ "out_of_attempts": []
+}

@@ -1,0 +1,16 @@
+model,domain,alpha,interpretable,n_sets,n_conditions,n_incomplete_sets,baseline_acquiescence
+typesafe/jev-1.13,N,0.9673,True,105,21,0,2.5630
+typesafe/jev-1.13,E,0.9685,True,105,21,0,2.5630
+typesafe/jev-1.13,O,0.9601,True,105,21,0,2.5630
+typesafe/jev-1.13,A,0.9747,True,105,21,0,2.5630
+typesafe/jev-1.13,C,0.9711,True,105,21,0,2.5630
+qwen/qwen3.8-27b,N,0.9694,True,101,21,0,2.7276
+qwen/qwen3.8-27b,E,0.9669,True,101,21,0,2.7276
+qwen/qwen3.8-27b,O,0.9609,True,101,21,0,2.7276
+qwen/qwen3.8-27b,A,0.9642,True,101,21,0,2.7276
+qwen/qwen3.8-27b,C,0.9716,True,101,21,0,2.7276
+google/gemma-4-26b-a4b-it,N,0.9547,True,101,21,0,2.3663
+google/gemma-4-26b-a4b-it,E,0.9518,True,101,21,0,2.3663
+google/gemma-4-26b-a4b-it,O,0.9496,True,101,21,0,2.3663
+google/gemma-4-26b-a4b-it,A,0.9672,True,101,21,0,2.3663
+google/gemma-4-26b-a4b-it,C,0.9501,True,101,21,0,2.3663

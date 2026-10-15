@@ -90,3 +90,14 @@ Same order as [`docs/api-laptop-checks.md` → Run order](../docs/api-laptop-che
 ## 10. [ ] Open decisions
 
 See PLAN.md → Open questions: confirm the memorisation threshold (before Jev's Level 2 run), and whether to add an MMLU math number-swap slice.
+
+## 11. [ ] Part B: Big Five (B1 steps 1-3)
+
+- [x] Decided 2026-10-15: personas as Goldberg marker adjectives (5 wordings per condition); Jev baseline 5 repeats, LLMs 1 run; no item shuffling (each item is its own request). Recorded in PLAN B1.
+- [x] `helpers/config.py`, `personas.py`, `bigfive.py`; `01_run_bigfive.py`, `02_analyse_bigfive.py`. Dry-run with a fake client (recovers planted shifts).
+- [x] `run_parallel` moved to `jev_common/parallel.py` (Part A's `helpers.generation` re-exports it).
+- [x] `prompts/personas/markers.json` checked 2026-10-15 against two secondary sources for Goldberg's 100 unipolar markers (psytests.org list + psychTools scoring key). The draft had 14 non-Goldberg words (e.g. C: responsible, reliable, hardworking, thrifty, lazy; N-low: calm, at ease, secure); now all 100 Goldberg words are used, by pole.
+- [x] `01_run_bigfive.py check` live (2026-10-15, $0.0001): Jev's `score` is the probability-weighted position 0-4, with per-position probabilities; all 3 models move up under an E-high persona (Jev 2.73 → 4.25/4.37, LLMs 3.0 → ~5). About $0.50 for the full B1 run.
+- [x] `baseline` run 2026-10-15 ($0.011; one Gemma 520 retried). Jev's repeats barely differ (mean per-item SD 0.04).
+- [x] `personas` run 2026-10-15 ($0.48, 0 failed) and analysed: alpha 0.95-0.97 for every model and trait; every persona moves its trait (Jev high - low +2.7 to +3.7; LLMs +2.7 to +3.9); state placement > instructions; large off-target shifts (~1-2 points, a desirability halo). See `results/bigfive_summary.md`.
+- [ ] Then B1 step 4 (IPIP paraphrases), step 5 (scenarios), B2 (ladder).

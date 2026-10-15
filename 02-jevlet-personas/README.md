@@ -20,32 +20,58 @@ The full design is in [`docs/PLAN.md` → Part B](../docs/PLAN.md#part-b--jevlet
 
 Code that needs the API laptop is still written on the work laptop; it just gets run there.
 
-## Layout (sketch)
+## Layout
 
-To be detailed when Part B starts. Shared code (pinned model IDs, OpenRouter client, cache, stats) comes from [`src/jev_common/`](../src/jev_common/); this folder only holds Part B's own code. Scripts will be numbered by step, as in Part A, once Part B has an order of work in PLAN.md.
+Shared code (pinned model IDs, OpenRouter client, cache, parallel runner, stats) comes from [`src/jev_common/`](../src/jev_common/); this folder only holds Part B's own code. Scripts are numbered by their step in [PLAN B3](../docs/PLAN.md#b3-order-of-work). Run them from this folder.
 
 ```
 02-jevlet-personas/
 ├── README.md
-├── helpers/          # Part B-only code
-│   ├── ipip.py       # IPIP-NEO-120 items, scoring key, reverse-keyed items
-│   └── reliability.py  # Cronbach's alpha per trait
+├── 01_run_bigfive.py       # B1 steps 1-3: check -> baseline -> personas (API laptop)
+├── 02_analyse_bigfive.py   # B1 steps 1-3: scores, alpha, acquiescence, noise, persona shifts
+├── helpers/                # Part B-only code
+│   ├── config.py           # paths, seeds, run counts, persona settings
+│   ├── ipip.py             # IPIP-NEO-120 items, scoring key, reverse-keyed items, Jev score questions
+│   ├── reliability.py      # Cronbach's alpha per trait, acquiescence
+│   ├── personas.py         # persona conditions and their wordings
+│   └── bigfive.py          # tasks, Jev requests, LLM prompts, result records
 ├── prompts/
-│   └── personas/     # persona text (in question instructions vs in the state)
-├── data/             # committed
-│   ├── ipip/         # items, scoring key, paraphrased items (B1 step 4)
-│   ├── scenarios/    # behaviour-check questions per trait (B1 step 5)
-│   └── ladder/<benchmark>/  # ARC-Easy ... HLE text-only MCQ (B2)
-├── run_bigfive.py    # B1: baseline + personas on the IPIP items
-├── run_scenarios.py  # B1: behaviour check
-├── run_ladder.py     # B2: no persona vs "pretend to be [level]"
-├── analyse.py
-├── results/          # committed
-├── cache/            # not committed
-└── logs/             # not committed
+│   ├── llm_system.txt      # LLM system line (same as Part A)
+│   └── personas/
+│       ├── markers.json    # Goldberg marker adjectives per trait and pole
+│       └── persona.txt     # "You are a person who is {adjectives}."
+├── data/                   # committed
+│   └── ipip/               # IPIP-NEO-120 items (later: paraphrased items, B1 step 4)
+├── results/                # committed
+│   ├── raw/<model slug>/bigfive/<condition>.jsonl   # 01
+│   ├── tables/bigfive_*.csv                         # 02
+│   └── bigfive_summary.md                           # 02
+├── cache/                  # not committed
+└── logs/                   # not committed
+```
+
+Still to come (PLAN B3 steps 4-6): IPIP paraphrases, scenario questions (`data/scenarios/`), and the difficulty ladder (`data/ladder/<benchmark>/`).
+
+## Big Five runs
+
+A condition is `baseline` or `<trait>-<high|low>-<state|instructions>` (20 persona conditions). Each item is a separate request.
+
+| | Baseline | Each persona condition |
+|---|---|---|
+| Jev | 5 fresh repeats (run-to-run noise) | 5 wordings x 1 call |
+| LLMs | 1 run (temperature 0) | 5 wordings x 1 call |
+
+About 12,600 Jev calls and 12,120 per LLM in total.
+
+```
+python 01_run_bigfive.py check       # one item on every model; prints Jev's raw score answer
+python 01_run_bigfive.py baseline
+python 01_run_bigfive.py personas    # refuses to run until markers.json is marked verified
+python 02_analyse_bigfive.py         # any laptop
 ```
 
 ## Status
 
-- Helpers: `ipip.py` and `reliability.py` built; IPIP-NEO-120 items in `data/ipip/ipip_neo_120.json`.
-- No scripts yet.
+- Helpers, `01_run_bigfive.py` and `02_analyse_bigfive.py` written (2026-10-15). Dry-run end to end with a fake client: the analysis recovers planted persona shifts, alpha and Jev's noise.
+- `check` run live 2026-10-15: Jev's `score` answer is a probability-weighted 0-4 position, as assumed. About $0.50 for the full B1 run.
+- `markers.json` verified 2026-10-15 (all 100 Goldberg unipolar markers). `baseline` and `personas` run 2026-10-15 ($0.49 in total); results in `results/bigfive_summary.md`.

@@ -1,9 +1,11 @@
 {
- "originals_only": true,
+ "originals_only": false,
  "rows": {
   "level0.jsonl": 2000,
   "level1.jsonl": 2000,
-  "train.jsonl": 5500,
-  "val.jsonl": 1000
+  "level2.jsonl": 2000,
+  "level3.jsonl": 200,
+  "train.jsonl": 11000,
+  "val.jsonl": 2000
  }
 }

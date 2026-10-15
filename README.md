@@ -23,6 +23,7 @@ jev-project/
 │   ├── models.py            # pinned model IDs, LLM providers and request settings
 │   ├── openrouter.py        # OpenRouter client (Jev decisions + chat completions), call log
 │   ├── cache.py             # on-disk response cache, so API scripts can resume
+│   ├── parallel.py          # threaded run loop that stops at the spending cap
 │   └── stats.py             # bootstrap CI, McNemar, log-odds, ECE, binomial, two-proportion
 ├── docs/                    # PLAN.md, experiment flow diagram, API-laptop checklist
 ├── dev_notes/               # to-do list and build lists for the repo itself
