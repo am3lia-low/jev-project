@@ -16,6 +16,7 @@ PERSONAS_DIR = PROMPTS_DIR / "personas"  # markers.json (adjectives), persona.tx
 RESULTS_DIR = PART_DIR / "results"
 RAW_RESULTS_DIR = RESULTS_DIR / "raw"  # 01: <model slug>/bigfive/<condition>.jsonl
 TABLES_DIR = RESULTS_DIR / "tables"  # 02
+FIGURES_DIR = RESULTS_DIR / "figures"  # 02
 BIGFIVE_SUMMARY_PATH = RESULTS_DIR / "bigfive_summary.md"  # 02
 CACHE_DIR = PART_DIR / "cache"  # gitignored; raw API responses
 LOG_DIR = PART_DIR / "logs"

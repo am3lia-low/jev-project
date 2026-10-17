@@ -1,0 +1,535 @@
+﻿id,quiz_set,original,swap1,swap2,swap3,meaning_kept_all,none_sounds_off,notes
+arcc-test-1024,benchmark,"Which best describes how the human circulatory and respiratory systems interact?
+a) The heart removes waste built up in the lungs.
+b) Oxygen enters the bloodstream directly from the nose.
+c) Oxygen is transferred to the bloodstream as blood passes by the lungs.
+d) The heart pumps air into the blood through the lungs.","Which best portrays how the human circulatory and respiratory systems interact?
+a) The heart eliminates waste built up in the lungs.
+b) Oxygen enters the bloodstream directly from the nose.
+c) Oxygen is transferred to the bloodstream as blood passes by the lungs.
+d) The heart pumps air into the blood through the lungs.","Which best explains how the human circulatory and respiratory systems interact?
+a) The heart removes waste built up in the lungs.
+b) Oxygen reaches the bloodstream directly from the nose.
+c) Oxygen is conveyed to the bloodstream as blood passes by the lungs.
+d) The heart pumps air into the blood through the lungs.","Which best characterizes how the human circulatory and respiratory systems interact?
+a) The heart removes waste built up in the lungs.
+b) Oxygen enters the bloodstream directly from the nose.
+c) Oxygen is transferred to the bloodstream as blood moves by the lungs.
+d) The heart propels air into the blood through the lungs.",,,
+csqa-val-0326,benchmark,"What room would you find many bookcases and is used for contemplation?
+a) study
+b) house
+c) homw
+d) kitchen
+e) den","What room would you find numerous bookcases and is used for contemplation?
+a) study
+b) house
+c) homw
+d) kitchen
+e) den","What chamber would you find many bookcases and is used for reflection?
+a) study
+b) house
+c) homw
+d) kitchen
+e) den","What chamber would you locate many bookcases and is used for meditation?
+a) study
+b) house
+c) homw
+d) kitchen
+e) den",,,
+csqa-val-0574,benchmark,"The person tried to reduce his weight with a shrink ray, but he got it backwards and only did what?
+a) grow
+b) gain weight
+c) make larger
+d) augment
+e) get bigger","The individual attempted to lower his weight with a shrink ray, but he got it reversed and only did what?
+a) grow
+b) gain weight
+c) make larger
+d) augment
+e) get bigger","The man sought to lessen his weight with a shrink ray, but he got it backwards and only did what?
+a) grow
+b) gain weight
+c) make larger
+d) augment
+e) get bigger","The fellow endeavored to decrease his weight with a shrink ray, but he got it reversed and merely did what?
+a) grow
+b) gain weight
+c) make larger
+d) augment
+e) get bigger",,,
+arce-test-0821,benchmark,"What is the most likely result of large-scale agricultural fertilization on aquatic systems?
+a) increased fish populations
+b) more biodiversity over time
+c) less oxygen available for fish
+d) reduced water levels","What is the most probable outcome of large-scale agricultural fertilization on aquatic systems?
+a) increased fish populations
+b) more biodiversity over time
+c) less oxygen available for fish
+d) reduced water levels","What is the most plausible result of widespread agricultural fertilization on aquatic systems?
+a) increased fish populations
+b) more biodiversity over time
+c) less oxygen available for fish
+d) reduced water levels","What is the most likely consequence of extensive farming fertilization on aquatic systems?
+a) increased fish populations
+b) more biodiversity over time
+c) less oxygen available for fish
+d) reduced water levels",,,
+arce-test-1160,benchmark,"Which of these best describes a tornado?
+a) A winter storm that produces frozen precipitation
+b) A rotating funnel-shaped cloud with strong winds and thunderstorms
+c) A severe weather condition with low temperatures and blowing snow
+d) A storm that forms over warm ocean water and has extremely strong winds","Which of these best characterizes a tornado?
+a) A cold-season storm that produces frozen precipitation
+b) A spinning funnel-shaped cloud with powerful winds and thunderstorms
+c) A severe weather event with low temperatures and drifting snow
+d) A tempest that develops over warm ocean water and has extremely strong winds","Which of these best describes a twister?
+a) A winter tempest that produces frozen precipitation
+b) A rotating funnel-shaped cloud with powerful winds and thunderstorms
+c) A harsh weather condition with low temperatures and blowing snow
+d) A storm that develops over warm ocean water and has extremely strong winds","Which of these best depicts a tornado?
+a) A winter storm that produces icy precipitation
+b) A revolving funnel-shaped cloud with strong winds and thunderstorms
+c) A severe weather condition with cold temperatures and blowing snow
+d) A storm that forms over warm sea water and has exceptionally strong winds",,,
+arcc-new-0078,control,"A heater is placed near the floor of a cold room. Warm air rises from the heater, and cooler air from across the room moves in to take its place. This circular movement of air is an example of heat transfer by
+a) conduction
+b) convection
+c) radiation
+d) evaporation","A heater is placed near the floor of a chilly room. Warm air ascends from the heater, and cooler air from across the room moves in to take its place. This circular movement of air is an example of heat transfer by
+a) conduction
+b) convection
+c) radiation
+d) evaporation","A heater is positioned near the floor of a cold room. Heated air rises from the heater, and cooler air from across the room travels in to take its place. This circular movement of air is an example of heat transfer by
+a) conduction
+b) convection
+c) radiation
+d) evaporation","A heater is placed near the floor of a cold room. Warm air rises from the heater, and cooler air from across the room flows in to take its place. This cyclic movement of air is an instance of heat transfer by
+a) conduction
+b) convection
+c) radiation
+d) evaporation",,,
+arce-test-1898,benchmark,"Which organelle converts glucose to energy for cellular work?
+a) nucleus
+b) mitochondrion
+c) vacuole
+d) chloroplast","Which organelle changes glucose to energy for cellular work?
+a) nucleus
+b) mitochondrion
+c) vacuole
+d) chloroplast","Which organelle converts dextrose to energy for cellular work?
+a) nucleus
+b) mitochondrion
+c) vacuole
+d) chloroplast","Which organelle converts glucose to power for cellular work?
+a) nucleus
+b) mitochondrion
+c) vacuole
+d) chloroplast",,,
+arce-test-1627,benchmark,"The body is made up of many systems that interact with one another. For example, the skeletal system and the muscular system work together to help the body move. Which system works with the respiratory system to distribute oxygen to the body?
+a) muscular system
+b) digestive system
+c) lymphatic system
+d) circulatory system","The body is made up of numerous systems that cooperate with one another. For example, the skeletal system and the muscular system work together to help the body move. Which system works with the respiratory system to distribute oxygen to the body?
+a) muscular system
+b) digestive system
+c) lymphatic system
+d) circulatory system","The body is made up of many systems that interact with one another. For example, the skeletal system and the muscular system work together to assist the body move. Which system works with the respiratory system to distribute oxygen to the body?
+a) muscular system
+b) digestive system
+c) lymphatic system
+d) circulatory system","The body is made up of many systems that interact with one another. For example, the skeletal system and the muscular system work together to help the body move. Which system operates with the respiratory system to supply oxygen to the body?
+a) muscular system
+b) digestive system
+c) lymphatic system
+d) circulatory system",,,
+arce-new-0044,control,"A student wants to make a bulb light up using a battery, a wire, and a bulb. What must be true for the bulb to light?
+a) The wire must be made of plastic.
+b) The battery must be placed far from the bulb.
+c) The parts must form a complete circuit.
+d) The bulb must be kept in a dark room.","A pupil wishes to make a bulb light up using a battery, a wire, and a bulb. What must be correct for the bulb to light?
+a) The wire must be made of plastic.
+b) The battery must be placed distant from the bulb.
+c) The parts must form a complete circuit.
+d) The bulb must be kept in a dark room.","A scholar intends to make a bulb light up using a battery, a wire, and a bulb. What must be true for the bulb to shine?
+a) The wire must be made of plastic.
+b) The battery must be placed far from the bulb.
+c) The parts must form a whole circuit.
+d) The bulb must be kept in a dark room.","A learner hopes to make a bulb light up using a battery, a wire, and a bulb. What must be accurate for the bulb to light?
+a) The wire must be made of plastic.
+b) The battery must be placed far from the bulb.
+c) The components must form a complete circuit.
+d) The bulb must be kept in an unlit room.",,,
+hs-val-2375,benchmark,"A green title page appears, with words showing that the video will be of a tenor saxophone player as well as the website to receive to lessons. A black male then appears with a green sweater and black hat playing the sax. the man
+a) bluffs on the drums and the video continues, at various points, to show individuals playing the instrument.
+b) continues to play and cheers, shakes hands with the man, throws a napkin, writes on the napkin and gives him a card.
+c) then lays the instrument across his lap and begins talking about what he is doing.
+d) jumps into a black and white video and temporarily stops playing, saying, "" big calibers "".","A green cover page appears, with text showing that the video will be of a tenor saxophone player as well as the website to receive to lessons. A black male then appears with a green sweater and black hat playing the sax. the man
+a) bluffs on the drums and the video continues, at various points, to show individuals playing the instrument.
+b) continues to play and applauds, shakes hands with the man, throws a napkin, writes on the napkin and gives him a card.
+c) then lays the instrument across his lap and begins talking about what he is doing.
+d) jumps into a black and white video and briefly stops playing, saying, "" big calibers "".","A green title page shows, with words indicating that the video will be of a tenor saxophone player as well as the website to receive to lessons. A black male then appears with a green jumper and black cap playing the sax. the man
+a) bluffs on the drums and the video continues, at various points, to show individuals playing the instrument.
+b) continues to play and cheers, shakes hands with the man, tosses a napkin, writes on the napkin and gives him a card.
+c) then lays the instrument across his lap and begins talking about what he is doing.
+d) jumps into a black and white video and temporarily stops playing, saying, "" big calibers "".","A green title page appears, with words showing that the clip will be of a tenor saxophone player as well as the website to receive to lessons. A black male next appears with a green sweater and black hat playing the sax. the man
+a) bluffs on the drums and the video continues, at various points, to show individuals playing the instrument.
+b) continues to play and cheers, shakes hands with the man, throws a napkin, writes on the napkin and hands him a card.
+c) then lays the instrument across his lap and starts talking about what he is doing.
+d) jumps into a black and white video and temporarily stops playing, saying, "" big calibers "".",,,
+csqa-val-0398,benchmark,"The bell rang, and the congregation began to what in to the church?
+a) run away
+b) wind instrument
+c) funnel
+d) blunderbuss
+e) associated with telephones","The chime rang, and the worshippers started to what in to the chapel?
+a) run away
+b) wind instrument
+c) funnel
+d) blunderbuss
+e) associated with telephones","The gong rang, and the assembly commenced to what in to the church?
+a) run away
+b) wind instrument
+c) funnel
+d) blunderbuss
+e) associated with telephones","The bell sounded, and the parish began to what in to the sanctuary?
+a) run away
+b) wind instrument
+c) funnel
+d) blunderbuss
+e) associated with telephones",,,
+hs-new-0059,control,"A woman in a green jacket is standing next to a horse in a dirt arena. she
+a) lifts the horse's front hoof, scrapes out the dirt with a small metal pick, and then sets the hoof down gently.
+b) puts a saddle on her own back and the horse climbs onto a wooden stand.
+c) ties the horse to a fence and begins to paint its hooves with yellow glue.
+d) pours a bucket of water over the saddle and rides it across the arena like a sled.","A lady in a green coat is standing next to a horse in a soil arena. she
+a) raises the horse's front hoof, scrapes out the soil with a small metal pick, and then places the hoof down gently.
+b) puts a saddle on her own back and the horse mounts onto a wooden stand.
+c) secures the horse to a fence and begins to coat its hooves with yellow glue.
+d) pours a pail of water over the saddle and rides it across the arena like a sled.","A woman in an emerald jacket is positioned beside a horse in a dirt arena. she
+a) lifts the horse's front hoof, cleans out the dirt with a little metal pick, and then sets the hoof down softly.
+b) places a saddle on her own back and the horse climbs onto a timber stand.
+c) ties the horse to a fence and starts to paint its hooves with yellow adhesive.
+d) spills a bucket of water over the saddle and rides it through the arena like a sled.","A woman in a green jacket is standing beside a horse in a dusty arena. she
+a) lifts the horse's front hoof, scrapes out the dirt with a small steel pick, and then lowers the hoof down gently.
+b) puts a saddle on her own back and the horse ascends onto a wooden stand.
+c) fastens the horse to a fence and begins to paint its hooves with yellow glue.
+d) pours a bucket of water over the saddle and rides it across the arena like a sledge.",,,
+arcc-test-0866,benchmark,"The ocean's surface is a more varied environment than its depths. Which two water-cycle processes cause the most variation in the ocean's surface salt concentration?
+a) transpiration and precipitation
+b) precipitation and evaporation
+c) evaporation and condensation
+d) condensation and transpiration","The sea's surface is a more diverse environment than its depths. Which two water-cycle processes cause the most variation in the ocean's surface salt concentration?
+a) transpiration and precipitation
+b) precipitation and evaporation
+c) evaporation and condensation
+d) condensation and transpiration","The ocean's surface is a more varied environment than its depths. Which two water-cycle processes produce the greatest variation in the ocean's surface salt concentration?
+a) transpiration and precipitation
+b) precipitation and evaporation
+c) evaporation and condensation
+d) condensation and transpiration","The ocean's surface is a more variable setting than its depths. Which two water-cycle processes cause the most variation in the ocean's surface salt concentration?
+a) transpiration and precipitation
+b) precipitation and evaporation
+c) evaporation and condensation
+d) condensation and transpiration",,,
+arce-test-0885,benchmark,"A ball rolling on the ground is observed to slow down and stop. Based on Newton's first law of motion, what is the best conclusion?
+a) An object in motion eventually stops.
+b) The ball must have been going slightly uphill.
+c) The ball did not have enough mass to keep going.
+d) There must have been an outside force acting on the ball.","A sphere rolling on the ground is seen to slow down and stop. Based on Newton's first law of motion, what is the best conclusion?
+a) An object in motion eventually halts.
+b) The ball must have been going slightly uphill.
+c) The ball did not have enough mass to keep going.
+d) There must have been an outside force acting on the ball.","A ball rolling on the surface is observed to decelerate and stop. Based on Newton's first law of motion, what is the best conclusion?
+a) An object in motion eventually stops.
+b) The ball must have been traveling slightly uphill.
+c) The ball did not have enough mass to keep going.
+d) There must have been an external force acting on the ball.","A ball rolling on the ground is noticed to slow down and halt. Based on Newton's first law of motion, what is the best conclusion?
+a) An object in motion eventually stops.
+b) The ball must have been going slightly uphill.
+c) The ball did not have sufficient mass to keep going.
+d) There must have been an outside force acting on the ball.",,,
+csqa-val-0697,benchmark,"If you have a large satchel with you when you fly you'll be asked to store it where?
+a) airport
+b) luggage compartment
+c) with the pilot
+d) room
+e) clothing store","If you have a sizable bag with you when you fly you'll be requested to stow it where?
+a) airfield
+b) baggage compartment
+c) with the pilot
+d) space
+e) clothing shop","If you have a big satchel with you when you fly you'll be asked to place it where?
+a) airport
+b) luggage compartment
+c) alongside the pilot
+d) room
+e) apparel store","If you have a sizeable shoulder bag with you when you fly you'll be requested to store it where?
+a) airport
+b) baggage compartment
+c) with the pilot
+d) chamber
+e) clothing store",,,
+hs-new-0077,control,"[header] How to bleed a radiator [title] Turn off your heating system and let the radiators cool completely. [step] Bleeding a hot radiator can release scalding water or steam. [title] Find the bleed valve at the top corner of the radiator.
+a) [step] Use the key to turn the valve a quarter turn counterclockwise while holding a cloth under it. You will hear air hissing out, and you should close the valve when water starts to drip.
+b) [step] Pull the valve off with a hammer and pour a glass of water into the hole. This will force the air to the bottom of the radiator.
+c) [title] Turn the heating system to its highest setting and open the valve all the way. [step] Wait until the radiator is too hot to touch, then go to bed.
+d) [step] Tape the valve shut so no air can escape and then bleed the water from the pipes. If the radiator is cold at the bottom, add more air.","[header] How to vent a radiator [title] Switch off your heating system and allow the radiators to cool fully. [step] Bleeding a hot radiator can release scalding water or steam. [title] Locate the bleed valve at the top corner of the radiator.
+a) [step] Use the key to turn the valve a quarter turn counterclockwise while holding a rag under it. You will hear air hissing out, and you should close the valve when water starts to drip.
+b) [step] Pull the valve off with a hammer and pour a glass of water into the hole. This will force the air to the bottom of the radiator.
+c) [title] Turn the heating system to its highest setting and open the valve all the way. [step] Wait until the radiator is too hot to touch, then go to bed.
+d) [step] Tape the valve shut so no air can escape and then bleed the water from the pipes. If the radiator is cold at the bottom, add more air.","[header] How to bleed a radiator [title] Shut off your heating system and let the radiators chill completely. [step] Bleeding a hot radiator can emit scalding water or steam. [title] Find the bleed valve at the upper corner of the radiator.
+a) [step] Use the key to turn the valve a quarter turn counterclockwise while keeping a cloth under it. You will hear air hissing out, and you should close the valve when water begins to drip.
+b) [step] Pull the valve off with a hammer and pour a glass of water into the hole. This will drive the air to the bottom of the radiator.
+c) [title] Turn the heating system to its maximum setting and open the valve all the way. [step] Wait until the radiator is too hot to touch, then go to bed.
+d) [step] Tape the valve shut so no air can escape and then bleed the water from the pipes. If the radiator is cold at the bottom, add more air.","[header] How to bleed a radiator [title] Turn off your heating system and allow the radiators to cool entirely. [step] Bleeding a hot radiator can release scalding water or vapor. [title] Locate the bleed valve at the top corner of the radiator.
+a) [step] Use the key to turn the valve a quarter turn counterclockwise while grasping a cloth under it. You will hear air hissing out, and you should close the valve when water starts to drip.
+b) [step] Pull the valve off with a hammer and pour a glass of water into the hole. This will compel the air to the bottom of the radiator.
+c) [title] Turn the heating system to its highest setting and open the valve completely. [step] Wait until the radiator is too hot to touch, then go to bed.
+d) [step] Tape the valve shut so no air can escape and then bleed the water from the pipes. If the radiator is cold at the bottom, add more air.",,,
+arce-test-1677,benchmark,"As the distance between a magnet and a metal paper clip increases, the force of attraction between them
+a) decreases
+b) increases
+c) remains the same","As the gap between a magnet and a metal paper clip increases, the force of attraction between them
+a) diminishes
+b) rises
+c) remains the same","As the distance between a magnet and a metal paper clip grows, the strength of attraction between them
+a) decreases
+b) increases
+c) remains the same","As the distance between a magnet and a metallic paper clip increases, the force of pull between them
+a) decreases
+b) increases
+c) remains the same",,,
+hs-new-0039,control,"[header] How to wash a wool sweater by hand [title] Check the care label. [step] Look for the tag inside the sweater to make sure that hand washing is safe. Some wool items must be dry cleaned only. [title] Fill a basin with lukewarm water. [step] Add a small amount of mild detergent made for delicate fabrics and swish it around until it is evenly mixed.
+a) Pour boiling water into the basin and drop the sweater in for an hour. [substeps] Hot water helps wool keep its shape and size.
+b) Scrub the sweater against a brick until the stains come out. [title] Hang the sweater from a clothesline while it is still dripping wet.
+c) Add a cup of bleach to the water so that the wool fibers will become soft. [title] Spin the sweater in the dryer on high heat.
+d) Submerge the sweater and press it gently under the water for a few minutes without twisting or rubbing it. [title] Rinse the sweater in clean water of the same temperature.","[header] How to launder a wool sweater by hand [title] Inspect the care label. [step] Search for the tag inside the sweater to make sure that hand washing is safe. Some wool items must be dry cleaned only. [title] Fill a basin with lukewarm water. [step] Add a little amount of mild detergent made for delicate fabrics and swish it around until it is evenly mixed.
+a) Pour boiling water into the basin and drop the sweater in for an hour. [substeps] Hot water helps wool keep its shape and size.
+b) Scrub the sweater against a brick until the stains come out. [title] Hang the sweater from a clothesline while it is still dripping wet.
+c) Add a cup of bleach to the water so that the wool fibers will become soft. [title] Spin the sweater in the dryer on high heat.
+d) Submerge the sweater and press it gently under the water for a few minutes without twisting or rubbing it. [title] Rinse the sweater in clean water of the same temperature.","[header] How to clean a wool sweater by hand [title] Examine the care label. [step] Look for the tag inside the sweater to make sure that hand washing is safe. Some wool items must be dry cleaned only. [title] Fill a basin with tepid water. [step] Put a small amount of mild detergent made for delicate fabrics and stir it around until it is evenly mixed.
+a) Pour boiling water into the basin and drop the sweater in for an hour. [substeps] Hot water helps wool keep its shape and size.
+b) Scrub the sweater against a brick until the stains come out. [title] Hang the sweater from a clothesline while it is still dripping wet.
+c) Add a cup of bleach to the water so that the wool fibers will become soft. [title] Spin the sweater in the dryer on high heat.
+d) Submerge the sweater and press it gently under the water for a few minutes without twisting or rubbing it. [title] Rinse the sweater in clean water of the same temperature.","[header] How to wash a wool sweater by hand [title] Review the care label. [step] Look for the tag inside the sweater to make sure that hand washing is safe. Some wool items must be dry cleaned only. [title] Fill a basin with lukewarm water. [step] Add a small amount of gentle detergent made for delicate fabrics and swish it around until it is uniformly mixed.
+a) Pour boiling water into the basin and drop the sweater in for an hour. [substeps] Hot water helps wool keep its shape and size.
+b) Scrub the sweater against a brick until the stains come out. [title] Hang the sweater from a clothesline while it is still dripping wet.
+c) Add a cup of bleach to the water so that the wool fibers will become soft. [title] Spin the sweater in the dryer on high heat.
+d) Submerge the sweater and press it gently under the water for a few minutes without twisting or rubbing it. [title] Rinse the sweater in clean water of the same temperature.",,,
+hs-new-0006,control,"A girl sits at a piano with sheet music in front of her. She places her fingers on the keys and begins to play a slow song. a woman beside her
+a) takes the piano apart and carries each key to the other side of the room.
+b) turns the pages of the music and nods along as the girl plays.
+c) starts to play a trumpet through the lid of the piano and the girl hands her a sandwich.
+d) stands up on the bench and begins to dance on the girl's hands.","A lass sits at a piano with sheet music in front of her. She places her fingers on the keys and starts to play an unhurried song. a woman alongside her
+a) takes the piano apart and transports each key to the other side of the room.
+b) flips the pages of the music and bobs along as the girl plays.
+c) starts to play a trumpet through the lid of the piano and the girl hands her a sandwich.
+d) stands up on the bench and begins to dance on the girl's hands.","A girl sits at a piano with sheet music in front of her. She sets her fingers on the keys and begins to play a slow song. a lady beside her
+a) takes the piano to pieces and carries each key to the other side of the room.
+b) turns the pages of the music and bobs along as the girl plays.
+c) starts to play a trumpet through the lid of the piano and the girl hands her a sandwich.
+d) stands up on the bench and begins to dance on the girl's hands.","A girl sits at a piano with sheet music in front of her. She places her fingers on the keys and commences to play a leisurely song. a woman near her
+a) takes the piano apart and carries each key to the other side of the room.
+b) turns the pages of the music and nods along as the girl plays.
+c) starts to play a trumpet through the lid of the piano and the girl hands her a sandwich.
+d) stands up on the bench and begins to dance on the girl's hands.",,,
+hs-val-3074,benchmark,"A field with many racing sail boats being rigged for a competition. a boy
+a) is shown seated with several close ups of dart board exhibits.
+b) stands with two playboys and hold a banner, tying a knot.
+c) rolls his sail boat to the water and begins sailing in a competition.
+d) rides his boat in a racing row boat doing jumps and tricks in pool decks during a race.","A field with numerous racing sail boats being prepared for a competition. a boy
+a) is displayed seated with several close ups of dart board exhibits.
+b) stands with two playboys and carry a flag, tying a knot.
+c) moves his sail boat to the water and starts sailing in a competition.
+d) pilots his boat in a racing row boat doing leaps and stunts in pool decks during a race.","A field with many racing sail boats being equipped for a contest. a boy
+a) is shown sitting with numerous close ups of dart board displays.
+b) stands with two playboys and hold a banner, knotting a knot.
+c) pushes his sail boat to the water and begins sailing in a contest.
+d) rides his boat in a racing row boat performing jumps and tricks in pool decks during a race.","An area with many competing sail boats being rigged for a competition. a boy
+a) is shown seated with several close ups of dart board displays.
+b) stands with two playboys and hold a banner, tying a knot.
+c) rolls his sail boat to the water and starts sailing in a competition.
+d) rides his boat in a racing row boat doing jumps and stunts in pool decks during a contest.",,,
+hs-val-5162,benchmark,"[header] How to set up a pllc for a legal practice [title] Choose your state of incorporation. [step] For most people, this will be a simple decision, based on where you are licensed and where you live. But if you or any of your partners are admitted to the bar in multiple states, you may choose to incorporate somewhere else.
+a) The laws that govern your state will be different in each state. Unfortunately, you cannot know what you may also need to prove such a decision.
+b) Legal representation in the state of care will depend on which state you live in. [substeps] In ohio, for example, you can forego a professional legal representation for sole proprietorships.
+c) That area may be a better atmosphere if your clients have joint legal rights, which will help your clients avoid legal dispute in your practicing practice. [substeps] Although there are many different forms, most states require that you register with the secretary of state or.
+d) Check with the secretary of state's office in any state where you are eligible. [substeps] You may want to base your decision on the ease of incorporating, or on the fees or taxes associated with operating a pllc in that state.","[header] How to establish a pllc for a legal practice [title] Select your state of incorporation. [step] For most people, this will be an easy decision, based on where you are licensed and where you reside. But if you or any of your partners are admitted to the bar in multiple states, you may elect to incorporate somewhere else.
+a) The rules that govern your state will be distinct in each state. Regrettably, you cannot know what you may also need to demonstrate such a decision.
+b) Legal counsel in the state of care will depend on which state you reside in. [substeps] In ohio, for example, you can forgo a professional legal representation for sole proprietorships.
+c) That area may be a better environment if your clients have joint legal rights, which will help your clients avoid legal dispute in your practicing practice. [substeps] Although there are many different forms, most states require that you register with the secretary of state or.
+d) Check with the secretary of state's office in any state where you qualify. [substeps] You may want to base your decision on the ease of incorporating, or on the charges or taxes associated with operating a pllc in that state.","[header] How to organize a pllc for a legal practice [title] Pick your state of incorporation. [step] For most people, this will be a straightforward decision, based on where you are licensed and where you reside. But if you or any of your partners are admitted to the bar in multiple states, you may opt to incorporate somewhere else.
+a) The statutes that govern your state will vary in each state. Sadly, you cannot know what you may also need to establish such a decision.
+b) Legal representation in the state of care will rely on which state you live in. [substeps] In ohio, for example, you can waive a professional legal representation for sole proprietorships.
+c) That area may be a better setting if your clients have joint legal rights, which will help your clients avoid legal dispute in your practicing practice. [substeps] Although there are numerous different forms, most states require that you register with the secretary of state or.
+d) Consult with the secretary of state's office in any state where you are eligible. [substeps] You may want to base your decision on the ease of incorporating, or on the costs or taxes associated with operating a pllc in that state.","[header] How to form a pllc for a legal practice [title] Determine your state of incorporation. [step] For most people, this will be a simple choice, based on where you are licensed and where you dwell. But if you or any of your partners are admitted to the bar in multiple states, you may decide to incorporate somewhere else.
+a) The laws that regulate your state will differ in each state. Unfortunately, you cannot know what you may also need to verify such a decision.
+b) Legal representation in the state of care will depend on which state you reside in. [substeps] In ohio, for example, you can dispense with a professional legal representation for sole proprietorships.
+c) That area may be a better climate if your clients have joint legal rights, which will help your clients avoid legal dispute in your practicing practice. [substeps] Although there are many different forms, most states require that you enroll with the secretary of state or.
+d) Verify with the secretary of state's office in any state where you are qualified. [substeps] You may want to base your decision on the ease of incorporating, or on the levies or taxes associated with operating a pllc in that state.",,,
+arcc-test-0959,benchmark,"During which stage of its life cycle does a butterfly spend the most time eating plant leaves?
+a) adult
+b) egg
+c) larva
+d) pupa","During which phase of its life cycle does a butterfly spend the most time eating plant leaves?
+a) adult
+b) egg
+c) larva
+d) pupa","During which period of its life cycle does a butterfly spend the most time eating plant leaves?
+a) adult
+b) egg
+c) larva
+d) pupa","During which stage of its life cycle does a butterfly spend the most time consuming plant leaves?
+a) adult
+b) egg
+c) larva
+d) pupa",,,
+csqa-val-0277,benchmark,"The old style pop ups literally let you see the story when you did what?
+a) giggle
+b) visualize
+c) open book
+d) reading
+e) go to movies","The former style pop ups literally let you see the story when you did what?
+a) giggle
+b) visualize
+c) open book
+d) reading
+e) go to movies","The old style pop ups actually let you see the story when you did what?
+a) giggle
+b) visualize
+c) open book
+d) reading
+e) go to movies","The old style pop ups literally let you view the story when you did what?
+a) giggle
+b) visualize
+c) open book
+d) reading
+e) go to movies",,,
+hs-val-5234,benchmark,"[header] How to structure user friendly, search friendly urls [title] Kiss. [step] Keep it short and simple. Yes, this the first rule.
+a) Imagine if you type in a new post, but forget about the addressee activity. Try to use only a very specific text word, and under that, a caption of what you want to know.
+b) When the web user views the url it should convey the correct details like the page content idea, page hierarchy and more details. So remember to keep it short (so that it easy to remember), and simple (so that it is easy to locate).
+c) False information in your search results will drive people away. If someone sees your name on a search engine, they will not be able to open that other name.
+d) But using "" i "" in this sentence is a good rule, but make sure your body language and signature style are clear and effective in the eyes of everyone. [substeps] Write this sentence as if you're talking to a visually-impaired individual.","[header] How to organize user friendly, search friendly urls [title] Kiss. [step] Keep it brief and simple. Yes, this the first guideline.
+a) Imagine if you enter in a new post, but overlook about the addressee activity. Try to use only a very particular text word, and under that, a caption of what you want to learn.
+b) When the web user sees the url it should convey the accurate details like the page content idea, page hierarchy and more details. So remember to keep it short (so that it easy to remember), and simple (so that it is easy to locate).
+c) False information in your search results will deter people away. If someone notices your name on a search engine, they will not be able to open that other name.
+d) But using "" i "" in this sentence is a sound rule, but make sure your body language and signature style are clear and effective in the eyes of everyone. [substeps] Write this sentence as if you're talking to a visually-impaired individual.","[header] How to arrange user friendly, search friendly urls [title] Kiss. [step] Keep it concise and straightforward. Yes, this the first principle.
+a) Imagine if you enter in a new post, but neglect about the addressee activity. Try to use only a very specific text word, and beneath that, a caption of what you want to know.
+b) When the web user observes the url it should communicate the correct details like the page content idea, page hierarchy and more details. So remember to keep it brief (so that it easy to remember), and simple (so that it is easy to locate).
+c) False information in your search results will dissuade people away. If someone spots your name on a search engine, they will not be able to open that other name.
+d) But using "" i "" in this sentence is a sound rule, but make sure your body language and signature style are understandable and effective in the eyes of everyone. [substeps] Write this sentence as if you're talking to a visually-impaired individual.","[header] How to organize user friendly, search friendly urls [title] Kiss. [step] Keep it concise and simple. Yes, this the first standard.
+a) Imagine if you type in a new post, but forget about the recipient activity. Try to use only a very particular text word, and under that, a caption of what you want to understand.
+b) When the web user views the url it should express the correct details like the page content idea, page hierarchy and more details. So remember to keep it short (so that it easy to recall), and simple (so that it is easy to find).
+c) False information in your search results will drive people off. If someone sees your name on a search engine, they will not be able to access that other name.
+d) But using "" i "" in this sentence is a good rule, but ensure your body language and signature style are clear and efficient in the eyes of everyone. [substeps] Write this sentence as if you're talking to a visually-impaired individual.",,,
+arcc-test-0661,benchmark,"In a completely cooperative relationship, each organism benefits equally. Which sequence lists these relationships in order of increasing cooperativeness?
+a) commensalism, mutualism, parasitism, predation
+b) parasitism, commensalism, predation, mutualism
+c) predation, parasitism, commensalism, mutualism
+d) mutualism, commensalism, parasitism, predation","In a wholly cooperative association, each organism benefits equally. Which sequence enumerates these relationships in order of increasing cooperativeness?
+a) commensalism, mutualism, parasitism, predation
+b) parasitism, commensalism, predation, mutualism
+c) predation, parasitism, commensalism, mutualism
+d) mutualism, commensalism, parasitism, predation","In a fully cooperative relationship, each organism gains equally. Which sequence lists these relationships in order of rising cooperativeness?
+a) commensalism, mutualism, parasitism, predation
+b) parasitism, commensalism, predation, mutualism
+c) predation, parasitism, commensalism, mutualism
+d) mutualism, commensalism, parasitism, predation","In an entirely cooperative relationship, each organism benefits equally. Which sequence identifies these relationships in order of increasing cooperativeness?
+a) commensalism, mutualism, parasitism, predation
+b) parasitism, commensalism, predation, mutualism
+c) predation, parasitism, commensalism, mutualism
+d) mutualism, commensalism, parasitism, predation",,,
+hs-val-2174,benchmark,"We see a man conducting an orchestra. We see a lady in a blue dress is playing in front of the other players. we
+a) see four men playing claires.
+b) see the conductor perform a solo.
+c) see the play finished and the man claps his hands.
+d) see the lady from the back, and we see the other players.","We observe a gentleman conducting an orchestra. We observe a woman in a blue dress is performing in front of the remaining players. we
+a) observe four men performing claires.
+b) observe the conductor play a solo.
+c) observe the play completed and the man applauds his hands.
+d) observe the woman from the rear, and we observe the remaining players.","We watch a person conducting an orchestra. We watch a woman in a blue dress is performing in front of the other players. we
+a) watch four men performing claires.
+b) watch the conductor play a solo.
+c) watch the play finished and the man applauds his hands.
+d) watch the woman from the back, and we watch the other players.","We view an individual conducting an orchestra. We view a lady in a blue gown is performing in front of the other players. we
+a) view four men playing claires.
+b) view the conductor perform a solo.
+c) view the play completed and the man claps his hands.
+d) view the lady from the rear, and we view the other players.",,,
+csqa-new-0023,control,"What do you do to a guitar before playing it so it sounds right?
+a) paint
+b) tune
+c) bury
+d) wash
+e) weigh","What do you do to a guitar before performing it so it sounds right?
+a) paint
+b) tune
+c) bury
+d) wash
+e) weigh","What do you do to a guitar before playing it so it sounds correct?
+a) paint
+b) tune
+c) bury
+d) wash
+e) weigh","What do you do to a guitar before playing it so it sounds good?
+a) paint
+b) tune
+c) bury
+d) wash
+e) weigh",,,
+hs-val-9630,benchmark,"[header] How to look good for a night out [title] Give yourself lots of time before you have to go. [title] Use a shampoo and conditioner made for your hair type, wash your hair well and leave your conditioner in for a few minutes, then wash out. [step] Towel dry your hair, comb through with a wide tooth comb.
+a) [title] Use a good conditioner made for your hair type, wash your hair well and leave your conditioner in for a few minutes, then wash out. [step] Towel dry your hair, comb through with a wide tooth comb.
+b) Apply the conditioner, then put in your favorite hairspray. [title] Find clothes in neutral colors such as pink, teal or brown.
+c) [title] Blow dry your hair, then use straighteners to make it straighter! [step] However, if you prefer loose curls (or your hair is naturally curly) use a diffuser with a curling balm. This will ensure that the curls are bouncy and full.
+d) If desired, pull it back into a messy bun without the comb. If not, gently comb through with a water-filled towel.","[header] How to look attractive for a night out [title] Give yourself ample time before you have to go. [title] Use a shampoo and conditioner designed for your hair type, cleanse your hair thoroughly and keep your conditioner in for a few minutes, then rinse out. [step] Towel dry your hair, comb through with a wide tooth comb.
+a) [title] Use an excellent conditioner designed for your hair type, cleanse your hair thoroughly and keep your conditioner in for a few minutes, then rinse out. [step] Towel dry your hair, comb through with a wide tooth comb.
+b) Apply the conditioner, then put in your preferred hairspray. [title] Find clothes in neutral colors such as pink, teal or brown.
+c) [title] Blow dry your hair, then use straighteners to make it straighter! [step] However, if you prefer loose curls (or your hair is naturally curly) use a diffuser with a curling balm. This will ensure that the curls are springy and full.
+d) If desired, pull it back into a messy bun without the comb. If not, gently comb through with a water-filled towel.","[header] How to look good for an evening out [title] Give yourself plenty of time before you have to go. [title] Use a shampoo and conditioner intended for your hair type, wash your hair thoroughly and leave your conditioner in for a few minutes, then rinse out. [step] Towel dry your hair, comb through with a wide tooth comb.
+a) [title] Use a quality conditioner intended for your hair type, wash your hair thoroughly and leave your conditioner in for a few minutes, then rinse out. [step] Towel dry your hair, comb through with a wide tooth comb.
+b) Apply the conditioner, then put in your favorite hairspray. [title] Select clothes in neutral colors such as pink, teal or brown.
+c) [title] Blow dry your hair, then use straighteners to make it straighter! [step] However, if you prefer loose curls (or your hair is naturally curly) use a diffuser with a curling balm. This will ensure that the curls are lively and full.
+d) If desired, pull it back into a messy bun without the comb. If not, gently comb through with a water-filled towel.","[header] How to look nice for a night out [title] Give yourself plenty of time before you have to go. [title] Use a shampoo and conditioner suited for your hair type, wash your hair well and keep your conditioner in for a few minutes, then rinse out. [step] Towel dry your hair, comb through with a wide tooth comb.
+a) [title] Use a good conditioner suited for your hair type, wash your hair well and keep your conditioner in for a few minutes, then rinse out. [step] Towel dry your hair, comb through with a wide tooth comb.
+b) Apply the conditioner, then put in your preferred hairspray. [title] Find clothes in neutral colors such as pink, teal or brown.
+c) [title] Blow dry your hair, then use straighteners to make it straighter! [step] However, if you prefer loose curls (or your hair is naturally curly) use a diffuser with a curling balm. This will ensure that the curls are buoyant and full.
+d) If desired, pull it back into a messy bun without the comb. If not, gently comb through with a water-filled towel.",,,
+csqa-val-0792,benchmark,"What rubber toy filled with helium will make a child happy?
+a) loved
+b) learn
+c) eat cake
+d) balloon
+e) become adult","What latex plaything filled with helium will make a child happy?
+a) loved
+b) learn
+c) eat cake
+d) balloon
+e) become adult","What rubber plaything filled with helium will make a child glad?
+a) loved
+b) learn
+c) eat cake
+d) balloon
+e) become adult","What rubber toy filled with helium will make a youngster happy?
+a) loved
+b) learn
+c) eat cake
+d) balloon
+e) become adult",,,
+arcc-test-0414,benchmark,"A sample of an unknown substance has a volume that is independent of its container. Which additional information is needed to determine the state of the sample?
+a) the mass of the sample
+b) the density of the sample
+c) whether the sample has a fixed shape
+d) whether the sample conducts electricity","A specimen of an unidentified material has a volume that is independent of its container. Which additional information is needed to identify the state of the specimen?
+a) the mass of the specimen
+b) the density of the specimen
+c) whether the specimen has a fixed shape
+d) whether the specimen conducts electricity","A sample of an unknown substance has a volume that is unaffected by its container. Which further information is needed to determine the state of the sample?
+a) the mass of the sample
+b) the density of the sample
+c) whether the sample has a constant shape
+d) whether the sample conducts electricity","A portion of an unknown substance has a volume that is independent of its container. Which additional information is needed to ascertain the state of the sample?
+a) the mass of the sample
+b) the density of the sample
+c) whether the sample possesses a fixed shape
+d) whether the sample conducts electricity",,,

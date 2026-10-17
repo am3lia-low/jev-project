@@ -1,0 +1,6 @@
+seed,best_epoch,train_seconds,gpu,train_rows,best_val_accuracy
+11,2,1348.0000,Tesla T4,11000,0.4515
+22,3,1346.6000,Tesla T4,11000,0.4600
+33,3,1344.7000,Tesla T4,11000,0.4850
+44,2,1347.5000,Tesla T4,11000,0.4465
+55,3,1346.5000,Tesla T4,11000,0.4430

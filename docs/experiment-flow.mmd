@@ -9,7 +9,7 @@ flowchart TD
     end
 
     %% ---------- Sampling (scripted) ----------
-    SRC --> SAMPLE["02_sample.py (API laptop)<br/>sample · split by question · stable IDs<br/>labels to A-E · dedupe SWAG vs HellaSwag<br/>store original + balanced-shuffle order"]
+    SRC --> SAMPLE["02_sample.py (API laptop)<br/>sample · split by question · stable IDs<br/>labels to A-E · dedupe SWAG vs HellaSwag<br/>drop duplicate-option items + test stems in train/val<br/>store original + balanced-shuffle order"]
     SAMPLE --> TRV["Train 1,100 + Val 200 per dataset<br/>5,500 + 1,000 in total"]
     SAMPLE --> TEST["Test 400 per dataset<br/>2,000 in total"]
 
@@ -18,20 +18,20 @@ flowchart TD
     TEST --> L1["Level 1<br/>original wording, balanced shuffle"]
 
     %% ---------- Synthetic: paraphrases ----------
-    TRV --> PARA["SYNTHETIC: 03_paraphrase.py (API laptop)<br/>cheap OpenRouter LLM, chosen by pilot<br/>not the same family as any LLM baseline<br/>rephrase question + options, reshuffle"]
+    TRV --> PARA["SYNTHETIC: 03_paraphrase.py (API laptop)<br/>openai/gpt-6-luna, chosen by 30-item pilot<br/>not the same family as any LLM baseline<br/>rephrase question + options, reshuffle"]
     TEST --> PARA
     PARA --> VPARA["04_validate.py<br/>auto: answer kept, option count, text changed<br/>manual: 50 items, meaning + difficulty rating"]
     VPARA --> L2["Level 2<br/>paraphrased + shuffled<br/>2,000"]
     VPARA --> TRAINSET["BERT training set<br/>originals + paraphrases<br/>train 11,000 · val 2,000"]
 
     %% ---------- Synthetic: brand-new questions ----------
-    GEN["SYNTHETIC: 05_generate_new.py (API laptop)<br/>Claude Sonnet 5.5 drafts new questions<br/>in each paper dataset's style"] --> HNEW["Human check<br/>answer correct · exactly one right option<br/>not a near-copy · light rewording to match style"]
+    GEN["SYNTHETIC: 05_generate_new.py (API laptop)<br/>Claude Sonnet 5.5 drafts new questions<br/>in each paper dataset's style<br/>near-copy screen: similarity ≥ 0.75 replaced,<br/>0.6-0.75 flagged for review"] --> HNEW["Human check<br/>answer correct · exactly one right option<br/>not a near-copy · light rewording to match style"]
     HNEW --> L3["Level 3<br/>200 brand-new<br/>50 x 4 paper datasets"]
 
     %% ---------- Synthetic: memorisation quiz ----------
     TEST --> QSEL["Quiz benchmark items<br/>400 = 100 x 4 paper datasets<br/>Level 0 wording"]
     L3 --> QCTRL["Quiz control items<br/>100 = 25 x 4, taken from Level 3"]
-    QSEL --> SWAP["SYNTHETIC: 06a_swap.py (API laptop)<br/>3 synonym-swap versions per item<br/>word-level only, same structure + answer"]
+    QSEL --> SWAP["SYNTHETIC: 06a_swap.py (API laptop)<br/>openai/gpt-6-luna<br/>3 synonym-swap versions per item<br/>word-level only, same structure + answer"]
     QCTRL --> SWAP
     SWAP --> VSWAP["06b_validate_swaps.py<br/>auto: all distinct, word count within 2,<br/>word-level edits only · manual: 30 items"]
     VSWAP --> QUIZ["Quiz, 500 items<br/>A-D = original + 3 swaps, position balanced<br/>E = none of the provided options"]
@@ -39,12 +39,14 @@ flowchart TD
     %% ---------- Models ----------
     subgraph MODELS["Models"]
         BERTU["Untrained BERT-base<br/>chance floor"]
-        BERTFT["Fine-tuned bert-base-uncased<br/>5 seeds (Colab T4)"]
-        OPT["Optional: BERT-large 1 seed ·<br/>RoBERTa-base · RACE pre-training"]
+        BERTFT["Fine-tuned bert-base-uncased<br/>5 seeds (Kaggle T4; no Colab GPU)"]
+        OPT["Optional: BERT-large 1 seed ·<br/>RoBERTa-base · RACE pre-training ·<br/>originals-only ablation (done)"]
         JEV["Jev typesafe/jev-1.13<br/>(API laptop)"]
         LLM["LLM baselines: Qwen3.8-27B,<br/>Gemma-4-26B-A4B (API laptop)"]
     end
     TRAINSET --> BERTFT
+    BERTFT --> VALID["BERT above-chance rule<br/>val originals only<br/>CI low > chance + 10 pts, per dataset"]
+    JEV --> REP["Jev checks before the levels<br/>8a sanity: Level 0 vs paper CI<br/>8b repeatability: 200 Qs x 3<br/>~100% agree → single runs"]
     TRAINSET -.-> OPT
 
     L0 --> MODELS
@@ -60,6 +62,7 @@ flowchart TD
     JEV --> R3["Quiz: % original picked vs 25%<br/>benchmark items vs control items"]
     LLM --> R3
     R1 --> R4["Level 3 accuracy<br/>vs Level 0"]
+    VALID --> R2
     R2 --> FINAL["Memorisation verdict<br/>ladder + quiz + Level 3"]
     R3 --> FINAL
     R4 --> FINAL
@@ -72,6 +75,6 @@ flowchart TD
     classDef result fill:#ede9fe,stroke:#7c3aed,color:#4c1d95
     class HS,AE,AC,CQ,SW human
     class PARA,GEN,SWAP synth
-    class SAMPLE,TRV,TEST,L0,L1,L2,L3,TRAINSET,VPARA,HNEW,QSEL,QCTRL,VSWAP,QUIZ script
+    class SAMPLE,TRV,TEST,L0,L1,L2,L3,TRAINSET,VPARA,HNEW,QSEL,QCTRL,VSWAP,QUIZ,VALID,REP script
     class BERTU,BERTFT,OPT,JEV,LLM model
     class R1,R2,R3,R4,FINAL result

@@ -54,7 +54,7 @@ Create the folders the layout needs, delete the ones it doesn't, and move every 
 
 - [x] Rate the pilot blind (`data/reviews/pilot_30.csv`, 2026-10-14): both models kept meaning 30/30; gpt-6-luna 30 same difficulty, Mistral 29 same + 1 harder. `PARAPHRASE_MODEL = "openai/gpt-6-luna"`.
 - [x] Review the Level 3 drafts (`data/reviews/new_questions.csv`, 2026-10-14): 272 of 400 reviewed, no text edits. `arcc-new-0095` and `csqa-new-0048` had keep=yes with a failed check, set to keep=no. `--apply-review` wrote `data/new/reviewed.jsonl`: 50 per dataset, 200 in total.
-- [ ] Then: `03_paraphrase.py` → `04_validate.py` (+ `--retry-failed` loop, fill `paraphrase_50.csv`) → `06a_swap.py` → `06b_validate_swaps.py` (+ retry loop, fill `swaps_30.csv`) → `06c_build_quiz.py`.
+- [ ] Then: `03_paraphrase.py` → `04_validate.py` (+ `--retry-failed` loop, fill `paraphrase_50.csv`) → `06a_swap.py` → `06b_validate_swaps.py` (+ retry loop, fill `swaps_30.csv`) → `06c_build_quiz.py`. All scripts run 2026-10-16/17 (quiz: 500 items); only the two review sheets are left.
 
 ## 6. [x] Docs out of date
 
@@ -76,15 +76,18 @@ Details in [`docs/api-laptop-checks.md`](../docs/api-laptop-checks.md).
 - [x] Confirm the request fields (reasoning off is now `effort: "none"`).
 - [x] Check Jev's `usage.cost` (present).
 - [x] Smoke-test 08/09 on Level 0 ($0.054): Jev sanity OK on every paper dataset; Qwen 2,000/2,000.
-- [ ] First Colab run of `07b_bert_colab.ipynb` with `SMOKE_TEST = True` (`data/bert/` is built `--originals-only`).
+- [x] First run of `07b_bert_colab.ipynb` with `SMOKE_TEST = True`, on Kaggle (2026-10-15; no Colab GPU). See `01-jev-benchmarks/results/bert_summary.md`.
 
 ## 9. [ ] Full runs (after 5 and 8)
 
 Same order as [`docs/api-laptop-checks.md` → Run order](../docs/api-laptop-checks.md#run-order-both-reviews-done-2026-10-14-paraphrase_model--gpt-6-luna) and PLAN A10:
 
-- [ ] `07a_build_bert_data.py` without `--originals-only`, then the full notebook on Colab (5 seeds); results into `results/bert/`.
-- [ ] `08_run_jev.py` repeat → levels → quiz.
-- [ ] `09_run_llm.py` levels → quiz (Qwen and Gemma).
+- [x] `03_paraphrase.py` + `04_validate.py` full run (2026-10-16): 8,500/8,500 pass, $0.79.
+- [ ] Fill in `data/reviews/paraphrase_50.csv` (manual paraphrase check).
+- [x] Optional originals-only BERT ablation on Kaggle (2026-10-15): `results/bert_original_only/`.
+- [x] `07a_build_bert_data.py` without `--originals-only`, then the full notebook on Kaggle (5 seeds + untrained; 2026-10-17); results in `results/bert/`.
+- [ ] `08_run_jev.py` repeat → levels → quiz. Done 2026-10-17: repeat (99.5% agreement, single runs), levels 0, 1, 3. Left: Level 2 (after `paraphrase_50.csv` + memorisation threshold) and quiz (after `swaps_30.csv`).
+- [ ] `09_run_llm.py` levels → quiz (Qwen and Gemma). Done 2026-10-17: levels 0, 1, 3 for both. Left: Level 2 and quiz, same gates as 08.
 - [ ] `10_analyse.py`, then the final verdict by hand.
 
 ## 10. [ ] Open decisions
@@ -99,5 +102,5 @@ See PLAN.md → Open questions: confirm the memorisation threshold (before Jev's
 - [x] `prompts/personas/markers.json` checked 2026-10-15 against two secondary sources for Goldberg's 100 unipolar markers (psytests.org list + psychTools scoring key). The draft had 14 non-Goldberg words (e.g. C: responsible, reliable, hardworking, thrifty, lazy; N-low: calm, at ease, secure); now all 100 Goldberg words are used, by pole.
 - [x] `01_run_bigfive.py check` live (2026-10-15, $0.0001): Jev's `score` is the probability-weighted position 0-4, with per-position probabilities; all 3 models move up under an E-high persona (Jev 2.73 → 4.25/4.37, LLMs 3.0 → ~5). About $0.50 for the full B1 run.
 - [x] `baseline` run 2026-10-15 ($0.011; one Gemma 520 retried). Jev's repeats barely differ (mean per-item SD 0.04).
-- [x] `personas` run 2026-10-15 ($0.48, 0 failed) and analysed: alpha 0.95-0.97 for every model and trait; every persona moves its trait (Jev high - low +2.7 to +3.7; LLMs +2.7 to +3.9); state placement > instructions; large off-target shifts (~1-2 points, a desirability halo). See `results/bigfive_summary.md`.
+- [x] `personas` run 2026-10-15 ($0.48, 0 failed) and analysed: alpha 0.95-0.97 for every model and trait; every persona moves its trait (Jev high - low +2.7 to +3.7; LLMs +2.7 to +3.9); state placement > instructions; large off-target shifts (~1-2 points, a desirability halo). Written up in `02-jevlet-personas/results/bigfive_findings.md` with the shift-matrix figure.
 - [ ] Then B1 step 4 (IPIP paraphrases), step 5 (scenarios), B2 (ladder).

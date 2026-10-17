@@ -17,7 +17,7 @@ Each part's README has its own folder in full. [`dev_notes/TODO.md`](dev_notes/T
 jev-project/
 ├── README.md
 ├── pyproject.toml           # dependencies; installs src/jev_common into the venv
-├── requirements.txt         # generated from pyproject.toml (uv export), for Colab
+├── requirements.txt         # generated from pyproject.toml (uv export), for Colab/Kaggle
 ├── .env.example             # copy to .env and add OPENROUTER_API_KEY
 ├── src/jev_common/          # code shared by both parts
 │   ├── models.py            # pinned model IDs, LLM providers and request settings
@@ -45,7 +45,7 @@ jev-project/
 |---|---|---|---|
 | Work laptop | None | Blocked | Writing code; validation and analysis on data pulled from git |
 | API laptop | None | Yes | Dataset downloads, every OpenRouter call (paraphrases, swaps, new questions, Jev, LLMs) |
-| Google Colab | T4 (free) | — | BERT fine-tuning and evaluation |
+| Kaggle (planned: Colab) | T4 (free) | — | BERT fine-tuning and evaluation; no Colab GPU was available |
 
 ## Setup
 
@@ -56,4 +56,4 @@ uv sync                 # creates .venv, installs dependencies + src/jev_common
 cp .env.example .env    # then add OPENROUTER_API_KEY (API laptop only)
 ```
 
-Dependencies live in `pyproject.toml`. After changing them, regenerate `requirements.txt` (used on Colab) with `uv export --no-hashes -o requirements.txt`.
+Dependencies live in `pyproject.toml`. After changing them, regenerate `requirements.txt` (used on Colab/Kaggle) with `uv export --no-hashes -o requirements.txt`.

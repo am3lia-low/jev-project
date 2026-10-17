@@ -1,0 +1,55 @@
+model,levels,dataset,n,right_only_first,right_only_second,p_value
+Jev,0 vs 1,hs,400,2,5,0.4531
+Jev,0 vs 1,arce,400,0,1,1.0000
+Jev,0 vs 1,arcc,400,0,3,0.2500
+Jev,0 vs 1,csqa,400,6,6,1.0000
+Jev,0 vs 1,swag,400,12,10,0.8318
+Jev,0 vs 1,all,2000,20,25,0.5515
+Qwen3.8-27B,0 vs 1,hs,400,9,9,1.0000
+Qwen3.8-27B,0 vs 1,arce,400,0,1,1.0000
+Qwen3.8-27B,0 vs 1,arcc,400,5,3,0.7266
+Qwen3.8-27B,0 vs 1,csqa,400,16,8,0.1516
+Qwen3.8-27B,0 vs 1,swag,400,17,10,0.2478
+Qwen3.8-27B,0 vs 1,all,2000,47,31,0.0888
+Gemma-4-26B-A4B,0 vs 1,hs,400,27,20,0.3817
+Gemma-4-26B-A4B,0 vs 1,arce,400,1,1,1.0000
+Gemma-4-26B-A4B,0 vs 1,arcc,400,7,5,0.7744
+Gemma-4-26B-A4B,0 vs 1,csqa,400,17,17,1.0000
+Gemma-4-26B-A4B,0 vs 1,swag,400,28,20,0.3123
+Gemma-4-26B-A4B,0 vs 1,all,2000,80,63,0.1807
+BERT-base,0 vs 1,hs,400,0,0,1.0000
+BERT-base,0 vs 1,arce,400,0,0,1.0000
+BERT-base,0 vs 1,arcc,400,0,0,1.0000
+BERT-base,0 vs 1,csqa,400,0,0,1.0000
+BERT-base,0 vs 1,swag,400,0,1,1.0000
+BERT-base,0 vs 1,all,2000,0,1,1.0000
+BERT-base,1 vs 2,hs,400,30,46,0.0846
+BERT-base,1 vs 2,arce,400,54,34,0.0422
+BERT-base,1 vs 2,arcc,400,36,46,0.3203
+BERT-base,1 vs 2,csqa,400,64,34,0.0032
+BERT-base,1 vs 2,swag,400,49,18,0.0002
+BERT-base,1 vs 2,all,2000,233,178,0.0077
+BERT-base,0 vs 2,hs,400,30,46,0.0846
+BERT-base,0 vs 2,arce,400,54,34,0.0422
+BERT-base,0 vs 2,arcc,400,36,46,0.3203
+BERT-base,0 vs 2,csqa,400,64,34,0.0032
+BERT-base,0 vs 2,swag,400,49,19,0.0004
+BERT-base,0 vs 2,all,2000,233,179,0.0089
+BERT-base untrained,0 vs 1,hs,400,2,1,1.0000
+BERT-base untrained,0 vs 1,arce,400,0,0,1.0000
+BERT-base untrained,0 vs 1,arcc,400,0,1,1.0000
+BERT-base untrained,0 vs 1,csqa,400,0,0,1.0000
+BERT-base untrained,0 vs 1,swag,400,1,1,1.0000
+BERT-base untrained,0 vs 1,all,2000,3,3,1.0000
+BERT-base untrained,1 vs 2,hs,400,29,47,0.0505
+BERT-base untrained,1 vs 2,arce,400,50,63,0.2589
+BERT-base untrained,1 vs 2,arcc,400,35,52,0.0857
+BERT-base untrained,1 vs 2,csqa,400,54,55,1.0000
+BERT-base untrained,1 vs 2,swag,400,30,69,0.0001
+BERT-base untrained,1 vs 2,all,2000,198,286,0.0001
+BERT-base untrained,0 vs 2,hs,400,30,47,0.0675
+BERT-base untrained,0 vs 2,arce,400,50,63,0.2589
+BERT-base untrained,0 vs 2,arcc,400,34,52,0.0662
+BERT-base untrained,0 vs 2,csqa,400,54,55,1.0000
+BERT-base untrained,0 vs 2,swag,400,30,69,0.0001
+BERT-base untrained,0 vs 2,all,2000,198,286,0.0001

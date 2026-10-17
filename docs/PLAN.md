@@ -60,7 +60,7 @@ flowchart TD
     end
 
     %% ---------- Sampling (scripted) ----------
-    SRC --> SAMPLE["02_sample.py (API laptop)<br/>sample · split by question · stable IDs<br/>labels to A-E · dedupe SWAG vs HellaSwag<br/>store original + balanced-shuffle order"]
+    SRC --> SAMPLE["02_sample.py (API laptop)<br/>sample · split by question · stable IDs<br/>labels to A-E · dedupe SWAG vs HellaSwag<br/>drop duplicate-option items + test stems in train/val<br/>store original + balanced-shuffle order"]
     SAMPLE --> TRV["Train 1,100 + Val 200 per dataset<br/>5,500 + 1,000 in total"]
     SAMPLE --> TEST["Test 400 per dataset<br/>2,000 in total"]
 
@@ -69,20 +69,20 @@ flowchart TD
     TEST --> L1["Level 1<br/>original wording, balanced shuffle"]
 
     %% ---------- Synthetic: paraphrases ----------
-    TRV --> PARA["SYNTHETIC: 03_paraphrase.py (API laptop)<br/>cheap OpenRouter LLM, chosen by pilot<br/>not the same family as any LLM baseline<br/>rephrase question + options, reshuffle"]
+    TRV --> PARA["SYNTHETIC: 03_paraphrase.py (API laptop)<br/>openai/gpt-6-luna, chosen by 30-item pilot<br/>not the same family as any LLM baseline<br/>rephrase question + options, reshuffle"]
     TEST --> PARA
     PARA --> VPARA["04_validate.py<br/>auto: answer kept, option count, text changed<br/>manual: 50 items, meaning + difficulty rating"]
     VPARA --> L2["Level 2<br/>paraphrased + shuffled<br/>2,000"]
     VPARA --> TRAINSET["BERT training set<br/>originals + paraphrases<br/>train 11,000 · val 2,000"]
 
     %% ---------- Synthetic: brand-new questions ----------
-    GEN["SYNTHETIC: 05_generate_new.py (API laptop)<br/>Claude Sonnet 5.5 drafts new questions<br/>in each paper dataset's style"] --> HNEW["Human check<br/>answer correct · exactly one right option<br/>not a near-copy · light rewording to match style"]
+    GEN["SYNTHETIC: 05_generate_new.py (API laptop)<br/>Claude Sonnet 5.5 drafts new questions<br/>in each paper dataset's style<br/>near-copy screen: similarity ≥ 0.75 replaced,<br/>0.6-0.75 flagged for review"] --> HNEW["Human check<br/>answer correct · exactly one right option<br/>not a near-copy · light rewording to match style"]
     HNEW --> L3["Level 3<br/>200 brand-new<br/>50 x 4 paper datasets"]
 
     %% ---------- Synthetic: memorisation quiz ----------
     TEST --> QSEL["Quiz benchmark items<br/>400 = 100 x 4 paper datasets<br/>Level 0 wording"]
     L3 --> QCTRL["Quiz control items<br/>100 = 25 x 4, taken from Level 3"]
-    QSEL --> SWAP["SYNTHETIC: 06a_swap.py (API laptop)<br/>3 synonym-swap versions per item<br/>word-level only, same structure + answer"]
+    QSEL --> SWAP["SYNTHETIC: 06a_swap.py (API laptop)<br/>openai/gpt-6-luna<br/>3 synonym-swap versions per item<br/>word-level only, same structure + answer"]
     QCTRL --> SWAP
     SWAP --> VSWAP["06b_validate_swaps.py<br/>auto: all distinct, word count within 2,<br/>word-level edits only · manual: 30 items"]
     VSWAP --> QUIZ["Quiz, 500 items<br/>A-D = original + 3 swaps, position balanced<br/>E = none of the provided options"]
@@ -90,12 +90,14 @@ flowchart TD
     %% ---------- Models ----------
     subgraph MODELS["Models"]
         BERTU["Untrained BERT-base<br/>chance floor"]
-        BERTFT["Fine-tuned bert-base-uncased<br/>5 seeds (Colab T4)"]
-        OPT["Optional: BERT-large 1 seed ·<br/>RoBERTa-base · RACE pre-training"]
+        BERTFT["Fine-tuned bert-base-uncased<br/>5 seeds (Kaggle T4; no Colab GPU)"]
+        OPT["Optional: BERT-large 1 seed ·<br/>RoBERTa-base · RACE pre-training ·<br/>originals-only ablation (done)"]
         JEV["Jev typesafe/jev-1.13<br/>(API laptop)"]
         LLM["LLM baselines: Qwen3.8-27B,<br/>Gemma-4-26B-A4B (API laptop)"]
     end
     TRAINSET --> BERTFT
+    BERTFT --> VALID["BERT above-chance rule<br/>val originals only<br/>CI low > chance + 10 pts, per dataset"]
+    JEV --> REP["Jev checks before the levels<br/>8a sanity: Level 0 vs paper CI<br/>8b repeatability: 200 Qs x 3<br/>~100% agree → single runs"]
     TRAINSET -.-> OPT
 
     L0 --> MODELS
@@ -111,6 +113,7 @@ flowchart TD
     JEV --> R3["Quiz: % original picked vs 25%<br/>benchmark items vs control items"]
     LLM --> R3
     R1 --> R4["Level 3 accuracy<br/>vs Level 0"]
+    VALID --> R2
     R2 --> FINAL["Memorisation verdict<br/>ladder + quiz + Level 3"]
     R3 --> FINAL
     R4 --> FINAL
@@ -123,7 +126,7 @@ flowchart TD
     classDef result fill:#ede9fe,stroke:#7c3aed,color:#4c1d95
     class HS,AE,AC,CQ,SW human
     class PARA,GEN,SWAP synth
-    class SAMPLE,TRV,TEST,L0,L1,L2,L3,TRAINSET,VPARA,HNEW,QSEL,QCTRL,VSWAP,QUIZ script
+    class SAMPLE,TRV,TEST,L0,L1,L2,L3,TRAINSET,VPARA,HNEW,QSEL,QCTRL,VSWAP,QUIZ,VALID,REP script
     class BERTU,BERTFT,OPT,JEV,LLM model
     class R1,R2,R3,R4,FINAL result
 ```
@@ -197,7 +200,7 @@ Three LLM-generated datasets. All scripts run on the API laptop, are resumable a
 | *Optional:* `bert-large-uncased`, 1 seed | As A5 | Only if BERT-base is weak; the model HellaSwag was filtered against |
 | *Optional:* `roberta-base` | As A5 | Stronger encoder for the accuracy comparison only (see below) |
 
-- **Why `bert-base-uncased`:** it is "BERT" as commonly understood, 5 seeds fit comfortably in free Colab (T4, 16GB; roughly 15–30 GPU hours/week, not guaranteed), and it is the standard reference point. BERT-large (340M) fits a T4 with fp16, a small batch (~4) and gradient accumulation, but 5 seeds may exceed free Colab limits.
+- **Why `bert-base-uncased`:** it is "BERT" as commonly understood, 5 seeds fit comfortably on a free T4 (16GB; Colab gives roughly 15–30 GPU hours/week, not guaranteed; Kaggle ~30), and it is the standard reference point. BERT-large (340M) fits a T4 with fp16, a small batch (~4) and gradient accumulation, but 5 seeds may exceed free-tier limits.
 - **Why RoBERTa is not the control:** RoBERTa's pre-training data includes CC-News (crawled Sep 2016–Feb 2019) and OpenWebText ([RoBERTa paper](https://arxiv.org/pdf/1907.11692)), a window in which ARC, SWAG and CommonsenseQA were already public. It may have seen benchmark text, so it is a less clean "never saw the test questions" control than BERT (BooksCorpus + Wikipedia). It is much stronger (RoBERTa-large: 85.2% HellaSwag leaderboard, 83.2% RACE), so it is worth adding as an optional accuracy baseline.
 - **BART-MNLI: cut.** NLI framing fits MCQ poorly and zero-shot NLI models tend towards chance on commonsense tasks.
 
@@ -208,8 +211,8 @@ Three LLM-generated datasets. All scripts run on the API laptop, are resumable a
 - **5 random seeds**; report mean ± SD. BERT fine-tuning on small datasets varies a lot between seeds ([Dodge et al. 2020](https://arxiv.org/pdf/2002.06305), [Zhang et al. 2021](https://arxiv.org/pdf/2006.05987)).
 - **Above-chance rule** (per dataset, on val): BERT counts as a valid difficulty control only if the lower bound of its val accuracy 95% CI is ≥ chance + 10 points. Datasets that fail are marked "BERT control uninformative". Computed on the original wording only (200 per dataset): a question and its paraphrase are near-duplicates, so counting both would make the CI look narrower than it is (decided 2026-10-09).
 - **Fallbacks if BERT is near chance (e.g. ARC-Challenge):** RACE pre-training first (RACE: ~98k exam MCQs, [Lai et al. 2017](https://aclanthology.org/D17-1082.pdf); BERT-base reached ~44% on ARC-Challenge this way, [intersun/ARC-Challenge](https://github.com/intersun/ARC-Challenge)), and/or BERT-large with 1 seed.
-- Optional ablations (cheap on Colab): train on original only; train on paraphrased only.
-- Hardware: Google Colab (free T4). Neither local laptop has an NVIDIA GPU.
+- Optional ablations (cheap on the free T4): train on original only (done 2026-10-15, `results/bert_original_only/`); train on paraphrased only.
+- Hardware: free T4 on Kaggle (planned for Colab, but no Colab GPU was available; the notebook runs on either). Neither local laptop has an NVIDIA GPU. Details in [`results/bert_summary.md`](../01-jev-benchmarks/results/bert_summary.md).
 - Training-set-size curves: **on hold**.
 
 ### A6. Test sets and the memorisation ladder
@@ -278,13 +281,13 @@ Comparisons:
 
 1. [x] Repo setup (this plan, project structure, dependencies)
 2. [x] `02_sample.py` — download 5 datasets, dedupe SWAG vs HellaSwag, sample, split, normalise labels, store original + shuffled orders, assign IDs (run 2026-10-08)
-3. [ ] `03_paraphrase.py` — pilot 2 models on 30 questions, choose (done 2026-10-14: gpt-6-luna), full run (API laptop)
-4. [ ] `04_validate.py` — automatic checks + manual 50
+3. [x] `03_paraphrase.py` — pilot 2 models on 30 questions, choose (2026-10-14: gpt-6-luna), full run (2026-10-16: 8,500/8,500, $0.79) (API laptop)
+4. [ ] `04_validate.py` — automatic checks + manual 50 (automatic checks done 2026-10-16; manual `paraphrase_50.csv` left)
 5. [x] `05_generate_new.py` — 400 drafts, 200 Level 3 questions kept after the human check (API laptop)
-6. [ ] `06a_swap.py` + `06b_validate_swaps.py` — quiz versions for 400 benchmark + 100 control items (API laptop); `06c_build_quiz.py` — assemble the 500-item quiz
-7. [ ] `07a_build_bert_data.py` — originals + paraphrases for Colab; `notebooks/07b_bert_colab.ipynb` — untrained BERT; fine-tune BERT-base (5 seeds); above-chance rule; evaluate Levels 0–3; optional fallbacks (so far: built with `--originals-only` for the Colab smoke test, which has not run yet)
-8. [ ] `08_run_jev.py` (API laptop): 8a sanity check · 8b repeatability · 8c Levels 0–3 · 8d quiz (8a done 2026-10-09: Level 0 within the paper's CI on all 4 paper datasets)
-9. [ ] `09_run_llm.py` (API laptop): LLM baselines, Levels 0–3 + quiz (so far: Qwen Level 0 as a smoke test)
+6. [ ] `06a_swap.py` + `06b_validate_swaps.py` — quiz versions for 400 benchmark + 100 control items (API laptop); `06c_build_quiz.py` — assemble the 500-item quiz (all run 2026-10-16/17; manual `swaps_30.csv` left)
+7. [x] `07a_build_bert_data.py` — originals + paraphrases for the notebook; `notebooks/07b_bert_colab.ipynb` — untrained BERT; fine-tune BERT-base (5 seeds); above-chance rule; evaluate Levels 0–3; optional fallbacks (run on Kaggle: smoke test and originals-only ablation 2026-10-15, main run with paraphrases 2026-10-17; fallbacks not needed yet)
+8. [ ] `08_run_jev.py` (API laptop): 8a sanity check · 8b repeatability · 8c Levels 0–3 · 8d quiz (8a done 2026-10-09: Level 0 within the paper's CI on all 4 paper datasets; 8b done 2026-10-17: 99.5% agreement, single runs; 8c Levels 0, 1, 3 done 2026-10-17, Level 2 waits for `paraphrase_50.csv` and the memorisation threshold; 8d waits for `swaps_30.csv`)
+9. [ ] `09_run_llm.py` (API laptop): LLM baselines, Levels 0–3 + quiz (Levels 0, 1, 3 done for both 2026-10-17; Level 2 and quiz wait on the same gates as 08)
 10. [ ] `10_analyse.py` — tables, plots, McNemar, log-odds comparison, quiz scoring, verdict
 
 Script files are named by their step number above (`06a`, `06b`, … when a step has several), so the folder lists them in run order.
@@ -344,7 +347,7 @@ Two conditions per benchmark: **no persona** (actual ability) and **"pretend to 
 |---|---|---|---|
 | Work laptop | None (AMD integrated) | Blocked by network filter | Code, sampling, validation, analysis |
 | API laptop | None | Yes | Paraphrasing, swaps, new questions, Jev, LLM calls |
-| Google Colab | T4 (free tier) | — | BERT fine-tuning and evaluation |
+| Kaggle (planned: Google Colab) | T4 (free tier) | — | BERT fine-tuning and evaluation; no Colab GPU was available |
 
 - Python ≥ 3.12, managed with `uv`.
 - API keys via environment variables (`OPENROUTER_API_KEY`), never committed.

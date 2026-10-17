@@ -5,7 +5,7 @@ what is missing, so it can be run at any stage. A response set is one
 (condition, variant, run): 120 answers. Sets with a failed call are left out
 of the scores and alpha, and counted.
 
-Writes results/tables/bigfive_*.csv and results/bigfive_summary.md:
+Writes results/tables/bigfive_*.csv, results/bigfive_summary.md
     bigfive_scores        domain scores (1-5) per response set
     bigfive_reliability   alpha per domain, pooled over every complete set of
                           a model (all conditions; see helpers/reliability.py),
@@ -16,6 +16,10 @@ Writes results/tables/bigfive_*.csv and results/bigfive_summary.md:
                           for high, low and the baseline, high - low with a
                           bootstrap CI over the trait's 24 items, and the
                           largest off-target high - low shift
+    bigfive_shift_matrix  high - low on every measured domain, per persona
+                          trait x placement (the diagonal is the target)
+
+and results/figures/bigfive_shift_matrix.png (the shift matrix as heatmaps).
 
 Run from this folder:
     python 02_analyse_bigfive.py
@@ -23,11 +27,16 @@ Run from this folder:
 
 from collections import Counter
 
+import matplotlib
+
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+from matplotlib.colors import LinearSegmentedColormap
 
 from helpers.bigfive import read_records
-from helpers.config import BIGFIVE_SUMMARY_PATH, PLACEMENTS, RAW_RESULTS_DIR, TABLES_DIR
+from helpers.config import BIGFIVE_SUMMARY_PATH, FIGURES_DIR, PLACEMENTS, RAW_RESULTS_DIR, TABLES_DIR
 from helpers.ipip import DOMAINS, SCALE_MAX, SCALE_MIN, domain_scores, keyed_score, load_items
 from helpers.reliability import ALPHA_THRESHOLD, acquiescence, alpha_per_domain
 from jev_common import stats
@@ -38,6 +47,9 @@ ITEMS = load_items()
 ITEM_BY_ID = {item.id: item for item in ITEMS}
 SET_KEY = ["model", "condition", "variant", "run"]
 MODEL_ORDER = [JEV_MODEL, *LLM_BASELINE_MODELS]
+INK, MUTED = "#0b0b0b", "#52514e"
+# Diverging blue <-> red with a neutral grey midpoint (validated default palette).
+SHIFT_CMAP = LinearSegmentedColormap.from_list("shift", ["#184f95", "#6da7ec", "#f0efec", "#ee8a89", "#b8302f"])
 
 
 # ---------------------------------------------------------------------------
@@ -159,6 +171,71 @@ def shifts_table(df: pd.DataFrame) -> pd.DataFrame:
     return pd.DataFrame(rows)
 
 
+def shift_matrix_table(df: pd.DataFrame) -> pd.DataFrame:
+    """High - low persona shift on every measured domain (keyed scores, 1-5 scale)."""
+    rows = []
+    for model in sorted(df["model"].unique(), key=_model_rank):
+        for placement in PLACEMENTS:
+            for persona in DOMAINS:
+                high, low = f"{persona}-high-{placement}", f"{persona}-low-{placement}"
+                for measured in DOMAINS:
+                    hi, lo = _item_means(df, model, high, measured), _item_means(df, model, low, measured)
+                    if hi.empty or lo.empty:
+                        continue
+                    rows.append({"model": model, "placement": placement, "persona_domain": persona,
+                                 "measured_domain": measured, "shift": hi.mean() - lo.mean()})
+    return pd.DataFrame(rows)
+
+
+def figure_shift_matrix(matrix: pd.DataFrame, path) -> None:
+    """One heatmap per model x placement: rows = persona trait, columns = measured trait."""
+    models = [m for m in MODEL_ORDER if m in set(matrix["model"])]
+    placements = [p for p in PLACEMENTS if p in set(matrix["placement"])]
+    domains = list(DOMAINS)
+    fig, axes = plt.subplots(len(placements), len(models), figsize=(3.4 * len(models) + 0.8, 3.3 * len(placements) + 0.9),
+                             squeeze=False, constrained_layout=True)
+    limit = SCALE_MAX - SCALE_MIN
+    image = None
+    for r, placement in enumerate(placements):
+        for c, model in enumerate(models):
+            ax = axes[r][c]
+            sub = matrix[(matrix["model"] == model) & (matrix["placement"] == placement)]
+            grid = sub.pivot(index="persona_domain", columns="measured_domain", values="shift").reindex(
+                index=domains, columns=domains)
+            image = ax.imshow(grid.to_numpy(), cmap=SHIFT_CMAP, vmin=-limit, vmax=limit)
+            for i in range(len(domains)):
+                for j in range(len(domains)):
+                    value = grid.iat[i, j]
+                    if np.isnan(value):
+                        continue
+                    ax.text(j, i, f"{value:+.1f}", ha="center", va="center", fontsize=9,
+                            color="#ffffff" if abs(value) >= 2.5 else INK,
+                            fontweight="bold" if i == j else "normal")
+            ax.set_xticks(range(len(domains)), domains, fontsize=9, color=MUTED)
+            ax.set_yticks(range(len(domains)), domains, fontsize=9, color=MUTED)
+            ax.tick_params(length=0)
+            for spine in ax.spines.values():
+                spine.set_visible(False)
+            ax.set_xticks(np.arange(-0.5, len(domains)), minor=True)
+            ax.set_yticks(np.arange(-0.5, len(domains)), minor=True)
+            ax.grid(which="minor", color="#fcfcfb", linewidth=2)
+            ax.tick_params(which="minor", length=0)
+            if r == 0:
+                ax.set_title(NAMES.get(model, model), fontsize=11, color=INK)
+            if c == 0:
+                ax.set_ylabel(f"Persona in {placement}\npersona trait (high - low)", fontsize=9, color=MUTED)
+            if r == len(placements) - 1:
+                ax.set_xlabel("measured trait", fontsize=9, color=MUTED)
+    bar = fig.colorbar(image, ax=axes, shrink=0.6, pad=0.02)
+    bar.set_label("high - low persona shift (1-5 scale)", fontsize=9, color=MUTED)
+    bar.ax.tick_params(labelsize=8, colors=MUTED)
+    bar.outline.set_visible(False)
+    fig.suptitle("Big Five persona shifts: diagonal = target trait, off-diagonal = side effects",
+                 fontsize=12, color=INK)
+    fig.savefig(path, dpi=160, facecolor="#fcfcfb")
+    plt.close(fig)
+
+
 # ---------------------------------------------------------------------------
 # Summary
 # ---------------------------------------------------------------------------
@@ -218,11 +295,15 @@ def main() -> None:
     reliability = reliability_table(sets, incomplete)
     noise = noise_table(df, scores) if not scores.empty else pd.DataFrame()
     shifts = shifts_table(df)
+    matrix = shift_matrix_table(df)
     for name, table in (("bigfive_scores", scores), ("bigfive_reliability", reliability),
-                        ("bigfive_noise", noise), ("bigfive_shifts", shifts)):
+                        ("bigfive_noise", noise), ("bigfive_shifts", shifts), ("bigfive_shift_matrix", matrix)):
         save(name, table)
+    if not matrix.empty:
+        FIGURES_DIR.mkdir(parents=True, exist_ok=True)
+        figure_shift_matrix(matrix, FIGURES_DIR / "bigfive_shift_matrix.png")
     BIGFIVE_SUMMARY_PATH.write_text(summary(reliability, noise, shifts), encoding="utf-8")
-    print(f"Wrote {TABLES_DIR}, {BIGFIVE_SUMMARY_PATH}")
+    print(f"Wrote {TABLES_DIR}, {FIGURES_DIR}, {BIGFIVE_SUMMARY_PATH}")
 
 
 if __name__ == "__main__":

@@ -16,11 +16,11 @@ Do not spend money beyond the tiny test calls listed without asking the user, an
 2. **Request fields:** provider routing (`order`, `allow_fallbacks`, `require_parameters`) matches the docs. Reasoning off is documented as `{"effort": "none"}`; `{"enabled": false}` is not documented for chat completions. Both gave 0 reasoning tokens live; switched to `effort: "none"`.
 3. **Jev `usage.cost`:** present (`usage: {input_tokens, output_tokens, cost}`), plus `provider: "TypeSafe"`. Jev rounds probabilities to 2 decimals, so `helpers/evaluation.py` now breaks ties with Jev's own `choice`. 1,745 of 2,000 Level 0 answers have some letter at exactly 0. Bear this in mind when reading ECE.
 4. **Smoke test:** `08_run_jev.py sanity` 2,000/2,000, 0 failed, $0.033, every paper dataset OK (hs 94.0, arce 99.2, arcc 97.5, csqa 88.5; swag 85.0). `09_run_llm.py levels --models qwen/qwen3.8-27b --levels 0`: 2,000/2,000, 0 failed, $0.021, all served by DekaLLM. 6 rows had a letter outside the top 20 and 4 rows tied (falls back to the earlier letter).
-5. Not done (Colab). The notebook now has `SMOKE_TEST = True` for the small first run (1 seed, 2,000 train rows, 1 epoch, into `results_smoke/`). `data/bert/` is built with `--originals-only`; rebuild it without the flag after 04.
+5. Done 2026-10-15 on **Kaggle** (no Colab GPU was available); see [`results/bert_summary.md`](../01-jev-benchmarks/results/bert_summary.md). The notebook has `SMOKE_TEST = True` for the small first run (1 seed, 2,000 train rows, 1 epoch, into `results_smoke/`). `data/bert/` is built with `--originals-only`; rebuild it without the flag after 04.
 
-## On hold: written on the work laptop, not verifiable there (2026-10-08). Items 1-4 done 2026-10-09, see above
+## On hold: written on the work laptop, not verifiable there (2026-10-08). Items 1-4 done 2026-10-09, item 5 2026-10-15, see above
 
-Kept as the original brief. Only item 5 is still open.
+Kept as the original brief. All items are done.
 
 | # | What | Where | How to check |
 |---|---|---|---|
@@ -28,13 +28,13 @@ Kept as the original brief. Only item 5 is still open.
 | 2 | **Request fields written from memory:** `"reasoning": {"enabled": false}` and provider routing `{"order": [...], "allow_fallbacks": false, "require_parameters": true}`. | `LLM_EVAL_PARAMS` / `llm_eval_params` in `src/jev_common/models.py` | Compare with the request the live check sent (cache file `request` field) and the OpenRouter docs (reasoning tokens, provider routing). |
 | 3 | **Does a Jev decisions response carry `usage.cost`?** `CallResult.cost_usd` reads it; if absent, cost per 1,000 questions shows $0. | `src/jev_common/openrouter.py` | Look at one cached Jev response. |
 | 4 | **Smoke test 08 and 09 on Level 0** before the other runs. There is no "first N questions" option and a run stopped by `--max-cost` writes nothing, so run `08_run_jev.py sanity` (~$0.01) and `09_run_llm.py levels --models qwen/qwen3.8-27b --levels 0` (~$0.2); check `results/raw/<model>/level0.jsonl` has probabilities, few or no errors, and sanity says OK. The calls are cached, so later full runs reuse them. | `08_run_jev.py`, `09_run_llm.py` | ~$0.25 |
-| 5 | **First run of the Colab notebook** (needs a GPU and the HuggingFace model download). | `notebooks/07b_bert_colab.ipynb` | Run on Colab T4 with a small data set first; check the truncation count, loss falls, val accuracy above chance. |
+| 5 | **First run of the BERT notebook** (planned for Colab, run on Kaggle) (needs a GPU and the HuggingFace model download). | `notebooks/07b_bert_colab.ipynb` | Run on Colab T4 with a small data set first; check the truncation count, loss falls, val accuracy above chance. |
 
 ## Run order (both reviews done 2026-10-14; `PARAPHRASE_MODEL` = gpt-6-luna)
 
-0. Item 5 above: Colab smoke test of the notebook.
-1. `03_paraphrase.py` → `04_validate.py` (retry loop; fill `paraphrase_50.csv`) → `06a_swap.py` → `06b_validate_swaps.py` (retry loop; fill `swaps_30.csv`) → `06c_build_quiz.py`. About $0.90.
-2. `07a_build_bert_data.py` (without `--originals-only`), copy `data/bert/` to `MyDrive/jev-bert/data/`, run the notebook on Colab, download results into `results/bert/`.
-3. `08_run_jev.py sanity` (cached, free) → `repeat` → `levels` → `quiz`. Under $0.10.
-4. `09_run_llm.py levels` → `quiz`. About $1.
+0. Item 5 above: smoke test of the notebook. Done 2026-10-15 (Kaggle).
+1. `03_paraphrase.py` → `04_validate.py` (retry loop; fill `paraphrase_50.csv`) → `06a_swap.py` → `06b_validate_swaps.py` (retry loop; fill `swaps_30.csv`) → `06c_build_quiz.py`. About $0.90. All run 2026-10-16/17; the two review sheets are left.
+2. `07a_build_bert_data.py` (without `--originals-only`), upload `data/bert/` as the Kaggle dataset `shiyalow/jev-bert-data`, run the notebook on Kaggle, download results into `results/bert/`. Done 2026-10-17.
+3. `08_run_jev.py sanity` (cached, free) → `repeat` → `levels` → `quiz`. Under $0.10. Done 2026-10-17 up to Levels 0, 1, 3; Level 2 and quiz left.
+4. `09_run_llm.py levels` → `quiz`. About $1. Levels 0, 1, 3 done for both 2026-10-17; Level 2 and quiz left.
 5. `10_analyse.py` (any laptop).

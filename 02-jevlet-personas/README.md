@@ -45,7 +45,9 @@ Shared code (pinned model IDs, OpenRouter client, cache, parallel runner, stats)
 ├── results/                # committed
 │   ├── raw/<model slug>/bigfive/<condition>.jsonl   # 01
 │   ├── tables/bigfive_*.csv                         # 02
-│   └── bigfive_summary.md                           # 02
+│   ├── figures/bigfive_shift_matrix.png             # 02
+│   ├── bigfive_summary.md                           # 02 (rewritten each run)
+│   └── bigfive_findings.md                          # written by hand
 ├── cache/                  # not committed
 └── logs/                   # not committed
 ```
@@ -74,4 +76,4 @@ python 02_analyse_bigfive.py         # any laptop
 
 - Helpers, `01_run_bigfive.py` and `02_analyse_bigfive.py` written (2026-10-15). Dry-run end to end with a fake client: the analysis recovers planted persona shifts, alpha and Jev's noise.
 - `check` run live 2026-10-15: Jev's `score` answer is a probability-weighted 0-4 position, as assumed. About $0.50 for the full B1 run.
-- `markers.json` verified 2026-10-15 (all 100 Goldberg unipolar markers). `baseline` and `personas` run 2026-10-15 ($0.49 in total); results in `results/bigfive_summary.md`.
+- `markers.json` verified 2026-10-15 (all 100 Goldberg unipolar markers). `baseline` and `personas` run 2026-10-15 ($0.49 in total); findings in [`results/bigfive_findings.md`](results/bigfive_findings.md).

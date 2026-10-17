@@ -10,7 +10,7 @@ The full design is in [`docs/PLAN.md` → Part A](../docs/PLAN.md#part-a--jev-be
 |---|---|
 | Work laptop | Writing all code; validation and analysis on data pulled from git |
 | API laptop | Dataset downloads (`02_sample.py`) and anything that calls OpenRouter (paraphrases, new questions, swaps, Jev, LLM baselines) |
-| Google Colab (T4) | BERT fine-tuning and evaluation (`notebooks/07b_bert_colab.ipynb`) |
+| Kaggle (T4; planned: Colab) | BERT fine-tuning and evaluation (`notebooks/07b_bert_colab.ipynb` runs on either) |
 
 Code that needs the API laptop is still written on the work laptop; it just gets run there. Results come back through git.
 
@@ -49,9 +49,9 @@ Scripts are numbered by their step in [A10](../docs/PLAN.md#a10-order-of-work) a
 ├── 06a_swap.py               # A3.3: 3 synonym swaps per quiz item         [API laptop]
 ├── 06b_validate_swaps.py     # A3.3: automatic checks + manual 30
 ├── 06c_build_quiz.py         # A7: original + 3 swaps, balanced positions, option E
-├── 07a_build_bert_data.py    # A5: originals + paraphrases for Colab
+├── 07a_build_bert_data.py    # A5: originals + paraphrases for the notebook
 ├── notebooks/
-│   └── 07b_bert_colab.ipynb  # A4-A5: untrained + fine-tuned BERT, Levels 0-3   [Colab]
+│   └── 07b_bert_colab.ipynb  # A4-A5: untrained + fine-tuned BERT, Levels 0-3   [Kaggle]
 ├── 08_run_jev.py             # A9: sanity check, repeatability, Levels 0-3, quiz   [API laptop]
 ├── 09_run_llm.py             # A9: LLM baselines, Levels 0-3 + quiz        [API laptop]
 ├── 10_analyse.py             # A8: tables, figures, McNemar, log-odds, quiz, verdict
@@ -77,7 +77,7 @@ Scripts are numbered by their step in [A10](../docs/PLAN.md#a10-order-of-work) a
 ├── results/                  # committed
 │   ├── raw/<author>__<model>/{level0,level1,level2,level3,quiz,repeat_1,repeat_2,repeat_3}.jsonl
 │   │                         # per question: answer, probabilities, latency, cost
-│   ├── bert/seed_<n>/        # downloaded from Colab
+│   ├── bert/seed_<n>/        # downloaded from Kaggle
 │   ├── tables/
 │   ├── figures/
 │   └── verdict.md
@@ -85,13 +85,14 @@ Scripts are numbered by their step in [A10](../docs/PLAN.md#a10-order-of-work) a
 └── logs/                     # not committed: API call logs
 ```
 
-Levels 0 and 1 are not separate files in `data/`: they are the original and shuffled orders of `data/sampled/<dataset>/test.jsonl`, built by `helpers/levels.py`. Only `07a` writes them out, into `data/bert/` for the Colab notebook.
+Levels 0 and 1 are not separate files in `data/`: they are the original and shuffled orders of `data/sampled/<dataset>/test.jsonl`, built by `helpers/levels.py`. Only `07a` writes them out, into `data/bert/` for the BERT notebook (uploaded to Kaggle as a dataset).
 
-## Status (2026-10-14)
+## Status (2026-10-17)
 
 - Helpers: all built and tested live. Build list: [`dev_notes/helpers-to-build.txt`](../dev_notes/helpers-to-build.txt).
 - `02_sample.py`: run 2026-10-08; `data/sampled/` holds the 8,500 sampled questions.
-- `03`-`06c` written and dry-run end to end. Both reviews done 2026-10-14: the paraphrase pilot (`pilot_30.csv`; gpt-6-luna chosen) and Level 3 (`new_questions.csv`; 200 kept in `data/new/reviewed.jsonl`). Next: the full `03` → `06c` run.
-- `07a` run with `--originals-only` for the Colab smoke test; the notebook has not been run on Colab yet.
-- `08_run_jev.py sanity` and `09_run_llm.py levels --models qwen/qwen3.8-27b --levels 0` run 2026-10-09 (Level 0 only); `10_analyse.py` run on those, so `results/tables/` and `results/figures/` cover Level 0 only and `verdict.md` has no signals yet.
+- `03`-`06c` written and dry-run end to end. Both reviews done 2026-10-14: the paraphrase pilot (`pilot_30.csv`; gpt-6-luna chosen) and Level 3 (`new_questions.csv`; 200 kept in `data/new/reviewed.jsonl`).
+- `03` + `04` full run 2026-10-15/16: all 8,500 paraphrases pass ($0.79). `06a`-`06c` run 2026-10-17: quiz of 500 items. Review sheets `paraphrase_50.csv` and `swaps_30.csv` written, not filled in yet.
+- `07a` rebuilt with paraphrases (train 11,000, val 2,000, Levels 0-3). The notebook runs on Kaggle (no Colab GPU was available): smoke test, originals-only ablation (`results/bert_original_only/`) and main run (`results/bert/`, 5 seeds + untrained) done. Details: [`results/bert_summary.md`](results/bert_summary.md).
+- `08` (sanity, repeat, Levels 0, 1, 3) and `09` (Levels 0, 1, 3, both LLMs) run 2026-10-17; `10_analyse.py` rerun. Level 2 and quiz runs wait for the two review sheets and the memorisation threshold.
 - Remaining work, in order: [`docs/api-laptop-checks.md` → Run order](../docs/api-laptop-checks.md).
