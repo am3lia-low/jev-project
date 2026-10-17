@@ -1,4 +1,4 @@
-﻿id,quiz_set,original,swap1,swap2,swap3,meaning_kept_all,none_sounds_off,notes
+id,quiz_set,original,swap1,swap2,swap3,meaning_kept_all,none_sounds_off,notes
 arcc-test-1024,benchmark,"Which best describes how the human circulatory and respiratory systems interact?
 a) The heart removes waste built up in the lungs.
 b) Oxygen enters the bloodstream directly from the nose.
@@ -15,7 +15,7 @@ d) The heart pumps air into the blood through the lungs.","Which best characteri
 a) The heart removes waste built up in the lungs.
 b) Oxygen enters the bloodstream directly from the nose.
 c) Oxygen is transferred to the bloodstream as blood moves by the lungs.
-d) The heart propels air into the blood through the lungs.",,,
+d) The heart propels air into the blood through the lungs.",yes,yes,
 csqa-val-0326,benchmark,"What room would you find many bookcases and is used for contemplation?
 a) study
 b) house
@@ -36,7 +36,7 @@ a) study
 b) house
 c) homw
 d) kitchen
-e) den",,,
+e) den",yes,yes,
 csqa-val-0574,benchmark,"The person tried to reduce his weight with a shrink ray, but he got it backwards and only did what?
 a) grow
 b) gain weight
@@ -57,7 +57,7 @@ a) grow
 b) gain weight
 c) make larger
 d) augment
-e) get bigger",,,
+e) get bigger",yes,yes,
 arce-test-0821,benchmark,"What is the most likely result of large-scale agricultural fertilization on aquatic systems?
 a) increased fish populations
 b) more biodiversity over time
@@ -74,7 +74,7 @@ d) reduced water levels","What is the most likely consequence of extensive farmi
 a) increased fish populations
 b) more biodiversity over time
 c) less oxygen available for fish
-d) reduced water levels",,,
+d) reduced water levels",yes,yes,
 arce-test-1160,benchmark,"Which of these best describes a tornado?
 a) A winter storm that produces frozen precipitation
 b) A rotating funnel-shaped cloud with strong winds and thunderstorms
@@ -91,7 +91,7 @@ d) A storm that develops over warm ocean water and has extremely strong winds","
 a) A winter storm that produces icy precipitation
 b) A revolving funnel-shaped cloud with strong winds and thunderstorms
 c) A severe weather condition with cold temperatures and blowing snow
-d) A storm that forms over warm sea water and has exceptionally strong winds",,,
+d) A storm that forms over warm sea water and has exceptionally strong winds",yes,yes,
 arcc-new-0078,control,"A heater is placed near the floor of a cold room. Warm air rises from the heater, and cooler air from across the room moves in to take its place. This circular movement of air is an example of heat transfer by
 a) conduction
 b) convection
@@ -108,7 +108,7 @@ d) evaporation","A heater is placed near the floor of a cold room. Warm air rise
 a) conduction
 b) convection
 c) radiation
-d) evaporation",,,
+d) evaporation",yes,yes,
 arce-test-1898,benchmark,"Which organelle converts glucose to energy for cellular work?
 a) nucleus
 b) mitochondrion
@@ -125,7 +125,7 @@ d) chloroplast","Which organelle converts glucose to power for cellular work?
 a) nucleus
 b) mitochondrion
 c) vacuole
-d) chloroplast",,,
+d) chloroplast",yes,no,didn't know dextrose was glucose. not sure if that's common
 arce-test-1627,benchmark,"The body is made up of many systems that interact with one another. For example, the skeletal system and the muscular system work together to help the body move. Which system works with the respiratory system to distribute oxygen to the body?
 a) muscular system
 b) digestive system
@@ -142,7 +142,7 @@ d) circulatory system","The body is made up of many systems that interact with o
 a) muscular system
 b) digestive system
 c) lymphatic system
-d) circulatory system",,,
+d) circulatory system",yes,yes,
 arce-new-0044,control,"A student wants to make a bulb light up using a battery, a wire, and a bulb. What must be true for the bulb to light?
 a) The wire must be made of plastic.
 b) The battery must be placed far from the bulb.
@@ -159,7 +159,7 @@ d) The bulb must be kept in a dark room.","A learner hopes to make a bulb light 
 a) The wire must be made of plastic.
 b) The battery must be placed far from the bulb.
 c) The components must form a complete circuit.
-d) The bulb must be kept in an unlit room.",,,
+d) The bulb must be kept in an unlit room.",yes,yes,
 hs-val-2375,benchmark,"A green title page appears, with words showing that the video will be of a tenor saxophone player as well as the website to receive to lessons. A black male then appears with a green sweater and black hat playing the sax. the man
 a) bluffs on the drums and the video continues, at various points, to show individuals playing the instrument.
 b) continues to play and cheers, shakes hands with the man, throws a napkin, writes on the napkin and gives him a card.
@@ -176,7 +176,7 @@ d) jumps into a black and white video and temporarily stops playing, saying, "" 
 a) bluffs on the drums and the video continues, at various points, to show individuals playing the instrument.
 b) continues to play and cheers, shakes hands with the man, throws a napkin, writes on the napkin and hands him a card.
 c) then lays the instrument across his lap and starts talking about what he is doing.
-d) jumps into a black and white video and temporarily stops playing, saying, "" big calibers "".",,,
+d) jumps into a black and white video and temporarily stops playing, saying, "" big calibers "".",yes,yes,"why ""black male""?"
 csqa-val-0398,benchmark,"The bell rang, and the congregation began to what in to the church?
 a) run away
 b) wind instrument
@@ -197,7 +197,7 @@ a) run away
 b) wind instrument
 c) funnel
 d) blunderbuss
-e) associated with telephones",,,
+e) associated with telephones",no,no,"a gong, bell and chime are different items in this context"
 hs-new-0059,control,"A woman in a green jacket is standing next to a horse in a dirt arena. she
 a) lifts the horse's front hoof, scrapes out the dirt with a small metal pick, and then sets the hoof down gently.
 b) puts a saddle on her own back and the horse climbs onto a wooden stand.
@@ -214,7 +214,7 @@ d) spills a bucket of water over the saddle and rides it through the arena like 
 a) lifts the horse's front hoof, scrapes out the dirt with a small steel pick, and then lowers the hoof down gently.
 b) puts a saddle on her own back and the horse ascends onto a wooden stand.
 c) fastens the horse to a fence and begins to paint its hooves with yellow glue.
-d) pours a bucket of water over the saddle and rides it across the arena like a sledge.",,,
+d) pours a bucket of water over the saddle and rides it across the arena like a sledge.",yes,no,soil and dirt are different in this context
 arcc-test-0866,benchmark,"The ocean's surface is a more varied environment than its depths. Which two water-cycle processes cause the most variation in the ocean's surface salt concentration?
 a) transpiration and precipitation
 b) precipitation and evaporation
@@ -231,7 +231,7 @@ d) condensation and transpiration","The ocean's surface is a more variable setti
 a) transpiration and precipitation
 b) precipitation and evaporation
 c) evaporation and condensation
-d) condensation and transpiration",,,
+d) condensation and transpiration",yes,yes,
 arce-test-0885,benchmark,"A ball rolling on the ground is observed to slow down and stop. Based on Newton's first law of motion, what is the best conclusion?
 a) An object in motion eventually stops.
 b) The ball must have been going slightly uphill.
@@ -248,7 +248,7 @@ d) There must have been an external force acting on the ball.","A ball rolling o
 a) An object in motion eventually stops.
 b) The ball must have been going slightly uphill.
 c) The ball did not have sufficient mass to keep going.
-d) There must have been an outside force acting on the ball.",,,
+d) There must have been an outside force acting on the ball.",yes,yes,
 csqa-val-0697,benchmark,"If you have a large satchel with you when you fly you'll be asked to store it where?
 a) airport
 b) luggage compartment
@@ -269,7 +269,7 @@ a) airport
 b) baggage compartment
 c) with the pilot
 d) chamber
-e) clothing store",,,
+e) clothing store",yes,yes,
 hs-new-0077,control,"[header] How to bleed a radiator [title] Turn off your heating system and let the radiators cool completely. [step] Bleeding a hot radiator can release scalding water or steam. [title] Find the bleed valve at the top corner of the radiator.
 a) [step] Use the key to turn the valve a quarter turn counterclockwise while holding a cloth under it. You will hear air hissing out, and you should close the valve when water starts to drip.
 b) [step] Pull the valve off with a hammer and pour a glass of water into the hole. This will force the air to the bottom of the radiator.
@@ -286,7 +286,7 @@ d) [step] Tape the valve shut so no air can escape and then bleed the water from
 a) [step] Use the key to turn the valve a quarter turn counterclockwise while grasping a cloth under it. You will hear air hissing out, and you should close the valve when water starts to drip.
 b) [step] Pull the valve off with a hammer and pour a glass of water into the hole. This will compel the air to the bottom of the radiator.
 c) [title] Turn the heating system to its highest setting and open the valve completely. [step] Wait until the radiator is too hot to touch, then go to bed.
-d) [step] Tape the valve shut so no air can escape and then bleed the water from the pipes. If the radiator is cold at the bottom, add more air.",,,
+d) [step] Tape the valve shut so no air can escape and then bleed the water from the pipes. If the radiator is cold at the bottom, add more air.",yes,yes,
 arce-test-1677,benchmark,"As the distance between a magnet and a metal paper clip increases, the force of attraction between them
 a) decreases
 b) increases
@@ -299,7 +299,7 @@ b) increases
 c) remains the same","As the distance between a magnet and a metallic paper clip increases, the force of pull between them
 a) decreases
 b) increases
-c) remains the same",,,
+c) remains the same",yes,yes,
 hs-new-0039,control,"[header] How to wash a wool sweater by hand [title] Check the care label. [step] Look for the tag inside the sweater to make sure that hand washing is safe. Some wool items must be dry cleaned only. [title] Fill a basin with lukewarm water. [step] Add a small amount of mild detergent made for delicate fabrics and swish it around until it is evenly mixed.
 a) Pour boiling water into the basin and drop the sweater in for an hour. [substeps] Hot water helps wool keep its shape and size.
 b) Scrub the sweater against a brick until the stains come out. [title] Hang the sweater from a clothesline while it is still dripping wet.
@@ -316,7 +316,7 @@ d) Submerge the sweater and press it gently under the water for a few minutes wi
 a) Pour boiling water into the basin and drop the sweater in for an hour. [substeps] Hot water helps wool keep its shape and size.
 b) Scrub the sweater against a brick until the stains come out. [title] Hang the sweater from a clothesline while it is still dripping wet.
 c) Add a cup of bleach to the water so that the wool fibers will become soft. [title] Spin the sweater in the dryer on high heat.
-d) Submerge the sweater and press it gently under the water for a few minutes without twisting or rubbing it. [title] Rinse the sweater in clean water of the same temperature.",,,
+d) Submerge the sweater and press it gently under the water for a few minutes without twisting or rubbing it. [title] Rinse the sweater in clean water of the same temperature.",yes,yes,
 hs-new-0006,control,"A girl sits at a piano with sheet music in front of her. She places her fingers on the keys and begins to play a slow song. a woman beside her
 a) takes the piano apart and carries each key to the other side of the room.
 b) turns the pages of the music and nods along as the girl plays.
@@ -333,7 +333,7 @@ d) stands up on the bench and begins to dance on the girl's hands.","A girl sits
 a) takes the piano apart and carries each key to the other side of the room.
 b) turns the pages of the music and nods along as the girl plays.
 c) starts to play a trumpet through the lid of the piano and the girl hands her a sandwich.
-d) stands up on the bench and begins to dance on the girl's hands.",,,
+d) stands up on the bench and begins to dance on the girl's hands.",yes,no,lass has a connotation to it
 hs-val-3074,benchmark,"A field with many racing sail boats being rigged for a competition. a boy
 a) is shown seated with several close ups of dart board exhibits.
 b) stands with two playboys and hold a banner, tying a knot.
@@ -350,7 +350,7 @@ d) rides his boat in a racing row boat performing jumps and tricks in pool decks
 a) is shown seated with several close ups of dart board displays.
 b) stands with two playboys and hold a banner, tying a knot.
 c) rolls his sail boat to the water and starts sailing in a competition.
-d) rides his boat in a racing row boat doing jumps and stunts in pool decks during a contest.",,,
+d) rides his boat in a racing row boat doing jumps and stunts in pool decks during a contest.",yes,yes,
 hs-val-5162,benchmark,"[header] How to set up a pllc for a legal practice [title] Choose your state of incorporation. [step] For most people, this will be a simple decision, based on where you are licensed and where you live. But if you or any of your partners are admitted to the bar in multiple states, you may choose to incorporate somewhere else.
 a) The laws that govern your state will be different in each state. Unfortunately, you cannot know what you may also need to prove such a decision.
 b) Legal representation in the state of care will depend on which state you live in. [substeps] In ohio, for example, you can forego a professional legal representation for sole proprietorships.
@@ -367,7 +367,7 @@ d) Consult with the secretary of state's office in any state where you are eligi
 a) The laws that regulate your state will differ in each state. Unfortunately, you cannot know what you may also need to verify such a decision.
 b) Legal representation in the state of care will depend on which state you reside in. [substeps] In ohio, for example, you can dispense with a professional legal representation for sole proprietorships.
 c) That area may be a better climate if your clients have joint legal rights, which will help your clients avoid legal dispute in your practicing practice. [substeps] Although there are many different forms, most states require that you enroll with the secretary of state or.
-d) Verify with the secretary of state's office in any state where you are qualified. [substeps] You may want to base your decision on the ease of incorporating, or on the levies or taxes associated with operating a pllc in that state.",,,
+d) Verify with the secretary of state's office in any state where you are qualified. [substeps] You may want to base your decision on the ease of incorporating, or on the levies or taxes associated with operating a pllc in that state.",yes,yes,
 arcc-test-0959,benchmark,"During which stage of its life cycle does a butterfly spend the most time eating plant leaves?
 a) adult
 b) egg
@@ -384,7 +384,7 @@ d) pupa","During which stage of its life cycle does a butterfly spend the most t
 a) adult
 b) egg
 c) larva
-d) pupa",,,
+d) pupa",yes,yes,
 csqa-val-0277,benchmark,"The old style pop ups literally let you see the story when you did what?
 a) giggle
 b) visualize
@@ -405,7 +405,7 @@ a) giggle
 b) visualize
 c) open book
 d) reading
-e) go to movies",,,
+e) go to movies",yes,yes,
 hs-val-5234,benchmark,"[header] How to structure user friendly, search friendly urls [title] Kiss. [step] Keep it short and simple. Yes, this the first rule.
 a) Imagine if you type in a new post, but forget about the addressee activity. Try to use only a very specific text word, and under that, a caption of what you want to know.
 b) When the web user views the url it should convey the correct details like the page content idea, page hierarchy and more details. So remember to keep it short (so that it easy to remember), and simple (so that it is easy to locate).
@@ -422,7 +422,7 @@ d) But using "" i "" in this sentence is a sound rule, but make sure your body l
 a) Imagine if you type in a new post, but forget about the recipient activity. Try to use only a very particular text word, and under that, a caption of what you want to understand.
 b) When the web user views the url it should express the correct details like the page content idea, page hierarchy and more details. So remember to keep it short (so that it easy to recall), and simple (so that it is easy to find).
 c) False information in your search results will drive people off. If someone sees your name on a search engine, they will not be able to access that other name.
-d) But using "" i "" in this sentence is a good rule, but ensure your body language and signature style are clear and efficient in the eyes of everyone. [substeps] Write this sentence as if you're talking to a visually-impaired individual.",,,
+d) But using "" i "" in this sentence is a good rule, but ensure your body language and signature style are clear and efficient in the eyes of everyone. [substeps] Write this sentence as if you're talking to a visually-impaired individual.",no,no,KISS is an acronym for Keep It Short & Simple
 arcc-test-0661,benchmark,"In a completely cooperative relationship, each organism benefits equally. Which sequence lists these relationships in order of increasing cooperativeness?
 a) commensalism, mutualism, parasitism, predation
 b) parasitism, commensalism, predation, mutualism
@@ -439,7 +439,7 @@ d) mutualism, commensalism, parasitism, predation","In an entirely cooperative r
 a) commensalism, mutualism, parasitism, predation
 b) parasitism, commensalism, predation, mutualism
 c) predation, parasitism, commensalism, mutualism
-d) mutualism, commensalism, parasitism, predation",,,
+d) mutualism, commensalism, parasitism, predation",yes,yes,
 hs-val-2174,benchmark,"We see a man conducting an orchestra. We see a lady in a blue dress is playing in front of the other players. we
 a) see four men playing claires.
 b) see the conductor perform a solo.
@@ -456,7 +456,7 @@ d) watch the woman from the back, and we watch the other players.","We view an i
 a) view four men playing claires.
 b) view the conductor perform a solo.
 c) view the play completed and the man claps his hands.
-d) view the lady from the rear, and we view the other players.",,,
+d) view the lady from the rear, and we view the other players.",no,yes,gender of the man varies
 csqa-new-0023,control,"What do you do to a guitar before playing it so it sounds right?
 a) paint
 b) tune
@@ -477,7 +477,7 @@ a) paint
 b) tune
 c) bury
 d) wash
-e) weigh",,,
+e) weigh",yes,yes,
 hs-val-9630,benchmark,"[header] How to look good for a night out [title] Give yourself lots of time before you have to go. [title] Use a shampoo and conditioner made for your hair type, wash your hair well and leave your conditioner in for a few minutes, then wash out. [step] Towel dry your hair, comb through with a wide tooth comb.
 a) [title] Use a good conditioner made for your hair type, wash your hair well and leave your conditioner in for a few minutes, then wash out. [step] Towel dry your hair, comb through with a wide tooth comb.
 b) Apply the conditioner, then put in your favorite hairspray. [title] Find clothes in neutral colors such as pink, teal or brown.
@@ -494,7 +494,7 @@ d) If desired, pull it back into a messy bun without the comb. If not, gently co
 a) [title] Use a good conditioner suited for your hair type, wash your hair well and keep your conditioner in for a few minutes, then rinse out. [step] Towel dry your hair, comb through with a wide tooth comb.
 b) Apply the conditioner, then put in your preferred hairspray. [title] Find clothes in neutral colors such as pink, teal or brown.
 c) [title] Blow dry your hair, then use straighteners to make it straighter! [step] However, if you prefer loose curls (or your hair is naturally curly) use a diffuser with a curling balm. This will ensure that the curls are buoyant and full.
-d) If desired, pull it back into a messy bun without the comb. If not, gently comb through with a water-filled towel.",,,
+d) If desired, pull it back into a messy bun without the comb. If not, gently comb through with a water-filled towel.",yes,yes,
 csqa-val-0792,benchmark,"What rubber toy filled with helium will make a child happy?
 a) loved
 b) learn
@@ -515,7 +515,7 @@ a) loved
 b) learn
 c) eat cake
 d) balloon
-e) become adult",,,
+e) become adult",yes,yes,
 arcc-test-0414,benchmark,"A sample of an unknown substance has a volume that is independent of its container. Which additional information is needed to determine the state of the sample?
 a) the mass of the sample
 b) the density of the sample
@@ -532,4 +532,4 @@ d) whether the sample conducts electricity","A portion of an unknown substance h
 a) the mass of the sample
 b) the density of the sample
 c) whether the sample possesses a fixed shape
-d) whether the sample conducts electricity",,,
+d) whether the sample conducts electricity",yes,yes,

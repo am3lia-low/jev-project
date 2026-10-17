@@ -1,4 +1,4 @@
-﻿id,correct_answer,original,paraphrase,meaning_preserved,difficulty,notes
+id,correct_answer,original,paraphrase,meaning_preserved,difficulty,notes
 arce-test-1189,C,"Water puddles on a sidewalk evaporate when the Sun heats the water. Which of these best describes what is happening as the water evaporates?
 A. Water changes phase as it releases heat to the environment.
 B. Water boils as it absorbs energy from the sidewalk.
@@ -7,7 +7,7 @@ D. Water evaporates as its thermal energy is transferred to the air.","When the 
 A. The water changes state while giving off heat to its surroundings.
 B. The water boils while taking in energy from the sidewalk.
 C. The water turns into a gas by absorbing energy from the Sun.
-D. The water evaporates while its thermal energy passes into the air.",,,
+D. The water evaporates while its thermal energy passes into the air.",yes,same,
 arce-test-1347,A,"Some dairy farmers want their cows to produce greater amounts of milk than average cows. Which process will help the dairy farmers develop cows with this trait?
 A. selective breeding
 B. behavioral modification
@@ -16,7 +16,7 @@ D. geographical isolation","Some dairy producers want their cows to yield more m
 A. selective mating
 B. changing behavior
 C. ecological succession
-D. geographic separation",,,
+D. geographic separation",yes,same,
 csqa-val-1027,A,"They were never going to be big actors, but they all had passion for the local what?
 A. theater
 B. opera
@@ -27,7 +27,7 @@ A. theatre
 B. opera
 C. production
 D. television
-E. blockbuster film",,,
+E. blockbuster film",yes,same,
 arce-test-1392,A,"Matter is defined as anything that takes up space and has
 A. mass
 B. texture
@@ -36,7 +36,7 @@ D. color","Matter is anything that occupies space and possesses
 A. mass
 B. texture
 C. odor
-D. color",,,
+D. color",yes,same,
 csqa-val-1124,C,"The princess was pure, the evil wizard wished to do what to her?
 A. dirty
 B. tarnish
@@ -47,7 +47,7 @@ A. soil
 B. blemish
 C. deprave
 D. pollute
-E. utilized",,,
+E. utilized",yes,same,
 csqa-val-0278,A,"What is it called when you are talking to someone?
 A. communication
 B. quiet
@@ -58,7 +58,7 @@ A. communication
 B. quiet
 C. boredom
 D. persuaded
-E. learn",,,
+E. learn",yes,same,
 csqa-val-1072,A,"How might a automobile get off a freeway?
 A. exit ramp
 B. garage
@@ -69,7 +69,7 @@ A. off-ramp
 B. garage
 C. driveway
 D. auto repair shop
-E. traffic signal",,,
+E. traffic signal",yes,same,
 arcc-test-0921,C,"Some fish sold in grocery stores are grown at fish farms. When more fish farms are built, which group is most likely harmed?
 A. people who own grocery stores
 B. truck drivers who carry the fish
@@ -78,7 +78,7 @@ D. construction workers who build the farms","Certain fish available at supermar
 A. grocery store owners
 B. drivers who transport the fish by truck
 C. people who sell wild-caught fish
-D. workers who construct the farms",,,
+D. workers who construct the farms",yes,same,
 swag-val-11466,D,"And he turns and sees the naked model. Someone
 A. has a ball that he'll need for.
 B. is seated in a side chair.
@@ -87,7 +87,7 @@ D. moves back to retrieve his clothes.","Then he pivots and spots the unclothed 
 A. possesses a ball that he will need for.
 B. is sitting in a chair off to the side.
 C. changes channels on someone who is not wearing a rustic helmet.
-D. steps backward to get his clothes.",,,
+D. steps backward to get his clothes.",yes,same,
 arcc-test-0724,D,"The main disadvantage of using solar energy to generate electricity is that solar panels
 A. produce greenhouse gases.
 B. produce water pollution.
@@ -96,7 +96,7 @@ D. are expensive to purchase.","A primary drawback of generating electricity fro
 A. release greenhouse gases.
 B. cause water contamination.
 C. cost a lot to run.
-D. are costly to buy.",,,
+D. are costly to buy.",yes,same,
 arcc-test-0342,B,"Which action would increase the amount of oxygen in a fish tank?
 A. adding more fish
 B. adding more plants
@@ -105,7 +105,7 @@ D. placing a water heater in the tank","What could be done to raise the oxygen l
 A. putting additional fish in the tank
 B. introducing additional plants
 C. putting food into the tank
-D. installing a water heater in the tank",,,
+D. installing a water heater in the tank",yes,same,
 arcc-test-1159,A,"Which of these is an example of water changing from water vapor to liquid?
 A. moisture forming on a mirror when you breathe on it
 B. sweat forming on your body when you exercise
@@ -114,7 +114,7 @@ D. rivers drying up during a very hot summer","Which of the following shows wate
 A. water droplets appearing on a mirror after you breathe on it
 B. sweat appearing on your body as you exercise
 C. ice cubes turning to liquid when placed in a warm drink
-D. rivers drying out during an extremely hot summer",,,
+D. rivers drying out during an extremely hot summer",yes,same,
 arce-test-0259,B,"Which of these best describes the function of the skeletal system?
 A. transports oxygen and nutrients throughout the body
 B. supports and protects tissues and organs
@@ -123,7 +123,7 @@ D. breaks down food into a form that cells can use","Which statement most accura
 A. carries oxygen and nutrients around the body
 B. provides support and safeguards tissues and organs
 C. eliminates harmful waste from the body's cells
-D. converts food into a form usable by cells",,,
+D. converts food into a form usable by cells",yes,same,
 hs-val-0284,B,"A man in a blue shirt is playing basketball on a court. he
 A. is making strides in the game.
 B. shoots at the hoop and misses it.
@@ -132,7 +132,7 @@ D. runs across the court, knocking other people to the ground.","A man wearing a
 A. is advancing in the game.
 B. takes a shot at the basket but misses.
 C. begins running toward the ball, which knocks him to the ground.
-D. runs across the court and knocks other people to the ground.",,,
+D. runs across the court and knocks other people to the ground.",yes,same,
 csqa-val-0622,A,"The janitor never had much to clean after services, but there was still always a paper or two to pick up where?
 A. synagogue
 B. front porch
@@ -143,7 +143,7 @@ A. synagogue
 B. porch at the front of the house
 C. schoolroom
 D. obesity
-E. food market",,,
+E. food market",yes,same,
 swag-val-13800,A,"Someone leads him to a counter protected by a glass barrier. She
 A. hands her tray to a cafeteria worker.
 B. nods at us broadly, who puts his hand behind her head and looks at her with an ornamental gesture.
@@ -152,7 +152,7 @@ D. lifts the zipper with his hand as she steals a drink.","Someone guides him to
 A. passes her tray to an employee in the cafeteria.
 B. gives us a wide nod, while he places his hand behind her head and regards her with a decorative gesture.
 C. gets unsteadily to his feet.
-D. uses her hand to raise the zipper while she takes a drink unnoticed.",,,
+D. uses her hand to raise the zipper while she takes a drink unnoticed.",yes,same,
 arcc-test-0083,D,"Thomas Edison most likely invented the light bulb by using
 A. lit candles.
 B. atomic models.
@@ -161,7 +161,7 @@ D. the scientific method.","Thomas Edison probably created the light bulb by app
 A. candles that were lit.
 B. models of atoms.
 C. light that had been reflected.
-D. the process of scientific inquiry.",,,
+D. the process of scientific inquiry.",yes,same,
 arcc-test-0283,B,"A star with twice the mass as the Sun would
 A. start its life cycle with a fission process.
 B. use its fuel source much more quickly.
@@ -170,7 +170,7 @@ D. result in a nebula.","A star with twice the Sun’s mass would
 A. begin its life cycle through a fission process.
 B. consume its fuel much faster.
 C. produce more solar flares.
-D. lead to the formation of a nebula.",,,
+D. lead to the formation of a nebula.",yes,same,
 swag-val-1490,B,"She turns away from the mirror and sits in a big chair with her legs drawn up sideways, the anklet now clearly visible. Someone
 A. very slender, someone is in the light of her life.
 B. smiles faintly and covers the anklet with her dress.
@@ -179,7 +179,7 @@ D. is awakened.","She turns her back on the mirror and settles into a large chai
 A. extremely thin, someone is the light of her life.
 B. gives a slight smile and hides the anklet beneath her dress.
 C. is asleep, covered in heavy bandages.
-D. is roused from sleep.",,,
+D. is roused from sleep.",yes,same,
 arce-test-0483,C,"Structures in the universe are grouped into large systems, each of which are made up of smaller systems. Which of the following is the largest system of which Earth is only a very small part?
 A. Jovian planets
 B. Halley's comet
@@ -188,7 +188,7 @@ D. Orion's belt","The universe contains large structures composed of smaller sys
 A. Giant planets
 B. Halley's comet
 C. The Milky Way
-D. Orion's belt",,,
+D. Orion's belt",yes,same,
 arce-test-0256,D,"The crews of two boats at sea can communicate with each other by shouting. Why is it impossible for the crews of two spaceships a similar distance apart in space to do this?
 A. The sound is reflected more in space.
 B. The pressure is too high inside the spaceships.
@@ -197,7 +197,7 @@ D. There is no air in space for the sound to travel through.","The crews on two 
 A. Sound is reflected to a greater extent in space.
 B. The pressure inside the spaceships is too high.
 C. The spaceships are moving faster than sound.
-D. Space has no air through which sound can travel.",,,
+D. Space has no air through which sound can travel.",yes,same,
 swag-val-12108,B,"He catches it in his mouth, then slashes the vampire's throat. Contracting his abdomen, he
 A. sees marley, planting a small shoulder spear in a the unlit neon cauldron.
 B. curls upward and cuts through the snare rope.
@@ -206,7 +206,7 @@ D. collapses to the couch.","After catching it in his mouth, he slits the vampir
 A. spots Marley, driving a small shoulder spear into an unlit neon cauldron.
 B. folds upward and slices through the snare rope.
 C. tears away two gloomy helmets.
-D. falls onto the couch.",,,
+D. falls onto the couch.",yes,same,
 arcc-test-0271,A,"Which is NOT a pathway for transportation?
 A. radio tower
 B. road
@@ -215,7 +215,7 @@ D. pipeline","Which of the following is NOT a means of transporting things?
 A. radio transmission tower
 B. roadway
 C. airstrip
-D. pipe system",,,
+D. pipe system",yes,same,
 arce-test-1509,D,"A student records the temperature in the schoolyard every day for a month. Which is the best way to present the temperature data so each day can be compared?
 A. summary paragraph
 B. labeled diagram
@@ -224,7 +224,7 @@ D. bar graph","A student measures and writes down the schoolyard temperature eac
 A. brief written summary
 B. diagram with labels
 C. circle graph
-D. bar chart",,,
+D. bar chart",yes,same,
 swag-val-3608,B,"A man is seen performing various flips and tricks in the middle of a public square with dozens of people watching on the side. The man
 A. continues to spin around the playground while another woman stands on the side and watches.
 B. continues to do tricks in various areas while the people around him watch and applaud.
@@ -233,7 +233,7 @@ D. continues walking around the area and grabbing a bit of balance and ends with
 A. keeps spinning around the playground as another woman stands off to the side watching.
 B. keeps performing tricks in different spots while the people nearby watch and applaud.
 C. keeps practicing tai chi alone, then skates in the field with others, going into the air in front of the camera.
-D. keeps moving around the area, briefly trying to balance, and finishes by rolling on a ball.",,,
+D. keeps moving around the area, briefly trying to balance, and finishes by rolling on a ball.",yes,same,
 swag-val-17597,B,"Close up shots are shown of people fencing back and fourth. People
 A. walk alongside and continues the fence as they continue moving.
 B. continue to fence with one another as people watch on the sides.
@@ -242,7 +242,7 @@ D. continue to speak to each other and ends with him pushed down and smiling.","
 A. walk beside one another and keep fencing as they move along.
 B. keep fencing against each other while spectators watch from the sides.
 C. move together on stage welds.
-D. keep talking to each other, ending with him being pushed down and smiling.",,,
+D. keep talking to each other, ending with him being pushed down and smiling.",yes,same,
 arcc-test-0375,D,"What is most likely the first step for students to do for a recycling project?
 A. burn the materials in a bonfire
 B. take the materials to a landfill
@@ -251,7 +251,7 @@ D. sort the materials by plastics, papers, and cans","What is the most probable 
 A. set the materials on fire in a bonfire
 B. bring the materials to a landfill
 C. put the materials in a garbage bin
-D. separate the materials into plastics, paper, and cans",,,
+D. separate the materials into plastics, paper, and cans",yes,same,
 hs-val-8138,B,"[header] How to build your own computer case [title] Decide more or less what you want your computer to look like. [step] Start off by doing some rough sketches followed by more intricate designs. Think about the material you will need to use to achieve your design.
 A. Your computer case should make some very large, intricate designs. [title] Repurpose a plastic cd mold of your design to reuse as a case.
 B. Will it be cardboard, wood, metal, acrylic, glass? Plan out what colors you will use, even down to small details such as led lights, and graphics. This will allow you to revise your design and get it to a point you will be happy with.
@@ -260,7 +260,7 @@ D. [title] Choose the style you want your case to be made from. [step] You can u
 A. Your computer case ought to feature some very large, detailed designs. [title] Reuse a plastic CD mold based on your design as a case.
 B. Will you use cardboard, wood, metal, acrylic, or glass? Decide which colors to use, including little details like LED lights and graphics. That way, you can make changes to your design until you are satisfied with it.
 C. A padded laptop case costs considerably more than a case made of sturdy fabric and hard plastic. They are typically sold in bundles costing one or two hundred dollars, although some costly computers call for more or less money.
-D. [title] Decide on the style you want for your case. [step] For accuracy, you may work with a pencil and ruler.",,,
+D. [title] Decide on the style you want for your case. [step] For accuracy, you may work with a pencil and ruler.",yes,same,
 csqa-val-0717,C,"Where could you get some knives if you are planning to bring them outside with you?
 A. sporting goods store
 B. backpack
@@ -271,7 +271,7 @@ A. athletic equipment shop
 B. backpack
 C. kitchen
 D. keen sides
-E. doghouse",,,
+E. doghouse",yes,same,
 arce-test-0719,C,"Which part of a sound wave measures loudness?
 A. wavelength
 B. magnitude
@@ -280,7 +280,7 @@ D. frequency","What feature of a sound wave indicates how loud it is?
 A. the distance between successive wave peaks
 B. the overall size or extent
 C. the height of the wave
-D. the number of waves passing per unit of time",,,
+D. the number of waves passing per unit of time",yes,same,
 swag-val-1142,C,"The plate landed on the field and the people in the field go after the field. The athlete
 A. race in a circle back and forth.
 B. gets up and runs across the field to another person and runs across a field.
@@ -289,7 +289,7 @@ D. runs up the track, win with all the winners in number 4.","After the plate la
 A. runs back and forth around a circle.
 B. stands up, runs across the field to another person, and then runs across a field.
 C. is inside a fenced netted area and throws their metal plate into the field.
-D. runs along the track and wins alongside all the winners in number 4.",,,
+D. runs along the track and wins alongside all the winners in number 4.",yes,same,
 csqa-val-0420,D,"Many people wanted to leave their country estates for row houses, what did they need to move to?
 A. living less expensively
 B. england
@@ -300,7 +300,7 @@ A. spending less money
 B. england
 C. a correctional facility
 D. urban area
-E. a small settlement",,,
+E. a small settlement",yes,same,
 csqa-val-0641,A,"Where is a well used toy car likely to be found?
 A. child's room
 B. boy's bedroom
@@ -311,7 +311,7 @@ A. a room belonging to a child
 B. a boy's sleeping room
 C. the place where someone lives
 D. a shop that sells toys
-E. a dwelling",,,
+E. a dwelling",yes,same,
 hs-val-4291,A,"[header] How to visit sagrada familia [title] Research travel options. [step] Since barcelona is the second largest city in spain, getting there should not be too difficult. Depending on how far you are traveling, you can fly into the barcelona-el prat airport (bcn) or take a train from around spain, france or even london.
 A. [substeps] If coming from nearby, la sagrada familia is located at caller de mallorca , 401. There are plenty of lodging options available nearby as well, including hostels, apartments, and regular hotels.
 B. It usually takes around 20 minutes to get there, so don't worry about waiting much longer. It's important to realize that barcelona won't be big enough to accommodate five to twenty people.
@@ -320,7 +320,7 @@ D. [title] Drive for about 2.2 hours to get to barcelona. [step] The driving can
 A. [substeps] If you are arriving from nearby, La Sagrada Familia is at Caller de Mallorca, 401. There are also many places to stay close by, such as hostels, apartments, and standard hotels.
 B. The trip there generally takes about 20 minutes, so you needn’t worry about waiting much longer. Keep in mind that Barcelona will not be large enough to accommodate five to twenty people.
 C. [substeps] As you plan your trip, look into some of the city’s tourist attractions for reference. Fly there ahead of time, since Barcelona is such a very active tourist.
-D. [title] Allow about 2.2 hours to drive to Barcelona. [step] Driving may be costly, so avoid wasting money in small amounts by arriving so early that you could not simply head straight to the airport.",,,
+D. [title] Allow about 2.2 hours to drive to Barcelona. [step] Driving may be costly, so avoid wasting money in small amounts by arriving so early that you could not simply head straight to the airport.",yes,same,
 arcc-test-0818,D,"What is the voltage in a circuit with a current of 3 ohms and a total resistance of 12?
 A. 0.25 V
 B. 4 V
@@ -329,7 +329,7 @@ D. 36 V","What voltage does a circuit have when its current is 3 ohms and its to
 A. 0.25 volts
 B. 4 volts
 C. 15 volts
-D. 36 volts",,,
+D. 36 volts",yes,same,
 arce-test-0110,B,"How often does Earth rotate on its axis?
 A. once every 12 hours
 B. once every 24 hours
@@ -338,7 +338,7 @@ D. once every year","What is the time interval for one complete rotation of Eart
 A. one time every 12 hours
 B. one time every 24 hours
 C. one time each month
-D. one time each year",,,
+D. one time each year",yes,same,
 swag-val-1856,B,"Someone pushes the door open. Someone
 A. pulls someone's eyes closed.
 B. steps over to him.
@@ -347,7 +347,7 @@ D. collects pages then walks away.","A person opens the door by pushing it. Some
 A. closes another person's eyes.
 B. moves over toward him.
 C. crawls past as he begins going inside it.
-D. gathers pages and then leaves.",,,
+D. gathers pages and then leaves.",yes,same,
 arcc-test-0097,B,"How are sedimentary rocks made?
 A. Magma or lava is cooled.
 B. Materials are pressed together.
@@ -356,7 +356,7 @@ D. Earthquakes cause small pieces to fall.","How do sedimentary rocks form?
 A. Magma or lava cools down.
 B. Materials are compacted together.
 C. Minerals are altered by chemical reactions.
-D. Earthquakes make small pieces break off.",,,
+D. Earthquakes make small pieces break off.",yes,same,
 swag-val-9090,B,"A man is seen speaking to the camera while standing out in a back yard. He
 A. is then shown cleaning products onto his mower while he combs along the sides.
 B. pans to a man spraying down a fence with a hose and another man watching on the side.
@@ -365,7 +365,7 @@ D. mixes it together with several clips of him playing forward back and laughing
 A. is next shown applying cleaning products to his mower as he combs along its sides.
 B. shifts the view to a man hosing down a fence while another man watches from the side.
 C. wraps a towel around the dog as he talks to the camera.
-D. combines this with several clips of him playing forward and back and laughing.",,,
+D. combines this with several clips of him playing forward and back and laughing.",yes,same,
 arcc-test-1113,B,"Each body cell of a goldfish contains 94 chromosomes. How many chromosomes are contained in a goldfish sex cell?
 A. 23
 B. 47
@@ -374,7 +374,7 @@ D. 188","A goldfish's somatic cell has 94 chromosomes. How many chromosomes does
 A. 23
 B. 47
 C. 94
-D. 188",,,
+D. 188",yes,same,
 hs-val-2226,C,"Separate hair into two parts down the middle. French braiding hair from left to right all the way to the end. french braiding hair
 A. coming down the side down to a side as the end of the hair is revealed.
 B. from left to right when gained.
@@ -383,7 +383,7 @@ D. pants are on the left side of the head.","Part the hair down the center into 
 A. moving down the side toward one side as the end of the hair comes into view.
 B. from left to right once obtained.
 C. starting at the back and moving right to left until reaching the end.
-D. trousers are located on the left side of the head.",,,
+D. trousers are located on the left side of the head.",yes,same,
 csqa-val-1195,D,"The lion sensed his competitor was timid, so what attitude did the lion take?
 A. reckless
 B. bellicose
@@ -394,7 +394,7 @@ A. rash
 B. hostile and eager to fight
 C. protective
 D. forceful and confrontational
-E. fearless",,,
+E. fearless",yes,same,
 csqa-val-0325,B,"WHat leads to an early death?
 A. poisonous gas
 B. homicide
@@ -405,7 +405,7 @@ A. toxic fumes
 B. the killing of one person by another
 C. a fragment of burned material
 D. atomic weapons
-E. cyanide",,,
+E. cyanide",yes,same,
 csqa-val-0797,A,"Where has the newest baseball stadium?
 A. phoenix
 B. chicago
@@ -416,7 +416,7 @@ A. phoenix
 B. chicago
 C. antarctica
 D. san francisco
-E. urban locations",,,
+E. urban locations",yes,same,
 hs-val-0661,C,"A crowd is cheering in front of a stage. Cheerleaders come out and perform a routine on the stage. the crowd
 A. claps for the cheerleaders.
 B. stands and claps for them.
@@ -425,7 +425,7 @@ D. cheers and waves their arms.","Spectators are cheering in front of a stage. C
 A. applauds the cheerleaders.
 B. gets to its feet and applauds them.
 C. cheers them on after they finish.
-D. shouts and waves its arms.",,,
+D. shouts and waves its arms.",yes,same,
 swag-val-10714,A,"The riders ride slowly and then it becomes later in the day and the sun is getting low. The beach
 A. is seen from a distance as the sun has set.
 B. is showing a batch of sponsors and shiny dust filled in a post of foliage, a fire and it reloading the snow.
@@ -434,7 +434,7 @@ D. is extremely peaceful with it as it rides down to the desert.","The riders mo
 A. can be seen in the distance after the sun has set.
 B. displays a group of sponsors and gleaming dust filling a post of foliage, a fire, and it reloading the snow.
 C. remains in the ocean, with several separate clips of surfers preparing for the boat.
-D. is very peaceful as it rides down into the desert.",,,
+D. is very peaceful as it rides down into the desert.",yes,same,
 swag-val-11718,A,"The woman starts brushing the horses legs. The woman
 A. is seen doing something with the horses hoof.
 B. begins mowing the belly of the horse.
@@ -443,7 +443,7 @@ D. rides to the side of the horse.","The woman begins brushing the horses' legs.
 A. is shown working on one of the horse's hooves.
 B. starts trimming the horse's belly.
 C. keeps speaking while in pain.
-D. rides alongside the horse.",,,
+D. rides alongside the horse.",yes,same,
 hs-val-0921,C,"Then, you see them on the field playing a game and later talking a little bit about it. They each seem to recall their own memories of times they won medal and stare at their medals. they
 A. are encouraging one another as they continue to play the game.
 B. continue to play numerous game of field hockey.
@@ -452,7 +452,7 @@ D. talk some a while and an audience sits at the end of the field watching.","Af
 A. keep playing the game while cheering each other on.
 B. play several field hockey games.
 C. gather in a small group to talk, and then you see an audience cheering and applauding.
-D. talk for a while as an audience sits at the far end of the field and watches.",,,
+D. talk for a while as an audience sits at the far end of the field and watches.",yes,same,
 hs-val-4469,A,"[header] How to remove smell from an old leather bag [title] Try a simple clean first. [step] If this clean doesn't shift the odor, you can try one of the other suggested methods after. [substeps] Wipe the leather bag inside and out with a clean, dry, soft cloth.
 A. This will pick up dust, loose debris and even some mold or mildew. Wipe the leather bag down with a damp cloth.
 B. Pour down a little dishwashing liquid directly over the odour. Washing the cleaning cloth in warm water along with it will prevent it from drying out or settling into a moldy head of the bag.
@@ -461,7 +461,7 @@ D. [substeps] Set a low-ph or neutral or ph-free vinegar solution into the bag a
 A. This can collect dust, loose dirt, and even some mold or mildew. Go over the leather bag with a damp cloth.
 B. Apply a small amount of dishwashing liquid directly to the odor. Washing the cleaning cloth in warm water at the same time will keep it from drying out or settling into a moldy head of the bag.
 C. Put on gloves to shield your hands from the chemicals, take the stained leather cloth, and lay it on the soiled bag. Leave it there for 10 minutes, then wipe downward from top to bottom.
-D. [substeps] After cleaning, put a low-ph, neutral, or ph-free vinegar solution into the bag. Combine it with a little water and warm water, then press a few drops of the solution onto the leather.",,,
+D. [substeps] After cleaning, put a low-ph, neutral, or ph-free vinegar solution into the bag. Combine it with a little water and warm water, then press a few drops of the solution onto the leather.",yes,same,
 arcc-test-0880,A,"A container tips over and liquid spills on the work surface during a laboratory exercise. What should the student do first?
 A. notify the teacher
 B. wipe up the spill
@@ -470,4 +470,4 @@ D. call the janitor","During a lab activity, a container overturns and liquid sp
 A. inform the teacher
 B. clean up the spill
 C. notify a classmate
-D. contact the janitor",,,
+D. contact the janitor",yes,same,
