@@ -54,7 +54,7 @@ Create the folders the layout needs, delete the ones it doesn't, and move every 
 
 - [x] Rate the pilot blind (`data/reviews/pilot_30.csv`, 2026-10-14): both models kept meaning 30/30; gpt-6-luna 30 same difficulty, Mistral 29 same + 1 harder. `PARAPHRASE_MODEL = "openai/gpt-6-luna"`.
 - [x] Review the Level 3 drafts (`data/reviews/new_questions.csv`, 2026-10-14): 272 of 400 reviewed, no text edits. `arcc-new-0095` and `csqa-new-0048` had keep=yes with a failed check, set to keep=no. `--apply-review` wrote `data/new/reviewed.jsonl`: 50 per dataset, 200 in total.
-- [ ] Then: `03_paraphrase.py` → `04_validate.py` (+ `--retry-failed` loop, fill `paraphrase_50.csv`) → `06a_swap.py` → `06b_validate_swaps.py` (+ retry loop, fill `swaps_30.csv`) → `06c_build_quiz.py`. All scripts run 2026-10-16/17 (quiz: 500 items); only the two review sheets are left.
+- [x] Then: `03_paraphrase.py` → `04_validate.py` (+ `--retry-failed` loop, fill `paraphrase_50.csv`) → `06a_swap.py` → `06b_validate_swaps.py` (+ retry loop, fill `swaps_30.csv`) → `06c_build_quiz.py`. All scripts run 2026-10-16/17. Both review sheets filled 2026-10-17: paraphrases 50/50 fine; swaps 6/30 flagged, which `06b` now drops (not retried), quiz rebuilt with 494 items.
 
 ## 6. [x] Docs out of date
 
@@ -83,10 +83,10 @@ Details in [`docs/api-laptop-checks.md`](../docs/api-laptop-checks.md).
 Same order as [`docs/api-laptop-checks.md` → Run order](../docs/api-laptop-checks.md#run-order-both-reviews-done-2026-10-14-paraphrase_model--gpt-6-luna) and PLAN A10:
 
 - [x] `03_paraphrase.py` + `04_validate.py` full run (2026-10-16): 8,500/8,500 pass, $0.79.
-- [ ] Fill in `data/reviews/paraphrase_50.csv` (manual paraphrase check).
+- [x] Fill in `data/reviews/paraphrase_50.csv` (manual paraphrase check, 2026-10-17).
 - [x] Optional originals-only BERT ablation on Kaggle (2026-10-15): `results/bert_original_only/`.
 - [x] `07a_build_bert_data.py` without `--originals-only`, then the full notebook on Kaggle (5 seeds + untrained; 2026-10-17); results in `results/bert/`.
-- [ ] `08_run_jev.py` repeat → levels → quiz. Done 2026-10-17: repeat (99.5% agreement, single runs), levels 0, 1, 3. Left: Level 2 (after `paraphrase_50.csv` + memorisation threshold) and quiz (after `swaps_30.csv`).
+- [ ] `08_run_jev.py` repeat → levels → quiz. Done 2026-10-17: repeat (99.5% agreement, single runs), levels 0, 1, 3. Left: Level 2 (after the memorisation threshold) and quiz (ready, 494 items).
 - [ ] `09_run_llm.py` levels → quiz (Qwen and Gemma). Done 2026-10-17: levels 0, 1, 3 for both. Left: Level 2 and quiz, same gates as 08.
 - [ ] `10_analyse.py`, then the final verdict by hand.
 

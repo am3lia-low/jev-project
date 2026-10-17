@@ -282,11 +282,11 @@ Comparisons:
 1. [x] Repo setup (this plan, project structure, dependencies)
 2. [x] `02_sample.py` — download 5 datasets, dedupe SWAG vs HellaSwag, sample, split, normalise labels, store original + shuffled orders, assign IDs (run 2026-10-08)
 3. [x] `03_paraphrase.py` — pilot 2 models on 30 questions, choose (2026-10-14: gpt-6-luna), full run (2026-10-16: 8,500/8,500, $0.79) (API laptop)
-4. [ ] `04_validate.py` — automatic checks + manual 50 (automatic checks done 2026-10-16; manual `paraphrase_50.csv` left)
+4. [x] `04_validate.py` — automatic checks + manual 50 (automatic checks done 2026-10-16; `paraphrase_50.csv` filled 2026-10-17: 50/50 meaning kept, same difficulty)
 5. [x] `05_generate_new.py` — 400 drafts, 200 Level 3 questions kept after the human check (API laptop)
-6. [ ] `06a_swap.py` + `06b_validate_swaps.py` — quiz versions for 400 benchmark + 100 control items (API laptop); `06c_build_quiz.py` — assemble the 500-item quiz (all run 2026-10-16/17; manual `swaps_30.csv` left)
+6. [x] `06a_swap.py` + `06b_validate_swaps.py` — quiz versions for 400 benchmark + 100 control items (API laptop); `06c_build_quiz.py` — assemble the quiz (all run 2026-10-16/17; `swaps_30.csv` filled 2026-10-17: 6 of 30 flagged and dropped by 06b, quiz rebuilt with 494 items: 396 benchmark + 98 control)
 7. [x] `07a_build_bert_data.py` — originals + paraphrases for the notebook; `notebooks/07b_bert_colab.ipynb` — untrained BERT; fine-tune BERT-base (5 seeds); above-chance rule; evaluate Levels 0–3; optional fallbacks (run on Kaggle: smoke test and originals-only ablation 2026-10-15, main run with paraphrases 2026-10-17; fallbacks not needed yet)
-8. [ ] `08_run_jev.py` (API laptop): 8a sanity check · 8b repeatability · 8c Levels 0–3 · 8d quiz (8a done 2026-10-09: Level 0 within the paper's CI on all 4 paper datasets; 8b done 2026-10-17: 99.5% agreement, single runs; 8c Levels 0, 1, 3 done 2026-10-17, Level 2 waits for `paraphrase_50.csv` and the memorisation threshold; 8d waits for `swaps_30.csv`)
+8. [ ] `08_run_jev.py` (API laptop): 8a sanity check · 8b repeatability · 8c Levels 0–3 · 8d quiz (8a done 2026-10-09: Level 0 within the paper's CI on all 4 paper datasets; 8b done 2026-10-17: 99.5% agreement, single runs; 8c Levels 0, 1, 3 done 2026-10-17, Level 2 waits for the memorisation threshold; 8d ready to run on the 494-item quiz)
 9. [ ] `09_run_llm.py` (API laptop): LLM baselines, Levels 0–3 + quiz (Levels 0, 1, 3 done for both 2026-10-17; Level 2 and quiz wait on the same gates as 08)
 10. [ ] `10_analyse.py` — tables, plots, McNemar, log-odds comparison, quiz scoring, verdict
 

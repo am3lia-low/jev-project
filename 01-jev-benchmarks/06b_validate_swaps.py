@@ -7,7 +7,9 @@ rejected and missing ones to `data/swaps/failed.json`, which
 `06a_swap.py --retry-failed` regenerates.
 
 Also writes the manual-check sheet `data/reviews/swaps_30.csv` (random passing
-items; never overwritten) and, once filled in, summarises it.
+items; never overwritten) and, once filled in, summarises it. Items rated "no"
+on either column are dropped from `swaps.jsonl` (and so from the quiz); they
+are not added to `failed.json`, so `--retry-failed` leaves them out too.
 
 Run from this folder:
     python 06b_validate_swaps.py
@@ -51,6 +53,10 @@ def main() -> None:
         else:
             passed.append((item, swaps))
 
+    rated = [r for r in read_review_sheet(SHEET) if r["meaning_kept_all"]] if SHEET.exists() else []
+    flagged = {r["id"] for r in rated if not (is_yes(r["meaning_kept_all"]) and is_yes(r["none_sounds_off"]))}
+    passed = [(item, swaps) for item, swaps in passed if item.id not in flagged]
+
     write_jsonl(SWAPS_PATH, [s for _, swaps in passed for s in swaps])
     FAILED_PATH.write_text(json.dumps(failed, indent=1), encoding="utf-8")
     by_set = Counter(item.meta["quiz_set"] for item, _ in passed)
@@ -63,11 +69,11 @@ def main() -> None:
         print("Next: python 06a_swap.py --retry-failed, then run this again")
 
     if SHEET.exists():
-        rows = [r for r in read_review_sheet(SHEET) if r["meaning_kept_all"]]
-        if rows:
-            kept = sum(is_yes(r["meaning_kept_all"]) for r in rows)
-            natural = sum(is_yes(r["none_sounds_off"]) for r in rows)
-            print(f"{SHEET}: {len(rows)} rated; meaning kept {kept}/{len(rows)}, none sounds off {natural}/{len(rows)}")
+        if rated:
+            kept = sum(is_yes(r["meaning_kept_all"]) for r in rated)
+            natural = sum(is_yes(r["none_sounds_off"]) for r in rated)
+            print(f"{SHEET}: {len(rated)} rated; meaning kept {kept}/{len(rated)}, none sounds off {natural}/{len(rated)}; "
+                  f"{len(flagged)} flagged and dropped: {', '.join(sorted(flagged))}")
         else:
             print(f"{SHEET}: not filled in yet")
     elif len(passed) >= config.N_MANUAL_SWAPS:

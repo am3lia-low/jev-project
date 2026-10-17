@@ -72,7 +72,7 @@ def main() -> None:
         print(f"  {quiz_set}: original at {dict(sorted(positions.items()))}")
     expected = len(config.PAPER_DATASETS) * (config.N_QUIZ_BENCHMARK_PER_DATASET + config.N_QUIZ_CONTROL_PER_DATASET)
     if len(records) < expected:
-        print(f"  {expected - len(records)} short of {expected}: items whose swaps never passed 06b are left out")
+        print(f"  {expected - len(records)} short of {expected}: items whose swaps failed 06b or were flagged in swaps_30.csv are left out")
 
 
 if __name__ == "__main__":
