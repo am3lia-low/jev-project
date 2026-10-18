@@ -49,6 +49,6 @@ Can't be run from the cloud Claude session: kaggle.com is blocked there and it h
 0. Item 5 above: smoke test of the notebook. Done 2026-10-15 (Kaggle).
 1. `03_paraphrase.py` → `04_validate.py` (retry loop; fill `paraphrase_50.csv`) → `06a_swap.py` → `06b_validate_swaps.py` (retry loop; fill `swaps_30.csv`) → `06c_build_quiz.py`. About $0.90. All run 2026-10-16/17; both review sheets filled 2026-10-17 (quiz rebuilt with 494 items after dropping 6 flagged swaps).
 2. `07a_build_bert_data.py` (without `--originals-only`), upload `data/bert/` as the Kaggle dataset `shiyalow/jev-bert-data`, run the notebook on Kaggle, download results into `results/bert/`. Done 2026-10-17.
-3. `08_run_jev.py sanity` (cached, free) → `repeat` → `levels` → `quiz`. Under $0.10. Done 2026-10-17 up to Levels 0, 1, 3; Level 2 and quiz left.
-4. `09_run_llm.py levels` → `quiz`. About $1. Levels 0, 1, 3 done for both 2026-10-17; Level 2 and quiz left.
+3. `08_run_jev.py sanity` (cached, free) → `repeat` → `levels` → `quiz`. Under $0.10. Done 2026-10-17 up to Levels 0, 1, 3; Level 2 and quiz left, both ready (memorisation threshold confirmed 2026-10-18; quiz 494 items).
+4. `09_run_llm.py levels` → `quiz`. About $1. Levels 0, 1, 3 done for both 2026-10-17; Level 2 and quiz left, both ready.
 5. `10_analyse.py` (any laptop).

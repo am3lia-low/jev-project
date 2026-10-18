@@ -266,7 +266,7 @@ Per model × dataset × level:
 
 Comparisons:
 - **Between levels:** paired McNemar tests (same questions in every level), pooled as the main test and per dataset as secondary.
-- **Memorisation hypothesis (fixed before any Jev run):** compare each model's Level 0 → Level 2 drop in **log-odds** (accuracy near 100% cannot drop as many points as accuracy near 50%; e.g. Jev 97→94% is a log-odds drop of 0.72, BERT 60→55% is 0.21). Memorisation is supported if the bootstrap 95% CI of (Jev drop − BERT drop) is entirely above 0 **and** Jev's drop is at least 2× BERT's. If BERT's drop is negative (paraphrasing made the questions easier for BERT), the 2× condition passes trivially and the CI decides alone. Pooled over SWAG, ARC-Easy, ARC-Challenge and CommonsenseQA where BERT passes the above-chance rule; HellaSwag reported separately.
+- **Memorisation hypothesis (fixed before any Jev run; confirmed as written 2026-10-18, before any Level 2 run):** compare each model's Level 0 → Level 2 drop in **log-odds** (accuracy near 100% cannot drop as many points as accuracy near 50%; e.g. Jev 97→94% is a log-odds drop of 0.72, BERT 60→55% is 0.21). Memorisation is supported if the bootstrap 95% CI of (Jev drop − BERT drop) is entirely above 0 **and** Jev's drop is at least 2× BERT's. If BERT's drop is negative (paraphrasing made the questions easier for BERT), the 2× condition passes trivially and the CI decides alone. Pooled over SWAG, ARC-Easy, ARC-Challenge and CommonsenseQA where BERT passes the above-chance rule; HellaSwag reported separately.
 - **Final verdict** combines three signals: the ladder (above), the quiz (A7) and Level 3 accuracy vs Level 0.
 
 ### A9. Running Jev and LLMs
@@ -287,8 +287,8 @@ Comparisons:
 5. [x] `05_generate_new.py` — 400 drafts, 200 Level 3 questions kept after the human check (API laptop)
 6. [x] `06a_swap.py` + `06b_validate_swaps.py` — quiz versions for 400 benchmark + 100 control items (API laptop); `06c_build_quiz.py` — assemble the quiz (all run 2026-10-16/17; `swaps_30.csv` filled 2026-10-17: 6 of 30 flagged and dropped by 06b, quiz rebuilt with 494 items: 396 benchmark + 98 control)
 7. [x] `07a_build_bert_data.py` — originals + paraphrases for the notebook; `notebooks/07b_bert_colab.ipynb` — untrained BERT; fine-tune BERT-base (5 seeds); above-chance rule; evaluate Levels 0–3; optional fallbacks (run on Kaggle: smoke test and originals-only ablation 2026-10-15, main run with paraphrases 2026-10-17; fallbacks not needed yet)
-8. [ ] `08_run_jev.py` (API laptop): 8a sanity check · 8b repeatability · 8c Levels 0–3 · 8d quiz (8a done 2026-10-09: Level 0 within the paper's CI on all 4 paper datasets; 8b done 2026-10-17: 99.5% agreement, single runs; 8c Levels 0, 1, 3 done 2026-10-17, Level 2 waits for the memorisation threshold; 8d ready to run on the 494-item quiz)
-9. [ ] `09_run_llm.py` (API laptop): LLM baselines, Levels 0–3 + quiz (Levels 0, 1, 3 done for both 2026-10-17; Level 2 and quiz wait on the same gates as 08)
+8. [ ] `08_run_jev.py` (API laptop): 8a sanity check · 8b repeatability · 8c Levels 0–3 · 8d quiz (8a done 2026-10-09: Level 0 within the paper's CI on all 4 paper datasets; 8b done 2026-10-17: 99.5% agreement, single runs; 8c Levels 0, 1, 3 done 2026-10-17, Level 2 ready (threshold confirmed 2026-10-18); 8d ready to run on the 494-item quiz)
+9. [ ] `09_run_llm.py` (API laptop): LLM baselines, Levels 0–3 + quiz (Levels 0, 1, 3 done for both 2026-10-17; Level 2 and quiz ready, as for 08)
 10. [ ] `10_analyse.py` — tables, plots, McNemar, log-odds comparison, quiz scoring, verdict
 
 Script files are named by their step number above (`06a`, `06b`, … when a step has several), so the folder lists them in run order.
@@ -369,5 +369,5 @@ Model lineup (OpenRouter listing checked 2026-10-06; pin these IDs, no `~…-lat
 
 ## Open questions
 
-- Confirm the memorisation threshold in A8 (log-odds, CI above 0 and ≥ 2× BERT's drop) before running Jev on Level 2. Jev's Level 0 sanity run is done, but no Level 2 results exist yet, so the rule can still be fixed in advance.
+- ~~Confirm the memorisation threshold in A8~~ Confirmed as written 2026-10-18 (log-odds, CI above 0 and ≥ 2× BERT's drop, pooled over the ladder datasets where BERT passes the above-chance rule), with no Jev or LLM Level 2 results in existence. Implemented in `10_analyse.py` (`memorisation_table`) and `stats.compare_drops`, `MEMORISATION_DROP_RATIO = 2.0`. Which datasets BERT passes on is decided by BERT's val results alone (currently ARC-Easy, CommonsenseQA, SWAG; ARC-Challenge may rejoin via the learning curve / RACE fallback), never by Jev's Level 2 numbers.
 - Add an MMLU math slice to test number-swapping (relevant to the paper's math anomaly)? This means changing the numbers in calculation questions so the correct answer changes: a model that memorised the original would keep picking the old answer.

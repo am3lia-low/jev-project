@@ -86,7 +86,7 @@ Same order as [`docs/api-laptop-checks.md` → Run order](../docs/api-laptop-che
 - [x] Fill in `data/reviews/paraphrase_50.csv` (manual paraphrase check, 2026-10-17).
 - [x] Optional originals-only BERT ablation on Kaggle (2026-10-15): `results/bert_original_only/`.
 - [x] `07a_build_bert_data.py` without `--originals-only`, then the full notebook on Kaggle (5 seeds + untrained; 2026-10-17); results in `results/bert/`.
-- [ ] `08_run_jev.py` repeat → levels → quiz. Done 2026-10-17: repeat (99.5% agreement, single runs), levels 0, 1, 3. Left: Level 2 (after the memorisation threshold) and quiz (ready, 494 items).
+- [ ] `08_run_jev.py` repeat → levels → quiz. Done 2026-10-17: repeat (99.5% agreement, single runs), levels 0, 1, 3. Left: Level 2 and quiz (both ready: threshold confirmed 2026-10-18, quiz 494 items).
 - [ ] `09_run_llm.py` levels → quiz (Qwen and Gemma). Done 2026-10-17: levels 0, 1, 3 for both. Left: Level 2 and quiz, same gates as 08.
 - [ ] `10_analyse.py`, then the final verdict by hand.
 
@@ -97,7 +97,10 @@ Same order as [`docs/api-laptop-checks.md` → Run order](../docs/api-laptop-che
 
 ## 10. [ ] Open decisions
 
-See PLAN.md → Open questions: confirm the memorisation threshold (before Jev's Level 2 run), and whether to add an MMLU math number-swap slice.
+See PLAN.md → Open questions.
+
+- [x] Memorisation threshold confirmed as written (2026-10-18), before any Level 2 run.
+- [ ] Whether to add an MMLU math number-swap slice.
 
 ## 11. [ ] Part B: Big Five (B1 steps 1-3)
 
