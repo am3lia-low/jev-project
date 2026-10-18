@@ -86,9 +86,9 @@ Same order as [`docs/api-laptop-checks.md` → Run order](../docs/api-laptop-che
 - [x] Fill in `data/reviews/paraphrase_50.csv` (manual paraphrase check, 2026-10-17).
 - [x] Optional originals-only BERT ablation on Kaggle (2026-10-15): `results/bert_original_only/`.
 - [x] `07a_build_bert_data.py` without `--originals-only`, then the full notebook on Kaggle (5 seeds + untrained; 2026-10-17); results in `results/bert/`.
-- [ ] `08_run_jev.py` repeat → levels → quiz. Done 2026-10-17: repeat (99.5% agreement, single runs), levels 0, 1, 3. Left: Level 2 and quiz (both ready: threshold confirmed 2026-10-18, quiz 494 items).
-- [ ] `09_run_llm.py` levels → quiz (Qwen and Gemma). Done 2026-10-17: levels 0, 1, 3 for both. Left: Level 2 and quiz, same gates as 08.
-- [ ] `10_analyse.py`, then the final verdict by hand.
+- [x] `08_run_jev.py` repeat → levels → quiz. 2026-10-17: repeat (99.5% agreement, single runs), levels 0, 1, 3; 2026-10-18: Level 2 and quiz ($0.05).
+- [x] `09_run_llm.py` levels → quiz (Qwen and Gemma). 2026-10-17: levels 0, 1, 3 for both; 2026-10-18: Level 2 and quiz ($0.08; providers still DekaLLM / Makora). Qwen picks E ("none") on 492/494 quiz items.
+- [ ] `10_analyse.py`, then the final verdict by hand. `10_analyse.py` run 2026-10-18 on all results (draft `results/verdict.md`); verdict by hand left.
 
 ## 9b. [ ] BERT learning curve (2026-10-18)
 

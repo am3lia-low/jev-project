@@ -1,0 +1,19 @@
+model,dataset,n,bert_control_valid,subject_drop,bert_drop,difference,ci_low,ci_high,supported
+Jev,hs,400,False,0.4899,-0.0672,0.5570,0.2014,0.9640,True
+Jev,arce,400,True,-0.3390,0.1218,-0.4608,-1.7064,-0.0160,False
+Jev,arcc,400,False,0.1795,-0.0686,0.2481,-0.0217,0.6271,False
+Jev,csqa,400,True,0.4514,0.2204,0.2311,-0.0588,0.5395,False
+Jev,swag,400,True,0.4516,0.2676,0.1840,-0.0793,0.4650,False
+Jev,"pooled (swag, arce, csqa)",1200,True,0.4085,0.1984,0.2101,0.0341,0.3988,True
+Qwen3.8-27B,hs,400,False,0.5732,-0.0672,0.6404,0.2358,1.1078,True
+Qwen3.8-27B,arce,400,True,0.3152,0.1218,0.1934,-0.9104,1.4012,False
+Qwen3.8-27B,arcc,400,False,0.3739,-0.0686,0.4425,-0.1570,1.1324,False
+Qwen3.8-27B,csqa,400,True,0.5230,0.2204,0.3026,0.0115,0.6134,True
+Qwen3.8-27B,swag,400,True,0.7816,0.2676,0.5140,0.1944,0.8536,True
+Qwen3.8-27B,"pooled (swag, arce, csqa)",1200,True,0.5999,0.1984,0.4014,0.2057,0.6071,True
+Gemma-4-26B-A4B,hs,400,False,0.5420,-0.0672,0.6092,0.2928,0.9470,True
+Gemma-4-26B-A4B,arce,400,True,0.3728,0.1218,0.2510,-0.1777,1.0874,False
+Gemma-4-26B-A4B,arcc,400,False,0.6674,-0.0686,0.7361,0.2648,1.3230,True
+Gemma-4-26B-A4B,csqa,400,True,0.3822,0.2204,0.1618,-0.1276,0.4511,False
+Gemma-4-26B-A4B,swag,400,True,0.3553,0.2676,0.0877,-0.1592,0.3494,False
+Gemma-4-26B-A4B,"pooled (swag, arce, csqa)",1200,True,0.3372,0.1984,0.1388,-0.0314,0.3107,False
