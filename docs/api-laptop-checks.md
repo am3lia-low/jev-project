@@ -30,6 +30,20 @@ Kept as the original brief. All items are done.
 | 4 | **Smoke test 08 and 09 on Level 0** before the other runs. There is no "first N questions" option and a run stopped by `--max-cost` writes nothing, so run `08_run_jev.py sanity` (~$0.01) and `09_run_llm.py levels --models qwen/qwen3.8-27b --levels 0` (~$0.2); check `results/raw/<model>/level0.jsonl` has probabilities, few or no errors, and sanity says OK. The calls are cached, so later full runs reuse them. | `08_run_jev.py`, `09_run_llm.py` | ~$0.25 |
 | 5 | **First run of the BERT notebook** (planned for Colab, run on Kaggle) (needs a GPU and the HuggingFace model download). | `notebooks/07b_bert_colab.ipynb` | Run on Colab T4 with a small data set first; check the truncation count, loss falls, val accuracy above chance. |
 
+## To do (2026-10-18): BERT learning curve on Kaggle
+
+Can't be run from the cloud Claude session: kaggle.com is blocked there and it has no Kaggle token. Free (Kaggle GPU quota only, ~80 min of T4); no OpenRouter calls.
+
+**Why:** test whether BERT is data-limited before enlarging the train pool (PLAN A5 → Learning curve). BERT failed the above-chance rule on HellaSwag and ARC-Challenge, and val stops improving after epoch 1.
+
+1. `git pull`; the option is in `notebooks/07b_bert_colab.ipynb` (commit "Add a learning-curve option to the BERT notebook"). No data rebuild: the current `shiyalow/jev-bert-data` version is the main-run data and is what the curve needs.
+2. In a new folder, copy the notebook and set `LEARNING_CURVE = True` in the settings cell (leave `CURVE_FRACTIONS = (0.25, 0.5, 1.0)`, `CURVE_SEEDS = SEEDS[:2]`, `SMOKE_TEST = False`). Do not commit that change; the repo copy stays `False`.
+3. `kernel-metadata.json` as for the main run, with id `shiyalow/jev-bert-learning-curve`, private, `enable_gpu`, `enable_internet`, `dataset_sources: ["shiyalow/jev-bert-data"]`. Push with `uvx kaggle kernels push --accelerator NvidiaTeslaT4`.
+4. When it finishes, `uvx kaggle kernels output shiyalow/jev-bert-learning-curve` and copy `results_learning_curve/` to `01-jev-benchmarks/results/bert_learning_curve/` (outside `results/bert/`, so `10_analyse.py` never reads it). Check all 6 folders arrived (`frac_025|050|100_seed_11|22`, each with `train_log.json`); the download can time out half-way.
+5. Commit the results with the printed summary table pasted into `results/bert_summary.md` under a new "Learning curve" heading, and tick TODO 9b.
+
+**Reading it:** one fraction's val number per dataset has a 95% CI of about ±7 points, so read the trend over the three fractions (Level 0, 400 per dataset, is steadier). HellaSwag and ARC-Challenge flat while SWAG / CommonsenseQA rise → more data only strengthens the datasets that already pass, and ARC-Challenge needs the RACE fallback (its train split is already 98% used). Everything still rising at 100% → enlarging the pool is worth it.
+
 ## Run order (both reviews done 2026-10-14; `PARAPHRASE_MODEL` = gpt-6-luna)
 
 0. Item 5 above: smoke test of the notebook. Done 2026-10-15 (Kaggle).

@@ -93,7 +93,7 @@ Same order as [`docs/api-laptop-checks.md` → Run order](../docs/api-laptop-che
 ## 9b. [ ] BERT learning curve (2026-10-18)
 
 - [x] `LEARNING_CURVE` option in `notebooks/07b_bert_colab.ipynb` (nested 25/50/100% subsets per dataset, original + paraphrase kept together, 2 seeds, ~80 min on a T4). Subset logic and summary cell tested locally on `data/bert/train.jsonl`; training not run here (no GPU).
-- [ ] Run on Kaggle (new kernel, `LEARNING_CURVE = True`), download to `results/bert_learning_curve/`, then decide: enlarge the train pool and/or the RACE fallback for ARC-Challenge.
+- [ ] Run on Kaggle from the API laptop (steps in `docs/api-laptop-checks.md` → "To do (2026-10-18)"; new kernel, `LEARNING_CURVE = True`), download to `results/bert_learning_curve/`, then decide: enlarge the train pool and/or the RACE fallback for ARC-Challenge.
 
 ## 10. [ ] Open decisions
 
