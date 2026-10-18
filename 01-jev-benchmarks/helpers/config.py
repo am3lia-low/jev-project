@@ -33,6 +33,8 @@ FIGURES_DIR = RESULTS_DIR / "figures"  # 10
 VERDICT_PATH = RESULTS_DIR / "verdict.md"  # 10
 CACHE_DIR = BENCH_DIR / "cache"  # gitignored; raw API responses
 LOG_DIR = BENCH_DIR / "logs"
+MMLU_DIR = DATA_DIR / "mmlu"  # 11a, 11b: number-swap sub-experiment (A11)
+MMLU_RESULTS_DIR = RESULTS_DIR / "mmlu"  # 11c: raw/<model slug>/{original,swapped}.jsonl; 11d: tables, summary.md
 
 # ---------------------------------------------------------------------------
 # Seeds (one per purpose so changing one step never moves another)
@@ -41,6 +43,7 @@ SAMPLE_SEED = 20261007  # which questions are drawn (A2)
 SHUFFLE_SEED = 20261008  # balanced option shuffle (A2 rule 3)
 QUIZ_SEED = 20261009  # position of the original in the quiz (A7)
 # 20261010 is the bootstrap seed, kept in jev_common.stats (A8)
+MMLU_SEED = 20261018  # MMLU item selection and option positions (A11)
 BERT_SEEDS = (11, 22, 33, 44, 55)  # five fine-tuning seeds (A5)
 
 # ---------------------------------------------------------------------------
@@ -61,7 +64,9 @@ N_MANUAL_PARAPHRASE = 50  # manual check of test paraphrases (A3.1)
 N_MANUAL_SWAPS = 30  # manual check of swap sets (A3.3)
 N_NEW_PER_CALL = 10  # Level 3 drafts per request (A3.2)
 N_STYLE_EXAMPLES = 5  # train questions shown as style examples per request (A3.2)
-MAX_ATTEMPTS = 3  # generations per item before giving up on it (03, 06a)
+MAX_ATTEMPTS = 3  # generations per item before giving up on it (03, 06a, 11a)
+N_MMLU = 200  # MMLU number-swap items kept (A11)
+N_MANUAL_MMLU = 30  # manual check of MMLU swaps (A11)
 
 # ---------------------------------------------------------------------------
 # Datasets (A1)
@@ -125,5 +130,11 @@ REPEAT_AGREEMENT_SINGLE_RUN = 0.99  # 8b: at or above this, one run per level is
 # sanity check (A9). HellaSwag and CommonsenseQA: Table 2; ARC-Easy and
 # ARC-Challenge: section 4.1 (Table 2 only has ARC E+C combined, 0.988).
 # Checked 2026-10-08.
+# MMLU number-swap sub-experiment (A11): maths subjects of `cais/mmlu`, test split.
+MMLU_HF_PATH = "cais/mmlu"
+MMLU_SUBJECTS = {"elementary_mathematics": "elem", "high_school_mathematics": "hsm", "college_mathematics": "colm"}
+MMLU_TRAP_CHANCE = 1 / 3  # the old answer is 1 of the 3 wrong options of a swapped item
+SOLVE_TIMEOUT_S = 10  # 11a: seconds allowed for one generated solve() check
+
 PAPER_JEV_ACCURACY = {"hs": 0.955, "arce": 0.993, "arcc": 0.977, "csqa": 0.882}
 

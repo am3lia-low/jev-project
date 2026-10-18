@@ -1,4 +1,4 @@
-"""Shared plumbing for the LLM generation scripts (03, 05, 06a) and review sheets.
+"""Shared plumbing for the LLM generation scripts (03, 05, 06a, 11a) and review sheets.
 
 - `make_client`: OpenRouter client with this part's cache, call log and a cap.
 - `chat_json`: one chat request that must answer with a JSON object.
@@ -51,14 +51,15 @@ def parse_json_reply(text: str | None) -> dict[str, Any]:
 
 
 def chat_json(
-    client: OpenRouterClient, model: str, prompt: str, attempt: int = 0
+    client: OpenRouterClient, model: str, prompt: str, attempt: int = 0, **overrides: Any
 ) -> tuple[dict[str, Any], CallResult]:
     """Send `prompt` as one user message and parse the JSON object it answers with.
 
     `attempt` > 0 sends the same prompt again as a fresh request (new cache
-    entry), for regenerating items that failed validation.
+    entry), for regenerating items that failed validation. `overrides`
+    replace the model's GENERATION_PARAMS (e.g. a lower temperature).
     """
-    params = {**GENERATION_PARAMS.get(model, {}), "response_format": {"type": "json_object"}}
+    params = {**GENERATION_PARAMS.get(model, {}), **overrides, "response_format": {"type": "json_object"}}
     result = client.chat(
         model,
         [{"role": "user", "content": prompt}],

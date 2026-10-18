@@ -1,0 +1,23 @@
+You are helping build a test of whether a model calculates or recalls memorised answers. Below is a multiple-choice maths question with its correct answer. Rewrite it with DIFFERENT NUMBERS so that the correct answer changes, keeping everything else exactly the same.
+
+Question:
+$question
+
+Options:
+$options
+
+Correct answer: $answer
+
+Rules:
+1. Change only the numbers. Every other character stays identical: same words, same order, same punctuation, same LaTeX. Do not write numbers as words or words as numbers.
+2. Change every number that affects the answer, noticeably (not by 1 or a tiny amount), keeping a similar size and the same number of digits where possible, and the same kind of arithmetic. The problem must stay well-posed and about as hard as the original, and the new answer should be as tidy as the original answer (a whole number if the original answer is one).
+3. The new correct answer must differ from all four original options.
+4. Write a Python function `solve(...)` that computes the correct answer from the question's numbers, passed as keyword arguments. It may use `math` and `Fraction` (already imported); no other imports. Return a number (int, float or Fraction). For a percentage answer, return the number before the % sign. Give the arguments for the original numbers and for your new numbers: solve(**original_args) must give the original correct answer, solve(**new_args) your new answer.
+5. Give 2 wrong answers for the new question, written as typical mistakes a student would make with the new numbers (a wrong operation, a missed step, an off-by-one). They must differ from the new answer, from each other and from the original correct answer ($answer).
+6. Write every answer in the same format as the original options (e.g. "$$12.50", "3/8", "45%", "7").
+7. If the answer does not depend on the numbers in a way you can recompute (e.g. a count fixed by theory, or a question with no numbers that matter), set "swappable" to false.
+
+Answer with JSON only:
+{"swappable": true, "new_question": "...", "solve": "def solve(a, b):\n    return ...", "original_args": {"a": 0, "b": 0}, "new_args": {"a": 0, "b": 0}, "new_answer": "...", "wrong_answers": ["...", "..."]}
+or
+{"swappable": false, "reason": "..."}

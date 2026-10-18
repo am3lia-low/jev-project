@@ -129,8 +129,9 @@ def model_slug(model: str) -> str:
     return model.replace("/", "__")
 
 
-def run_path(model: str, run: str) -> Path:
-    return RAW_RESULTS_DIR / model_slug(model) / f"{run}.jsonl"
+def run_path(model: str, run: str, root: Path = RAW_RESULTS_DIR) -> Path:
+    """`root` is RAW_RESULTS_DIR except for the MMLU sub-experiment (11c), kept apart from 10_analyse.py."""
+    return root / model_slug(model) / f"{run}.jsonl"
 
 
 def _pred(task: Task, probabilities: dict[str, float] | None, result: CallResult | None) -> str | None:
@@ -171,9 +172,10 @@ def _record(task: Task, run: str, probabilities: dict[str, float] | None,
 
 
 def run_tasks(
-    tasks: list[Task], answer: Answerer, model: str, run: str, cache_tag: str | None, workers: int
+    tasks: list[Task], answer: Answerer, model: str, run: str, cache_tag: str | None, workers: int,
+    root: Path = RAW_RESULTS_DIR,
 ) -> bool:
-    """Answer every task and write `run_path(model, run)`; True if the spending cap stopped it.
+    """Answer every task and write `run_path(model, run, root)`; True if the spending cap stopped it.
 
     A stopped run writes nothing: re-run it (finished calls come from the
     cache) so a results file is always complete. Calls that fail after the
@@ -185,7 +187,7 @@ def run_tasks(
         return True
     records = {task.id: _record(task, run, probabilities, result, None) for task, (probabilities, result) in done}
     records |= {task.id: _record(task, run, None, None, error) for task, error in failed}
-    path = run_path(model, run)
+    path = run_path(model, run, root)
     write_records(path, [records[task.id] for task in tasks])
     accuracy = sum(r["correct"] for r in records.values()) / len(records)
     print(f"  {run}: {len(records)} questions, accuracy {accuracy:.1%}, {len(failed)} failed -> {path}")

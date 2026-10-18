@@ -33,11 +33,13 @@ Scripts are numbered by their step in [A10](../docs/PLAN.md#a10-order-of-work) a
 │   ├── levels.py             # Level 0-3 views of the test set
 │   ├── prompts.py            # loads and fills the templates in prompts/; Jev request builders
 │   ├── generation.py         # LLM calls returning JSON, parallel runs, review sheets
+│   ├── mmlu.py               # A11: MMLU maths candidates, number parsing, solve() check
 │   └── evaluation.py         # tasks, LLM prompt, run loop, result records (08, 09, 10)
 ├── prompts/                  # frozen prompt text
 │   ├── paraphrase.txt
 │   ├── swap.txt
 │   ├── quiz.txt
+│   ├── mmlu_swap.txt         # A11 (eval/mmlu.txt: the bare question, as ARC)
 │   ├── llm_system.txt        # decision-index's system line for the LLM baselines
 │   ├── generate_new/<dataset>.txt
 │   └── eval/<dataset>.txt    # decision-index templates (A9)
@@ -55,6 +57,10 @@ Scripts are numbered by their step in [A10](../docs/PLAN.md#a10-order-of-work) a
 ├── 08_run_jev.py             # A9: sanity check, repeatability, Levels 0-3, quiz   [API laptop]
 ├── 09_run_llm.py             # A9: LLM baselines, Levels 0-3 + quiz        [API laptop]
 ├── 10_analyse.py             # A8: tables, figures, McNemar, log-odds, quiz, verdict
+├── 11a_mmlu_swap.py          # A11: MMLU maths number swaps + solve() code check   [API laptop]
+├── 11b_mmlu_build.py         # A11: pick 200, original + swapped (trap) versions, manual 30
+├── 11c_run_mmlu.py           # A11: Jev + LLMs on both versions                [API laptop]
+├── 11d_analyse_mmlu.py       # A11: accuracy, log-odds drop, trap rate, pass rule
 │
 ├── data/                     # committed
 │   ├── sampled/<dataset>/{train,val,test}.jsonl     # 02
@@ -69,11 +75,14 @@ Scripts are numbered by their step in [A10](../docs/PLAN.md#a10-order-of-work) a
 │   ├── swaps/swaps.jsonl, swaps/failed.json         # 06b: swaps that passed / rejected
 │   ├── quiz/quiz.jsonl                              # 06c
 │   ├── bert/{train,val,level0..level3}.jsonl, manifest.json  # 07a
+│   ├── mmlu/{candidates,raw,verified}.jsonl, failed.json   # 11a
+│   ├── mmlu/items.jsonl                             # 11b: original + swapped versions
 │   └── reviews/              # manual-check sheets you fill in (CSV)
 │       ├── pilot_30.csv
 │       ├── paraphrase_50.csv
 │       ├── new_questions.csv
-│       └── swaps_30.csv
+│       ├── swaps_30.csv
+│       └── mmlu_swaps_30.csv
 ├── results/                  # committed
 │   ├── raw/<author>__<model>/{level0,level1,level2,level3,quiz,repeat_1,repeat_2,repeat_3}.jsonl
 │   │                         # per question: answer, probabilities, latency, cost
@@ -82,7 +91,8 @@ Scripts are numbered by their step in [A10](../docs/PLAN.md#a10-order-of-work) a
 │   ├── figures/
 │   ├── verdict.md
 │   ├── memorisation_findings.md  # written by hand: reading of the results
-│   └── bert_learning_curve/frac_<pct>_seed_<n>/  # 07b with LEARNING_CURVE = True (diagnostic)
+│   ├── bert_learning_curve/frac_<pct>_seed_<n>/  # 07b with LEARNING_CURVE = True (diagnostic)
+│   └── mmlu/{raw/<model slug>/{original,swapped}.jsonl, tables/, summary.md}  # 11c, 11d (not read by 10)
 ├── cache/                    # not committed: raw API responses, so scripts can resume
 └── logs/                     # not committed: API call logs
 ```
@@ -99,5 +109,6 @@ Levels 0 and 1 are not separate files in `data/`: they are the original and shuf
 - `08` and `09`: all levels and the quiz run for Jev, Qwen and Gemma (Levels 0, 1, 3 on 2026-10-17; Level 2 and quiz on 2026-10-18, 0 failed). `10_analyse.py` rerun on everything; draft verdict in [`results/verdict.md`](results/verdict.md).
 - **Results so far:** Jev passes the pre-registered ladder rule only narrowly (pooled log-odds drop 2.05× BERT's, CI [0.03, 0.40]; no single dataset passes; Qwen drops more); the quiz is uninformative (originals picked more on unseen control items; Qwen answers "none" on 492/494); no drop on Level 3. Read as weak, inconclusive evidence of memorisation: [`results/memorisation_findings.md`](results/memorisation_findings.md).
 - BERT learning curve run 2026-10-18 (`results/bert_learning_curve/`): HellaSwag flat; ARC-Challenge still rising but below the threshold, so it only rejoins via the RACE fallback; the other three still rising at 100%.
-- Next: the final verdict by hand, the RACE-fallback decision, and the MMLU number-swap sub-experiment (PLAN A11).
+- MMLU number-swap sub-experiment (PLAN A11): `11a`-`11d` written and dry-run on a fake model 2026-10-18 (checks catch planted bad swaps; analysis recovers a planted memoriser). Not run live yet.
+- Next: the final verdict by hand, the RACE-fallback decision, and the live MMLU runs (`docs/api-laptop-checks.md`).
 - Remaining work, in order: [`docs/api-laptop-checks.md` → Run order](../docs/api-laptop-checks.md).
