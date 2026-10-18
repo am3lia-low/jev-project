@@ -30,6 +30,24 @@ Kept as the original brief. All items are done.
 | 4 | **Smoke test 08 and 09 on Level 0** before the other runs. There is no "first N questions" option and a run stopped by `--max-cost` writes nothing, so run `08_run_jev.py sanity` (~$0.01) and `09_run_llm.py levels --models qwen/qwen3.8-27b --levels 0` (~$0.2); check `results/raw/<model>/level0.jsonl` has probabilities, few or no errors, and sanity says OK. The calls are cached, so later full runs reuse them. | `08_run_jev.py`, `09_run_llm.py` | ~$0.25 |
 | 5 | **First run of the BERT notebook** (planned for Colab, run on Kaggle) (needs a GPU and the HuggingFace model download). | `notebooks/07b_bert_colab.ipynb` | Run on Colab T4 with a small data set first; check the truncation count, loss falls, val accuracy above chance. |
 
+## To do (2026-10-18): Level 2 and quiz runs (Jev + LLMs)
+
+Both gates cleared: `paraphrase_50.csv` filled 2026-10-17 (50/50 fine), memorisation threshold confirmed as written 2026-10-18 (PLAN A8), quiz rebuilt 2026-10-17 with 494 items (6 swaps flagged in `swaps_30.csv` dropped by `06b`). No Level 2 or quiz results exist yet. Independent of the BERT learning curve below; run in any order.
+
+Run from `01-jev-benchmarks/` after `git pull`:
+
+1. `python 08_run_jev.py levels --levels 2` — 2,000 questions; Level 0 cost $0.033, so expect about the same. 8b's 99.5% agreement means one run (no `--runs`).
+2. `python 08_run_jev.py quiz` — 494 items.
+3. `python 09_run_llm.py levels --levels 2` — both Qwen and Gemma (default `--models`).
+4. `python 09_run_llm.py quiz` — both models.
+5. `python 10_analyse.py`, then commit `results/` (raw, tables, figures, `verdict.md`).
+
+All four runs together should stay well under $1 (previous estimate for the whole of 08 + 09: about $1.10, most of it already spent). The `--max-cost` defaults ($0.50 for 08, $2.00 for 09) are enough; a run stopped by `--max-cost` writes nothing, but its calls are cached, so a re-run picks up where it stopped.
+
+**Check after each run:** `results/raw/<model>/level2.jsonl` and `quiz.jsonl` have 2,000 / 494 rows, probabilities present, few or no errors (`08`/`09` print only progress and spend; accuracies come from `10_analyse.py`). LLMs: still served by the pinned providers (DekaLLM for Qwen, Makora for Gemma; the call log records `provider`).
+
+**Do not** change `MEMORISATION_DROP_RATIO`, the ladder pool or the above-chance rule after seeing these results; they are fixed (PLAN A8). ARC-Challenge rejoins the pool only on BERT's evidence (learning curve / RACE fallback).
+
 ## To do (2026-10-18): BERT learning curve on Kaggle
 
 Can't be run from the cloud Claude session: kaggle.com is blocked there and it has no Kaggle token. Free (Kaggle GPU quota only, ~80 min of T4); no OpenRouter calls.
