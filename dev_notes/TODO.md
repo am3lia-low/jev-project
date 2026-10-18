@@ -90,6 +90,11 @@ Same order as [`docs/api-laptop-checks.md` → Run order](../docs/api-laptop-che
 - [ ] `09_run_llm.py` levels → quiz (Qwen and Gemma). Done 2026-10-17: levels 0, 1, 3 for both. Left: Level 2 and quiz, same gates as 08.
 - [ ] `10_analyse.py`, then the final verdict by hand.
 
+## 9b. [ ] BERT learning curve (2026-10-18)
+
+- [x] `LEARNING_CURVE` option in `notebooks/07b_bert_colab.ipynb` (nested 25/50/100% subsets per dataset, original + paraphrase kept together, 2 seeds, ~80 min on a T4). Subset logic and summary cell tested locally on `data/bert/train.jsonl`; training not run here (no GPU).
+- [ ] Run on Kaggle (new kernel, `LEARNING_CURVE = True`), download to `results/bert_learning_curve/`, then decide: enlarge the train pool and/or the RACE fallback for ARC-Challenge.
+
 ## 10. [ ] Open decisions
 
 See PLAN.md → Open questions: confirm the memorisation threshold (before Jev's Level 2 run), and whether to add an MMLU math number-swap slice.
