@@ -22,7 +22,7 @@ Run from this folder on the API laptop:
 import argparse
 import json
 
-from helpers.bigfive import Answerer, Task, jev_answerer, llm_answerer, make_client, run_condition, tasks_for
+from helpers.bigfive import Task, make_client, model_answerer, run_condition, tasks_for
 from helpers.config import N_BASELINE_RUNS_JEV, N_BASELINE_RUNS_LLM, N_PERSONA_VARIANTS, PLACEMENTS
 from helpers.ipip import DOMAINS, load_items
 from helpers.personas import BASELINE_CONDITION, Condition, markers_verified, persona_conditions
@@ -32,17 +32,11 @@ from jev_common.openrouter import OpenRouterClient
 MODELS = (JEV_MODEL, *LLM_BASELINE_MODELS)
 
 
-def answerer(client: OpenRouterClient, model: str) -> Answerer:
-    if model == JEV_MODEL:
-        return jev_answerer(client, model)
-    return llm_answerer(client, model, llm_eval_params(model))
-
-
 def check(client: OpenRouterClient, models: list[str]) -> None:
     item = load_items()[1]  # ipip-002 "Make friends easily", E plus-keyed
     conditions = [BASELINE_CONDITION, *(Condition("E", "high", p) for p in PLACEMENTS)]
     for model in models:
-        answer = answerer(client, model)
+        answer = model_answerer(client, model)
         for condition in conditions:
             task = Task(item, condition, None if condition.is_baseline else 1, 1)
             value, probabilities, raw, result = answer(task)
@@ -54,7 +48,7 @@ def run(client: OpenRouterClient, models: list[str], conditions: list[Condition]
     items = load_items()
     for model in models:
         print(model)
-        answer = answerer(client, model)
+        answer = model_answerer(client, model)
         for condition in conditions:
             if condition.is_baseline:
                 n_runs = N_BASELINE_RUNS_JEV if model == JEV_MODEL else N_BASELINE_RUNS_LLM

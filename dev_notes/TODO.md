@@ -101,15 +101,15 @@ Same order as [`docs/api-laptop-checks.md` → Run order](../docs/api-laptop-che
 See PLAN.md → Open questions.
 
 - [x] Memorisation threshold confirmed as written (2026-10-18), before any Level 2 run.
-- [x] MMLU math number-swap slice: yes, as its own sub-experiment (2026-10-18; PLAN A11, TODO 12).
+- [x] MMLU math number-swap slice: yes, as its own sub-experiment (2026-10-18; PLAN A11, TODO 9c).
 
-## 12. [ ] MMLU number-swap sub-experiment (PLAN A11, 2026-10-18)
+## 9c. [ ] MMLU number-swap sub-experiment (PLAN A11, 2026-10-18)
 
-Maths only (elementary / high school / college maths, 340 numeric candidates), ~200 items; swaps by `NEW_QUESTION_MODEL` with a `solve()` code check; old answer kept as a trap option.
+Maths only (elementary / high school / college maths, 339 numeric candidates), ~200 items; swaps by `NEW_QUESTION_MODEL` with a `solve()` code check; old answer kept as a trap option.
 
-- [ ] Confirm the A11 pass rule before any `11c` run.
-- [ ] `11a_mmlu_swap.py` (generate + code check), `11b_mmlu_build.py`, `11c_run_mmlu.py`, `11d_analyse_mmlu.py`; dry-run with a fake model.
-- [ ] Run `11a`, fill `data/reviews/mmlu_swaps_30.csv`, run `11b`.
+- [x] A11 pass rule confirmed as written (2026-10-18), before any `11c` run.
+- [x] `11a_mmlu_swap.py` (generate + code check), `11b_mmlu_build.py`, `11c_run_mmlu.py`, `11d_analyse_mmlu.py`, `helpers/mmlu.py`, `prompts/mmlu_swap.txt`. Dry-run 2026-10-18 on a fake model with real MMLU data: the checks catch planted bad swaps (wording changed, wrong solve(), not swappable), retries and review flags work, positions balanced, and 11d recovers a planted memoriser (and clears two computing models).
+- [ ] Run `11a` (+ `--retry-failed`; ~$2-3 of Sonnet), `11b`, fill `data/reviews/mmlu_swaps_30.csv`, re-run `11b`.
 - [ ] Run `11c` (Jev, Qwen, Gemma), then `11d`.
 
 ## 11. [ ] Part B: Big Five (B1 steps 1-3)
@@ -122,3 +122,11 @@ Maths only (elementary / high school / college maths, 340 numeric candidates), ~
 - [x] `baseline` run 2026-10-15 ($0.011; one Gemma 520 retried). Jev's repeats barely differ (mean per-item SD 0.04).
 - [x] `personas` run 2026-10-15 ($0.48, 0 failed) and analysed: alpha 0.95-0.97 for every model and trait; every persona moves its trait (Jev high - low +2.7 to +3.7; LLMs +2.7 to +3.9); state placement > instructions; large off-target shifts (~1-2 points, a desirability halo). Written up in `02-jevlet-personas/results/bigfive_findings.md` with the shift-matrix figure.
 - [ ] Then B1 step 4 (IPIP paraphrases), step 5 (scenarios), B2 (ladder).
+
+## 12. [ ] Part B: persona decay (B4)
+
+- [x] Designed 2026-10-18 (PLAN B4): own-answer and quiz histories, 32 turns, checkpoints 0/2/4/8/16/32, E/C/N high/low, wordings 1-3, persona in state vs instructions, no-persona baseline, re-reminder at turn 16.
+- [x] `helpers/decay.py`, `03_run_decay.py`, `04_analyse_decay.py`; `model_answerer` moved into `helpers/bigfive.py`. Dry-run on a fake model (recovers a planted fade, the re-reminder, flat controls).
+- [x] `03_run_decay.py estimate` (local): ~14k calls per model, about $2.45 in total.
+- [ ] API laptop: `03_run_decay.py check` (< $0.01), then `run` (~$2.45), then `04_analyse_decay.py` and a hand-written findings file.
+- [ ] Follow-up: active realistic arm (support chat, a `choice` per turn).

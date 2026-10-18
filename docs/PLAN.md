@@ -7,7 +7,7 @@ The project has two independent parts:
 - **Part A — Jev benchmarks** ([`01-jev-benchmarks/`](../01-jev-benchmarks/)): Jev vs BERT on MCQ, and how deep Jev's memorisation of public benchmarks goes.
 - **Part B — Jevlet personas** ([`02-jevlet-personas/`](../02-jevlet-personas/)): can Jev adopt behavioural (Big Five) and intellectual personas, compared to LLMs?
 
-Last updated: 2026-10-15
+Last updated: 2026-10-18
 
 ---
 
@@ -294,7 +294,7 @@ Comparisons:
 8. [x] `08_run_jev.py` (API laptop): 8a sanity check · 8b repeatability · 8c Levels 0–3 · 8d quiz (8a done 2026-10-09: Level 0 within the paper's CI on all 4 paper datasets; 8b done 2026-10-17: 99.5% agreement, single runs; 8c Levels 0, 1, 3 done 2026-10-17, Level 2 2026-10-18; 8d done 2026-10-18 on the 494-item quiz)
 9. [x] `09_run_llm.py` (API laptop): LLM baselines, Levels 0–3 + quiz (Levels 0, 1, 3 done for both 2026-10-17; Level 2 and quiz 2026-10-18)
 10. [ ] `10_analyse.py` — tables, plots, McNemar, log-odds comparison, quiz scoring, verdict (run on all results 2026-10-18; reading in [`results/memorisation_findings.md`](../01-jev-benchmarks/results/memorisation_findings.md); final verdict by hand left)
-11. [ ] MMLU number-swap sub-experiment ([A11](#a11-mmlu-number-swap-sub-experiment)): `11a_mmlu_swap.py` → manual check → `11b_mmlu_build.py` → `11c_run_mmlu.py` → `11d_analyse_mmlu.py`
+11. [ ] MMLU number-swap sub-experiment ([A11](#a11-mmlu-number-swap-sub-experiment)): `11a_mmlu_swap.py` → `11b_mmlu_build.py` (writes the manual-check sheet; re-run after filling it) → `11c_run_mmlu.py` → `11d_analyse_mmlu.py` (all written and dry-run on a fake model 2026-10-18; not run live yet)
 
 Script files are named by their step number above (`06a`, `06b`, … when a step has several), so the folder lists them in run order.
 
@@ -305,10 +305,10 @@ Separate from the ladder, quiz and Level 3 (decided 2026-10-18): its own data, s
 **Why:** Deußer et al. flagged likely MMLU training exposure because Jev scored *higher* on calculation-heavy MMLU subjects. The ladder and quiz keep the answer unchanged, so they cannot separate recall from reasoning. Changing a question's numbers changes its answer: a model that computes follows the new numbers; a model that recalls the original keeps picking the old answer.
 
 **Items — `11a_mmlu_swap.py`**
-- Source: MMLU (`cais/mmlu`) **test** split, `elementary_mathematics` (378), `high_school_mathematics` (270), `college_mathematics` (100). Candidates: all four options are plain numbers (integer, decimal, fraction, %, $) and the question contains a number: 152 + 165 + 23 = 340 (checked 2026-10-18).
-- For each candidate, `NEW_QUESTION_MODEL` returns: the question with **only its numbers changed** (same wording, same magnitude and number of digits where possible, same kind of arithmetic), a Python `solve(...)` function with the original and the new numbers as arguments, and 2 plausible wrong answers for the new version. It may answer `not_swappable` (e.g. a count fixed by theory, not by the numbers).
+- Source: MMLU (`cais/mmlu`) **test** split, `elementary_mathematics` (378), `high_school_mathematics` (270), `college_mathematics` (100). Candidates: all four options are plain numbers (integer, decimal, fraction, %, $) and the question contains a number: 151 + 165 + 23 = 339 (checked 2026-10-18; items with two equal-valued options are left out).
+- For each candidate, `NEW_QUESTION_MODEL` returns: the question with **only its numbers changed** (same wording, same magnitude and number of digits where possible, same kind of arithmetic), a Python `solve(...)` function with the original and the new numbers as arguments, and 2 wrong answers for the new version written as typical mistakes on the new numbers (so they tempt as much as the old answer does). It may answer `not_swappable` (e.g. a count fixed by theory, not by the numbers).
 - **Code check** (automatic): `solve(original numbers)` must equal the original correct option, `solve(new numbers)` must differ from it and from every original option, and the 2 wrong answers must differ from both. `solve` runs in a separate process with a timeout. Items failing any check are retried (up to `MAX_ATTEMPTS`), then dropped.
-- **Manual check:** a sheet of 30 verified items (`data/reviews/mmlu_swaps_30.csv`): new question reads naturally, only numbers changed, new answer right. Flagged items are dropped.
+- **Manual check** (sheet written by `11b`): 30 of the selected items (`data/reviews/mmlu_swaps_30.csv`): only numbers changed and it reads naturally, new answer right, and the 2 wrong answers are as plausible as the old answer (the 1/3 chance level of the trap test assumes this). Flagged items are replaced by the next verified item of their subject.
 - Keep **200** verified items, a seeded draw spread over the three subjects in proportion to their verified counts.
 
 **Two versions per item — `11b_mmlu_build.py`**
@@ -318,7 +318,7 @@ Separate from the ladder, quiz and Level 3 (decided 2026-10-18): its own data, s
 
 **Runs — `11c_run_mmlu.py`:** Jev, Qwen and Gemma, both versions, one run each (Jev's repeatability is 99.5%, A9). 1,200 calls, a few cents.
 
-**Analysis — `11d_analyse_mmlu.py`** (pass rule to be confirmed before any `11c` run, as A8 was)
+**Analysis — `11d_analyse_mmlu.py`** (pass rule confirmed as written 2026-10-18, before any `11c` run)
 - Per model: accuracy on original vs swapped (bootstrap 95% CI), paired McNemar, log-odds drop.
 - **Trap rate:** share of swapped items where the model picks the old answer, and the trap's share of its *wrong* answers (chance: 1/3, as 3 wrong options).
 - **Memorisation supported for a model** if both: (1) its log-odds drop from original to swapped has a bootstrap 95% CI entirely above 0, and (2) the trap's share of its wrong answers on swapped items is above 1/3 (one-sided binomial, p < 0.05).
@@ -331,7 +331,7 @@ Separate from the ladder, quiz and Level 3 (decided 2026-10-18): its own data, s
 
 Code: [`02-jevlet-personas/`](../02-jevlet-personas/) (see its README).
 
-Separate from Part A. Jev calls are stateless (no conversation history), so classic multi-turn persona drift should not apply; the risk is a **weak pull** (persona barely shifts answers away from defaults). LLMs are the baseline throughout.
+Separate from Part A. Jev calls are stateless (no conversation history), so classic multi-turn persona drift can only happen through what an app puts in the state. B1 tests the first risk, a **weak pull** (persona barely shifts answers away from defaults); B4 tests whether a persona fades as a history grows in the state. LLMs are the baseline throughout.
 
 ### B1. Behavioural axis — Big Five
 
@@ -371,6 +371,24 @@ Two conditions per benchmark: **no persona** (actual ability) and **"pretend to 
 4. [ ] IPIP paraphrases for the contamination check (B1 step 4)
 5. [ ] Scenario questions per trait for the behaviour check (B1 step 5)
 6. [ ] Difficulty ladder (B2): loaders, HLE text-only MCQ filter, persona prompts, runs, analysis
+7. [ ] Persona decay (B4): `03_run_decay.py` (`estimate` -> `check` -> `run`) and `04_analyse_decay.py`. Written and dry-run on a fake model 2026-10-18 (recovers a planted fade, the re-reminder and the flat controls). `estimate` 2026-10-18: ~14k calls per model, about $2.45 for all three models and both arms. Not run live yet
+8. [ ] Persona decay follow-up (B4): active realistic arm, a support chat where the jevlet makes a `choice` each turn, scored on its choices (fits with B1 step 5)
+
+### B4. Persona decay
+
+Do personas fade as a history grows in front of the question? Added 2026-10-18, after B1 found strong pulls with stateless, one-item requests (the best case for a persona).
+
+- **Prior work:** [Li et al. 2024](https://arxiv.org/abs/2402.10962) (COLM) found significant instruction/persona drift within 8 rounds of self-chat (LLaMA2-chat-70B; gpt-3.5 ~10% drop), linked it to attention on the system prompt dropping between turns, and fixed later-turn drift by repeating the system prompt. [CAPE](https://aclanthology.org/2025.findings-emnlp.563/) (EMNLP 2025 Findings) kept earlier Q&A in context: answers became more consistent but personalities shifted, by model. [PERSIST](https://ojs.aaai.org/index.php/AAAI/article/view/41133) (AAAI) found history can also increase variability. No prior work on Jev.
+- **How a history reaches Jev:** Jev keeps nothing between requests, so our script builds the history and sends it in the state with every request, as an app would: `{"persona": ..., "history": [{"question": ..., "answer": ...}, ...]}`. The persona comes first, then the history, then the probe question. The LLM baselines get the same state JSON in the B1 prompt format (not real chat turns), so all three models get the same input.
+- **Arms** (history of 32 turns, decided 2026-10-18):
+  - **Own answers:** IPIP items from O and A (16 each, seeded order, the same for every condition), answered by the model turn by turn. Turn t is sent with turns 1 to t-1, and the script writes the most likely answer label into the history. Real use: drift plus the model seeing its own earlier answers.
+  - **Quiz Q&A:** 32 fixed ARC-Easy questions (Part A validation split) with their correct answers, the same for every condition and model. Same length and structure, no personality content: decay from length alone.
+  - Realistic app content was considered (2026-10-18) and left for the follow-up: a passive chat log adds little over the quiz arm and can carry emotional pull. The planned version is active: the jevlet makes a `choice` each turn.
+- **Probes:** at checkpoints 0, 2, 4, 8, 16 and 32 turns, the persona trait's 24 IPIP items (all 72 for the baseline), one request each, with the first k turns. Probe answers are never added to the history. Checkpoint 0 is exactly the B1 request.
+- **Conditions:** traits E, C (strongest pulls in B1) and N (largest side effects); high and low; B1 wordings 1-3; persona in the state (main) or in the question instructions (control: the persona stays next to every question). Plus a no-persona baseline (what the history does on its own) and a **re-reminder**: the persona repeated as a history entry right after turn 16, probed at 16 and 32 (state placement only; later turns are not regenerated).
+- **Measure:** shift = high - low on the persona's trait at each checkpoint (effects of the history on both poles cancel). **Retention** = shift / shift at checkpoint 0. Bootstrap CIs over items.
+- **Reading the results:** retention falls in the state but not in the instructions -> distance from the question is the cause. Both fall -> the history content overrides the persona. The re-reminder recovers the shift -> the persona was crowded out, not lost. Own answers vs quiz -> does seeing its own (in-character) answers reinforce or wear down the persona?
+- **Size:** per model, 37 conversations per arm; own arm 1,184 history calls + 6,480 probes, quiz arm 6,480 probes (~14k calls per model). Estimated $2.45 for all three models (`estimate`, scaled from B1's actual cost per character).
 
 ---
 
@@ -402,4 +420,4 @@ Model lineup (OpenRouter listing checked 2026-10-06; pin these IDs, no `~…-lat
 ## Open questions
 
 - ~~Confirm the memorisation threshold in A8~~ Confirmed as written 2026-10-18 (log-odds, CI above 0 and ≥ 2× BERT's drop, pooled over the ladder datasets where BERT passes the above-chance rule), with no Jev or LLM Level 2 results in existence. Implemented in `10_analyse.py` (`memorisation_table`) and `stats.compare_drops`, `MEMORISATION_DROP_RATIO = 2.0`. Which datasets BERT passes on is decided by BERT's val results alone (currently ARC-Easy, CommonsenseQA, SWAG; ARC-Challenge may rejoin via the learning curve / RACE fallback), never by Jev's Level 2 numbers.
-- ~~Add an MMLU math slice to test number-swapping?~~ Decided 2026-10-18: yes, as a separate sub-experiment (A11): maths only, ~200 items, LLM swaps checked by code, old answer kept as a trap option. Its pass rule (A11 → Analysis) is still to be confirmed before any run.
+- ~~Add an MMLU math slice to test number-swapping?~~ Decided 2026-10-18: yes, as a separate sub-experiment (A11): maths only, ~200 items, LLM swaps checked by code, old answer kept as a trap option. Its pass rule (A11 → Analysis) was confirmed as written 2026-10-18, before any run.

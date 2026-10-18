@@ -27,9 +27,10 @@ import os
 from collections.abc import Callable, Iterable, Sequence
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any
+from typing import Any, Protocol
 
 from jev_common.cache import DiskCache
+from jev_common.models import JEV_MODEL, llm_eval_params
 from jev_common.openrouter import CallResult, OpenRouterClient, letter_probabilities
 from jev_common.parallel import run_parallel
 
@@ -40,9 +41,21 @@ from .personas import Condition, persona_text
 QUESTION_KEY = "q1"
 SCALE_KEYS = tuple(str(SCALE_MIN + i) for i in range(len(scale_labels())))  # "1".."5"
 
-# (answer 1-5, probabilities or None, raw Jev answer or None, call result) for one task
+
+
+class Request(Protocol):
+    """Anything that can be sent as one request: a B1 `Task` or a B4 `decay.Call`."""
+
+    @property
+    def request(self) -> dict[str, Any]: ...  # {state, questions}, with the question under QUESTION_KEY
+
+    @property
+    def cache_tag(self) -> str | None: ...
+
+
+# (answer 1-5, probabilities or None, raw Jev answer or None, call result) for one request
 Answer = tuple[float, dict[str, float] | None, dict[str, Any] | None, CallResult]
-Answerer = Callable[["Task"], Answer]
+Answerer = Callable[[Request], Answer]
 
 
 @dataclass(frozen=True)
@@ -84,7 +97,7 @@ def tasks_for(condition: Condition, items: Sequence[Item], variants: Iterable[in
 # Answering
 # ---------------------------------------------------------------------------
 def jev_answerer(client: OpenRouterClient, model: str) -> Answerer:
-    def answer(task: Task) -> Answer:
+    def answer(task: Request) -> Answer:
         request = task.request
         result = client.decide(model, request["state"], request["questions"], cache_tag=task.cache_tag)
         raw = result.response["answers"][QUESTION_KEY]
@@ -93,7 +106,7 @@ def jev_answerer(client: OpenRouterClient, model: str) -> Answerer:
     return answer
 
 
-def render_prompt(task: Task) -> str:
+def render_prompt(task: Request) -> str:
     """The user message, as decision-index renders a question (Part A's `render_prompt`)."""
     request = task.request
     question = request["questions"][QUESTION_KEY]
@@ -105,19 +118,26 @@ def render_prompt(task: Task) -> str:
     return "\n".join(lines)
 
 
-def chat_messages(task: Task) -> list[dict[str, str]]:
+def chat_messages(task: Request) -> list[dict[str, str]]:
     system = (PROMPTS_DIR / "llm_system.txt").read_text(encoding="utf-8").strip()
     return [{"role": "system", "content": system}, {"role": "user", "content": render_prompt(task)}]
 
 
 def llm_answerer(client: OpenRouterClient, model: str, params: dict[str, Any]) -> Answerer:
-    def answer(task: Task) -> Answer:
+    def answer(task: Request) -> Answer:
         result = client.chat(model, chat_messages(task), cache_tag=task.cache_tag, **params)
         probabilities = letter_probabilities(result.response, SCALE_KEYS)
         expected = sum(int(key) * p for key, p in probabilities.items())
         return expected, probabilities, None, result
 
     return answer
+
+
+def model_answerer(client: OpenRouterClient, model: str) -> Answerer:
+    """Jev's answerer for Jev, else the LLM answerer with that model's pinned settings."""
+    if model == JEV_MODEL:
+        return jev_answerer(client, model)
+    return llm_answerer(client, model, llm_eval_params(model))
 
 
 def make_client(namespace: str, max_cost_usd: float) -> OpenRouterClient:

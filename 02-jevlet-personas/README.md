@@ -10,6 +10,7 @@ The full design is in [`docs/PLAN.md` → Part B](../docs/PLAN.md#part-b--jevlet
 |---|---|---|
 | Behavioural | Big Five personas with IPIP-NEO-120, using Jev's `score` type, plus scenario questions using `choice` | [B1](../docs/PLAN.md#b1-behavioural-axis--big-five) |
 | Intellectual | "Pretend to be [level]" across a ladder from ARC-Easy up to Humanity's Last Exam | [B2](../docs/PLAN.md#b2-intellectual-axis--difficulty-ladder) |
+| Persona decay | Does a Big Five persona fade as a history grows in the state? | [B4](../docs/PLAN.md#b4-persona-decay) |
 
 ## Where things run
 
@@ -29,12 +30,15 @@ Shared code (pinned model IDs, OpenRouter client, cache, parallel runner, stats)
 ├── README.md
 ├── 01_run_bigfive.py       # B1 steps 1-3: check -> baseline -> personas (API laptop)
 ├── 02_analyse_bigfive.py   # B1 steps 1-3: scores, alpha, acquiescence, noise, persona shifts
+├── 03_run_decay.py         # B4: estimate (local) -> check -> run (API laptop)
+├── 04_analyse_decay.py     # B4: shift and retention per checkpoint, figure
 ├── helpers/                # Part B-only code
 │   ├── config.py           # paths, seeds, run counts, persona settings
 │   ├── ipip.py             # IPIP-NEO-120 items, scoring key, reverse-keyed items, Jev score questions
 │   ├── reliability.py      # Cronbach's alpha per trait, acquiescence
 │   ├── personas.py         # persona conditions and their wordings
-│   └── bigfive.py          # tasks, Jev requests, LLM prompts, result records
+│   ├── bigfive.py          # tasks, Jev requests, LLM prompts, result records
+│   └── decay.py            # B4 histories, conversations, probes, records
 ├── prompts/
 │   ├── llm_system.txt      # LLM system line (same as Part A)
 │   └── personas/
@@ -44,9 +48,12 @@ Shared code (pinned model IDs, OpenRouter client, cache, parallel runner, stats)
 │   └── ipip/               # IPIP-NEO-120 items (later: paraphrased items, B1 step 4)
 ├── results/                # committed
 │   ├── raw/<model slug>/bigfive/<condition>.jsonl   # 01
+│   ├── raw/<model slug>/decay/<arm>/        # 03: <condition>.jsonl, histories/
 │   ├── tables/bigfive_*.csv                         # 02
 │   ├── figures/bigfive_shift_matrix.png             # 02
+│   ├── figures/decay_retention.png                  # 04
 │   ├── bigfive_summary.md                           # 02 (rewritten each run)
+│   ├── decay_summary.md                             # 04 (rewritten each run)
 │   └── bigfive_findings.md                          # written by hand
 ├── cache/                  # not committed
 └── logs/                   # not committed
@@ -72,8 +79,20 @@ python 01_run_bigfive.py personas    # refuses to run until markers.json is mark
 python 02_analyse_bigfive.py         # any laptop
 ```
 
+## Persona decay runs (B4)
+
+Our script builds each conversation's history and sends it in the state with every request; no model remembers anything between requests. Two arms, 32 turns each: **own** (the model's own answers to O and A items) and **quiz** (fixed ARC-Easy Q&A). At 0, 2, 4, 8, 16 and 32 turns, the persona trait's 24 items are asked, one request each. Full design in [PLAN B4](../docs/PLAN.md#b4-persona-decay).
+
+```
+python 03_run_decay.py estimate      # local only, no API calls: call counts and cost
+python 03_run_decay.py check         # API laptop, < $0.01: 2 turns + 1 probe per model
+python 03_run_decay.py run           # API laptop, about $2.45 for all models and both arms
+python 04_analyse_decay.py           # any laptop
+```
+
 ## Status
 
 - Helpers, `01_run_bigfive.py` and `02_analyse_bigfive.py` written (2026-10-15). Dry-run end to end with a fake client: the analysis recovers planted persona shifts, alpha and Jev's noise.
 - `check` run live 2026-10-15: Jev's `score` answer is a probability-weighted 0-4 position, as assumed. About $0.50 for the full B1 run.
 - `markers.json` verified 2026-10-15 (all 100 Goldberg unipolar markers). `baseline` and `personas` run 2026-10-15 ($0.49 in total); findings in [`results/bigfive_findings.md`](results/bigfive_findings.md).
+- B4 persona decay written and dry-run on a fake model 2026-10-18 (recovers a planted fade). `estimate`: ~14k calls per model, about $2.45 in total. Not run live yet.
