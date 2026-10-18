@@ -1,0 +1,119 @@
+JEV PROJECT - PROGRESS LOG
+==========================
+Session: 2026-10-18, ended 23:45 (MPST), on the API laptop.
+Detailed checklist: dev_notes/TODO.md. Plan: docs/PLAN.md. API-laptop steps:
+docs/api-laptop-checks.md.
+
+Git: commits 10af158, b4fb749, a2108be on main (local, not pushed).
+NOT committed: docs/PLAN.md and dev_notes/TODO.md hold both this session's
+Part A edits and another session's uncommitted Part B (B4 persona decay)
+edits, plus that session's 02-jevlet-personas/ files. Commit them together
+once the B4 session is done.
+
+
+SPEND (today)
+-------------
+  - Part A Level 2 + quiz runs (Jev $0.05, Qwen + Gemma $0.08) .. $0.13
+  - BERT learning curve on Kaggle ............................ free (T4 quota)
+  - MMLU scripts: dry-run on a fake model only ............... $0.00
+
+
+==========================================================================
+PART A - JEV BENCHMARKS
+==========================================================================
+
+DONE (2026-10-18)
+-----------------
+1. Level 2 and quiz runs (TODO 9, PLAN A10 steps 8-9)
+   - 08_run_jev.py levels --levels 2, quiz; 09_run_llm.py levels --levels 2,
+     quiz (Qwen, Gemma). 0 failed; 2,000 / 494 rows each; LLMs stayed on
+     the pinned providers (DekaLLM / Makora).
+   - Level 2 accuracy: Jev 89.6%, Qwen 88.4%, Gemma 83.5%.
+   - Qwen picks option E ("none") on 492/494 quiz items: valid per the
+     prompt, but its quiz result is set aside as uninformative.
+
+2. 10_analyse.py rerun on all results; draft results/verdict.md.
+   Hand-written reading: 01-jev-benchmarks/results/memorisation_findings.md
+   - Level 1 (shuffled options): no change for any model.
+   - Ladder (pre-registered rule): Jev passes narrowly (pooled log-odds drop
+     0.41 vs BERT 0.20 = 2.05x, CI [0.03, 0.40]); no single dataset passes;
+     Qwen passes more clearly (0.60), Gemma fails (0.34).
+   - Quiz: every model picks the original MORE on unseen control items than
+     on benchmark items (Jev 81.6% vs 62.6%) -> rewards natural wording,
+     doesn't detect exposure.
+   - Level 3: no drop (99.5-100%); Level 3 is easier (option-length cue).
+   - Reading agreed with the user: weak, inconclusive evidence of
+     memorisation, no stronger than for a standard LLM.
+
+3. BERT learning curve (TODO 9b) on Kaggle (shiyalow/jev-bert-learning-curve)
+   - All 6 folders in results/bert_learning_curve/; summary table in
+     results/bert_summary.md -> "Learning curve".
+   - HellaSwag flat (~36%). ARC-Challenge rising (Level 0 24.9 -> 32.4%) but
+     below the above-chance threshold. SWAG / ARC-Easy / CommonsenseQA still
+     rising at 100%.
+   - Note: a first push went up with LEARNING_CURVE = False by mistake; it was
+     deleted while still queued and re-pushed correctly.
+
+4. MMLU number-swap sub-experiment (TODO 9c, PLAN A11) - designed and coded
+   - Decided: separate sub-experiment; maths only (elementary / high school /
+     college maths, 339 numeric candidates), 200 items; Sonnet writes the
+     swap + a solve() function, checked by running it; the old answer stays
+     as a trap option.
+   - Pass rule confirmed as written, before any run: log-odds drop CI > 0
+     AND the trap's share of wrong answers > 1/3 (binomial p < 0.05).
+   - 11a_mmlu_swap.py, 11b_mmlu_build.py, 11c_run_mmlu.py,
+     11d_analyse_mmlu.py, helpers/mmlu.py, prompts/mmlu_swap.txt,
+     prompts/eval/mmlu.txt. Results go to results/mmlu/ (not read by 10).
+   - Dry-run on a fake model with real MMLU data: checks catch planted bad
+     swaps, retries and review flags work, positions balanced, 11d recovers
+     a planted memoriser and clears two computing models.
+
+5. Docs updated: PLAN (A5, A7, A8, A10, A11, open questions), both READMEs'
+   status, api-laptop-checks.md, TODO.md, bert_summary.md.
+
+
+TO DO
+-----
+1. MMLU live runs (TODO 9c; steps in docs/api-laptop-checks.md)
+   - 11a (+ --retry-failed), about $2-3 of Sonnet - needs the user's go-ahead.
+   - 11b, then fill data/reviews/mmlu_swaps_30.csv (only numbers changed /
+     new answer right / wrong answers as plausible as the old one), re-run 11b.
+   - 11c (Jev, Qwen, Gemma; a few cents), 11d, commit, hand-written reading.
+2. Final memorisation verdict by hand (TODO 9), using
+   memorisation_findings.md and, once run, the MMLU result.
+3. Decide on the RACE fallback for ARC-Challenge (TODO 9b) and/or enlarging
+   the train pool for the datasets that already pass.
+4. Optional: rebalance Level 3 option lengths (the length cue) before reading
+   Level 3 as evidence.
+
+
+==========================================================================
+PART B - JEVLET PERSONAS
+==========================================================================
+
+DONE (before today, 2026-10-15/16)
+----------------------------------
+1. B1 steps 1-3 (Big Five): baseline + personas run ($0.49);
+   alpha 0.95-0.97; every persona moves its trait strongly (Jev +2.7 to
+   +3.7); state placement > instructions; large off-target halo.
+   Write-up: 02-jevlet-personas/results/bigfive_findings.md.
+
+DONE (2026-10-18, by another Claude session - not checked in this one)
+---------------------------------------------------------------------
+2. B4 persona decay designed (PLAN B4) and written: helpers/decay.py,
+   03_run_decay.py, 04_analyse_decay.py; dry-run on a fake model;
+   estimate ~14k calls per model, ~$2.45 total. Not committed yet.
+   At 23:40 it was writing results under
+   02-jevlet-personas/results/raw/typesafe__jev-1.13/decay/own/, so a live
+   run may have started; check that session's state before continuing.
+
+
+TO DO
+-----
+1. B4: 03_run_decay.py check (< $0.01) -> run (~$2.45) -> 04_analyse_decay.py
+   -> hand-written findings file; then commit Part B files + PLAN/TODO.
+2. B1 step 4: IPIP paraphrases (contamination check).
+3. B1 step 5: scenario questions per trait (behaviour check).
+4. B2: difficulty ladder (ARC -> MMLU -> GPQA Diamond -> HLE text-only MCQ),
+   no persona vs "pretend to be [level]".
+5. B4 follow-up: active realistic arm (support chat, a choice per turn).
