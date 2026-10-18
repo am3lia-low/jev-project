@@ -123,10 +123,13 @@ Maths only (elementary / high school / college maths, 339 numeric candidates), ~
 - [x] `personas` run 2026-10-15 ($0.48, 0 failed) and analysed: alpha 0.95-0.97 for every model and trait; every persona moves its trait (Jev high - low +2.7 to +3.7; LLMs +2.7 to +3.9); state placement > instructions; large off-target shifts (~1-2 points, a desirability halo). Written up in `02-jevlet-personas/results/bigfive_findings.md` with the shift-matrix figure.
 - [ ] Then B1 step 4 (IPIP paraphrases), step 5 (scenarios), B2 (ladder).
 
-## 12. [ ] Part B: persona decay (B4)
+## 12. [x] Part B: persona decay (B4)
 
 - [x] Designed 2026-10-18 (PLAN B4): own-answer and quiz histories, 32 turns, checkpoints 0/2/4/8/16/32, E/C/N high/low, wordings 1-3, persona in state vs instructions, no-persona baseline, re-reminder at turn 16.
 - [x] `helpers/decay.py`, `03_run_decay.py`, `04_analyse_decay.py`; `model_answerer` moved into `helpers/bigfive.py`. Dry-run on a fake model (recovers a planted fade, the re-reminder, flat controls).
 - [x] `03_run_decay.py estimate` (local): ~14k calls per model, about $2.45 in total.
-- [ ] API laptop: `03_run_decay.py check` (< $0.01), then `run` (~$2.45), then `04_analyse_decay.py` and a hand-written findings file.
+- [x] `check` live 2026-10-18 ($0.0001): all 3 models take the history; the persona still pulls with 2 turns in front.
+- [x] `run` + `04_analyse_decay.py`. Run 2026-10-18 ($1.33, 0 failed after re-running 19 rate-limited Gemma calls); findings in `02-jevlet-personas/results/decay_findings.md`: a persona in the state barely fades (retention after 32 turns: Jev 0.95 quiz / 0.83 own answers; LLMs 0.84-0.98); a persona in the instructions fades much more, and for Jev drops within 2 turns (0.79 / 0.39); own-answer histories wear personas down more than quiz histories (models copy the answers already in the history; with no persona, Jev and Qwen answer "Neither" throughout and score exactly 3.00); the re-reminder changes nothing.
+- [ ] Longer histories (128-256 turns) to see whether the state persona eventually fades.
+- [ ] Persona in the instructions with a state holding only unrelated data, to confirm that a non-empty state is what weakens it.
 - [ ] Follow-up: active realistic arm (support chat, a `choice` per turn).

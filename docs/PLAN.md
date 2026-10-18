@@ -371,7 +371,7 @@ Two conditions per benchmark: **no persona** (actual ability) and **"pretend to 
 4. [ ] IPIP paraphrases for the contamination check (B1 step 4)
 5. [ ] Scenario questions per trait for the behaviour check (B1 step 5)
 6. [ ] Difficulty ladder (B2): loaders, HLE text-only MCQ filter, persona prompts, runs, analysis
-7. [ ] Persona decay (B4): `03_run_decay.py` (`estimate` -> `check` -> `run`) and `04_analyse_decay.py`. Written and dry-run on a fake model 2026-10-18 (recovers a planted fade, the re-reminder and the flat controls). `estimate` 2026-10-18: ~14k calls per model, about $2.45 for all three models and both arms. Not run live yet
+7. [x] Persona decay (B4): `03_run_decay.py` (`estimate` -> `check` -> `run`) and `04_analyse_decay.py`. Written and dry-run on a fake model 2026-10-18 (recovers a planted fade, the re-reminder and the flat controls). `estimate` 2026-10-18: ~14k calls per model, about $2.45 for all three models and both arms. Run 2026-10-18 ($1.33, 0 failed after re-running 19 rate-limited Gemma calls); findings in `02-jevlet-personas/results/decay_findings.md`: a persona in the state barely fades (retention after 32 turns: Jev 0.95 quiz / 0.83 own answers; LLMs 0.84-0.98); a persona in the instructions fades much more, and for Jev drops within 2 turns (0.79 / 0.39); own-answer histories wear personas down more than quiz histories (models copy the answers already in the history; with no persona, Jev and Qwen answer "Neither" throughout and score exactly 3.00); the re-reminder changes nothing
 8. [ ] Persona decay follow-up (B4): active realistic arm, a support chat where the jevlet makes a `choice` each turn, scored on its choices (fits with B1 step 5)
 
 ### B4. Persona decay
@@ -388,7 +388,8 @@ Do personas fade as a history grows in front of the question? Added 2026-10-18, 
 - **Conditions:** traits E, C (strongest pulls in B1) and N (largest side effects); high and low; B1 wordings 1-3; persona in the state (main) or in the question instructions (control: the persona stays next to every question). Plus a no-persona baseline (what the history does on its own) and a **re-reminder**: the persona repeated as a history entry right after turn 16, probed at 16 and 32 (state placement only; later turns are not regenerated).
 - **Measure:** shift = high - low on the persona's trait at each checkpoint (effects of the history on both poles cancel). **Retention** = shift / shift at checkpoint 0. Bootstrap CIs over items.
 - **Reading the results:** retention falls in the state but not in the instructions -> distance from the question is the cause. Both fall -> the history content overrides the persona. The re-reminder recovers the shift -> the persona was crowded out, not lost. Own answers vs quiz -> does seeing its own (in-character) answers reinforce or wear down the persona?
-- **Size:** per model, 37 conversations per arm; own arm 1,184 history calls + 6,480 probes, quiz arm 6,480 probes (~14k calls per model). Estimated $2.45 for all three models (`estimate`, scaled from B1's actual cost per character).
+- **Size:** per model, 37 conversations per arm; own arm 1,184 history calls + 6,480 probes, quiz arm 6,480 probes (~14k calls per model). Estimated $2.45 for all three models (`estimate`, scaled from B1's actual cost per character); actual $1.33.
+- **Results (2026-10-18):** see [`decay_findings.md`](../02-jevlet-personas/results/decay_findings.md). Put a jevlet's persona in the state: there it keeps 83-95% of its pull after 32 turns, while in the instructions Jev keeps only 39-79%.
 
 ---
 
