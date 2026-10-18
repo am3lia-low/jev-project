@@ -30,9 +30,11 @@ Kept as the original brief. All items are done.
 | 4 | **Smoke test 08 and 09 on Level 0** before the other runs. There is no "first N questions" option and a run stopped by `--max-cost` writes nothing, so run `08_run_jev.py sanity` (~$0.01) and `09_run_llm.py levels --models qwen/qwen3.8-27b --levels 0` (~$0.2); check `results/raw/<model>/level0.jsonl` has probabilities, few or no errors, and sanity says OK. The calls are cached, so later full runs reuse them. | `08_run_jev.py`, `09_run_llm.py` | ~$0.25 |
 | 5 | **First run of the BERT notebook** (planned for Colab, run on Kaggle) (needs a GPU and the HuggingFace model download). | `notebooks/07b_bert_colab.ipynb` | Run on Colab T4 with a small data set first; check the truncation count, loss falls, val accuracy above chance. |
 
-## To do (2026-10-18): Level 2 and quiz runs (Jev + LLMs)
+## Done (2026-10-18, $0.13): Level 2 and quiz runs (Jev + LLMs)
 
-Both gates cleared: `paraphrase_50.csv` filled 2026-10-17 (50/50 fine), memorisation threshold confirmed as written 2026-10-18 (PLAN A8), quiz rebuilt 2026-10-17 with 494 items (6 swaps flagged in `swaps_30.csv` dropped by `06b`). No Level 2 or quiz results exist yet. Independent of the BERT learning curve below; run in any order.
+All four runs done 2026-10-18, 0 failed, 2,000 / 494 rows each; providers still DekaLLM / Makora. Jev $0.05, LLMs $0.08. `10_analyse.py` rerun; results committed. Reading: [`results/memorisation_findings.md`](../01-jev-benchmarks/results/memorisation_findings.md). Kept below as the brief that was followed.
+
+Both gates cleared: `paraphrase_50.csv` filled 2026-10-17 (50/50 fine), memorisation threshold confirmed as written 2026-10-18 (PLAN A8), quiz rebuilt 2026-10-17 with 494 items (6 swaps flagged in `swaps_30.csv` dropped by `06b`). Independent of the BERT learning curve below; run in any order.
 
 Run from `01-jev-benchmarks/` after `git pull`:
 
@@ -48,7 +50,9 @@ All four runs together should stay well under $1 (previous estimate for the whol
 
 **Do not** change `MEMORISATION_DROP_RATIO`, the ladder pool or the above-chance rule after seeing these results; they are fixed (PLAN A8). ARC-Challenge rejoins the pool only on BERT's evidence (learning curve / RACE fallback).
 
-## To do (2026-10-18): BERT learning curve on Kaggle
+## Done (2026-10-18): BERT learning curve on Kaggle
+
+Run 2026-10-18 as `shiyalow/jev-bert-learning-curve` (a first push with `LEARNING_CURVE = False` was deleted before it started). All 6 folders downloaded to `results/bert_learning_curve/`; summary in [`bert_summary.md` → Learning curve](../01-jev-benchmarks/results/bert_summary.md#learning-curve). Kept below as the brief that was followed.
 
 Can't be run from the cloud Claude session: kaggle.com is blocked there and it has no Kaggle token. Free (Kaggle GPU quota only, ~80 min of T4); no OpenRouter calls.
 
@@ -67,6 +71,6 @@ Can't be run from the cloud Claude session: kaggle.com is blocked there and it h
 0. Item 5 above: smoke test of the notebook. Done 2026-10-15 (Kaggle).
 1. `03_paraphrase.py` → `04_validate.py` (retry loop; fill `paraphrase_50.csv`) → `06a_swap.py` → `06b_validate_swaps.py` (retry loop; fill `swaps_30.csv`) → `06c_build_quiz.py`. About $0.90. All run 2026-10-16/17; both review sheets filled 2026-10-17 (quiz rebuilt with 494 items after dropping 6 flagged swaps).
 2. `07a_build_bert_data.py` (without `--originals-only`), upload `data/bert/` as the Kaggle dataset `shiyalow/jev-bert-data`, run the notebook on Kaggle, download results into `results/bert/`. Done 2026-10-17.
-3. `08_run_jev.py sanity` (cached, free) → `repeat` → `levels` → `quiz`. Under $0.10. Done 2026-10-17 up to Levels 0, 1, 3; Level 2 and quiz left, both ready (memorisation threshold confirmed 2026-10-18; quiz 494 items).
-4. `09_run_llm.py levels` → `quiz`. About $1. Levels 0, 1, 3 done for both 2026-10-17; Level 2 and quiz left, both ready.
-5. `10_analyse.py` (any laptop).
+3. `08_run_jev.py sanity` (cached, free) → `repeat` → `levels` → `quiz`. Under $0.10. Done: Levels 0, 1, 3 on 2026-10-17, Level 2 and quiz on 2026-10-18.
+4. `09_run_llm.py levels` → `quiz`. About $1. Levels 0, 1, 3 done for both 2026-10-17; Level 2 and quiz 2026-10-18.
+5. `10_analyse.py` (any laptop). Run on all results 2026-10-18; final verdict by hand left.

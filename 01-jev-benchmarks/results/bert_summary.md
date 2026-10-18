@@ -99,3 +99,25 @@ Accuracy, mean ± SD over the 5 seeds (%):
 ## Level 3 has an option-length cue
 
 In Level 3 the correct option is the longest in 89/200 questions (45%; chance ~24%, Level 0 26% without SWAG), and many distractors are obviously absurd (e.g. "throws the plate into the sink and starts to swim"). Jev 100%, Gemma 100%, Qwen 99.5% and BERT 54.4% (vs 47.6 on Level 0) all score higher on Level 3 than Level 0. So "Level 3 vs Level 0" mixes memorisation with Level 3 simply being easier; treat it as a caveat (or rebalance option lengths / regenerate harder distractors) before reading it as evidence.
+
+## Learning curve
+
+`shiyalow/jev-bert-learning-curve` (2026-10-18): the main-run training on nested 25 / 50 / 100% subsets of each dataset's train questions (original + paraphrase kept together), seeds 11 and 22, 3 epochs. Same `shiyalow/jev-bert-data` version as the main run. Results: `results/bert_learning_curve/frac_<pct>_seed_<n>/` (all 6 folders arrived; outside `results/bert/`, so `10_analyse.py` doesn't read them).
+
+Accuracy, mean of the 2 seeds, as printed by the notebook (val mixes originals and paraphrases):
+
+| Run | Fraction | ARC-Challenge | ARC-Easy | CommonsenseQA | HellaSwag | SWAG |
+|---|---|---|---|---|---|---|
+| Level 0 | 25% | 24.9 | 45.6 | 44.4 | 36.2 | 59.1 |
+| | 50% | 28.9 | 49.0 | 47.5 | 35.8 | 62.2 |
+| | 100% | 32.4 | 53.5 | 48.9 | 36.4 | 67.1 |
+| val | 25% | 26.7 | 45.8 | 39.5 | 38.2 | 56.8 |
+| | 50% | 31.0 | 44.5 | 41.5 | 37.0 | 58.5 |
+| | 100% | 32.5 | 48.0 | 45.8 | 38.5 | 61.2 |
+
+One fraction's number per dataset has a 95% CI of about ±5 (Level 0, n = 400) to ±7 points (val), so read the trend over the three fractions:
+
+- **HellaSwag is flat** (~36% at every fraction). More data won't help; it was adversarially filtered against BERT (A1). It stays uninformative, as the plan expected.
+- **ARC-Challenge is still rising** (Level 0 24.9 → 28.9 → 32.4; val 26.7 → 31.0 → 32.5), but is still below the above-chance threshold (CI low ≥ 35). Its train split is already 98% used, so more data has to come from elsewhere: the **RACE fallback** (PLAN A5).
+- **SWAG, ARC-Easy and CommonsenseQA are still rising at 100%** (Level 0 +8, +8 and +4.5 points from 25% to 100%). They already pass the rule. A larger pool would make the reference stronger there, but isn't needed for validity.
+- **Decision left:** whether to run the RACE fallback for ARC-Challenge (and/or enlarge the pool for the passing datasets). Which datasets BERT passes on stays decided by BERT's val results alone (PLAN A8).

@@ -88,19 +88,29 @@ Same order as [`docs/api-laptop-checks.md` → Run order](../docs/api-laptop-che
 - [x] `07a_build_bert_data.py` without `--originals-only`, then the full notebook on Kaggle (5 seeds + untrained; 2026-10-17); results in `results/bert/`.
 - [x] `08_run_jev.py` repeat → levels → quiz. 2026-10-17: repeat (99.5% agreement, single runs), levels 0, 1, 3; 2026-10-18: Level 2 and quiz ($0.05).
 - [x] `09_run_llm.py` levels → quiz (Qwen and Gemma). 2026-10-17: levels 0, 1, 3 for both; 2026-10-18: Level 2 and quiz ($0.08; providers still DekaLLM / Makora). Qwen picks E ("none") on 492/494 quiz items.
-- [ ] `10_analyse.py`, then the final verdict by hand. `10_analyse.py` run 2026-10-18 on all results (draft `results/verdict.md`); verdict by hand left.
+- [ ] `10_analyse.py`, then the final verdict by hand. `10_analyse.py` run 2026-10-18 on all results (draft `results/verdict.md`); reading in `results/memorisation_findings.md` (weak, inconclusive: Jev passes the ladder rule only pooled and narrowly, Qwen drops more; quiz uninformative; no Level 3 drop). Verdict by hand left.
 
-## 9b. [ ] BERT learning curve (2026-10-18)
+## 9b. [ ] BERT learning curve (2026-10-18; run done, decision left)
 
 - [x] `LEARNING_CURVE` option in `notebooks/07b_bert_colab.ipynb` (nested 25/50/100% subsets per dataset, original + paraphrase kept together, 2 seeds, ~80 min on a T4). Subset logic and summary cell tested locally on `data/bert/train.jsonl`; training not run here (no GPU).
-- [ ] Run on Kaggle from the API laptop (steps in `docs/api-laptop-checks.md` → "To do (2026-10-18)"; new kernel, `LEARNING_CURVE = True`), download to `results/bert_learning_curve/`, then decide: enlarge the train pool and/or the RACE fallback for ARC-Challenge.
+- [x] Run on Kaggle from the API laptop (2026-10-18): `results/bert_learning_curve/`, summary in `results/bert_summary.md` → Learning curve. HellaSwag flat; ARC-Challenge rising (Level 0 24.9 → 32.4%) but below the threshold; SWAG / ARC-Easy / CommonsenseQA still rising at 100%.
+- [ ] Decide: RACE fallback for ARC-Challenge (its train split is 98% used) and/or enlarge the pool. Was: run on Kaggle from the API laptop (steps in `docs/api-laptop-checks.md` → "To do (2026-10-18)"; new kernel, `LEARNING_CURVE = True`), download to `results/bert_learning_curve/`, then decide: enlarge the train pool and/or the RACE fallback for ARC-Challenge.
 
 ## 10. [ ] Open decisions
 
 See PLAN.md → Open questions.
 
 - [x] Memorisation threshold confirmed as written (2026-10-18), before any Level 2 run.
-- [ ] Whether to add an MMLU math number-swap slice.
+- [x] MMLU math number-swap slice: yes, as its own sub-experiment (2026-10-18; PLAN A11, TODO 12).
+
+## 12. [ ] MMLU number-swap sub-experiment (PLAN A11, 2026-10-18)
+
+Maths only (elementary / high school / college maths, 340 numeric candidates), ~200 items; swaps by `NEW_QUESTION_MODEL` with a `solve()` code check; old answer kept as a trap option.
+
+- [ ] Confirm the A11 pass rule before any `11c` run.
+- [ ] `11a_mmlu_swap.py` (generate + code check), `11b_mmlu_build.py`, `11c_run_mmlu.py`, `11d_analyse_mmlu.py`; dry-run with a fake model.
+- [ ] Run `11a`, fill `data/reviews/mmlu_swaps_30.csv`, run `11b`.
+- [ ] Run `11c` (Jev, Qwen, Gemma), then `11d`.
 
 ## 11. [ ] Part B: Big Five (B1 steps 1-3)
 

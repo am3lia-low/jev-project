@@ -213,6 +213,7 @@ Three LLM-generated datasets. All scripts run on the API laptop, are resumable a
 - **Fallbacks if BERT is near chance (e.g. ARC-Challenge):** RACE pre-training first (RACE: ~98k exam MCQs, [Lai et al. 2017](https://aclanthology.org/D17-1082.pdf); BERT-base reached ~44% on ARC-Challenge this way, [intersun/ARC-Challenge](https://github.com/intersun/ARC-Challenge)), and/or BERT-large with 1 seed.
 - Optional ablations (cheap on the free T4): train on original only (done 2026-10-15, `results/bert_original_only/`); train on paraphrased only.
 - **Learning curve** (diagnostic, added 2026-10-18): the notebook's `LEARNING_CURVE = True` trains on nested 25/50/100% subsets of each dataset's train questions (2 seeds), to test whether BERT is data-limited before enlarging the train pool. Results go to `results/bert_learning_curve/`. Expected reading: if HellaSwag and ARC-Challenge stay flat while SWAG/CommonsenseQA rise, more data strengthens the reference only where BERT already passes, and ARC-Challenge needs the RACE fallback (its train split is already 98% used).
+  - **Result (2026-10-18):** HellaSwag flat (~36% at every fraction); ARC-Challenge still rising (Level 0 24.9 → 28.9 → 32.4%) but below the threshold, so it can only rejoin through the RACE fallback; SWAG, ARC-Easy and CommonsenseQA still rising at 100%. Details in [`bert_summary.md`](../01-jev-benchmarks/results/bert_summary.md#learning-curve). Decision left: run the RACE fallback for ARC-Challenge, and/or enlarge the pool.
 - Hardware: free T4 on Kaggle (planned for Colab, but no Colab GPU was available; the notebook runs on either). Neither local laptop has an NVIDIA GPU. Details in [`results/bert_summary.md`](../01-jev-benchmarks/results/bert_summary.md).
 - Training-set-size curves: **on hold**.
 
@@ -253,6 +254,8 @@ Steps:
 | Above 25% | Above 25% | Prefers natural-sounding text; only the gap counts |
 | ≤ control | any | No evidence |
 
+Result (2026-10-18): every model picked the original more often on control items than on benchmark items (Jev 81.6% vs 62.6%), so in practice the quiz rewarded natural wording over the swaps and did not detect prior exposure. Qwen picked E on 492/494 items; its quiz result is uninformative.
+
 Limits: a null result does not prove no memorisation (content can be memorised without exact wording — Level 2 covers that). Control originals are LLM-drafted while benchmark originals are human-written; the light rewording in A3.2 reduces but does not remove this difference.
 
 ### A8. Metrics and analysis
@@ -268,6 +271,7 @@ Comparisons:
 - **Between levels:** paired McNemar tests (same questions in every level), pooled as the main test and per dataset as secondary.
 - **Memorisation hypothesis (fixed before any Jev run; confirmed as written 2026-10-18, before any Level 2 run):** compare each model's Level 0 → Level 2 drop in **log-odds** (accuracy near 100% cannot drop as many points as accuracy near 50%; e.g. Jev 97→94% is a log-odds drop of 0.72, BERT 60→55% is 0.21). Memorisation is supported if the bootstrap 95% CI of (Jev drop − BERT drop) is entirely above 0 **and** Jev's drop is at least 2× BERT's. If BERT's drop is negative (paraphrasing made the questions easier for BERT), the 2× condition passes trivially and the CI decides alone. Pooled over SWAG, ARC-Easy, ARC-Challenge and CommonsenseQA where BERT passes the above-chance rule; HellaSwag reported separately.
 - **Final verdict** combines three signals: the ladder (above), the quiz (A7) and Level 3 accuracy vs Level 0.
+- **Results (2026-10-18):** Jev passes the ladder rule narrowly (pooled drop 0.41 vs BERT 0.20, 2.05×, CI of the difference [0.03, 0.40]; no single dataset passes); Qwen passes more clearly (0.60), Gemma fails (0.34). Quiz uninformative (all models pick the original more on unseen control items; Qwen's quiz result set aside, it picks E on 492/494). No Level 3 drop. Reading: weak, inconclusive evidence; see [`memorisation_findings.md`](../01-jev-benchmarks/results/memorisation_findings.md). The MMLU sub-experiment (A11) is the follow-up.
 
 ### A9. Running Jev and LLMs
 
@@ -287,11 +291,39 @@ Comparisons:
 5. [x] `05_generate_new.py` — 400 drafts, 200 Level 3 questions kept after the human check (API laptop)
 6. [x] `06a_swap.py` + `06b_validate_swaps.py` — quiz versions for 400 benchmark + 100 control items (API laptop); `06c_build_quiz.py` — assemble the quiz (all run 2026-10-16/17; `swaps_30.csv` filled 2026-10-17: 6 of 30 flagged and dropped by 06b, quiz rebuilt with 494 items: 396 benchmark + 98 control)
 7. [x] `07a_build_bert_data.py` — originals + paraphrases for the notebook; `notebooks/07b_bert_colab.ipynb` — untrained BERT; fine-tune BERT-base (5 seeds); above-chance rule; evaluate Levels 0–3; optional fallbacks (run on Kaggle: smoke test and originals-only ablation 2026-10-15, main run with paraphrases 2026-10-17; fallbacks not needed yet)
-8. [ ] `08_run_jev.py` (API laptop): 8a sanity check · 8b repeatability · 8c Levels 0–3 · 8d quiz (8a done 2026-10-09: Level 0 within the paper's CI on all 4 paper datasets; 8b done 2026-10-17: 99.5% agreement, single runs; 8c Levels 0, 1, 3 done 2026-10-17, Level 2 ready (threshold confirmed 2026-10-18); 8d ready to run on the 494-item quiz)
-9. [ ] `09_run_llm.py` (API laptop): LLM baselines, Levels 0–3 + quiz (Levels 0, 1, 3 done for both 2026-10-17; Level 2 and quiz ready, as for 08)
-10. [ ] `10_analyse.py` — tables, plots, McNemar, log-odds comparison, quiz scoring, verdict
+8. [x] `08_run_jev.py` (API laptop): 8a sanity check · 8b repeatability · 8c Levels 0–3 · 8d quiz (8a done 2026-10-09: Level 0 within the paper's CI on all 4 paper datasets; 8b done 2026-10-17: 99.5% agreement, single runs; 8c Levels 0, 1, 3 done 2026-10-17, Level 2 2026-10-18; 8d done 2026-10-18 on the 494-item quiz)
+9. [x] `09_run_llm.py` (API laptop): LLM baselines, Levels 0–3 + quiz (Levels 0, 1, 3 done for both 2026-10-17; Level 2 and quiz 2026-10-18)
+10. [ ] `10_analyse.py` — tables, plots, McNemar, log-odds comparison, quiz scoring, verdict (run on all results 2026-10-18; reading in [`results/memorisation_findings.md`](../01-jev-benchmarks/results/memorisation_findings.md); final verdict by hand left)
+11. [ ] MMLU number-swap sub-experiment ([A11](#a11-mmlu-number-swap-sub-experiment)): `11a_mmlu_swap.py` → manual check → `11b_mmlu_build.py` → `11c_run_mmlu.py` → `11d_analyse_mmlu.py`
 
 Script files are named by their step number above (`06a`, `06b`, … when a step has several), so the folder lists them in run order.
+
+### A11. MMLU number-swap sub-experiment
+
+Separate from the ladder, quiz and Level 3 (decided 2026-10-18): its own data, scripts (`11a`–`11d`) and pass rule, reported next to the A8 verdict rather than as a fourth signal of it. No BERT control: each model is compared with itself on the original vs the number-swapped question.
+
+**Why:** Deußer et al. flagged likely MMLU training exposure because Jev scored *higher* on calculation-heavy MMLU subjects. The ladder and quiz keep the answer unchanged, so they cannot separate recall from reasoning. Changing a question's numbers changes its answer: a model that computes follows the new numbers; a model that recalls the original keeps picking the old answer.
+
+**Items — `11a_mmlu_swap.py`**
+- Source: MMLU (`cais/mmlu`) **test** split, `elementary_mathematics` (378), `high_school_mathematics` (270), `college_mathematics` (100). Candidates: all four options are plain numbers (integer, decimal, fraction, %, $) and the question contains a number: 152 + 165 + 23 = 340 (checked 2026-10-18).
+- For each candidate, `NEW_QUESTION_MODEL` returns: the question with **only its numbers changed** (same wording, same magnitude and number of digits where possible, same kind of arithmetic), a Python `solve(...)` function with the original and the new numbers as arguments, and 2 plausible wrong answers for the new version. It may answer `not_swappable` (e.g. a count fixed by theory, not by the numbers).
+- **Code check** (automatic): `solve(original numbers)` must equal the original correct option, `solve(new numbers)` must differ from it and from every original option, and the 2 wrong answers must differ from both. `solve` runs in a separate process with a timeout. Items failing any check are retried (up to `MAX_ATTEMPTS`), then dropped.
+- **Manual check:** a sheet of 30 verified items (`data/reviews/mmlu_swaps_30.csv`): new question reads naturally, only numbers changed, new answer right. Flagged items are dropped.
+- Keep **200** verified items, a seeded draw spread over the three subjects in proportion to their verified counts.
+
+**Two versions per item — `11b_mmlu_build.py`**
+- **Original:** MMLU's question and 4 options, original order (as Level 0).
+- **Swapped:** new question; options = new correct answer + **old correct answer (the trap)** + 2 wrong answers. Positions of the correct answer and the trap are balanced over A–D across items (seeded).
+- Prompt as for ARC: the bare question (`prompts/eval/mmlu.txt`), options A–D.
+
+**Runs — `11c_run_mmlu.py`:** Jev, Qwen and Gemma, both versions, one run each (Jev's repeatability is 99.5%, A9). 1,200 calls, a few cents.
+
+**Analysis — `11d_analyse_mmlu.py`** (pass rule to be confirmed before any `11c` run, as A8 was)
+- Per model: accuracy on original vs swapped (bootstrap 95% CI), paired McNemar, log-odds drop.
+- **Trap rate:** share of swapped items where the model picks the old answer, and the trap's share of its *wrong* answers (chance: 1/3, as 3 wrong options).
+- **Memorisation supported for a model** if both: (1) its log-odds drop from original to swapped has a bootstrap 95% CI entirely above 0, and (2) the trap's share of its wrong answers on swapped items is above 1/3 (one-sided binomial, p < 0.05).
+- **Jev vs baselines:** report the bootstrap CI of (Jev drop − baseline drop) for each LLM. The LLMs may also have seen MMLU, so they are a comparison, not a clean control: "Jev relies on recall more than the LLMs" needs that CI above 0.
+- Limits: swapped numbers can make a question slightly harder (the drop alone is not proof; the trap rate is the specific signal). A wrong computation can land on the old answer by chance when the numbers barely change; the generator is told to change every number noticeably, and the manual check looks for this.
 
 ---
 
@@ -370,4 +402,4 @@ Model lineup (OpenRouter listing checked 2026-10-06; pin these IDs, no `~…-lat
 ## Open questions
 
 - ~~Confirm the memorisation threshold in A8~~ Confirmed as written 2026-10-18 (log-odds, CI above 0 and ≥ 2× BERT's drop, pooled over the ladder datasets where BERT passes the above-chance rule), with no Jev or LLM Level 2 results in existence. Implemented in `10_analyse.py` (`memorisation_table`) and `stats.compare_drops`, `MEMORISATION_DROP_RATIO = 2.0`. Which datasets BERT passes on is decided by BERT's val results alone (currently ARC-Easy, CommonsenseQA, SWAG; ARC-Challenge may rejoin via the learning curve / RACE fallback), never by Jev's Level 2 numbers.
-- Add an MMLU math slice to test number-swapping (relevant to the paper's math anomaly)? This means changing the numbers in calculation questions so the correct answer changes: a model that memorised the original would keep picking the old answer.
+- ~~Add an MMLU math slice to test number-swapping?~~ Decided 2026-10-18: yes, as a separate sub-experiment (A11): maths only, ~200 items, LLM swaps checked by code, old answer kept as a trap option. Its pass rule (A11 → Analysis) is still to be confirmed before any run.

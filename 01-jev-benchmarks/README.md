@@ -80,19 +80,24 @@ Scripts are numbered by their step in [A10](../docs/PLAN.md#a10-order-of-work) a
 │   ├── bert/seed_<n>/        # downloaded from Kaggle
 │   ├── tables/
 │   ├── figures/
-│   └── verdict.md
+│   ├── verdict.md
+│   ├── memorisation_findings.md  # written by hand: reading of the results
+│   └── bert_learning_curve/frac_<pct>_seed_<n>/  # 07b with LEARNING_CURVE = True (diagnostic)
 ├── cache/                    # not committed: raw API responses, so scripts can resume
 └── logs/                     # not committed: API call logs
 ```
 
 Levels 0 and 1 are not separate files in `data/`: they are the original and shuffled orders of `data/sampled/<dataset>/test.jsonl`, built by `helpers/levels.py`. Only `07a` writes them out, into `data/bert/` for the BERT notebook (uploaded to Kaggle as a dataset).
 
-## Status (2026-10-17)
+## Status (2026-10-18)
 
 - Helpers: all built and tested live. Build list: [`dev_notes/helpers-to-build.txt`](../dev_notes/helpers-to-build.txt).
 - `02_sample.py`: run 2026-10-08; `data/sampled/` holds the 8,500 sampled questions.
 - `03`-`06c` written and dry-run end to end. Both reviews done 2026-10-14: the paraphrase pilot (`pilot_30.csv`; gpt-6-luna chosen) and Level 3 (`new_questions.csv`; 200 kept in `data/new/reviewed.jsonl`).
 - `03` + `04` full run 2026-10-15/16: all 8,500 paraphrases pass ($0.79). `06a`-`06c` run 2026-10-17: quiz of 500 items. Review sheets filled 2026-10-17: `paraphrase_50.csv` 50/50 fine; `swaps_30.csv` flagged 6, which `06b` drops, so the quiz is now 494 items.
 - `07a` rebuilt with paraphrases (train 11,000, val 2,000, Levels 0-3). The notebook runs on Kaggle (no Colab GPU was available): smoke test, originals-only ablation (`results/bert_original_only/`) and main run (`results/bert/`, 5 seeds + untrained) done. Details: [`results/bert_summary.md`](results/bert_summary.md).
-- `08` (sanity, repeat, Levels 0, 1, 3) and `09` (Levels 0, 1, 3, both LLMs) run 2026-10-17; `10_analyse.py` rerun. Level 2 and quiz runs are ready: review sheets filled 2026-10-17, memorisation threshold confirmed 2026-10-18.
+- `08` and `09`: all levels and the quiz run for Jev, Qwen and Gemma (Levels 0, 1, 3 on 2026-10-17; Level 2 and quiz on 2026-10-18, 0 failed). `10_analyse.py` rerun on everything; draft verdict in [`results/verdict.md`](results/verdict.md).
+- **Results so far:** Jev passes the pre-registered ladder rule only narrowly (pooled log-odds drop 2.05× BERT's, CI [0.03, 0.40]; no single dataset passes; Qwen drops more); the quiz is uninformative (originals picked more on unseen control items; Qwen answers "none" on 492/494); no drop on Level 3. Read as weak, inconclusive evidence of memorisation: [`results/memorisation_findings.md`](results/memorisation_findings.md).
+- BERT learning curve run 2026-10-18 (`results/bert_learning_curve/`): HellaSwag flat; ARC-Challenge still rising but below the threshold, so it only rejoins via the RACE fallback; the other three still rising at 100%.
+- Next: the final verdict by hand, the RACE-fallback decision, and the MMLU number-swap sub-experiment (PLAN A11).
 - Remaining work, in order: [`docs/api-laptop-checks.md` → Run order](../docs/api-laptop-checks.md).
