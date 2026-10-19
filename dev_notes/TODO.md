@@ -110,6 +110,8 @@ Maths only (elementary / high school / college maths, 339 numeric candidates), ~
 - [x] A11 pass rule confirmed as written (2026-10-18), before any `11c` run.
 - [x] `11a_mmlu_swap.py` (generate + code check), `11b_mmlu_build.py`, `11c_run_mmlu.py`, `11d_analyse_mmlu.py`, `helpers/mmlu.py`, `prompts/mmlu_swap.txt`. Dry-run 2026-10-18 on a fake model with real MMLU data: the checks catch planted bad swaps (wording changed, wrong solve(), not swappable), retries and review flags work, positions balanced, and 11d recovers a planted memoriser (and clears two computing models).
 - [ ] Run `11a` (+ `--retry-failed`; ~$2-3 of Sonnet), `11b`, fill `data/reviews/mmlu_swaps_30.csv`, re-run `11b`.
+  - [x] `11a` first pass (2026-10-19, $2.64): 278/339 verified (elementary 137, high school 139, college 2). 61 failed: 27 wording changed, 4 not swappable, 2 no number changed, 2 wrong `solve()`, and **28 never generated because the OpenRouter credits ran out** (HTTP 402), 21 of them college maths.
+  - [ ] Add OpenRouter credits, then `python 11a_mmlu_swap.py --retry-failed` (regenerates the 28 missing and retries the 29 fixable; well under $1). Without it, college maths is nearly absent from the 200.
 - [ ] Run `11c` (Jev, Qwen, Gemma), then `11d`.
 
 ## 11. [ ] Part B: Big Five (B1 steps 1-3)
@@ -121,7 +123,10 @@ Maths only (elementary / high school / college maths, 339 numeric candidates), ~
 - [x] `01_run_bigfive.py check` live (2026-10-15, $0.0001): Jev's `score` is the probability-weighted position 0-4, with per-position probabilities; all 3 models move up under an E-high persona (Jev 2.73 → 4.25/4.37, LLMs 3.0 → ~5). About $0.50 for the full B1 run.
 - [x] `baseline` run 2026-10-15 ($0.011; one Gemma 520 retried). Jev's repeats barely differ (mean per-item SD 0.04).
 - [x] `personas` run 2026-10-15 ($0.48, 0 failed) and analysed: alpha 0.95-0.97 for every model and trait; every persona moves its trait (Jev high - low +2.7 to +3.7; LLMs +2.7 to +3.9); state placement > instructions; large off-target shifts (~1-2 points, a desirability halo). Written up in `02-jevlet-personas/results/bigfive_findings.md` with the shift-matrix figure.
-- [ ] Then B1 step 4 (IPIP paraphrases), step 5 (scenarios), B2 (ladder).
+- [x] Scripts for B1 step 4, step 5 and B2 written 2026-10-19 and dry-run end to end on a fake model (outputs in a scratch folder; the analyses recover the planted effects). Shared code: `helpers/choice.py` (choice questions), `helpers/costs.py` (estimates from B1's real costs); `chat_json` and the review-sheet helpers moved to `jev_common/generation.py` (Part A re-exports them).
+- [ ] B1 step 4, IPIP paraphrases (contamination check): `05_paraphrase_ipip.py` (~$0.01) → fill `data/reviews/ipip_paraphrases.csv` (all 120) → `--apply-review` → `01_run_bigfive.py baseline --items paraphrased` and `personas --items paraphrased` (~$0.50, as B1) → `06_analyse_paraphrase.py`.
+- [ ] B1 step 5, scenarios (behaviour check): `07_make_scenarios.py` (Sonnet, ~$0.30; 5 drafts per facet) → fill `data/reviews/scenarios.csv` (150 rows, keep y/n) → `--apply-review` (first 4 kept per facet) → `08_run_scenarios.py estimate`, `check`, `baseline`, `personas` (dry-run estimate $0.35; real scenario text is longer, so expect more) → `09_analyse_scenarios.py`.
+- [ ] B2, difficulty ladder: `huggingface-cli login` and accept the GPQA and HLE terms on HuggingFace → `10_build_ladder.py` (confirm the GPQA/HLE field names; record the HLE count) → `11_run_ladder.py estimate`, `check`, `run` → `12_analyse_ladder.py`. One persona level to start with ("average secondary-school student"), in the state and in the instructions.
 
 ## 12. [x] Part B: persona decay (B4)
 
@@ -130,6 +135,7 @@ Maths only (elementary / high school / college maths, 339 numeric candidates), ~
 - [x] `03_run_decay.py estimate` (local): ~14k calls per model, about $2.45 in total.
 - [x] `check` live 2026-10-18 ($0.0001): all 3 models take the history; the persona still pulls with 2 turns in front.
 - [x] `run` + `04_analyse_decay.py`. Run 2026-10-18 ($1.33, 0 failed after re-running 19 rate-limited Gemma calls); findings in `02-jevlet-personas/results/decay_findings.md`: a persona in the state barely fades (retention after 32 turns: Jev 0.95 quiz / 0.83 own answers; LLMs 0.84-0.98); a persona in the instructions fades much more, and for Jev drops within 2 turns (0.79 / 0.39); own-answer histories wear personas down more than quiz histories (models copy the answers already in the history; with no persona, Jev and Qwen answer "Neither" throughout and score exactly 3.00); the re-reminder changes nothing.
-- [ ] Longer histories (128-256 turns) to see whether the state persona eventually fades.
-- [ ] Persona in the instructions with a state holding only unrelated data, to confirm that a non-empty state is what weakens it.
+- [x] Follow-up arms added to `03_run_decay.py` / `04_analyse_decay.py` (2026-10-19), opt-in with `--arms`; dry-run on a fake model. The main run's estimate is unchanged ($2.45) and its tables re-generate identically.
+- [ ] Longer histories: `python 03_run_decay.py run --arms long` (quiz Q&A to 256 turns; checkpoints 0/32/64/128/256; its first 32 turns are the quiz arm's, so those come from the cache). Estimate $5.54 both placements, $2.98 state only (`--placements state`); the main run's estimate was ~2x its actual cost.
+- [ ] Unrelated state: `python 03_run_decay.py run --arms appdata` (online-shop order records under `"orders"`, checkpoints 0/1/2/8/32, no Q&A). Estimate $0.55.
 - [ ] Follow-up: active realistic arm (support chat, a `choice` per turn).

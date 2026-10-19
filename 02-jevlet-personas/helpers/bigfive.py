@@ -10,7 +10,8 @@ of the keys, read from the first token's top logprobs, so it is fractional
 like Jev's.
 
 Records: one JSON object per item per line in
-`results/raw/<model slug>/bigfive/<condition>.jsonl`, sorted by (variant, run, item):
+`results/raw/<model slug>/bigfive/<condition>.jsonl` (`bigfive_paraphrased/`
+for the paraphrased items, B1 step 4), sorted by (variant, run, item):
 
     item_id, domain, facet, keyed, condition,
     persona_domain, pole, placement   null for the baseline
@@ -154,8 +155,8 @@ def model_slug(model: str) -> str:
     return model.replace("/", "__")
 
 
-def run_path(model: str, condition: Condition) -> Path:
-    return RAW_RESULTS_DIR / model_slug(model) / "bigfive" / f"{condition.name}.jsonl"
+def run_path(model: str, condition: Condition, folder: str = "bigfive") -> Path:
+    return RAW_RESULTS_DIR / model_slug(model) / folder / f"{condition.name}.jsonl"
 
 
 def _record(task: Task, answer: Answer | None, error: str | None) -> dict[str, Any]:
@@ -181,7 +182,7 @@ def _record(task: Task, answer: Answer | None, error: str | None) -> dict[str, A
     }
 
 
-def run_condition(tasks: list[Task], answer: Answerer, model: str, workers: int) -> bool:
+def run_condition(tasks: list[Task], answer: Answerer, model: str, workers: int, folder: str = "bigfive") -> bool:
     """Answer every task of one condition and write its results file; True if the spending cap stopped it.
 
     A stopped run writes nothing: re-run it (finished calls come from the
@@ -197,7 +198,7 @@ def run_condition(tasks: list[Task], answer: Answerer, model: str, workers: int)
     records = [_record(task, result, None) for task, result in done]
     records += [_record(task, None, error) for task, error in failed]
     records.sort(key=lambda r: (r["variant"] or 0, r["run"], r["item_id"]))
-    path = run_path(model, condition)
+    path = run_path(model, condition, folder)
     write_records(path, records)
     answered = [r["answer"] for r in records if r["answer"] is not None]
     mean = sum(answered) / len(answered) if answered else float("nan")

@@ -10,6 +10,13 @@ Three steps, run in this order:
     run        The experiment: per model and arm, build the histories (own
                arm), then send every probe.
 
+Arms (helpers/config.py, DECAY_ARM_SETTINGS): own and quiz are the main run
+and the default. The follow-ups (2026-10-19) are opt-in with --arms:
+    long       quiz Q&A up to 256 turns: does the state persona fade at last?
+    appdata    unrelated app records in the state, no Q&A: does any non-empty
+               state weaken a persona in the instructions?
+Run `estimate` with the same arguments first; the long arm is the costly one.
+
 Design and file formats: helpers/decay.py. Every request is cached, so
 re-running a step costs nothing for what is already done.
 
@@ -17,39 +24,39 @@ Run from this folder (check and run on the API laptop):
     python 03_run_decay.py estimate
     python 03_run_decay.py check
     python 03_run_decay.py run [--arms own quiz] [--models typesafe/jev-1.13] [--max-cost 5]
+    python 03_run_decay.py estimate --arms long appdata
+    python 03_run_decay.py run --arms appdata
+    python 03_run_decay.py run --arms long --placements state
 """
 
 import argparse
 import json
 from collections.abc import Sequence
 
-from helpers.bigfive import Request, chat_messages, make_client, model_answerer, model_slug, read_records, tasks_for
+from helpers.bigfive import make_client, model_answerer
 from helpers.config import (
+    DECAY_ALL_ARMS,
+    DECAY_ARM_SETTINGS,
     DECAY_ARMS,
-    DECAY_CHECKPOINTS,
     DECAY_DOMAINS,
-    DECAY_TURNS,
     DECAY_VARIANTS,
-    N_BASELINE_RUNS_JEV,
-    N_BASELINE_RUNS_LLM,
-    N_PERSONA_VARIANTS,
     PLACEMENTS,
     POLES,
-    RAW_RESULTS_DIR,
 )
+from helpers.costs import estimate_usd
 from helpers.decay import (
     Call,
     Conversation,
     answer_label,
     conversations,
+    fixed_turns,
     history_items,
     item_question,
     probe_calls,
-    quiz_history,
     run_arm,
 )
 from helpers.ipip import load_items
-from helpers.personas import BASELINE_CONDITION, Condition, markers_verified, persona_conditions
+from helpers.personas import Condition, markers_verified
 from jev_common.models import JEV_MODEL, LLM_BASELINE_MODELS, llm_eval_params
 
 MODELS = (JEV_MODEL, *LLM_BASELINE_MODELS)
@@ -58,8 +65,8 @@ MODELS = (JEV_MODEL, *LLM_BASELINE_MODELS)
 def all_calls(arm: str, domains: Sequence[str], placements: Sequence[str]) -> list[Call]:
     """Every call one model makes in one arm. Own-arm turn labels are a placeholder (sizes only)."""
     convs = conversations(arm, domains, placements, DECAY_VARIANTS, POLES)
-    if arm == "quiz":
-        return [call for conv in convs for call in probe_calls(conv, quiz_history(), domains)]
+    if arm != "own":
+        return [call for conv in convs for call in probe_calls(conv, fixed_turns(arm), domains)]
     placeholder = [{"question": item_question(item), "answer": "Moderately Accurate"} for item in history_items()]
     calls = []
     for conv in convs:
@@ -68,52 +75,29 @@ def all_calls(arm: str, domains: Sequence[str], placements: Sequence[str]) -> li
     return calls
 
 
-def request_chars(model: str, call: Request) -> int:
-    """Size of what is sent: the Jev request JSON, or the LLM's chat messages."""
-    if model == JEV_MODEL:
-        return len(json.dumps(call.request, ensure_ascii=False))
-    return sum(len(m["content"]) for m in chat_messages(call))
-
-
-def b1_cost_per_char(model: str) -> tuple[float, float]:
-    """(USD per character sent, USD per call) from the model's actual B1 costs.
-
-    Fits cost = chars x rate + fixed per call, with the fixed part taken as the
-    output price of one token (LLMs answer with one token; Jev's output is free).
-    """
-    records = [r for path in (RAW_RESULTS_DIR / model_slug(model) / "bigfive").glob("*.jsonl")
-               for r in read_records(path)]
-    if not records:
-        raise SystemExit(f"No B1 results for {model}; run 01_run_bigfive.py first (the estimate is scaled from them)")
-    cost = sum(r["cost_usd"] or 0.0 for r in records)
-    items = load_items()
-    n_runs = N_BASELINE_RUNS_JEV if model == JEV_MODEL else N_BASELINE_RUNS_LLM
-    tasks = tasks_for(BASELINE_CONDITION, items, [None], range(1, n_runs + 1))
-    for condition in persona_conditions():
-        tasks += tasks_for(condition, items, range(1, N_PERSONA_VARIANTS + 1), [1])
-    chars = sum(request_chars(model, task) for task in tasks)
-    per_call = {JEV_MODEL: 0.0, "qwen/qwen3.8-27b": 3.00e-6, "google/gemma-4-26b-a4b-it": 0.32e-6}[model]
-    return max(cost - per_call * len(records), 0.0) / chars, per_call
-
 
 def estimate(models: Sequence[str], arms: Sequence[str], domains: Sequence[str], placements: Sequence[str]) -> None:
     print("Estimate only: no API calls are made.\n")
-    longest = Call(Conversation("own", Condition("E", "high", "state"), 1), load_items()[1],
-                   tuple({"question": item_question(i), "answer": "Moderately Accurate"} for i in history_items()))
-    print(f"History at {DECAY_TURNS} turns: own arm ~{len(json.dumps(list(longest.history)))} characters, "
-          f"quiz arm {len(json.dumps(list(quiz_history())))} characters (about 4 characters per token)\n")
+    for arm in arms:
+        settings = DECAY_ARM_SETTINGS[arm]
+        if arm == "own":
+            turns = [{"question": item_question(i), "answer": "Moderately Accurate"} for i in history_items()]
+        else:
+            turns = list(fixed_turns(arm))
+        print(f"{arm}: {settings['turns']} turns under \"{settings['key']}\", ~{len(json.dumps(turns))} characters "
+              f"at full length (about 4 characters per token); checkpoints {settings['checkpoints']}")
+    print("Requests already in the cache (checkpoint 0, the long arm's first 32 turns) cost nothing; "
+          "the estimate counts them anyway.\n")
     total = 0.0
-    print(f"{'model':28} {'arm':5} {'calls':>7} {'chars sent':>12} {'est. USD':>9}")
+    print(f"{'model':28} {'arm':8} {'calls':>7} {'chars sent':>13} {'est. USD':>9}")
     for model in models:
-        rate, per_call = b1_cost_per_char(model)
         for arm in arms:
             calls = all_calls(arm, domains, placements)
-            chars = sum(request_chars(model, call) for call in calls)
-            usd = chars * rate + per_call * len(calls)
+            chars, usd = estimate_usd(model, calls)
             total += usd
-            print(f"{model:28} {arm:5} {len(calls):7d} {chars:12,d} {usd:9.2f}")
-    print(f"\nTotal estimate: ${total:.2f}. Checkpoints {DECAY_CHECKPOINTS}, traits {list(domains)}, "
-          f"placements {list(placements)}, wordings {list(DECAY_VARIANTS)}.")
+            print(f"{model:28} {arm:8} {len(calls):7d} {chars:13,d} {usd:9.2f}")
+    print(f"\nTotal estimate: ${total:.2f}. Traits {list(domains)}, placements {list(placements)}, "
+          f"wordings {list(DECAY_VARIANTS)}.")
 
 
 def check(models: Sequence[str]) -> None:
@@ -153,7 +137,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     parser.add_argument("step", choices=("estimate", "check", "run"))
     parser.add_argument("--models", nargs="+", choices=MODELS, default=list(MODELS))
-    parser.add_argument("--arms", nargs="+", choices=DECAY_ARMS, default=list(DECAY_ARMS))
+    parser.add_argument("--arms", nargs="+", choices=DECAY_ALL_ARMS, default=list(DECAY_ARMS))
     parser.add_argument("--domains", nargs="+", choices=DECAY_DOMAINS, default=list(DECAY_DOMAINS))
     parser.add_argument("--placements", nargs="+", choices=PLACEMENTS, default=list(PLACEMENTS))
     parser.add_argument("--workers", type=int, default=8)

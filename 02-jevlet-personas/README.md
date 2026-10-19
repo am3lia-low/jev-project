@@ -32,20 +32,37 @@ Shared code (pinned model IDs, OpenRouter client, cache, parallel runner, stats)
 ├── 02_analyse_bigfive.py   # B1 steps 1-3: scores, alpha, acquiescence, noise, persona shifts
 ├── 03_run_decay.py         # B4: estimate (local) -> check -> run (API laptop)
 ├── 04_analyse_decay.py     # B4: shift and retention per checkpoint, figure
+├── 05_paraphrase_ipip.py   # B1 step 4: reword the IPIP items -> review sheet -> --apply-review
+├── 06_analyse_paraphrase.py  # B1 step 4: original vs paraphrased answers
+├── 07_make_scenarios.py    # B1 step 5: write scenario drafts -> review sheet -> --apply-review
+├── 08_run_scenarios.py     # B1 step 5: estimate (local) -> check -> baseline -> personas
+├── 09_analyse_scenarios.py # B1 step 5: behaviour shift next to self-report shift
+├── 10_build_ladder.py      # B2: build the five benchmark sets (needs a HuggingFace login)
+├── 11_run_ladder.py        # B2: estimate (local) -> check -> run
+├── 12_analyse_ladder.py    # B2: accuracy vs chance and humans, persona drop, figure
 ├── helpers/                # Part B-only code
 │   ├── config.py           # paths, seeds, run counts, persona settings
 │   ├── ipip.py             # IPIP-NEO-120 items, scoring key, reverse-keyed items, Jev score questions
 │   ├── reliability.py      # Cronbach's alpha per trait, acquiescence
 │   ├── personas.py         # persona conditions and their wordings
 │   ├── bigfive.py          # tasks, Jev requests, LLM prompts, result records
-│   └── decay.py            # B4 histories, conversations, probes, records
+│   ├── decay.py            # B4 histories, conversations, probes, records
+│   ├── choice.py           # choice questions (scenarios, ladder): requests, LLM prompts, picked letter
+│   ├── costs.py            # cost estimates scaled from B1's real costs
+│   ├── scenarios.py        # B1 step 5 scenarios, tasks, records
+│   └── ladder.py           # B2 loaders, conditions, tasks, records
 ├── prompts/
 │   ├── llm_system.txt      # LLM system line (same as Part A)
+│   ├── ipip_paraphrase.txt # B1 step 4 generator prompt
+│   ├── scenarios.txt       # B1 step 5 generator prompt
 │   └── personas/
 │       ├── markers.json    # Goldberg marker adjectives per trait and pole
 │       └── persona.txt     # "You are a person who is {adjectives}."
 ├── data/                   # committed
-│   └── ipip/               # IPIP-NEO-120 items (later: paraphrased items, B1 step 4)
+│   ├── ipip/               # IPIP-NEO-120 items; paraphrased items after review (B1 step 4)
+│   ├── scenarios/          # drafts and the reviewed scenarios.json (B1 step 5)
+│   ├── ladder/             # <benchmark>.jsonl and build_report.json (B2)
+│   └── reviews/            # sheets filled in by hand: ipip_paraphrases.csv, scenarios.csv
 ├── results/                # committed
 │   ├── raw/<model slug>/bigfive/<condition>.jsonl   # 01
 │   ├── raw/<model slug>/decay/<arm>/        # 03: <condition>.jsonl, histories/
@@ -60,7 +77,7 @@ Shared code (pinned model IDs, OpenRouter client, cache, parallel runner, stats)
 └── logs/                   # not committed
 ```
 
-Still to come (PLAN B3 steps 4-6): IPIP paraphrases, scenario questions (`data/scenarios/`), and the difficulty ladder (`data/ladder/<benchmark>/`).
+Results of the new steps go to `results/raw/<model slug>/bigfive_paraphrased/`, `scenarios/` and `ladder/<benchmark>/`, with `*_summary.md` files written by the analysis scripts.
 
 ## Big Five runs
 
@@ -91,9 +108,56 @@ python 03_run_decay.py run           # API laptop, about $2.45 for all models an
 python 04_analyse_decay.py           # any laptop
 ```
 
+Follow-up arms (2026-10-19), opt-in: `long` (quiz Q&A to 256 turns) and `appdata` (unrelated order records in the state). Run `estimate` with the same arguments first.
+
+```
+python 03_run_decay.py estimate --arms long appdata
+python 03_run_decay.py run --arms appdata
+python 03_run_decay.py run --arms long --placements state
+```
+
+## IPIP paraphrases (B1 step 4)
+
+Does a model answer the original items from memory? Reword them and compare.
+
+```
+python 05_paraphrase_ipip.py                     # API laptop, ~$0.01; writes data/reviews/ipip_paraphrases.csv
+python 05_paraphrase_ipip.py --apply-review      # after filling in same_meaning (and edit) for all 120
+python 01_run_bigfive.py baseline --items paraphrased
+python 01_run_bigfive.py personas --items paraphrased
+python 06_analyse_paraphrase.py
+```
+
+## Scenarios (B1 step 5)
+
+Does a persona move behaviour, not only self-report? Each scenario has a high-trait and a low-trait action.
+
+```
+python 07_make_scenarios.py                      # API laptop, ~$0.30; writes data/reviews/scenarios.csv
+python 07_make_scenarios.py --apply-review       # after filling in keep (y/n) for every draft
+python 08_run_scenarios.py estimate              # local, no API calls
+python 08_run_scenarios.py check
+python 08_run_scenarios.py baseline
+python 08_run_scenarios.py personas
+python 09_analyse_scenarios.py
+```
+
+## Difficulty ladder (B2)
+
+Where does each model fall to chance, and does "pretend to be an average secondary-school student" lower its accuracy? GPQA and HLE are gated on HuggingFace: accept their terms on the website, then run `huggingface-cli login` once.
+
+```
+python 10_build_ladder.py
+python 11_run_ladder.py estimate                 # local, no API calls
+python 11_run_ladder.py check
+python 11_run_ladder.py run
+python 12_analyse_ladder.py
+```
+
 ## Status
 
 - Helpers, `01_run_bigfive.py` and `02_analyse_bigfive.py` written (2026-10-15). Dry-run end to end with a fake client: the analysis recovers planted persona shifts, alpha and Jev's noise.
 - `check` run live 2026-10-15: Jev's `score` answer is a probability-weighted 0-4 position, as assumed. About $0.50 for the full B1 run.
 - `markers.json` verified 2026-10-15 (all 100 Goldberg unipolar markers). `baseline` and `personas` run 2026-10-15 ($0.49 in total); findings in [`results/bigfive_findings.md`](results/bigfive_findings.md).
 - B4 persona decay written and dry-run on a fake model 2026-10-18 (recovers a planted fade). `estimate`: ~14k calls per model, about $2.45 in total. Run 2026-10-18 ($1.33); findings in [`results/decay_findings.md`](results/decay_findings.md).
+- 2026-10-19: B1 step 4 (05, 06), B1 step 5 (07-09), B2 (10-12) and the B4 follow-up arms written and dry-run end to end on a fake model; the analyses recover the planted effects. None run on the real models yet.

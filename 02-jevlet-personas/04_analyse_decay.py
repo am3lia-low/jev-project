@@ -36,8 +36,8 @@ import pandas as pd
 
 from helpers.bigfive import read_records
 from helpers.config import (
-    DECAY_ARMS,
-    DECAY_CHECKPOINTS,
+    DECAY_ALL_ARMS,
+    DECAY_ARM_SETTINGS,
     DECAY_REMINDER_TURN,
     DECAY_SUMMARY_PATH,
     FIGURES_DIR,
@@ -51,7 +51,8 @@ from jev_common.models import JEV_MODEL, LLM_BASELINE_MODELS
 
 NAMES = {JEV_MODEL: "Jev", LLM_BASELINE_MODELS[0]: "Qwen3.8-27B", LLM_BASELINE_MODELS[1]: "Gemma-4-26B-A4B"}
 MODEL_ORDER = [JEV_MODEL, *LLM_BASELINE_MODELS]
-ARM_NAMES = {"own": "Own answers in the history", "quiz": "Quiz Q&A in the history"}
+ARM_NAMES = {"own": "Own answers in the history", "quiz": "Quiz Q&A in the history",
+             "long": "Long quiz history", "appdata": "App records in the state"}
 ITEM_BY_ID = {item.id: item for item in load_items()}
 SCALE = SCALE_MAX - SCALE_MIN
 INK, MUTED, GRID, SURFACE = "#0b0b0b", "#52514e", "#e4e3df", "#fcfcfb"
@@ -96,7 +97,7 @@ def load_turns() -> pd.DataFrame:
 # ---------------------------------------------------------------------------
 def _display_order(column: pd.Series) -> pd.Series:
     """Sort key: models, arms and placements in their configured order, anything else as is."""
-    for order in (MODEL_ORDER, DECAY_ARMS, PLACEMENTS):
+    for order in (MODEL_ORDER, DECAY_ALL_ARMS, PLACEMENTS):
         if column.isin(order).all():
             return column.map({value: i for i, value in enumerate(order)})
     return column
@@ -164,13 +165,14 @@ def turns_table(turns: pd.DataFrame) -> pd.DataFrame:
 def figure_retention(pooled: pd.DataFrame, path) -> None:
     """Shift (high - low) per checkpoint: columns = models, rows = arms, one line per placement."""
     models = [m for m in MODEL_ORDER if m in set(pooled["model"])]
-    arms = [a for a in DECAY_ARMS if a in set(pooled["arm"])]
-    x_of = {k: i for i, k in enumerate(DECAY_CHECKPOINTS)}
+    arms = [a for a in DECAY_ALL_ARMS if a in set(pooled["arm"])]
     fig, axes = plt.subplots(len(arms), len(models), figsize=(3.6 * len(models) + 0.6, 3.0 * len(arms) + 1.0),
                              squeeze=False, sharey=True, constrained_layout=True)
     for r, arm in enumerate(arms):
         for c, model in enumerate(models):
             ax = axes[r][c]
+            checkpoints = DECAY_ARM_SETTINGS[arm]["checkpoints"]
+            x_of = {k: i for i, k in enumerate(checkpoints)}
             sub = pooled[(pooled["model"] == model) & (pooled["arm"] == arm)]
             for placement in PLACEMENTS:
                 colour = PLACEMENT_COLOURS[placement]
@@ -189,7 +191,7 @@ def figure_retention(pooled: pd.DataFrame, path) -> None:
                                 fmt="D", color=colour, markersize=7, markerfacecolor=SURFACE,
                                 markeredgewidth=2, elinewidth=1.2, capsize=0, linestyle="none",
                                 label=f"{PLACEMENT_NAMES[placement]}, re-reminded at turn {DECAY_REMINDER_TURN}")
-            ax.set_xticks(range(len(DECAY_CHECKPOINTS)), [str(k) for k in DECAY_CHECKPOINTS], fontsize=9, color=MUTED)
+            ax.set_xticks(range(len(checkpoints)), [str(k) for k in checkpoints], fontsize=9, color=MUTED)
             ax.set_ylim(0, SCALE)
             ax.set_yticks(range(SCALE + 1))
             ax.tick_params(colors=MUTED, labelsize=9, length=0)
@@ -203,7 +205,8 @@ def figure_retention(pooled: pd.DataFrame, path) -> None:
             if c == 0:
                 ax.set_ylabel(f"{ARM_NAMES[arm]}\nshift, high - low (1-5 scale)", fontsize=9, color=MUTED)
             if r == len(arms) - 1:
-                ax.set_xlabel("turns of history before the question", fontsize=9, color=MUTED)
+                ax.set_xlabel("turns of history (records, for app data) before the question", fontsize=9,
+                              color=MUTED)
     handles, labels = axes[0][0].get_legend_handles_labels()
     fig.legend(handles, labels, loc="outside lower center", ncol=3, frameon=False, fontsize=9, labelcolor=INK)
     fig.suptitle("Persona pull as the history grows (0 = no pull, 4 = maximum)", fontsize=12, color=INK)
@@ -222,11 +225,11 @@ def summary(pooled: pd.DataFrame, baseline: pd.DataFrame) -> str:
              "in `tables/decay_shifts.csv`.", ""]
     if pooled.empty:
         return "\n".join([*lines, "No results yet."]) + "\n"
-    last = max(DECAY_CHECKPOINTS)
-    lines += [f"## Shift at 0 and {last} turns", "",
-              "| Model | History | Placement | Shift at 0 | Shift at " f"{last} | Retention at {last} |"
-              f" Re-reminded, at {last} |", "|---|---|---|---|---|---|---|"]
+    lines += ["## Shift with no history and at the longest history", "",
+              "| Model | History | Placement | Shift at 0 | Longest (turns) | Shift there | Retention there |"
+              " Re-reminded, there |", "|---|---|---|---|---|---|---|---|"]
     for (model, arm, placement), group in pooled.groupby(["model", "arm", "placement"], sort=False):
+        last = max(DECAY_ARM_SETTINGS[arm]["checkpoints"])
         plain = group[~group["reminder"]].set_index("checkpoint")
         remind = group[group["reminder"]].set_index("checkpoint")
 
@@ -237,7 +240,7 @@ def summary(pooled: pd.DataFrame, baseline: pd.DataFrame) -> str:
             return f"{row['shift']:.2f} [{row['ci_low']:.2f}, {row['ci_high']:.2f}]"
 
         retention = plain["retention"].get(last, np.nan)
-        lines.append(f"| {NAMES.get(model, model)} | {arm} | {placement} | {cell(plain, 0)} | {cell(plain, last)} | "
+        lines.append(f"| {NAMES.get(model, model)} | {arm} | {placement} | {cell(plain, 0)} | {last} | {cell(plain, last)} | "
                      f"{'–' if pd.isna(retention) else f'{retention:.2f}'} | {cell(remind, last)} |")
     if not baseline.empty:
         domains = [d for d in ("N", "E", "O", "A", "C") if d in baseline.columns]

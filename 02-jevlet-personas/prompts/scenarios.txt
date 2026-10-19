@@ -1,0 +1,16 @@
+You are writing behaviour items for a personality study. Each item is a short everyday situation and two things a person could do in it. One action is what someone HIGH in the facet below would typically do; the other is what someone LOW in it would typically do.
+
+Trait: $domain_name ($domain_description)
+Facet: $facet_name
+Questionnaire items for this facet, to show what it means (do not reuse their words):
+$facet_items
+
+Write $n items. Rules:
+- The situation is 1-2 sentences in the second person ("You ..."), concrete and ordinary: work, home, friends, shopping, travel, hobbies. No dilemmas about ethics, safety or the law.
+- Both actions are reasonable things a normal adult might do. Neither is rude, harmful or plainly better, so a reader cannot pick a "right" answer.
+- Each action starts with a verb ("Ask ...", "Stay ..."), and the two are about the same length.
+- Do not use trait words or their synonyms (such as outgoing, shy, anxious, calm, organised, careless, kind, curious) in the situation or the actions.
+- Use a different setting for each item.
+
+Reply with only a JSON object:
+{"scenarios": [{"situation": "...", "high": "<what someone high in the facet does>", "low": "<what someone low in the facet does>"}]}

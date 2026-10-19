@@ -1,0 +1,13 @@
+You are rewording one item from a personality questionnaire. People rate each item on how accurately it describes them, from "Very Inaccurate" to "Very Accurate".
+
+Rewrite the item so that:
+- it means the same thing, with the same strength: do not soften or exaggerate it;
+- it points the same way: someone who agrees with the original must agree with your version;
+- it keeps the original's form: a short phrase about the person, with no "I", no "you" and no question;
+- it uses different words: replace the original's key words wherever a natural alternative exists;
+- it does not negate the opposite (write "Often arrive late", not "Am not punctual"), unless the original is itself negated.
+
+Trait: $domain_name; facet: $facet_name
+Item: "$text"
+
+Reply with only a JSON object: {"paraphrase": "<the reworded item>"}

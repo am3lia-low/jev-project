@@ -85,6 +85,6 @@ Repeating the persona after turn 16 gave the same shift as not repeating it (e.g
 
 ## Next
 
-1. A longer-history run (e.g. 128-256 turns of quiz Q&A, or long app text) to see whether the state persona eventually fades.
+1. A longer-history run (e.g. 128-256 turns of quiz Q&A, or long app text) to see whether the state persona eventually fades. *Ready (2026-10-19): `03_run_decay.py run --arms long`.*
 2. The active realistic arm (PLAN B3 step 8): a support chat where the jevlet makes a `choice` each turn, scored on its choices.
-3. A follow-up on finding 2: persona in the instructions with a state that holds only unrelated data, to confirm that "a non-empty state" is the cause.
+3. A follow-up on finding 2: persona in the instructions with a state that holds only unrelated data, to confirm that "a non-empty state" is the cause. *Ready (2026-10-19): `03_run_decay.py run --arms appdata`.*

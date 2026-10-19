@@ -9,20 +9,25 @@ with the persona first (left out for the baseline and for the persona-in-
 instructions control), then the history, then the probe question. At
 checkpoint 0 there is no history key, so that request is exactly B1's.
 
-A `Conversation` is one arm x condition x wording. Its history has
-DECAY_TURNS turns:
-    own    the model's own answers to IPIP items from DECAY_HISTORY_DOMAINS,
-           built turn by turn (turn t is answered with turns 1..t-1 in the
-           state, and our script writes the most likely answer label in)
-    quiz   fixed ARC-Easy questions with their correct answers, the same for
-           every condition and model; no calls are needed to build it
-A turn is {"question": ..., "answer": ...}.
+A `Conversation` is one arm x condition x wording. Each arm's length,
+checkpoints and state key are in DECAY_ARM_SETTINGS:
+    own      the model's own answers to IPIP items from DECAY_HISTORY_DOMAINS,
+             built turn by turn (turn t is answered with turns 1..t-1 in the
+             state, and our script writes the most likely answer label in)
+    quiz     fixed ARC-Easy questions with their correct answers, the same for
+             every condition and model; no calls are needed to build it
+    long     the quiz history continued to DECAY_LONG_TURNS turns (its first
+             turns are the quiz arm's, so those probes come from the cache)
+    appdata  unrelated app records (orders) under "orders" instead of a
+             history: does any non-empty state weaken the persona?
+A history turn is {"question": ..., "answer": ...}; an appdata turn is one
+order record.
 
 At each checkpoint k the probes are the persona trait's 24 IPIP items (all
 DECAY_DOMAINS items for the baseline), one request each, sent with the first
 k turns. Probe answers are never added to the history. The re-reminder
 repeats the persona as a {"persona": ...} entry right after turn
-DECAY_REMINDER_TURN (persona in the state only).
+DECAY_REMINDER_TURN (persona in the state only, own and quiz arms).
 
 Results, per model slug and arm, under results/raw/<slug>/decay/<arm>/:
     <condition>.jsonl            one probe answer per line, sorted by
@@ -47,19 +52,20 @@ from jev_common.parallel import run_parallel
 
 from .bigfive import QUESTION_KEY, Answer, Answerer, model_slug, write_records
 from .config import (
-    DECAY_CHECKPOINTS,
+    DECAY_ARM_SETTINGS,
     DECAY_HISTORY_DOMAINS,
     DECAY_REMINDER_CHECKPOINTS,
     DECAY_REMINDER_TURN,
     DECAY_SEED,
     DECAY_TURNS,
+    QUIZ_EXTRA_SOURCE_PATH,
     QUIZ_SOURCE_PATH,
     RAW_RESULTS_DIR,
 )
 from .ipip import Item, jev_score_question, load_items, scale_labels
 from .personas import BASELINE_CONDITION, Condition, persona_text
 
-Turn = dict[str, str]
+Turn = dict[str, Any]
 
 
 # ---------------------------------------------------------------------------
@@ -82,13 +88,55 @@ def history_items() -> tuple[Item, ...]:
     return tuple(chosen)
 
 
-@cache
-def quiz_history(path: Path = QUIZ_SOURCE_PATH) -> tuple[Turn, ...]:
-    """The quiz arm's DECAY_TURNS turns: seeded ARC-Easy questions with their correct answers."""
+def _read_rows(path: Path) -> list[dict[str, Any]]:
     with path.open(encoding="utf-8") as handle:
-        rows = [json.loads(line) for line in handle if line.strip()]
-    rows = random.Random(f"{DECAY_SEED}:quiz").sample(rows, DECAY_TURNS)
-    return tuple({"question": r["question"], "answer": r["options"]["ABCDEFGH".index(r["answer"])]} for r in rows)
+        return [json.loads(line) for line in handle if line.strip()]
+
+
+@cache
+def quiz_history(n_turns: int = DECAY_TURNS, path: Path = QUIZ_SOURCE_PATH,
+                 extra_path: Path = QUIZ_EXTRA_SOURCE_PATH) -> tuple[Turn, ...]:
+    """Seeded ARC-Easy questions with their correct answers.
+
+    The first DECAY_TURNS are always the quiz arm's (validation questions);
+    longer histories continue with a seeded draw from the rest of the
+    validation questions and the train questions.
+    """
+    rows = _read_rows(path)
+    first = random.Random(f"{DECAY_SEED}:quiz").sample(rows, DECAY_TURNS)
+    if n_turns > DECAY_TURNS:
+        used = {r["id"] for r in first}
+        rest = [r for r in rows + _read_rows(extra_path) if r["id"] not in used]
+        first += random.Random(f"{DECAY_SEED}:quiz-long").sample(rest, n_turns - DECAY_TURNS)
+    return tuple({"question": r["question"], "answer": r["options"]["ABCDEFGH".index(r["answer"])]}
+                 for r in first[:n_turns])
+
+
+APP_PRODUCTS = ("kettle", "desk lamp", "phone charger", "bath towels", "coffee beans", "notebook set",
+                "water bottle", "running socks", "plant pot", "batteries (AA, 12-pack)", "tea sampler",
+                "laptop stand", "umbrella", "bike light", "dish rack", "backpack")
+APP_STATUSES = ("delivered", "delivered", "delivered", "shipped", "returned", "cancelled")
+
+
+@cache
+def app_records(n_turns: int = DECAY_TURNS) -> tuple[Turn, ...]:
+    """The appdata arm's records: seeded online-shop orders, with no personality content."""
+    rng = random.Random(f"{DECAY_SEED}:appdata")
+    records = []
+    for number in range(n_turns):
+        quantity = rng.choice((1, 1, 1, 2, 3))
+        records.append({"order_id": f"SO-{48213 + 7 * number}", "date": f"2026-{1 + number * 9 // n_turns:02d}-"
+                        f"{rng.randint(1, 28):02d}", "product": rng.choice(APP_PRODUCTS), "quantity": quantity,
+                        "total_gbp": round(quantity * rng.uniform(4, 60), 2), "status": rng.choice(APP_STATUSES)})
+    return tuple(records)
+
+
+def fixed_turns(arm: str) -> tuple[Turn, ...]:
+    """The turns of an arm that needs no calls to build (every arm but own)."""
+    n_turns = DECAY_ARM_SETTINGS[arm]["turns"]
+    if arm == "appdata":
+        return app_records(n_turns)
+    return quiz_history(n_turns)
 
 
 def answer_label(value: float, probabilities: dict[str, float] | None, is_jev: bool) -> str:
@@ -149,6 +197,10 @@ class Call:
         return None
 
     @property
+    def history_key(self) -> str:
+        return DECAY_ARM_SETTINGS[self.conversation.arm]["key"]
+
+    @property
     def request(self) -> dict[str, Any]:
         question = jev_score_question(self.item)
         state: dict[str, Any] = {}
@@ -158,7 +210,7 @@ class Call:
         elif placement == "instructions":
             question = {**question, "instructions": f"{self.conversation.persona} {question['instructions']}"}
         if self.history:
-            state["history"] = list(self.history)
+            state[self.history_key] = list(self.history)
         return {"state": state, "questions": {QUESTION_KEY: question}}
 
 
@@ -171,12 +223,13 @@ def conversations(arm: str, domains: Sequence[str], placements: Sequence[str], v
 
 def probe_calls(conversation: Conversation, turns: Sequence[Turn], baseline_domains: Sequence[str]) -> list[Call]:
     items = conversation.probe_items(baseline_domains)
+    settings = DECAY_ARM_SETTINGS[conversation.arm]
     reminders = [False]
-    if conversation.condition.placement == "state":
+    if conversation.condition.placement == "state" and settings["reminder"]:
         reminders.append(True)
     calls = []
     for reminder in reminders:
-        for checkpoint in DECAY_REMINDER_CHECKPOINTS if reminder else DECAY_CHECKPOINTS:
+        for checkpoint in DECAY_REMINDER_CHECKPOINTS if reminder else settings["checkpoints"]:
             history = conversation.history_at(turns, checkpoint, reminder)
             calls += [Call(conversation, item, history, checkpoint, reminder) for item in items]
     return calls
@@ -247,7 +300,7 @@ def run_arm(arm: str, convs: list[Conversation], answer: Answerer, model: str, i
         for conversation, error in failed:
             print(f"  {arm} {conversation.name}: history not built, its probes skipped: {error}")
     else:
-        turns_by_conv = {conversation: list(quiz_history()) for conversation in convs}
+        turns_by_conv = {conversation: list(fixed_turns(arm)) for conversation in convs}
 
     calls = [call for conv, turns in turns_by_conv.items() for call in probe_calls(conv, turns, baseline_domains)]
     done, failed_calls, stopped = run_parallel(answer, calls, workers, f"{arm} probes")
