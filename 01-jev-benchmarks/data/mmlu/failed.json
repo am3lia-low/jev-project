@@ -1,72 +1,30 @@
 {
- "mmlu-elem-0019": {
-  "attempt": 0,
-  "problems": [
-   "wording changed (not only numbers)"
-  ]
- },
- "mmlu-elem-0024": {
-  "attempt": 0,
-  "problems": [
-   "wording changed (not only numbers)"
-  ]
- },
  "mmlu-elem-0042": {
-  "attempt": 0,
-  "problems": [
-   "wording changed (not only numbers)"
-  ]
- },
- "mmlu-elem-0048": {
-  "attempt": 0,
+  "attempt": 2,
   "problems": [
    "wording changed (not only numbers)"
   ]
  },
  "mmlu-elem-0135": {
-  "attempt": 0,
+  "attempt": 2,
   "problems": [
    "wording changed (not only numbers)"
   ]
  },
  "mmlu-elem-0195": {
-  "attempt": 0,
-  "problems": [
-   "wording changed (not only numbers)"
-  ]
- },
- "mmlu-elem-0201": {
-  "attempt": 0,
-  "problems": [
-   "wording changed (not only numbers)"
-  ]
- },
- "mmlu-elem-0212": {
-  "attempt": 0,
-  "problems": [
-   "wording changed (not only numbers)"
-  ]
- },
- "mmlu-elem-0265": {
-  "attempt": 0,
-  "problems": [
-   "wording changed (not only numbers)"
-  ]
- },
- "mmlu-elem-0275": {
-  "attempt": 0,
+  "attempt": 2,
   "problems": [
    "wording changed (not only numbers)"
   ]
  },
  "mmlu-elem-0314": {
-  "attempt": 0,
+  "attempt": 2,
   "problems": [
    "wording changed (not only numbers)"
   ]
  },
  "mmlu-elem-0334": {
-  "attempt": 0,
+  "attempt": 2,
   "problems": [
    "wording changed (not only numbers)"
   ]
@@ -78,31 +36,31 @@
   ]
  },
  "mmlu-elem-0372": {
-  "attempt": 0,
+  "attempt": 3,
   "problems": [
-   "solve(original) = 421, not the original answer 309"
+   "not swappable: The stated correct answer (309) does not match the question: 365 + 56 = 421, and 309 is actually 365 - 56. No solve function for the addition can reproduce the given answer for the original numbers, so the item is inconsistent and cannot be reliably rewritten."
   ]
  },
  "mmlu-hsm-0002": {
-  "attempt": 0,
+  "attempt": 2,
   "problems": [
    "wording changed (not only numbers)"
   ]
  },
  "mmlu-hsm-0005": {
-  "attempt": 0,
+  "attempt": 2,
   "problems": [
    "wording changed (not only numbers)"
   ]
  },
  "mmlu-hsm-0010": {
-  "attempt": 0,
+  "attempt": 2,
   "problems": [
    "wording changed (not only numbers)"
   ]
  },
  "mmlu-hsm-0025": {
-  "attempt": 0,
+  "attempt": 2,
   "problems": [
    "wording changed (not only numbers)"
   ]
@@ -113,38 +71,32 @@
    "not swappable: The only numbers are 3 (cards chosen) and 52 (a standard deck). The 52 is fixed by the words 'standard deck', so changing it would make the problem ill-posed. The count of 3 also appears as the word 'three' in 'all three cards', and the rules forbid changing words. Changing only the digit would make the question inconsistent, so no valid rewrite exists."
   ]
  },
- "mmlu-hsm-0041": {
-  "attempt": 0,
-  "problems": [
-   "wording changed (not only numbers)"
-  ]
- },
  "mmlu-hsm-0044": {
-  "attempt": 0,
+  "attempt": 2,
   "problems": [
    "wording changed (not only numbers)"
   ]
  },
  "mmlu-hsm-0048": {
-  "attempt": 0,
+  "attempt": 2,
   "problems": [
    "wording changed (not only numbers)"
   ]
  },
  "mmlu-hsm-0136": {
-  "attempt": 0,
+  "attempt": 2,
   "problems": [
    "wording changed (not only numbers)"
   ]
  },
  "mmlu-hsm-0163": {
-  "attempt": 0,
+  "attempt": 2,
   "problems": [
    "wording changed (not only numbers)"
   ]
  },
  "mmlu-hsm-0191": {
-  "attempt": 0,
+  "attempt": 2,
   "problems": [
    "wording changed (not only numbers)"
   ]
@@ -155,156 +107,35 @@
    "not swappable: The only numbers in the question are the exponents 3, 2 and 1 in z^3 + z^2 + z, and the implicit coefficients. They define the structure of the problem rather than being data values. For the original expression, the imaginary part gives b^2 = 3a^2 + 2a + 1. Changing the exponents gives a different Diophantine condition. For example, z^4 + z^2 + z is impossible by parity, and z^4 + z^3 + z leads to an untidy condition. I could not find a variant that stays well-posed, matches the original difficulty and has a tidy integer answer without changing the wording or adding new numbers."
   ]
  },
- "mmlu-hsm-0208": {
-  "attempt": 0,
-  "problems": [
-   "wording changed (not only numbers)"
-  ]
- },
  "mmlu-hsm-0226": {
-  "attempt": 0,
+  "attempt": 2,
   "problems": [
    "wording changed (not only numbers)"
   ]
  },
  "mmlu-hsm-0236": {
-  "attempt": 0,
+  "attempt": 2,
   "problems": [
    "wording changed (not only numbers)"
   ]
  },
  "mmlu-hsm-0237": {
-  "attempt": 0,
+  "attempt": 2,
   "problems": [
    "wording changed (not only numbers)",
    "no number changed"
-  ]
- },
- "mmlu-hsm-0248": {
-  "attempt": -1,
-  "problems": [
-   "missing"
-  ]
- },
- "mmlu-hsm-0250": {
-  "attempt": -1,
-  "problems": [
-   "missing"
-  ]
- },
- "mmlu-hsm-0251": {
-  "attempt": -1,
-  "problems": [
-   "missing"
-  ]
- },
- "mmlu-hsm-0255": {
-  "attempt": -1,
-  "problems": [
-   "missing"
-  ]
- },
- "mmlu-hsm-0256": {
-  "attempt": -1,
-  "problems": [
-   "missing"
-  ]
- },
- "mmlu-hsm-0257": {
-  "attempt": -1,
-  "problems": [
-   "missing"
-  ]
- },
- "mmlu-hsm-0261": {
-  "attempt": -1,
-  "problems": [
-   "missing"
-  ]
- },
- "mmlu-hsm-0265": {
-  "attempt": 0,
-  "problems": [
-   "solve(new) = 1836, not the stated new answer 1835"
-  ]
- },
- "mmlu-hsm-0267": {
-  "attempt": -1,
-  "problems": [
-   "missing"
-  ]
- },
- "mmlu-hsm-0269": {
-  "attempt": -1,
-  "problems": [
-   "missing"
-  ]
- },
- "mmlu-colm-0001": {
-  "attempt": -1,
-  "problems": [
-   "missing"
-  ]
- },
- "mmlu-colm-0004": {
-  "attempt": -1,
-  "problems": [
-   "missing"
   ]
  },
  "mmlu-colm-0007": {
-  "attempt": -1,
+  "attempt": 3,
   "problems": [
-   "missing"
-  ]
- },
- "mmlu-colm-0010": {
-  "attempt": -1,
-  "problems": [
-   "missing"
-  ]
- },
- "mmlu-colm-0011": {
-  "attempt": -1,
-  "problems": [
-   "missing"
+   "not swappable: The answer is always 25% regardless of the segment length. The only numeric value that could change is the length 10, and it does not affect the answer. The number of pieces is fixed by the two points, and it is written as a word, which the rules do not let me change. So changing the numbers cannot change the correct answer."
   ]
  },
  "mmlu-colm-0012": {
-  "attempt": -1,
+  "attempt": 1,
   "problems": [
-   "missing"
-  ]
- },
- "mmlu-colm-0014": {
-  "attempt": -1,
-  "problems": [
-   "missing"
-  ]
- },
- "mmlu-colm-0023": {
-  "attempt": 0,
-  "problems": [
-   "wording changed (not only numbers)",
-   "no number changed"
-  ]
- },
- "mmlu-colm-0029": {
-  "attempt": -1,
-  "problems": [
-   "missing"
-  ]
- },
- "mmlu-colm-0033": {
-  "attempt": -1,
-  "problems": [
-   "missing"
-  ]
- },
- "mmlu-colm-0037": {
-  "attempt": -1,
-  "problems": [
-   "missing"
+   "wording changed (not only numbers)"
   ]
  },
  "mmlu-colm-0039": {
@@ -313,58 +144,10 @@
    "not swappable: The maximum number of acute angles in a convex n-gon is 3 for every n \u2265 3, because the exterior angles sum to 360\u00b0. Changing the number 10 therefore cannot change the answer. The answer is fixed by theory, not computed from the given number."
   ]
  },
- "mmlu-colm-0042": {
-  "attempt": -1,
-  "problems": [
-   "missing"
-  ]
- },
- "mmlu-colm-0044": {
-  "attempt": -1,
-  "problems": [
-   "missing"
-  ]
- },
- "mmlu-colm-0059": {
-  "attempt": -1,
-  "problems": [
-   "missing"
-  ]
- },
  "mmlu-colm-0077": {
-  "attempt": -1,
+  "attempt": 3,
   "problems": [
-   "missing"
-  ]
- },
- "mmlu-colm-0081": {
-  "attempt": -1,
-  "problems": [
-   "missing"
-  ]
- },
- "mmlu-colm-0082": {
-  "attempt": -1,
-  "problems": [
-   "missing"
-  ]
- },
- "mmlu-colm-0087": {
-  "attempt": -1,
-  "problems": [
-   "missing"
-  ]
- },
- "mmlu-colm-0090": {
-  "attempt": -1,
-  "problems": [
-   "missing"
-  ]
- },
- "mmlu-colm-0092": {
-  "attempt": -1,
-  "problems": [
-   "missing"
+   "not swappable: The only numbers are the matrix size (2 x 2) and the exponent -1. The answer follows from theory: A = A^(-1) gives A^2 = I, so with A not equal to \u00b1I the eigenvalues are 1 and -1, and the trace is 0. Changing the size to 3 x 3 would leave the trace undetermined. Changing the exponent would not give a tidy, well-posed question with the same structure. There are no numerical values to swap that would give a recomputable new answer."
   ]
  }
 }

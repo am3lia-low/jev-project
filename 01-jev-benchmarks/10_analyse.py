@@ -17,10 +17,18 @@ How models are combined:
   wording only (200 per dataset), so the two versions of one question are not
   counted as independent.
 
+--sensitivity <BERT results folder> (A8, bigger-pool sensitivity analysis):
+re-runs only the above-chance rule and the ladder rule with that folder's BERT
+in place of results/bert/, and writes results/tables/sensitivity_<folder>_*.csv
+and results/sensitivity_<folder>.md next to the main results. The main tables
+and verdict.md are not touched: the verdict stays on the original BERT run.
+
 Run from this folder:
     python 10_analyse.py
+    python 10_analyse.py --sensitivity results/bert_bigpool
 """
 
+import argparse
 import json
 from collections import Counter
 from pathlib import Path
@@ -54,15 +62,15 @@ ALL = "all"
 # ---------------------------------------------------------------------------
 # Loading
 # ---------------------------------------------------------------------------
-def load() -> pd.DataFrame:
+def load(bert_dir: Path = config.BERT_RESULTS_DIR) -> pd.DataFrame:
     rows = []
     if config.RAW_RESULTS_DIR.exists():
         for folder in sorted(p for p in config.RAW_RESULTS_DIR.iterdir() if p.is_dir()):
             model = folder.name.replace("__", "/")
             for path in sorted(folder.glob("*.jsonl")):
                 rows += [{**r, "model": model, "seed": -1} for r in read_records(path)]
-    if config.BERT_RESULTS_DIR.exists():
-        for folder in sorted(p for p in config.BERT_RESULTS_DIR.iterdir() if p.is_dir()):
+    if bert_dir.exists():
+        for folder in sorted(p for p in bert_dir.iterdir() if p.is_dir()):
             untrained = folder.name == "untrained"
             seed = -1 if untrained else int(folder.name.removeprefix("seed_"))
             for path in sorted(folder.glob("*.jsonl")):
@@ -416,7 +424,61 @@ def verdict(memorisation: pd.DataFrame, quiz_rates: pd.DataFrame, quiz_compare: 
 
 
 # ---------------------------------------------------------------------------
+def sensitivity(bert_dir: Path) -> None:
+    """The ladder rule with another BERT run as the reference, next to the main run's (A8)."""
+    name = bert_dir.name
+    runs = {"main": load(), name: load(bert_dir)}
+    if runs[name][runs[name]["model"] == BERT].empty:
+        raise SystemExit(f"No fine-tuned BERT results in {bert_dir} yet")
+    chance, ladder = {}, {}
+    for label, df in runs.items():
+        chance[label] = above_chance(df)
+        valid = dict(zip(chance[label]["dataset"], chance[label]["valid"])) if not chance[label].empty else {}
+        ladder[label] = memorisation_table(df, valid)
+    config.TABLES_DIR.mkdir(parents=True, exist_ok=True)
+    chance[name].to_csv(config.TABLES_DIR / f"sensitivity_{name}_above_chance.csv", index=False, float_format="%.4f")
+    ladder[name].to_csv(config.TABLES_DIR / f"sensitivity_{name}_ladder.csv", index=False, float_format="%.4f")
+
+    def bert_accuracy(df: pd.DataFrame) -> dict[str, float]:
+        return {run: per_question(df, BERT, run)["correct"].mean() for run in ("level0", "level2")}
+
+    lines = [f"# Sensitivity: BERT trained on a bigger pool (`{name}`)", "",
+             f"Written by `10_analyse.py --sensitivity`; do not edit by hand. Pre-registered in PLAN A8 "
+             "(2026-10-20): the verdict stays on the main BERT run; this checks whether it holds when BERT is "
+             "trained on more data. Same test questions, same Jev and LLM results, same rules.", "",
+             "## BERT above-chance rule (val originals)", "", "| Dataset | Main: accuracy, CI low | Valid | "
+             f"{name}: accuracy, CI low | Valid |", "|---|---|---|---|---|"]
+    merged = chance["main"].merge(chance[name], on="dataset", suffixes=("_main", "_new"))
+    for _, r in merged.iterrows():
+        lines.append(f"| {r['dataset']} | {r['accuracy_main']:.1%}, {r['ci_low_main']:.1%} | "
+                     f"{'yes' if r['valid_main'] else 'no'} | {r['accuracy_new']:.1%}, {r['ci_low_new']:.1%} | "
+                     f"{'yes' if r['valid_new'] else 'no'} |")
+    accuracy = {label: bert_accuracy(df) for label, df in runs.items()}
+    lines += ["", "BERT accuracy, all datasets: " + "; ".join(
+        f"{label} Level 0 {a['level0']:.1%}, Level 2 {a['level2']:.1%}" for label, a in accuracy.items()), "",
+              "## Ladder rule, pooled over the datasets where each BERT run is valid", "",
+              "| Model | Run | Pool | Model drop | BERT drop | Ratio | Difference [95% CI] | Supported |",
+              "|---|---|---|---|---|---|---|---|"]
+    for label, table in ladder.items():
+        pooled = table[table["dataset"].str.startswith("pooled")]
+        for _, r in pooled.iterrows():
+            ratio = r["subject_drop"] / r["bert_drop"] if r["bert_drop"] > 0 else float("nan")
+            lines.append(f"| {r['model']} | {label} | {r['dataset'].removeprefix('pooled ')} | {r['subject_drop']:.2f} | "
+                         f"{r['bert_drop']:.2f} | {ratio:.2f}x | {r['difference']:.2f} [{r['ci_low']:.2f}, "
+                         f"{r['ci_high']:.2f}] | {'yes' if r['supported'] else 'no'} |")
+    out = config.RESULTS_DIR / f"sensitivity_{name}.md"
+    out.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    print(f"Wrote {out} and results/tables/sensitivity_{name}_*.csv (main tables and verdict.md untouched)")
+
+
 def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
+    parser.add_argument("--sensitivity", type=Path, metavar="BERT_RESULTS_DIR",
+                        help="re-run the ladder rule with another BERT run (A8 sensitivity analysis)")
+    args = parser.parse_args()
+    if args.sensitivity is not None:
+        sensitivity(args.sensitivity)
+        return
     df = load()
     if df.empty:
         raise SystemExit(f"No results in {config.RAW_RESULTS_DIR} or {config.BERT_RESULTS_DIR} yet")

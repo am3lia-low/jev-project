@@ -24,10 +24,12 @@ SWAPS_DIR = DATA_DIR / "swaps"
 QUIZ_DIR = DATA_DIR / "quiz"
 REVIEW_DIR = DATA_DIR / "reviews"  # manual-check sheets (CSV) you fill in
 BERT_DATA_DIR = DATA_DIR / "bert"  # 07a: flat files for the Colab notebook
+BERT_BIGPOOL_DATA_DIR = DATA_DIR / "bert_bigpool"  # 07a --extra-train: the sensitivity run's notebook data
 PROMPTS_DIR = BENCH_DIR / "prompts"
 RESULTS_DIR = BENCH_DIR / "results"
 RAW_RESULTS_DIR = RESULTS_DIR / "raw"  # 08, 09: <model slug>/<run>.jsonl
 BERT_RESULTS_DIR = RESULTS_DIR / "bert"  # 07b, downloaded from Colab: <seed_n | untrained>/<run>.jsonl
+BERT_BIGPOOL_RESULTS_DIR = RESULTS_DIR / "bert_bigpool"  # 07b on data/bert_bigpool (sensitivity, A8)
 TABLES_DIR = RESULTS_DIR / "tables"  # 10
 FIGURES_DIR = RESULTS_DIR / "figures"  # 10
 VERDICT_PATH = RESULTS_DIR / "verdict.md"  # 10
@@ -52,6 +54,11 @@ BERT_SEEDS = (11, 22, 33, 44, 55)  # five fine-tuning seeds (A5)
 N_TRAIN = 1_100  # per dataset
 N_VAL = 200  # per dataset
 N_TEST = 400  # per dataset
+# Bigger-pool sensitivity analysis (A8, decided 2026-10-20): extra train
+# questions for the datasets where BERT passes, drawn by 02b_sample_extra.py.
+# None = everything left in the train pool (ARC-Easy has 950 left).
+N_TRAIN_EXTRA: dict[str, int | None] = {"arce": None, "csqa": 1_100, "swag": 1_100}
+EXTRA_TRAIN_SPLIT = "train_extra"  # file name; its questions are train questions (split "train")
 N_NEW_PER_DATASET = 50  # Level 3 questions kept per paper dataset (A3.2)
 N_NEW_DRAFTS_PER_DATASET = 100  # drafted per paper dataset; spares for rejected drafts
 N_QUIZ_BENCHMARK_PER_DATASET = 100  # quiz benchmark items (A7)
@@ -75,6 +82,13 @@ N_MANUAL_MMLU = 30  # manual check of MMLU swaps (A11)
 # HuggingFace split names. Field names of each HuggingFace dataset are handled
 # in loaders.py.
 SPLITS = ("train", "val", "test")
+
+
+def sampled_splits(dataset: str) -> tuple[str, ...]:
+    """SPLITS, plus EXTRA_TRAIN_SPLIT for datasets 02b_sample_extra.py has drawn extra questions for."""
+    if (SAMPLED_DIR / dataset / f"{EXTRA_TRAIN_SPLIT}.jsonl").exists():
+        return (*SPLITS, EXTRA_TRAIN_SPLIT)
+    return SPLITS
 
 
 @dataclass(frozen=True)

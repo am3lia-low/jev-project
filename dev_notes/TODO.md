@@ -94,7 +94,10 @@ Same order as [`docs/api-laptop-checks.md` → Run order](../docs/api-laptop-che
 
 - [x] `LEARNING_CURVE` option in `notebooks/07b_bert_colab.ipynb` (nested 25/50/100% subsets per dataset, original + paraphrase kept together, 2 seeds, ~80 min on a T4). Subset logic and summary cell tested locally on `data/bert/train.jsonl`; training not run here (no GPU).
 - [x] Run on Kaggle from the API laptop (2026-10-18): `results/bert_learning_curve/`, summary in `results/bert_summary.md` → Learning curve. HellaSwag flat; ARC-Challenge rising (Level 0 24.9 → 32.4%) but below the threshold; SWAG / ARC-Easy / CommonsenseQA still rising at 100%.
-- [ ] Decide: RACE fallback for ARC-Challenge (its train split is 98% used) and/or enlarge the pool. Was: run on Kaggle from the API laptop (steps in `docs/api-laptop-checks.md` → "To do (2026-10-18)"; new kernel, `LEARNING_CURVE = True`), download to `results/bert_learning_curve/`, then decide: enlarge the train pool and/or the RACE fallback for ARC-Challenge.
+- [x] Decided 2026-10-20: **enlarge the pool, as a sensitivity analysis** (option A: the verdict stays on the original BERT run; pre-registered in PLAN A8 before anything was drawn). All 3 passing datasets: ARC-Easy +950 (all that was left), CommonsenseQA and SWAG +1,100 each. No RACE fallback: ARC-Challenge stays out of the pool.
+- [x] `02b_sample_extra.py` (new; no overlap with any existing split, existing files untouched) → `03_paraphrase.py` ($0.25) → `04_validate.py` (3,150/3,150 pass after 1 retry; existing paraphrase files byte-identical) → `07a_build_bert_data.py --extra-train` → `data/bert_bigpool/` (train 17,300 rows; val and levels byte-identical to `data/bert/`).
+- [x] Uploaded as the private Kaggle dataset `shiyalow/jev-bert-data-bigpool`; notebook pushed as the private kernel `shiyalow/jev-bert-bigpool` (repo notebook with `RESULTS_NAME = "results_bigpool"`, `RUN_UNTRAINED = False`; 5 seeds, T4). Started 2026-10-20.
+- [ ] When it finishes: `uvx kaggle kernels output shiyalow/jev-bert-bigpool`, copy `results_bigpool/` to `01-jev-benchmarks/results/bert_bigpool/` (check all 5 `seed_*` folders have `train_log.json`), then `python 10_analyse.py --sensitivity results/bert_bigpool` (writes `results/sensitivity_bert_bigpool.md`; main tables and verdict untouched). Add the result to `memorisation_findings.md`.
 
 ## 10. [ ] Open decisions
 
@@ -111,7 +114,9 @@ Maths only (elementary / high school / college maths, 339 numeric candidates), ~
 - [x] `11a_mmlu_swap.py` (generate + code check), `11b_mmlu_build.py`, `11c_run_mmlu.py`, `11d_analyse_mmlu.py`, `helpers/mmlu.py`, `prompts/mmlu_swap.txt`. Dry-run 2026-10-18 on a fake model with real MMLU data: the checks catch planted bad swaps (wording changed, wrong solve(), not swappable), retries and review flags work, positions balanced, and 11d recovers a planted memoriser (and clears two computing models).
 - [ ] Run `11a` (+ `--retry-failed`; ~$2-3 of Sonnet), `11b`, fill `data/reviews/mmlu_swaps_30.csv`, re-run `11b`.
   - [x] `11a` first pass (2026-10-19, $2.64): 278/339 verified (elementary 137, high school 139, college 2). 61 failed: 27 wording changed, 4 not swappable, 2 no number changed, 2 wrong `solve()`, and **28 never generated because the OpenRouter credits ran out** (HTTP 402), 21 of them college maths.
-  - [ ] Add OpenRouter credits, then `python 11a_mmlu_swap.py --retry-failed` (regenerates the 28 missing and retries the 29 fixable; well under $1). Without it, college maths is nearly absent from the 200.
+  - [x] Credits topped up; `--retry-failed` twice (2026-10-20, $0.58 + $0.23): **314/339 verified** (elementary 144, high school 151, college 19). 25 dropped: 18 wording changed, 7 not swappable (1 item had one attempt left; not worth a run). 11a total $3.45.
+  - [x] `11b` run: 200 items (elementary 92, high school 96, college 12); new answer balanced 50 per letter, trap 48-52. Review sheet written.
+  - [ ] Fill in `data/reviews/mmlu_swaps_30.csv` (yes/no for only_numbers_changed, new_answer_right, wrong_as_plausible), then re-run `11b`.
 - [ ] Run `11c` (Jev, Qwen, Gemma), then `11d`.
 
 ## 11. [ ] Part B: Big Five (B1 steps 1-3)

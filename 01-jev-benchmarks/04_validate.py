@@ -59,7 +59,7 @@ def main() -> None:
     passed_test = []
     for key in args.datasets:
         report[key] = {}
-        for split in config.SPLITS:
+        for split in config.sampled_splits(key):
             originals = read_jsonl(config.SAMPLED_DIR / key / f"{split}.jsonl")
             raw_file = config.PARAPHRASED_RAW_DIR / key / f"{split}.jsonl"
             raw = {q.id: q for q in read_jsonl(raw_file)} if raw_file.exists() else {}

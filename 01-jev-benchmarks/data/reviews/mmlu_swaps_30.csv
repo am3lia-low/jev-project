@@ -1,0 +1,273 @@
+﻿id,original_question,original_options,old_answer,swapped_question,swapped_options,new_answer,trap,solve,only_numbers_changed,new_answer_right,wrong_as_plausible,notes
+mmlu-colm-0090,"If A is the 2 by 2 matrix whose (i, j) entry is equal to i + j, and B is the 3 by 3 matrix whose (i, j) entry is equal to i + j, find the value of the sum detA + detB.","A. -2
+B. -1
+C. 0
+D. 2",B,"If A is the 1 by 1 matrix whose (i, j) entry is equal to i + j, and B is the 2 by 2 matrix whose (i, j) entry is equal to i + j, find the value of the sum detA + detB.","A. 3
+B. 1
+C. -1
+D. 0",B,C,"def solve(a, b):
+    def d(n):
+        if n == 1:
+            return 2
+        if n == 2:
+            return -1
+        return 0
+    return d(a) + d(b)",,,,
+mmlu-elem-0001,Ms. Perez drove a total of 40 miles in 5 days. She drove the same number of miles each day. How many miles did Ms. Perez drive each day?,"A. 5
+B. 7
+C. 8
+D. 9",C,Ms. Perez drove a total of 84 miles in 7 days. She drove the same number of miles each day. How many miles did Ms. Perez drive each day?,"A. 77
+B. 8
+C. 91
+D. 12",D,B,"def solve(miles, days):
+    return miles // days",,,,
+mmlu-elem-0007,Find the quotient of 2.16 ÷ 0.06.,"A. 3.6
+B. 36
+C. 0.01272
+D. 12.72",B,Find the quotient of 4.55 ÷ 0.07.,"A. 36
+B. 65
+C. 650
+D. 6.5",B,A,"def solve(a, b):
+    return round(a / b, 6)",,,,
+mmlu-elem-0019,Simplify (2 + 5)^2 − 42.,"A. 7
+B. 16
+C. 30
+D. 33",A,Simplify (3 + 8)^2 − 85.,"A. -12
+B. 206
+C. 7
+D. 36",D,C,"def solve(a, b, c):
+    return (a + b)**2 - c",,,,
+mmlu-elem-0039,Let 12-9+c=12. What value of c makes the equation true?,"A. 0
+B. 3
+C. 9
+D. 12",C,Let 24-7+c=24. What value of c makes the equation true?,"A. 17
+B. 9
+C. 7
+D. 31",C,B,"def solve(a, b, d):
+    return d - a + b",,,,
+mmlu-elem-0047,Compute 22 / 2 + 9.,"A. 10
+B. 11
+C. 20
+D. 2",C,Compute 48 / 4 + 15.,"A. 27
+B. 19
+C. 20
+D. 12",A,C,"def solve(a, b, c):
+    return a / b + c",,,,
+mmlu-elem-0076,Cat food costs $.47/lb. How much does a 6-lb bag cost?,"A. $2.82
+B. $2.97
+C. $6.47
+D. $12.77",A,Cat food costs $.38/lb. How much does a 7-lb bag cost?,"A. $2.66
+B. $2.82
+C. $26.60
+D. $7.38",A,B,"def solve(price, weight):
+    return round(price * weight, 2)",,,,
+mmlu-elem-0120,"John’s friend told him that he could earn $49 for handing out flyers at a local concert. John wants to calculate the hourly rate, If he works a total of 3.5 hours, the equation 3.5x = 49 can be used to determine his hourly rate. What would John’s hourly rate be, in dollars?","A. $1.40
+B. $14.00
+C. $45.50
+D. $171.50",B,"John’s friend told him that he could earn $45 for handing out flyers at a local concert. John wants to calculate the hourly rate, If he works a total of 2.5 hours, the equation 2.5x = 45 can be used to determine his hourly rate. What would John’s hourly rate be, in dollars?","A. $14.00
+B. $18.00
+C. $42.50
+D. $112.50",B,A,"def solve(h, total):
+    return total / h",,,,
+mmlu-elem-0142,"If x − 3 = 6, what is the value of x?","A. 2
+B. 3
+C. 6
+D. 9",D,"If x − 7 = 8, what is the value of x?","A. 56
+B. 1
+C. 9
+D. 15",D,C,"def solve(a, b):
+    return a + b",,,,
+mmlu-elem-0151,"Which of the following is the best estimate for 4,286 × 390?","A. 12,000,000
+B. 1,600,000
+C. 1,200,000
+D. 16,000",B,"Which of the following is the best estimate for 5,732 × 290?","A. 18,000,000
+B. 1,800,000
+C. 180,000
+D. 1,600,000",B,D,"def solve(a, b):
+    ra = round(a, -(len(str(a)) - 1))
+    rb = round(b, -(len(str(b)) - 1))
+    return ra * rb",,,,
+mmlu-elem-0159,What is 7% equal to?,"A. 0.007
+B. 0.07
+C. 0.7
+D. 7",B,What is 4% equal to?,"A. 0.07
+B. 0.04
+C. 0.004
+D. 0.4",B,A,"def solve(p):
+    return p / 100",,,,
+mmlu-elem-0162,What is the product of 32 x 67?,"A. 1,824
+B. 1,934
+C. 2,044
+D. 2,144",D,What is the product of 46 x 53?,"A. 2,398
+B. 2,338
+C. 2,438
+D. 2,144",C,D,"def solve(a, b):
+    return a * b",,,,
+mmlu-elem-0201,"During a semester, a student received scores of 76, 80, 83, 71, 80, and 78 on six tests. What is the student's average score for these six tests?","A. 76
+B. 77
+C. 78
+D. 79",C,"During a semester, a student received scores of 85, 74, 90, 79, 82, and 82 on six tests. What is the student's average score for these six tests?","A. 81
+B. 78
+C. 83
+D. 82",D,B,"def solve(s1, s2, s3, s4, s5, s6):
+    return Fraction(s1 + s2 + s3 + s4 + s5 + s6, 6)",,,,
+mmlu-elem-0253,"Add. 46,911 + 653,092","A. 699,903
+B. 700,003
+C. 913,203
+D. 1,122,202",B,"Add. 38,274 + 527,615","A. 565,889
+B. 555,889
+C. 700,003
+D. 575,889",A,C,"def solve(a, b):
+    return a + b",,,,
+mmlu-elem-0286,Use mental math to find the sum of 11.7 + 3.4 + 6.3.,"A. 20.3
+B. 20.4
+C. 21.4
+D. 22.4",C,Use mental math to find the sum of 12.6 + 4.7 + 7.4.,"A. 24.6
+B. 24.7
+C. 25.7
+D. 21.4",B,D,"def solve(a, b, c):
+    return round(a + b + c, 10)",,,,
+mmlu-elem-0331,"An office building has 300,000 + 5,000 + 600 + 10 square feet of floor space. What is the number of square feet of floor space written in standard form?","A. 30,561
+B. 35,610
+C. 300,561
+D. 305,610",D,"An office building has 200,000 + 8,000 + 900 + 40 square feet of floor space. What is the number of square feet of floor space written in standard form?","A. 20,894
+B. 208,940
+C. 208,094
+D. 305,610",B,D,"def solve(a, b, c, d):
+    return a + b + c + d",,,,
+mmlu-elem-0340,"Find the median in the set of data $79.88, $21.88, $29.88, $19.88, $17.88.","A. $17.88
+B. $19.88
+C. $21.88
+D. $29.88",C,"Find the median in the set of data $68.45, $33.45, $24.45, $41.45, $28.45.","A. $24.45
+B. $39.05
+C. $33.45
+D. $21.88",C,D,"def solve(a, b, c, d, e):
+    s = sorted([a, b, c, d, e])
+    return s[2]",,,,
+mmlu-elem-0362,Use mental math to solve 8y = 56.,"A. 6
+B. 7
+C. 8
+D. 9",B,Use mental math to solve 6y = 72.,"A. 12
+B. 13
+C. 432
+D. 7",A,D,"def solve(a, b):
+    return Fraction(b, a)",,,,
+mmlu-elem-0374,"There are 72 students on the dance team, and 4 over 9 take tap lessons. How many students take tap lessons?","A. 32
+B. 49
+C. 63
+D. 68",A,"There are 84 students on the dance team, and 5 over 7 take tap lessons. How many students take tap lessons?","A. 24
+B. 12
+C. 60
+D. 32",C,D,"def solve(total, num, den):
+    return Fraction(total * num, den)",,,,
+mmlu-hsm-0001,"The length of a rectangle is twice its width. Given the length of the diagonal is $5\sqrt{5}$, find the area of the rectangle.","A. 2500
+B. 2
+C. 50
+D. 25",C,"The length of a rectangle is twice its width. Given the length of the diagonal is $7\sqrt{5}$, find the area of the rectangle.","A. 49
+B. 50
+C. 196
+D. 98",D,B,"def solve(k, m):
+    return Fraction(2 * k**2 * m, 5)",,,,
+mmlu-hsm-0018,"If $f(x)=ax^6-bx^4+x-1$ and $f(2)=5$, then what is the value of $f(-2)$?","A. 1
+B. 3
+C. 0
+D. 5",A,"If $f(x)=ax^6-bx^4+x-4$ and $f(3)=14$, then what is the value of $f(-3)$?","A. 20
+B. 14
+C. 8
+D. 1",C,D,"def solve(c, fc, k):
+    E = fc - c + k
+    return E - c - k",,,,
+mmlu-hsm-0063,"Anton has two species of ants, Species A and Species B, in his ant farm. The two species are identical in appearance, but Anton knows that every day, there are twice as many ants of Species A than before, while there are three times as many ants of Species B. On Day 0, Anton counts that there are 30 ants in his ant farm. On Day 5, Anton counts that there are 3281 ants in his ant farm. How many of these are of Species A?","A. 211
+B. 2321
+C. 11
+D. 608",D,"Anton has two species of ants, Species A and Species B, in his ant farm. The two species are identical in appearance, but Anton knows that every day, there are twice as many ants of Species A than before, while there are three times as many ants of Species B. On Day 0, Anton counts that there are 40 ants in his ant farm. On Day 5, Anton counts that there are 6977 ants in his ant farm. How many of these are of Species A?","A. 6561
+B. 13
+C. 416
+D. 608",C,D,"def solve(total, n, N):
+    a0 = Fraction(3**n * total - N, 3**n - 2**n)
+    return a0 * 2**n",,,,
+mmlu-hsm-0070,How many positive 4-digit integers have only odd digits?,"A. 100
+B. 999
+C. 625
+D. 500",C,How many positive 6-digit integers have only odd digits?,"A. 7776
+B. 625
+C. 3125
+D. 15625",D,B,"def solve(n):
+    return 5**n",,,,
+mmlu-hsm-0077,"Let $a\star b = a^b-ab$. If $2\star x = 22$, find $x$.","A. 5
+B. 22
+C. 11
+D. 6",A,"Let $a\star b = a^b-ab$. If $3\star x = 69$, find $x$.","A. 3
+B. 4
+C. 5
+D. 23",B,C,"def solve(a, n):
+    for x in range(0, 200):
+        if a**x - a*x == n:
+            return x
+    return None",,,,
+mmlu-hsm-0107,What is the least possible positive integer-value of $n$ such that $\sqrt{18\cdot n \cdot 34}$ is an integer?,"A. 34
+B. 2
+C. 17
+D. 3",C,What is the least possible positive integer-value of $n$ such that $\sqrt{50\cdot n \cdot 42}$ is an integer?,"A. 17
+B. 7
+C. 21
+D. 42",C,A,"def solve(a, b):
+    m = a * b
+    r = 1
+    p = 2
+    while p * p <= m:
+        c = 0
+        while m % p == 0:
+            m //= p
+            c += 1
+        if c % 2:
+            r *= p
+        p += 1
+    return r * m",,,,
+mmlu-hsm-0133,"A novel has 400 pages and Veronica wants to estimate how long it will take her to complete it. She reads 250 words per minute. She counted the words on one quarter of a typical page and found that there were approximately 200 words per page. To the nearest minute, how long will it take Veronica to read the book?","A. 225
+B. 320
+C. 400
+D. 450",B,"A novel has 360 pages and Veronica wants to estimate how long it will take her to complete it. She reads 300 words per minute. She counted the words on one quarter of a typical page and found that there were approximately 250 words per page. To the nearest minute, how long will it take Veronica to read the book?","A. 300
+B. 320
+C. 75
+D. 432",A,B,"def solve(pages, wpm, words):
+    return round(pages * words / wpm)",,,,
+mmlu-hsm-0146,"Suppose that for some $a,b,c$ we have $a+b+c = 6$, $ab+ac+bc = 5$ and $abc = -12$. What is $a^3+b^3+c^3$?","A. 90
+B. 99
+C. 64
+D. 91",A,"Suppose that for some $a,b,c$ we have $a+b+c = 7$, $ab+ac+bc = 2$ and $abc = -40$. What is $a^3+b^3+c^3$?","A. 261
+B. 90
+C. 301
+D. 181",D,B,"def solve(s, p, q):
+    return s**3 - 3*s*p + 3*q",,,,
+mmlu-hsm-0235,"Zoey is laying bricks for her patio. The salesman wants to sell Zoey as many bricks as possible to cover her patio with a thickness of one brick, while not having any extra bricks. The patio area is a rectangle with dimensions 12 feet by 10 feet, and each individual brick is 4 inches by 6 inches by 2 inches. What would be the greatest number of bricks the salesman could sell to meet his sales criteria?","A. 5,760
+B. 2,880
+C. 2,160
+D. 1,440",C,"Zoey is laying bricks for her patio. The salesman wants to sell Zoey as many bricks as possible to cover her patio with a thickness of one brick, while not having any extra bricks. The patio area is a rectangle with dimensions 9 feet by 14 feet, and each individual brick is 6 inches by 8 inches by 3 inches. What would be the greatest number of bricks the salesman could sell to meet his sales criteria?","A. 378
+B. 2,160
+C. 756
+D. 1,008",D,B,"def solve(L, W, a, b, c):
+    area = L * 12 * W * 12
+    dims = sorted([a, b, c])
+    return area // (dims[0] * dims[1])",,,,
+mmlu-hsm-0243,How many positive and negative integers is $12$ a multiple of?,"A. 1
+B. 4
+C. 12
+D. 3",C,How many positive and negative integers is $30$ a multiple of?,"A. 16
+B. 8
+C. 30
+D. 12",A,D,"def solve(n):
+    count = 0
+    for d in range(1, abs(n) + 1):
+        if n % d == 0:
+            count += 1
+    return 2 * count",,,,
+mmlu-hsm-0257,"Consider two positive even integers less than $15$ (not necessarily distinct). When the sum of these two numbers is added to their product, how many different possible values may result?","A. 21
+B. 27
+C. 49
+D. 45",B,"Consider two positive even integers less than $19$ (not necessarily distinct). When the sum of these two numbers is added to their product, how many different possible values may result?","A. 81
+B. 45
+C. 27
+D. 44",D,C,"def solve(limit):
+    evens = list(range(2, limit, 2))
+    return len({a*b + a + b for a in evens for b in evens})",,,,

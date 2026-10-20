@@ -208,7 +208,7 @@ def run_full(datasets: list[str], workers: int, max_cost: float, retry_failed: b
         stopped = any(
             paraphrase_split(client, model, key, split, failed_ids, workers)
             for key in datasets
-            for split in config.SPLITS
+            for split in config.sampled_splits(key)
         )
         if stopped:
             print(f"Stopped at the ${max_cost:.2f} cap; re-run to continue (cached calls are free)")

@@ -17,7 +17,7 @@
     "problems": {}
    }
   },
-  "arce": {
+  "arcc": {
    "train": {
     "total": 1100,
     "passed": 1100,
@@ -34,7 +34,7 @@
     "problems": {}
    }
   },
-  "arcc": {
+  "arce": {
    "train": {
     "total": 1100,
     "passed": 1100,
@@ -48,6 +48,11 @@
    "test": {
     "total": 400,
     "passed": 400,
+    "problems": {}
+   },
+   "train_extra": {
+    "total": 950,
+    "passed": 950,
     "problems": {}
    }
   },
@@ -66,6 +71,11 @@
     "total": 400,
     "passed": 400,
     "problems": {}
+   },
+   "train_extra": {
+    "total": 1100,
+    "passed": 1100,
+    "problems": {}
    }
   },
   "swag": {
@@ -82,6 +92,11 @@
    "test": {
     "total": 400,
     "passed": 400,
+    "problems": {}
+   },
+   "train_extra": {
+    "total": 1100,
+    "passed": 1100,
     "problems": {}
    }
   }
