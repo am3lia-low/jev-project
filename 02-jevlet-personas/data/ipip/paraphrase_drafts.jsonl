@@ -1,0 +1,120 @@
+{"item_id": "ipip-001", "original": "Worry about things", "paraphrase": "Feel concerned about things", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-002", "original": "Make friends easily", "paraphrase": "Form friendships readily", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-003", "original": "Have a vivid imagination", "paraphrase": "Possess a lively capacity for imagining things", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-004", "original": "Trust others", "paraphrase": "Have confidence in other people", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-005", "original": "Complete tasks successfully", "paraphrase": "Finish assignments effectively", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-006", "original": "Get angry easily", "paraphrase": "Become irritated easily", "flags": ["keeps half or more of the key words"], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-007", "original": "Love large parties", "paraphrase": "Enjoy big gatherings", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-008", "original": "Believe in the importance of art", "paraphrase": "Recognize the value of art", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-009", "original": "Use others for my own ends", "paraphrase": "Exploit others to achieve personal goals", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-010", "original": "Like to tidy up", "paraphrase": "Enjoy keeping things neat", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-011", "original": "Often feel blue", "paraphrase": "Often feel down", "flags": ["keeps half or more of the key words"], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-012", "original": "Take charge", "paraphrase": "Assume leadership", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-013", "original": "Experience my emotions intensely", "paraphrase": "Feel my emotions deeply", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-014", "original": "Love to help others", "paraphrase": "Delight in assisting others", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-015", "original": "Keep my promises", "paraphrase": "Honor my commitments", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-016", "original": "Find it difficult to approach others", "paraphrase": "Have trouble approaching other people", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-017", "original": "Am always busy", "paraphrase": "Am constantly occupied", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-018", "original": "Prefer variety to routine", "paraphrase": "Favor diversity over regular habits", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-019", "original": "Love a good fight", "paraphrase": "Relish a heated argument", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-020", "original": "Work hard", "paraphrase": "Put in a great deal of effort", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-021", "original": "Go on binges", "paraphrase": "Indulge excessively in bouts", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-022", "original": "Love excitement", "paraphrase": "Enjoy thrills", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-023", "original": "Love to read challenging material", "paraphrase": "Enjoy reading thought-provoking material", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-024", "original": "Believe that I am better than others", "paraphrase": "See myself as superior to others", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-025", "original": "Am always prepared", "paraphrase": "Am consistently ready", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-026", "original": "Panic easily", "paraphrase": "Become alarmed readily", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-027", "original": "Radiate joy", "paraphrase": "Exude happiness", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-028", "original": "Tend to vote for liberal political candidates", "paraphrase": "Tend to cast ballots for politically progressive candidates", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-029", "original": "Sympathize with the homeless", "paraphrase": "Feel compassion for people without homes", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-030", "original": "Jump into things without thinking", "paraphrase": "Act before considering the consequences", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-031", "original": "Fear for the worst", "paraphrase": "Worry that the worst will happen", "flags": ["keeps half or more of the key words"], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-032", "original": "Feel comfortable around people", "paraphrase": "Feel at ease in others' company", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-033", "original": "Enjoy wild flights of fantasy", "paraphrase": "Delight in extravagant flights of fancy", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-034", "original": "Believe that others have good intentions", "paraphrase": "Assume others mean well", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-035", "original": "Excel in what I do", "paraphrase": "Perform exceptionally well in chosen pursuits", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-036", "original": "Get irritated easily", "paraphrase": "Become annoyed easily", "flags": ["keeps half or more of the key words"], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-037", "original": "Talk to a lot of different people at parties", "paraphrase": "Chat with many different people at social gatherings", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-038", "original": "See beauty in things that others might not notice", "paraphrase": "Notice beauty in things others may overlook", "flags": ["keeps half or more of the key words"], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-039", "original": "Cheat to get ahead", "paraphrase": "Use dishonest tactics to gain an advantage", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-040", "original": "Often forget to put things back in their proper place", "paraphrase": "Frequently leave items where they don't belong", "flags": ["adds a negation"], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-041", "original": "Dislike myself", "paraphrase": "Hold myself in low regard", "flags": ["keeps half or more of the key words"], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-042", "original": "Try to lead others", "paraphrase": "Take charge of a group", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-043", "original": "Feel others' emotions", "paraphrase": "Sense other people's feelings", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-044", "original": "Am concerned about others", "paraphrase": "Care about other people", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-045", "original": "Tell the truth", "paraphrase": "Speak honestly", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-046", "original": "Am afraid to draw attention to myself", "paraphrase": "Fear attracting notice to myself", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-047", "original": "Am always on the go", "paraphrase": "Am constantly busy", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-048", "original": "Prefer to stick with things that I know", "paraphrase": "Favor familiar things", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-049", "original": "Yell at people", "paraphrase": "Shout at others", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-050", "original": "Do more than what's expected of me", "paraphrase": "Exceed what is required of me", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-051", "original": "Rarely overindulge", "paraphrase": "Seldom go overboard", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-052", "original": "Seek adventure", "paraphrase": "Look for thrilling experiences", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-053", "original": "Avoid philosophical discussions", "paraphrase": "Steer clear of conversations about fundamental ideas", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-054", "original": "Think highly of myself", "paraphrase": "Have a high opinion of myself", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-055", "original": "Carry out my plans", "paraphrase": "Follow through on my intentions", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-056", "original": "Become overwhelmed by events", "paraphrase": "Become overloaded by what happens", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-057", "original": "Have a lot of fun", "paraphrase": "Enjoy themselves a great deal", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-058", "original": "Believe that there is no absolute right and wrong", "paraphrase": "Consider right and wrong to be relative, not absolute", "flags": ["keeps half or more of the key words"], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-059", "original": "Feel sympathy for those who are worse off than myself", "paraphrase": "Feel compassion for those less fortunate than myself", "flags": ["keeps half or more of the key words"], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-060", "original": "Make rash decisions", "paraphrase": "Make impulsive choices", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-061", "original": "Am afraid of many things", "paraphrase": "Am frightened by many things", "flags": ["keeps half or more of the key words"], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-062", "original": "Avoid contacts with others", "paraphrase": "Steer clear of social interaction", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-063", "original": "Love to daydream", "paraphrase": "Enjoy letting the mind wander", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-064", "original": "Trust what people say", "paraphrase": "Believe what others tell you", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-065", "original": "Handle tasks smoothly", "paraphrase": "Manage assignments with ease", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-066", "original": "Lose my temper", "paraphrase": "Become angry quickly", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-067", "original": "Prefer to be alone", "paraphrase": "Prefer one's own company", "flags": ["keeps half or more of the key words"], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-068", "original": "Do not like poetry", "paraphrase": "Do not enjoy poems", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-069", "original": "Take advantage of others", "paraphrase": "Exploit other people", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-070", "original": "Leave a mess in my room", "paraphrase": "Keep my room untidy", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-071", "original": "Am often down in the dumps", "paraphrase": "Frequently feel gloomy", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-072", "original": "Take control of things", "paraphrase": "Assume charge of situations", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-073", "original": "Rarely notice my emotional reactions", "paraphrase": "Seldom register my emotional responses", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-074", "original": "Am indifferent to the feelings of others", "paraphrase": "Am unconcerned about other people’s emotions", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-075", "original": "Break rules", "paraphrase": "Disregard regulations", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-076", "original": "Only feel comfortable with friends", "paraphrase": "Feel at ease only in the company of friends", "flags": ["keeps half or more of the key words"], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-077", "original": "Do a lot in my spare time", "paraphrase": "Stay very busy during free time", "flags": ["keeps half or more of the key words"], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-078", "original": "Dislike changes", "paraphrase": "Disfavor change", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-079", "original": "Insult people", "paraphrase": "Offend others", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-080", "original": "Do just enough work to get by", "paraphrase": "Put in only the effort needed to get by", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-081", "original": "Easily resist temptations", "paraphrase": "Readily refrain from alluring indulgences", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-082", "original": "Enjoy being reckless", "paraphrase": "Enjoy taking foolish risks", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-083", "original": "Have difficulty understanding abstract ideas", "paraphrase": "Struggle to grasp theoretical concepts", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-084", "original": "Have a high opinion of myself", "paraphrase": "Hold myself in high regard", "flags": ["keeps half or more of the key words"], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-085", "original": "Waste my time", "paraphrase": "Spend my time unproductively", "flags": ["keeps half or more of the key words"], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-086", "original": "Feel that I'm unable to deal with things", "paraphrase": "Feel incapable of coping with situations", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-087", "original": "Love life", "paraphrase": "Enjoy life", "flags": ["keeps half or more of the key words"], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-088", "original": "Tend to vote for conservative political candidates", "paraphrase": "Usually support politically right-wing candidates at the polls", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-089", "original": "Am not interested in other people's problems", "paraphrase": "Am uninterested in others' troubles", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-090", "original": "Rush into things", "paraphrase": "Act hastily", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-091", "original": "Get stressed out easily", "paraphrase": "Become tense readily", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-092", "original": "Keep others at a distance", "paraphrase": "Remain emotionally reserved around others", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-093", "original": "Like to get lost in thought", "paraphrase": "Enjoy becoming absorbed in thought", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-094", "original": "Distrust people", "paraphrase": "Find people hard to trust", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-095", "original": "Know how to get things done", "paraphrase": "Know how to accomplish tasks", "flags": ["keeps half or more of the key words"], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-096", "original": "Am not easily annoyed", "paraphrase": "Am not readily irritated", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-097", "original": "Avoid crowds", "paraphrase": "Keep away from large gatherings", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-098", "original": "Do not enjoy going to art museums", "paraphrase": "Do not take pleasure in visiting art museums", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-099", "original": "Obstruct others' plans", "paraphrase": "Get in the way of others' plans", "flags": ["keeps half or more of the key words"], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-100", "original": "Leave my belongings around", "paraphrase": "Leave my possessions lying about", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-101", "original": "Feel comfortable with myself", "paraphrase": "Feel at ease with oneself", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-102", "original": "Wait for others to lead the way", "paraphrase": "Hold back until someone else takes charge", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-103", "original": "Don't understand people who get emotional", "paraphrase": "Don't comprehend people who become emotional", "flags": ["keeps half or more of the key words"], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-104", "original": "Take no time for others", "paraphrase": "Devote no time to other people", "flags": ["keeps half or more of the key words"], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-105", "original": "Break my promises", "paraphrase": "Fail to keep my commitments", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-106", "original": "Am not bothered by difficult social situations", "paraphrase": "Am unfazed by challenging social settings", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-107", "original": "Like to take it easy", "paraphrase": "Prefer a relaxed pace", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-108", "original": "Am attached to conventional ways", "paraphrase": "Remain devoted to customary practices", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-109", "original": "Get back at others", "paraphrase": "Take revenge on others", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-110", "original": "Put little time and effort into my work", "paraphrase": "Devote little time and energy to work", "flags": ["keeps half or more of the key words"], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-111", "original": "Am able to control my cravings", "paraphrase": "Can keep my urges in check", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-112", "original": "Act wild and crazy", "paraphrase": "Behave exuberantly and recklessly", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-113", "original": "Am not interested in theoretical discussions", "paraphrase": "Am uninterested in abstract conversations", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-114", "original": "Boast about my virtues", "paraphrase": "Brag about my good qualities", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-115", "original": "Have difficulty starting tasks", "paraphrase": "Struggle to begin tasks", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-116", "original": "Remain calm under pressure", "paraphrase": "Stay composed in stressful situations", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-117", "original": "Look at the bright side of life", "paraphrase": "See the positive aspects of life", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-118", "original": "Believe that we should be tough on crime", "paraphrase": "Believe that crime should be met with strict consequences", "flags": ["keeps half or more of the key words"], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-119", "original": "Try not to think about the needy", "paraphrase": "Try to avoid thinking about people who are struggling", "flags": [], "model": "openai/gpt-6-luna", "attempt": 0}
+{"item_id": "ipip-120", "original": "Act without thinking", "paraphrase": "Take action without considering the consequences", "flags": ["keeps half or more of the key words"], "model": "openai/gpt-6-luna", "attempt": 0}
