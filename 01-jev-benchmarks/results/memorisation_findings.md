@@ -62,10 +62,45 @@ Why this is weak evidence for Jev:
 
 All three LLMs score 99.5–100% on the 200 new questions, *higher* than their Level 0 accuracy on the same four datasets. BERT also scores higher (54.4% vs 42.8%), so the new questions are easier than the benchmark ones. Part of the reason is an option-length cue: the correct option is the longest in 45% of Level 3 questions vs ~26% at Level 0 ([`bert_summary.md`](bert_summary.md#level-3-has-an-option-length-cue)). That limits how much a missing drop can show, but it's the opposite of what a model relying on recall would produce.
 
+### 5. Sensitivity check: BERT on a bigger training pool (pre-registered 2026-10-20)
+
+BERT was re-trained with more training questions on the three ladder datasets: ARC-Easy +950 (all that was left), CommonsenseQA and SWAG +1,100 each (17,300 training rows instead of 11,000; 5 seeds; Kaggle, finished 2026-10-21). Same test questions, same Jev and LLM results, same rules. As fixed in [PLAN A8](../../docs/PLAN.md#a8-metrics-and-analysis) before the run, **the verdict stays on the main BERT run**; this only asks whether the result holds. Numbers: [`sensitivity_bert_bigpool.md`](sensitivity_bert_bigpool.md).
+
+**BERT got better, but its paraphrase drop barely moved.**
+
+| | Main BERT | Bigger-pool BERT |
+|---|---|---|
+| Val accuracy (originals): ARC-Easy / CSQA / SWAG | 48.8 / 44.4 / 63.0% | 53.4 / 47.6 / 65.5% |
+| Datasets passing the above-chance rule | ARC-Easy, CSQA, SWAG | the same (ARC-Challenge 37.5%, still below) |
+| Pooled log-odds drop, Level 0 → 2 | 0.20 | 0.21 |
+
+**The ladder rule with the bigger-pool BERT:**
+
+| | Ratio to BERT's drop | Difference [95% CI] | Rule |
+|---|---|---|---|
+| Jev | 1.98x (was 2.06x) | 0.20 [0.03, 0.39] | **fails** (was: passes) |
+| Qwen | 2.90x (was 3.02x) | 0.39 [0.20, 0.60] | passes (as before) |
+| Gemma | 1.63x (was 1.70x) | 0.13 [−0.04, 0.30] | fails (as before) |
+
+**Why the flip is not caused by the bigger pool, and what it does show.** The two BERT runs differ by 0.01 in their drop. The five seeds *within* one run differ by up to 0.08:
+
+| | BERT drop, mean of 5 seeds | Range over seeds | Jev's ratio, seed by seed |
+|---|---|---|---|
+| Main BERT | 0.198 (SD 0.027) | 0.154 – 0.221 | 1.86x – 2.66x |
+| Bigger-pool BERT | 0.207 (SD 0.030) | 0.156 – 0.234 | 1.75x – 2.63x |
+
+So Jev sits on the 2x line: against single seeds of the *main* run, its drop clears 2x on 3 of 5 and misses on 2. The two halves of the rule behave differently:
+- **"Jev drops more than BERT" (CI above 0) is robust:** it holds with both BERT runs, CI low 0.03 each time.
+- **"Jev drops at least 2x as much" is a coin flip:** it depends on which BERT seeds happen to be averaged, not on Jev.
+
+Qwen passes both halves with both runs, by a clear margin. This adds to the reading below: Jev's ladder signal is not one that survives a reasonable change to the reference. Per dataset, CommonsenseQA now passes on its own (drop 0.45 vs 0.16), SWAG and ARC-Easy still fail.
+
 ## Reading (draft; the final verdict is by hand, TODO 9)
 
 Jev meets the pre-registered ladder criterion, but narrowly, only when pooled, and by less than the Qwen baseline. The quiz and Level 3 don't support memorisation. Overall this is **weak, inconclusive evidence** that Jev has memorised the benchmarks, no stronger than for a standard LLM. The PLAN fixes the rule, so it is reported as passing, with the caveats above alongside it.
 
 The [MMLU number-swap sub-experiment](../../docs/PLAN.md#a11-mmlu-number-swap-sub-experiment) (PLAN A11) is designed to settle it: changing a calculation's numbers turns a recalled answer into a wrong one, which none of the tests above can do.
+
+The bigger-pool sensitivity check (finding 5) agrees: the pre-registered result is reported as "passes", but it fails with an equally valid, slightly stronger BERT, and passes or fails seed by seed. Jev reliably drops more than BERT, but not reliably twice as much.
 
 Still open: ARC-Challenge stays out of the ladder pool. The BERT learning curve (2026-10-18) shows BERT still improving on it but below the threshold; it can only rejoin through the RACE fallback, decided on BERT's evidence alone (PLAN A8).
