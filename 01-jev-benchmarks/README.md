@@ -99,7 +99,7 @@ Scripts are numbered by their step in [A10](../docs/PLAN.md#a10-order-of-work) a
 
 Levels 0 and 1 are not separate files in `data/`: they are the original and shuffled orders of `data/sampled/<dataset>/test.jsonl`, built by `helpers/levels.py`. Only `07a` writes them out, into `data/bert/` for the BERT notebook (uploaded to Kaggle as a dataset).
 
-## Status (2026-10-18)
+## Status (2026-10-26)
 
 - Helpers: all built and tested live. Build list: [`dev_notes/helpers-to-build.txt`](../dev_notes/helpers-to-build.txt).
 - `02_sample.py`: run 2026-10-08; `data/sampled/` holds the 8,500 sampled questions.
@@ -108,7 +108,8 @@ Levels 0 and 1 are not separate files in `data/`: they are the original and shuf
 - `07a` rebuilt with paraphrases (train 11,000, val 2,000, Levels 0-3). The notebook runs on Kaggle (no Colab GPU was available): smoke test, originals-only ablation (`results/bert_original_only/`) and main run (`results/bert/`, 5 seeds + untrained) done. Details: [`results/bert_summary.md`](results/bert_summary.md).
 - `08` and `09`: all levels and the quiz run for Jev, Qwen and Gemma (Levels 0, 1, 3 on 2026-10-17; Level 2 and quiz on 2026-10-18, 0 failed). `10_analyse.py` rerun on everything; draft verdict in [`results/verdict.md`](results/verdict.md).
 - **Results so far:** Jev passes the pre-registered ladder rule only narrowly (pooled log-odds drop 2.05× BERT's, CI [0.03, 0.40]; no single dataset passes; Qwen drops more); the quiz is uninformative (originals picked more on unseen control items; Qwen answers "none" on 492/494); no drop on Level 3. Read as weak, inconclusive evidence of memorisation: [`results/memorisation_findings.md`](results/memorisation_findings.md).
-- BERT learning curve run 2026-10-18 (`results/bert_learning_curve/`): HellaSwag flat; ARC-Challenge still rising but below the threshold, so it only rejoins via the RACE fallback; the other three still rising at 100%.
-- MMLU number-swap sub-experiment (PLAN A11): `11a`-`11d` written and dry-run on a fake model 2026-10-18 (checks catch planted bad swaps; analysis recovers a planted memoriser). Not run live yet.
-- Next: the final verdict by hand, the RACE-fallback decision, and the live MMLU runs (`docs/api-laptop-checks.md`).
+- BERT learning curve run 2026-10-18 (`results/bert_learning_curve/`): HellaSwag flat; ARC-Challenge still rising but below the threshold, and it stays out of the pool (no RACE fallback, decided 2026-10-20); the other three still rising at 100%.
+- Bigger BERT train pool, as a sensitivity analysis (2026-10-20/21, `results/bert_bigpool/`, [`results/sensitivity_bert_bigpool.md`](results/sensitivity_bert_bigpool.md)): BERT improves but its drop barely moves; Jev flips from a narrow pass (2.06x) to a narrow fail (1.98x). The verdict stays on the main run.
+- MMLU number-swap sub-experiment (PLAN A11): `11a`-`11d` written and dry-run on a fake model 2026-10-18 (checks catch planted bad swaps; analysis recovers a planted memoriser). `11a` run 2026-10-19/20 (314/339 verified, $3.45), `11b` picked 200; review sheet filled 2026-10-24 (30/30 pass).
+- Next: `11c` + `11d` (the live MMLU runs, `docs/api-laptop-checks.md`), then the final verdict by hand.
 - Remaining work, in order: [`docs/api-laptop-checks.md` → Run order](../docs/api-laptop-checks.md).

@@ -48,7 +48,7 @@ All four runs together should stay well under $1 (previous estimate for the whol
 
 **Check after each run:** `results/raw/<model>/level2.jsonl` and `quiz.jsonl` have 2,000 / 494 rows, probabilities present, few or no errors (`08`/`09` print only progress and spend; accuracies come from `10_analyse.py`). LLMs: still served by the pinned providers (DekaLLM for Qwen, Makora for Gemma; the call log records `provider`).
 
-**Do not** change `MEMORISATION_DROP_RATIO`, the ladder pool or the above-chance rule after seeing these results; they are fixed (PLAN A8). ARC-Challenge rejoins the pool only on BERT's evidence (learning curve / RACE fallback).
+**Do not** change `MEMORISATION_DROP_RATIO`, the ladder pool or the above-chance rule after seeing these results; they are fixed (PLAN A8). ARC-Challenge stays out of the pool (decided 2026-10-20: no RACE fallback; the bigger train pool is a sensitivity analysis only, PLAN A8).
 
 ## Done (2026-10-18): BERT learning curve on Kaggle
 
@@ -75,11 +75,11 @@ Can't be run from the cloud Claude session: kaggle.com is blocked there and it h
 4. `09_run_llm.py levels` → `quiz`. About $1. Levels 0, 1, 3 done for both 2026-10-17; Level 2 and quiz 2026-10-18.
 5. `10_analyse.py` (any laptop). Run on all results 2026-10-18; final verdict by hand left.
 
-## To do (2026-10-18): MMLU number-swap runs (PLAN A11)
+## To do: MMLU number-swap runs (PLAN A11; steps 1-2 done 2026-10-19/24)
 
 Pass rule confirmed 2026-10-18, before any run. Scripts dry-run on a fake model. Run from `01-jev-benchmarks/`:
 
 1. `python 11a_mmlu_swap.py`: downloads the 339 MMLU maths candidates, then one Sonnet request each (about $2-3; `--max-cost` default $5). Then `python 11a_mmlu_swap.py --retry-failed` until it says nothing can be retried. Expect some "not swappable" (counts fixed by theory).
-2. `python 11b_mmlu_build.py`: picks 200, writes `data/mmlu/items.jsonl` and `data/reviews/mmlu_swaps_30.csv`. Fill in the sheet (yes/no: only numbers changed, new answer right, wrong answers as plausible as the old one), then re-run `11b`.
+2. `python 11b_mmlu_build.py`: picks 200, writes `data/mmlu/items.jsonl` and `data/reviews/mmlu_swaps_30.csv`. Fill in the sheet (yes/no: only numbers changed, new answer right, wrong answers as plausible as the old one), then re-run `11b`. Done: 314/339 verified ($3.45), 200 picked; sheet filled 2026-10-24 (30/30 pass), `items.jsonl` unchanged.
 3. `python 11c_run_mmlu.py`: Jev, Qwen and Gemma, 400 calls each, a few cents.
 4. `python 11d_analyse_mmlu.py`, then commit `data/mmlu/`, the sheet and `results/mmlu/`.

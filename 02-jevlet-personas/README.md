@@ -160,4 +160,7 @@ python 12_analyse_ladder.py
 - `check` run live 2026-10-15: Jev's `score` answer is a probability-weighted 0-4 position, as assumed. About $0.50 for the full B1 run.
 - `markers.json` verified 2026-10-15 (all 100 Goldberg unipolar markers). `baseline` and `personas` run 2026-10-15 ($0.49 in total); findings in [`results/bigfive_findings.md`](results/bigfive_findings.md).
 - B4 persona decay written and dry-run on a fake model 2026-10-18 (recovers a planted fade). `estimate`: ~14k calls per model, about $2.45 in total. Run 2026-10-18 ($1.33); findings in [`results/decay_findings.md`](results/decay_findings.md).
-- 2026-10-19: B1 step 4 (05, 06), B1 step 5 (07-09), B2 (10-12) and the B4 follow-up arms written and dry-run end to end on a fake model; the analyses recover the planted effects. None run on the real models yet.
+- 2026-10-19: B1 step 4 (05, 06), B1 step 5 (07-09), B2 (10-12) and the B4 follow-up arms written and dry-run end to end on a fake model; the analyses recover the planted effects.
+- 2026-10-20: B4 follow-up arms run (`long` state only $1.06, `appdata` $0.43); results in PLAN B4 → Follow-up arms. `05_paraphrase_ipip.py` ($0.006) and `07_make_scenarios.py` ($0.20) run.
+- 2026-10-24: both review sheets filled; `--apply-review` wrote `data/ipip/ipip_neo_120_paraphrased.json` (10 items replaced by an edit) and `data/scenarios/scenarios.json` (120 scenarios).
+- Next: `01_run_bigfive.py --items paraphrased` → `06`; `08_run_scenarios.py` → `09`; B2 (needs a HuggingFace login for GPQA and HLE); the active support-chat decay arm (to design).
