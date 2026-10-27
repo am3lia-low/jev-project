@@ -75,11 +75,11 @@ Can't be run from the cloud Claude session: kaggle.com is blocked there and it h
 4. `09_run_llm.py levels` → `quiz`. About $1. Levels 0, 1, 3 done for both 2026-10-17; Level 2 and quiz 2026-10-18.
 5. `10_analyse.py` (any laptop). Run on all results 2026-10-18; final verdict by hand left.
 
-## To do: MMLU number-swap runs (PLAN A11; steps 1-2 done 2026-10-19/24)
+## Done (2026-10-27): MMLU number-swap runs (PLAN A11)
 
 Pass rule confirmed 2026-10-18, before any run. Scripts dry-run on a fake model. Run from `01-jev-benchmarks/`:
 
 1. `python 11a_mmlu_swap.py`: downloads the 339 MMLU maths candidates, then one Sonnet request each (about $2-3; `--max-cost` default $5). Then `python 11a_mmlu_swap.py --retry-failed` until it says nothing can be retried. Expect some "not swappable" (counts fixed by theory).
 2. `python 11b_mmlu_build.py`: picks 200, writes `data/mmlu/items.jsonl` and `data/reviews/mmlu_swaps_30.csv`. Fill in the sheet (yes/no: only numbers changed, new answer right, wrong answers as plausible as the old one), then re-run `11b`. Done: 314/339 verified ($3.45), 200 picked; sheet filled 2026-10-24 (30/30 pass), `items.jsonl` unchanged.
-3. `python 11c_run_mmlu.py`: Jev, Qwen and Gemma, 400 calls each, a few cents.
+3. `python 11c_run_mmlu.py`: Jev, Qwen and Gemma, 400 calls each, a few cents. Done 2026-10-27: $0.013, 0 failed.
 4. `python 11d_analyse_mmlu.py`, then commit `data/mmlu/`, the sheet and `results/mmlu/`.

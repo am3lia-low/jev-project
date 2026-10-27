@@ -99,7 +99,7 @@ Scripts are numbered by their step in [A10](../docs/PLAN.md#a10-order-of-work) a
 
 Levels 0 and 1 are not separate files in `data/`: they are the original and shuffled orders of `data/sampled/<dataset>/test.jsonl`, built by `helpers/levels.py`. Only `07a` writes them out, into `data/bert/` for the BERT notebook (uploaded to Kaggle as a dataset).
 
-## Status (2026-10-26)
+## Status (2026-10-27)
 
 - Helpers: all built and tested live. Build list: [`dev_notes/helpers-to-build.txt`](../dev_notes/helpers-to-build.txt).
 - `02_sample.py`: run 2026-10-08; `data/sampled/` holds the 8,500 sampled questions.
@@ -110,6 +110,6 @@ Levels 0 and 1 are not separate files in `data/`: they are the original and shuf
 - **Results so far:** Jev passes the pre-registered ladder rule only narrowly (pooled log-odds drop 2.05× BERT's, CI [0.03, 0.40]; no single dataset passes; Qwen drops more); the quiz is uninformative (originals picked more on unseen control items; Qwen answers "none" on 492/494); no drop on Level 3. Read as weak, inconclusive evidence of memorisation: [`results/memorisation_findings.md`](results/memorisation_findings.md).
 - BERT learning curve run 2026-10-18 (`results/bert_learning_curve/`): HellaSwag flat; ARC-Challenge still rising but below the threshold, and it stays out of the pool (no RACE fallback, decided 2026-10-20); the other three still rising at 100%.
 - Bigger BERT train pool, as a sensitivity analysis (2026-10-20/21, `results/bert_bigpool/`, [`results/sensitivity_bert_bigpool.md`](results/sensitivity_bert_bigpool.md)): BERT improves but its drop barely moves; Jev flips from a narrow pass (2.06x) to a narrow fail (1.98x). The verdict stays on the main run.
-- MMLU number-swap sub-experiment (PLAN A11): `11a`-`11d` written and dry-run on a fake model 2026-10-18 (checks catch planted bad swaps; analysis recovers a planted memoriser). `11a` run 2026-10-19/20 (314/339 verified, $3.45), `11b` picked 200; review sheet filled 2026-10-24 (30/30 pass).
-- Next: `11c` + `11d` (the live MMLU runs, `docs/api-laptop-checks.md`), then the final verdict by hand.
+- MMLU number-swap sub-experiment (PLAN A11): `11a`-`11d` written and dry-run on a fake model 2026-10-18 (checks catch planted bad swaps; analysis recovers a planted memoriser). `11a` run 2026-10-19/20 (314/339 verified, $3.45), `11b` picked 200; review sheet filled 2026-10-24 (30/30 pass); `11c` + `11d` run 2026-10-27 ($0.013). No model meets the rule; Jev drops 96.0 → 75.0% when only the numbers change (the LLMs don't drop significantly), but doesn't reliably pick the old answer. [`results/mmlu_findings.md`](results/mmlu_findings.md).
+- Verdict drafted 2026-10-27 in [`results/memorisation_findings.md`](results/memorisation_findings.md#verdict-drafted-2026-10-27-to-be-confirmed-by-hand-todo-9); next: confirm it by hand.
 - Remaining work, in order: [`docs/api-laptop-checks.md` → Run order](../docs/api-laptop-checks.md).

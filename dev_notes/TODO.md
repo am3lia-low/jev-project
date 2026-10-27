@@ -88,7 +88,7 @@ Same order as [`docs/api-laptop-checks.md` → Run order](../docs/api-laptop-che
 - [x] `07a_build_bert_data.py` without `--originals-only`, then the full notebook on Kaggle (5 seeds + untrained; 2026-10-17); results in `results/bert/`.
 - [x] `08_run_jev.py` repeat → levels → quiz. 2026-10-17: repeat (99.5% agreement, single runs), levels 0, 1, 3; 2026-10-18: Level 2 and quiz ($0.05).
 - [x] `09_run_llm.py` levels → quiz (Qwen and Gemma). 2026-10-17: levels 0, 1, 3 for both; 2026-10-18: Level 2 and quiz ($0.08; providers still DekaLLM / Makora). Qwen picks E ("none") on 492/494 quiz items.
-- [ ] `10_analyse.py`, then the final verdict by hand. `10_analyse.py` run 2026-10-18 on all results (draft `results/verdict.md`); reading in `results/memorisation_findings.md` (weak, inconclusive: Jev passes the ladder rule only pooled and narrowly, Qwen drops more; quiz uninformative; no Level 3 drop). Verdict by hand left.
+- [ ] `10_analyse.py`, then the final verdict by hand. `10_analyse.py` run 2026-10-18 on all results (draft `results/verdict.md`); reading in `results/memorisation_findings.md` (weak, inconclusive: Jev passes the ladder rule only pooled and narrowly, Qwen drops more; quiz uninformative; no Level 3 drop). Verdict drafted 2026-10-27 in `memorisation_findings.md` → Verdict, including the MMLU result; left: confirm it by hand.
 
 ## 9b. [ ] BERT learning curve (2026-10-18; run done, decision left)
 
@@ -106,7 +106,7 @@ See PLAN.md → Open questions.
 - [x] Memorisation threshold confirmed as written (2026-10-18), before any Level 2 run.
 - [x] MMLU math number-swap slice: yes, as its own sub-experiment (2026-10-18; PLAN A11, TODO 9c).
 
-## 9c. [ ] MMLU number-swap sub-experiment (PLAN A11, 2026-10-18)
+## 9c. [x] MMLU number-swap sub-experiment (PLAN A11, 2026-10-18)
 
 Maths only (elementary / high school / college maths, 339 numeric candidates), ~200 items; swaps by `NEW_QUESTION_MODEL` with a `solve()` code check; old answer kept as a trap option.
 
@@ -117,7 +117,7 @@ Maths only (elementary / high school / college maths, 339 numeric candidates), ~
   - [x] Credits topped up; `--retry-failed` twice (2026-10-20, $0.58 + $0.23): **314/339 verified** (elementary 144, high school 151, college 19). 25 dropped: 18 wording changed, 7 not swappable (1 item had one attempt left; not worth a run). 11a total $3.45.
   - [x] `11b` run: 200 items (elementary 92, high school 96, college 12); new answer balanced 50 per letter, trap 48-52. Review sheet written.
   - [x] Fill in `data/reviews/mmlu_swaps_30.csv` (yes/no for only_numbers_changed, new_answer_right, wrong_as_plausible), then re-run `11b`. Filled 2026-10-24: 30/30 yes on all three checks, none flagged; `11b` re-run, `items.jsonl` unchanged.
-- [ ] Run `11c` (Jev, Qwen, Gemma), then `11d`.
+- [x] Run `11c` (Jev, Qwen, Gemma), then `11d`. Run 2026-10-27 ($0.013, 0 failed). No model meets the rule. Jev drops 96.0 → 75.0% (log-odds 2.03 [1.46, 2.89]; larger than both LLMs') but the old answer is only 40% of its 50 wrong answers (p = 0.20). Qwen and Gemma: no significant drop. Write-up: `01-jev-benchmarks/results/mmlu_findings.md`, finding 6 in `memorisation_findings.md`.
 
 ## 11. [ ] Part B: Big Five (B1 steps 1-3)
 

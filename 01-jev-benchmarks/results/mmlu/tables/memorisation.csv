@@ -1,0 +1,4 @@
+model,n,acc_original,acc_original_low,acc_original_high,acc_swapped,acc_swapped_low,acc_swapped_high,mcnemar_original_only,mcnemar_swapped_only,mcnemar_p,drop,drop_low,drop_high,trap_rate,wrong_answers,trap_picks,trap_share_of_wrong,trap_p,supported
+Jev,200,0.9600,0.9300,0.9850,0.7500,0.6900,0.8050,44,2,0.0000,2.0280,1.4556,2.8874,0.1000,50,20,0.4000,0.1964,False
+Qwen3.8-27B,200,0.6800,0.6150,0.7450,0.6150,0.5450,0.6800,41,28,0.1480,0.2837,-0.0662,0.6472,0.1250,77,25,0.3247,0.6061,False
+Gemma-4-26B-A4B,200,0.7500,0.6900,0.8100,0.7050,0.6400,0.7650,29,20,0.2529,0.2257,-0.1167,0.5813,0.0850,59,17,0.2881,0.8080,False
