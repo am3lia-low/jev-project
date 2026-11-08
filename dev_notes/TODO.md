@@ -50,7 +50,7 @@ Create the folders the layout needs, delete the ones it doesn't, and move every 
 - [x] Paraphrase pilot run ($0.005). Both candidates passed all automatic checks; ~$0.70–0.80 for the full 8,500.
 - [x] Level 3 drafts run ($1.07 incl. a first attempt). Sonnet tends to write textbook questions ARC already contains, so drafts with similarity ≥ 0.75 to any benchmark question are now discarded and replaced (24); 60 more (0.6–0.75) are flagged for review.
 
-## 5. [ ] Reviews, then the synthetic-data runs
+## 5. [x] Reviews, then the synthetic-data runs
 
 - [x] Rate the pilot blind (`data/reviews/pilot_30.csv`, 2026-10-14): both models kept meaning 30/30; gpt-6-luna 30 same difficulty, Mistral 29 same + 1 harder. `PARAPHRASE_MODEL = "openai/gpt-6-luna"`.
 - [x] Review the Level 3 drafts (`data/reviews/new_questions.csv`, 2026-10-14): 272 of 400 reviewed, no text edits. `arcc-new-0095` and `csqa-new-0048` had keep=yes with a failed check, set to keep=no. `--apply-review` wrote `data/new/reviewed.jsonl`: 50 per dataset, 200 in total.
@@ -68,7 +68,7 @@ Create the folders the layout needs, delete the ones it doesn't, and move every 
 - [x] `PAPER_JEV_ACCURACY` in `config.py`, incl. CommonsenseQA 0.882 (paper Table 2).
 - [x] Decided 2026-10-09: LLM baselines stay on OpenRouter (top-20 logprobs; a letter outside them counts as 0%), no self-hosting for full probabilities. BERT's above-chance rule uses val originals only. Both recorded in PLAN A5/A9.
 
-## 8. [ ] On hold for the API laptop / Colab (1-4 done 2026-10-09; Colab run left)
+## 8. [x] On hold for the API laptop / Colab (1-4 done 2026-10-09; notebook run on Kaggle 2026-10-15)
 
 Details in [`docs/api-laptop-checks.md`](../docs/api-laptop-checks.md).
 
@@ -119,7 +119,7 @@ Maths only (elementary / high school / college maths, 339 numeric candidates), ~
   - [x] Fill in `data/reviews/mmlu_swaps_30.csv` (yes/no for only_numbers_changed, new_answer_right, wrong_as_plausible), then re-run `11b`. Filled 2026-10-24: 30/30 yes on all three checks, none flagged; `11b` re-run, `items.jsonl` unchanged.
 - [x] Run `11c` (Jev, Qwen, Gemma), then `11d`. Run 2026-10-27 ($0.013, 0 failed). No model meets the rule. Jev drops 96.0 → 75.0% (log-odds 2.03 [1.46, 2.89]; larger than both LLMs') but the old answer is only 40% of its 50 wrong answers (p = 0.20). Qwen and Gemma: no significant drop. Write-up: `01-jev-benchmarks/results/mmlu_findings.md`, finding 6 in `memorisation_findings.md`.
 
-## 11. [ ] Part B: Big Five (B1 steps 1-3)
+## 11. [ ] Part B: Big Five (B1) and difficulty ladder (B2)
 
 - [x] Decided 2026-10-15: personas as Goldberg marker adjectives (5 wordings per condition); Jev baseline 5 repeats, LLMs 1 run; no item shuffling (each item is its own request). Recorded in PLAN B1.
 - [x] `helpers/config.py`, `personas.py`, `bigfive.py`; `01_run_bigfive.py`, `02_analyse_bigfive.py`. Dry-run with a fake client (recovers planted shifts).
@@ -133,7 +133,7 @@ Maths only (elementary / high school / college maths, 339 numeric candidates), ~
 - [ ] B1 step 5, scenarios (2026-10-20: `07_make_scenarios.py` run, $0.20, 18 flagged; sheet filled 2026-10-24: all 150 kept, `--apply-review` wrote 120 scenarios, 24 per trait, high action shown as A in 12) (behaviour check): `07_make_scenarios.py` (Sonnet, ~$0.30; 5 drafts per facet) → fill `data/reviews/scenarios.csv` (150 rows, keep y/n) → `--apply-review` (first 4 kept per facet) → `08_run_scenarios.py estimate`, `check`, `baseline`, `personas` (dry-run estimate $0.35; real scenario text is longer, so expect more) → `09_analyse_scenarios.py`.
 - [ ] B2, difficulty ladder: `huggingface-cli login` and accept the GPQA and HLE terms on HuggingFace → `10_build_ladder.py` (confirm the GPQA/HLE field names; record the HLE count) → `11_run_ladder.py estimate`, `check`, `run` → `12_analyse_ladder.py`. One persona level to start with ("average secondary-school student"), in the state and in the instructions.
 
-## 12. [x] Part B: persona decay (B4)
+## 12. [x] Part B: persona decay (B4; complete, one optional extension not started)
 
 - [x] Designed 2026-10-18 (PLAN B4): own-answer and quiz histories, 32 turns, checkpoints 0/2/4/8/16/32, E/C/N high/low, wordings 1-3, persona in state vs instructions, no-persona baseline, re-reminder at turn 16.
 - [x] `helpers/decay.py`, `03_run_decay.py`, `04_analyse_decay.py`; `model_answerer` moved into `helpers/bigfive.py`. Dry-run on a fake model (recovers a planted fade, the re-reminder, flat controls).
@@ -145,4 +145,4 @@ Maths only (elementary / high school / college maths, 339 numeric candidates), ~
   - Run 2026-10-20, state only ($1.06, 0 failed). The state persona still barely fades: retention at 256 turns Jev 0.93, Qwen 0.95, Gemma 0.98.
 - [x] Unrelated state: `python 03_run_decay.py run --arms appdata` (online-shop order records under `"orders"`, checkpoints 0/1/2/8/32, no Q&A). Estimate $0.55.
   - Run 2026-10-20 ($0.43, 0 failed). Jev's instructions persona drops with a single order record (retention 0.66 at 1 record, 0.73 at 32), so any non-empty state weakens it, not only a history. State placement holds (0.94 for all three). Qwen and Gemma, instructions: no drop (1.02 / 1.04).
-- [ ] Follow-up: active realistic arm (support chat, a `choice` per turn).
+- [ ] *Optional, not started:* active realistic arm (support chat, a `choice` per turn). Not needed to complete B4; design it after B1 step 5 if wanted.

@@ -163,4 +163,5 @@ python 12_analyse_ladder.py
 - 2026-10-19: B1 step 4 (05, 06), B1 step 5 (07-09), B2 (10-12) and the B4 follow-up arms written and dry-run end to end on a fake model; the analyses recover the planted effects.
 - 2026-10-20: B4 follow-up arms run (`long` state only $1.06, `appdata` $0.43); results in PLAN B4 → Follow-up arms. `05_paraphrase_ipip.py` ($0.006) and `07_make_scenarios.py` ($0.20) run.
 - 2026-10-24: both review sheets filled; `--apply-review` wrote `data/ipip/ipip_neo_120_paraphrased.json` (10 items replaced by an edit) and `data/scenarios/scenarios.json` (120 scenarios).
-- Next: `01_run_bigfive.py --items paraphrased` → `06`; `08_run_scenarios.py` → `09`; B2 (needs a HuggingFace login for GPQA and HLE); the active support-chat decay arm (to design).
+- B4 persona decay is complete (main run and both follow-up arms).
+- Next: `01_run_bigfive.py --items paraphrased` → `06`; `08_run_scenarios.py` → `09`; B2 (needs a HuggingFace login for GPQA and HLE). Optional, not started: the active support-chat decay arm (to design after the scenarios run).

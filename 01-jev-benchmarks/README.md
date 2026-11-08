@@ -99,7 +99,7 @@ Scripts are numbered by their step in [A10](../docs/PLAN.md#a10-order-of-work) a
 
 Levels 0 and 1 are not separate files in `data/`: they are the original and shuffled orders of `data/sampled/<dataset>/test.jsonl`, built by `helpers/levels.py`. Only `07a` writes them out, into `data/bert/` for the BERT notebook (uploaded to Kaggle as a dataset).
 
-## Status (2026-10-27)
+## Status (2026-11-08): Part A complete
 
 - Helpers: all built and tested live. Build list: [`dev_notes/helpers-to-build.txt`](../dev_notes/helpers-to-build.txt).
 - `02_sample.py`: run 2026-10-08; `data/sampled/` holds the 8,500 sampled questions.
@@ -107,9 +107,9 @@ Levels 0 and 1 are not separate files in `data/`: they are the original and shuf
 - `03` + `04` full run 2026-10-15/16: all 8,500 paraphrases pass ($0.79). `06a`-`06c` run 2026-10-17: quiz of 500 items. Review sheets filled 2026-10-17: `paraphrase_50.csv` 50/50 fine; `swaps_30.csv` flagged 6, which `06b` drops, so the quiz is now 494 items.
 - `07a` rebuilt with paraphrases (train 11,000, val 2,000, Levels 0-3). The notebook runs on Kaggle (no Colab GPU was available): smoke test, originals-only ablation (`results/bert_original_only/`) and main run (`results/bert/`, 5 seeds + untrained) done. Details: [`results/bert_summary.md`](results/bert_summary.md).
 - `08` and `09`: all levels and the quiz run for Jev, Qwen and Gemma (Levels 0, 1, 3 on 2026-10-17; Level 2 and quiz on 2026-10-18, 0 failed). `10_analyse.py` rerun on everything; draft verdict in [`results/verdict.md`](results/verdict.md).
-- **Results so far:** Jev passes the pre-registered ladder rule only narrowly (pooled log-odds drop 2.05× BERT's, CI [0.03, 0.40]; no single dataset passes; Qwen drops more); the quiz is uninformative (originals picked more on unseen control items; Qwen answers "none" on 492/494); no drop on Level 3. Read as weak, inconclusive evidence of memorisation: [`results/memorisation_findings.md`](results/memorisation_findings.md).
+- **Results so far:** Jev passes the pre-registered ladder rule only narrowly (pooled log-odds drop 2.06× BERT's, CI [0.03, 0.40]; no single dataset passes; Qwen drops more); the quiz is uninformative (originals picked more on unseen control items; Qwen answers "none" on 492/494); no drop on Level 3. Read as weak, inconclusive evidence of memorisation: [`results/memorisation_findings.md`](results/memorisation_findings.md).
 - BERT learning curve run 2026-10-18 (`results/bert_learning_curve/`): HellaSwag flat; ARC-Challenge still rising but below the threshold, and it stays out of the pool (no RACE fallback, decided 2026-10-20); the other three still rising at 100%.
 - Bigger BERT train pool, as a sensitivity analysis (2026-10-20/21, `results/bert_bigpool/`, [`results/sensitivity_bert_bigpool.md`](results/sensitivity_bert_bigpool.md)): BERT improves but its drop barely moves; Jev flips from a narrow pass (2.06x) to a narrow fail (1.98x). The verdict stays on the main run.
 - MMLU number-swap sub-experiment (PLAN A11): `11a`-`11d` written and dry-run on a fake model 2026-10-18 (checks catch planted bad swaps; analysis recovers a planted memoriser). `11a` run 2026-10-19/20 (314/339 verified, $3.45), `11b` picked 200; review sheet filled 2026-10-24 (30/30 pass); `11c` + `11d` run 2026-10-27 ($0.013). No model meets the rule; Jev drops 96.0 → 75.0% when only the numbers change (the LLMs don't drop significantly), but doesn't reliably pick the old answer. [`results/mmlu_findings.md`](results/mmlu_findings.md).
-- Verdict drafted 2026-10-27 in [`results/memorisation_findings.md`](results/memorisation_findings.md#verdict-drafted-2026-10-27-to-be-confirmed-by-hand-todo-9); next: confirm it by hand.
-- Remaining work, in order: [`docs/api-laptop-checks.md` → Run order](../docs/api-laptop-checks.md).
+- Verdict drafted 2026-10-27 and confirmed by hand 2026-11-08: [`results/memorisation_findings.md` → Verdict](results/memorisation_findings.md#verdict-confirmed-2026-11-08). The ladder pass stands officially but is not Jev-specific; the quiz and Level 3 are inconclusive; MMLU memorisation is not supported by the rule, with strong reason to suspect exposure.
+- No Part A work is left. (`results/verdict.md` and `results/mmlu/summary.md` keep "draft" in their titles because the scripts write them automatically; the hand-written findings files are the final ones.)

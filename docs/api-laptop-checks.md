@@ -73,7 +73,7 @@ Can't be run from the cloud Claude session: kaggle.com is blocked there and it h
 2. `07a_build_bert_data.py` (without `--originals-only`), upload `data/bert/` as the Kaggle dataset `shiyalow/jev-bert-data`, run the notebook on Kaggle, download results into `results/bert/`. Done 2026-10-17.
 3. `08_run_jev.py sanity` (cached, free) → `repeat` → `levels` → `quiz`. Under $0.10. Done: Levels 0, 1, 3 on 2026-10-17, Level 2 and quiz on 2026-10-18.
 4. `09_run_llm.py levels` → `quiz`. About $1. Levels 0, 1, 3 done for both 2026-10-17; Level 2 and quiz 2026-10-18.
-5. `10_analyse.py` (any laptop). Run on all results 2026-10-18; final verdict by hand left.
+5. `10_analyse.py` (any laptop). Run on all results 2026-10-18; final verdict confirmed by hand 2026-11-08.
 
 ## Done (2026-10-27): MMLU number-swap runs (PLAN A11)
 
