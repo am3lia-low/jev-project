@@ -1,6 +1,6 @@
 # Memorisation: findings (Part A, Levels 0–3, quiz and MMLU number swap)
 
-All runs finished 2026-10-18 on the API laptop; written up 2026-10-18. The design is in [PLAN A6–A8](../../docs/PLAN.md#a6-test-sets-and-the-memorisation-ladder). This file is written by hand. The numbers come from `10_analyse.py`; its automatic draft is [`verdict.md`](verdict.md) (overwritten on every run) and the full tables are in [`tables/`](tables/). The BERT side is in [`bert_summary.md`](bert_summary.md).
+Main runs finished 2026-10-18 on the API laptop; BERT sensitivity run 2026-10-21; MMLU number swap 2026-10-27. Written up 2026-10-18, updated as each run finished; verdict confirmed 2026-11-08. The design is in [PLAN A6–A8](../../docs/PLAN.md#a6-test-sets-and-the-memorisation-ladder). This file is written by hand. The numbers come from `10_analyse.py`; its automatic draft is [`verdict.md`](verdict.md) (overwritten on every run) and the full tables are in [`tables/`](tables/). The BERT side is in [`bert_summary.md`](bert_summary.md).
 
 ## What was run
 
@@ -35,13 +35,13 @@ The rule (PLAN A8, fixed before any Level 2 run): the model's log-odds drop must
 
 | | Pooled drop (log-odds) | × BERT's 0.20 | Difference, 95% CI | Rule |
 |---|---|---|---|---|
-| Jev | 0.41 | 2.05× | 0.21 [0.03, 0.40] | passes |
-| Qwen | 0.60 | 3.0× | 0.40 [0.21, 0.61] | passes |
+| Jev | 0.41 | 2.06× | 0.21 [0.03, 0.40] | passes |
+| Qwen | 0.60 | 3.02× | 0.40 [0.21, 0.61] | passes |
 | Gemma | 0.34 | 1.7× | 0.14 [−0.03, 0.31] | fails |
 
 Why this is weak evidence for Jev:
 - **It passes only when pooled.** Jev passes on none of the three datasets on its own, and ARC-Easy went *up* (99.25% → 99.5%).
-- **It's marginal:** 2.05× against a 2× threshold, with a CI lower bound of 0.03.
+- **It's marginal:** 2.06× against a 2× threshold, with a CI lower bound of 0.03.
 - **Qwen drops more than Jev.** Paraphrased wording costs ordinary LLMs more than it costs BERT, so the ladder may be picking up an LLM-wide paraphrase effect, not Jev-specific recall.
 - **BERT was trained on paraphrases in the same style** (PLAN A3.1), so Level 2 wording is familiar to it and new to the LLMs. Some of the extra drop may come from this.
 - HellaSwag (reported separately, BERT invalid there) "passes" for all three LLMs, but only because BERT's HellaSwag drop is negative.
@@ -78,20 +78,20 @@ BERT was re-trained with more training questions on the three ladder datasets: A
 
 | | Ratio to BERT's drop | Difference [95% CI] | Rule |
 |---|---|---|---|
-| Jev | 1.98x (was 2.06x) | 0.20 [0.03, 0.39] | **fails** (was: passes) |
-| Qwen | 2.90x (was 3.02x) | 0.39 [0.20, 0.60] | passes (as before) |
-| Gemma | 1.63x (was 1.70x) | 0.13 [−0.04, 0.30] | fails (as before) |
+| Jev | 1.98× (was 2.06×) | 0.20 [0.03, 0.39] | **fails** (was: passes) |
+| Qwen | 2.90× (was 3.02×) | 0.39 [0.20, 0.60] | passes (as before) |
+| Gemma | 1.63× (was 1.70×) | 0.13 [−0.04, 0.30] | fails (as before) |
 
 **Why the flip is not caused by the bigger pool, and what it does show.** The two BERT runs differ by 0.01 in their drop. The five seeds *within* one run differ by up to 0.08:
 
 | | BERT drop, mean of 5 seeds | Range over seeds | Jev's ratio, seed by seed |
 |---|---|---|---|
-| Main BERT | 0.198 (SD 0.027) | 0.154 – 0.221 | 1.86x – 2.66x |
-| Bigger-pool BERT | 0.207 (SD 0.030) | 0.156 – 0.234 | 1.75x – 2.63x |
+| Main BERT | 0.198 (SD 0.027) | 0.154 – 0.221 | 1.86× – 2.66× |
+| Bigger-pool BERT | 0.207 (SD 0.030) | 0.156 – 0.234 | 1.75× – 2.63× |
 
-So Jev sits on the 2x line: against single seeds of the *main* run, its drop clears 2x on 3 of 5 and misses on 2. The two halves of the rule behave differently:
+So Jev sits on the 2× line: against single seeds of the *main* run, its drop clears 2× on 3 of 5 and misses on 2. The two halves of the rule behave differently:
 - **"Jev drops more than BERT" (CI above 0) is robust:** it holds with both BERT runs, CI low 0.03 each time.
-- **"Jev drops at least 2x as much" is a coin flip:** it depends on which BERT seeds happen to be averaged, not on Jev.
+- **"Jev drops at least 2× as much" is a coin flip:** it depends on which BERT seeds happen to be averaged, not on Jev.
 
 Qwen passes both halves with both runs, by a clear margin. This adds to the reading below: Jev's ladder signal is not one that survives a reasonable change to the reference. Per dataset, CommonsenseQA now passes on its own (drop 0.45 vs 0.16), SWAG and ARC-Easy still fail.
 
@@ -110,21 +110,34 @@ A separate sub-experiment with its own pass rule (fixed 2026-10-18), reported ne
 - **Jev scores 20-28 points above the LLMs on the original maths items**, despite arithmetic being a listed weakness, and falls to about their level once the numbers change.
 - **The trap test had little power** (only 50 wrong answers), and a post-hoc probability check also finds only a slight, non-significant lean towards the old answer.
 
-## Verdict (drafted 2026-10-27; to be confirmed by hand, TODO 9)
+## Verdict (confirmed 2026-11-08)
 
 **Pre-registered results, as fixed in PLAN A8 and A11:**
 
 | Test | Jev | Qwen | Gemma |
 |---|---|---|---|
-| Ladder (main BERT run) | passes, narrowly (2.05x) | passes (3.0x) | fails |
-| Quiz | no evidence | set aside | no evidence |
-| Level 3 | no drop | no drop | no drop |
-| MMLU number swap | not met (drop yes, trap no) | not met | not met |
+| Ladder (main BERT run) | passes, narrowly (2.06×) | passes (3.02×) | fails |
+| Quiz | inconclusive (test did not work) | inconclusive (answered "none") | inconclusive (test did not work) |
+| Level 3 | inconclusive (new questions easier) | inconclusive | inconclusive |
+| MMLU number swap | not supported (drop yes, trap no) | not supported | not supported |
 
-**Reading.** On the paper benchmarks (ARC, CommonsenseQA, HellaSwag, SWAG), the evidence that Jev memorised them is **weak and inconclusive**. Jev's only pass is narrow, pooled, flips with an equally valid BERT (finding 5), and Qwen drops more. Rewording the questions costs Jev about what it costs an ordinary LLM.
+**Paper benchmarks (ARC, CommonsenseQA, HellaSwag, SWAG): no evidence of Jev-specific memorisation.**
 
-**MMLU maths is different.** Changing only the numbers costs Jev 21 points while the LLMs barely move, and Jev's original-item accuracy is far above what its maths ability suggests. This is the strongest sign in Part A that Jev's score depends on exposure to the test items. The pre-registered rule is not met, because Jev does not reliably pick the remembered old answer, so it is reported as "not supported" with this caveat alongside it.
+- **Ladder.** Officially, Jev passes the pre-registered rule, and that result stands. But it passes only narrowly (2.06× against a 2× threshold), only when the datasets are pooled, and it fails with an equally valid BERT reference (finding 5; Jev's ratio ranges 1.75-2.66× across single BERT seeds). An ordinary LLM, Qwen, passes more clearly (3.02×). So the pass shows that rewording costs LLMs more than it costs BERT. It does not show anything particular to Jev.
+- **Quiz and Level 3: why we ran them, and why they were inconclusive.** Both were meant to catch memorisation that the ladder might miss.
+  - The *quiz* asked each model to pick the original wording of a question out of near-copies. A model that had memorised the benchmark text should recognise it. Instead, every model picked the original more often on control questions written for this project, which it could not have seen, than on benchmark questions. The quiz was measuring which wording sounds most natural, not prior exposure. Qwen also answered "none" on 492 of 494 items. A null quiz result was never going to clear Jev on its own (PLAN A7: content can be memorised without exact wording, which is what the ladder covers).
+  - *Level 3* gave the models brand-new questions in each benchmark's style. A model relying on recall should do worse on them. No model did worse, but BERT, which has memorised nothing, also did better (54.4% vs 42.8%): the new questions turned out easier, partly through an option-length cue (finding 4). So a missing drop says little.
+  - Rather than rebuild these two tests, we let the ladder carry the paper-benchmark verdict and tested memorisation of content directly with the MMLU number swap (A11). Both are reported as inconclusive, not as evidence that Jev is clean.
 
-**In one line:** no pre-registered test shows Jev memorising the paper benchmarks beyond what a standard LLM shows; its MMLU maths accuracy, however, looks inflated by exposure to those items, which fits Deußer et al.'s concern about MMLU.
+**MMLU maths: not supported by the pre-registered rule, but there is strong reason to suspect exposure.**
+
+- **Why it is "not supported".** The rule needed two things: a drop when only the numbers change, *and* Jev falling back on the old answer when it gets a swapped item wrong. The second part fails. Jev picks the old answer on 40% of its 50 wrong answers (p = 0.20). The extra probability check (post-hoc, so descriptive only) agrees: Jev puts slightly more probability on the old answer than on the other wrong options, but the difference, 0.017 [−0.009, 0.045], includes 0.
+- **Why we still strongly suspect it.**
+  - Changing only the numbers drops Jev from 96.0% to 75.0% (log-odds drop 2.03 [1.46, 2.89]). Qwen and Gemma barely move, and Jev's drop is larger than each of theirs. So the swapped items are not simply harder.
+  - On the original items Jev scores 20-28 points above the LLMs, even though arithmetic is a listed weakness of Jev. Once the numbers change, it falls to about their level.
+  - The trap half of the test had little power: Jev is right so often that it made only 50 wrong answers to count. So the failed trap test is weak evidence against exposure, not strong evidence for its absence.
+  - Jev may recognise an item's form without holding the exact answer value. That is a possible explanation, not a result.
+
+**In one line:** Jev passes the ladder rule only narrowly, and an ordinary LLM passes it more clearly, so no test shows Jev memorising the paper benchmarks beyond what a standard LLM shows. On MMLU maths, memorisation is not supported by the pre-registered rule, but Jev's sharp, Jev-specific drop when only the numbers change gives strong reason to suspect its accuracy there is inflated by exposure to those items. This fits Deußer et al.'s concern about MMLU.
 
 ARC-Challenge and HellaSwag stay out of the ladder pool: BERT is near chance on them, and the RACE fallback was not used (decided 2026-10-20).

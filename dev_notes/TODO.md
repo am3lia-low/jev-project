@@ -78,7 +78,7 @@ Details in [`docs/api-laptop-checks.md`](../docs/api-laptop-checks.md).
 - [x] Smoke-test 08/09 on Level 0 ($0.054): Jev sanity OK on every paper dataset; Qwen 2,000/2,000.
 - [x] First run of `07b_bert_colab.ipynb` with `SMOKE_TEST = True`, on Kaggle (2026-10-15; no Colab GPU). See `01-jev-benchmarks/results/bert_summary.md`.
 
-## 9. [ ] Full runs (after 5 and 8)
+## 9. [x] Full runs (after 5 and 8)
 
 Same order as [`docs/api-laptop-checks.md` → Run order](../docs/api-laptop-checks.md#run-order-both-reviews-done-2026-10-14-paraphrase_model--gpt-6-luna) and PLAN A10:
 
@@ -88,9 +88,9 @@ Same order as [`docs/api-laptop-checks.md` → Run order](../docs/api-laptop-che
 - [x] `07a_build_bert_data.py` without `--originals-only`, then the full notebook on Kaggle (5 seeds + untrained; 2026-10-17); results in `results/bert/`.
 - [x] `08_run_jev.py` repeat → levels → quiz. 2026-10-17: repeat (99.5% agreement, single runs), levels 0, 1, 3; 2026-10-18: Level 2 and quiz ($0.05).
 - [x] `09_run_llm.py` levels → quiz (Qwen and Gemma). 2026-10-17: levels 0, 1, 3 for both; 2026-10-18: Level 2 and quiz ($0.08; providers still DekaLLM / Makora). Qwen picks E ("none") on 492/494 quiz items.
-- [ ] `10_analyse.py`, then the final verdict by hand. `10_analyse.py` run 2026-10-18 on all results (draft `results/verdict.md`); reading in `results/memorisation_findings.md` (weak, inconclusive: Jev passes the ladder rule only pooled and narrowly, Qwen drops more; quiz uninformative; no Level 3 drop). Verdict drafted 2026-10-27 in `memorisation_findings.md` → Verdict, including the MMLU result; left: confirm it by hand.
+- [x] `10_analyse.py`, then the final verdict by hand. `10_analyse.py` run 2026-10-18 on all results (draft `results/verdict.md`); reading in `results/memorisation_findings.md` (weak, inconclusive: Jev passes the ladder rule only pooled and narrowly, Qwen drops more; quiz uninformative; no Level 3 drop). Verdict drafted 2026-10-27 in `memorisation_findings.md` → Verdict, including the MMLU result; confirmed by hand 2026-11-08 (ladder: official narrow pass, not Jev-specific; quiz and Level 3: inconclusive; MMLU: not supported, with strong reason to suspect exposure).
 
-## 9b. [ ] BERT learning curve (2026-10-18; run done, decision left)
+## 9b. [x] BERT learning curve (2026-10-18; decided 2026-10-20, sensitivity run done 2026-10-21)
 
 - [x] `LEARNING_CURVE` option in `notebooks/07b_bert_colab.ipynb` (nested 25/50/100% subsets per dataset, original + paraphrase kept together, 2 seeds, ~80 min on a T4). Subset logic and summary cell tested locally on `data/bert/train.jsonl`; training not run here (no GPU).
 - [x] Run on Kaggle from the API laptop (2026-10-18): `results/bert_learning_curve/`, summary in `results/bert_summary.md` → Learning curve. HellaSwag flat; ARC-Challenge rising (Level 0 24.9 → 32.4%) but below the threshold; SWAG / ARC-Easy / CommonsenseQA still rising at 100%.
@@ -99,7 +99,7 @@ Same order as [`docs/api-laptop-checks.md` → Run order](../docs/api-laptop-che
 - [x] Uploaded as the private Kaggle dataset `shiyalow/jev-bert-data-bigpool`; notebook pushed as the private kernel `shiyalow/jev-bert-bigpool` (repo notebook with `RESULTS_NAME = "results_bigpool"`, `RUN_UNTRAINED = False`; 5 seeds, T4). Started 2026-10-20.
 - [x] Finished 2026-10-21 (all 5 seeds, no truncation); results in `results/bert_bigpool/`, `10_analyse.py --sensitivity` → `results/sensitivity_bert_bigpool.md`. BERT improves (val +2.5 to +4.6 points on the 3 datasets) but its drop barely moves (0.20 → 0.21). **Jev flips from pass (2.06x) to fail (1.98x)**; Qwen still passes, Gemma still fails. Seed by seed, Jev's ratio ranges 1.86-2.66x (main) / 1.75-2.63x (bigger pool), so the 2x half of the rule is a coin flip for Jev while the CI half holds. Written up as finding 5 in `memorisation_findings.md`.
 
-## 10. [ ] Open decisions
+## 10. [x] Open decisions
 
 See PLAN.md → Open questions.
 
