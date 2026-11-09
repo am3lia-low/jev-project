@@ -19,7 +19,7 @@ kept; the rest are spares. `--apply-review` then takes the first
 N_NEW_PER_DATASET kept per dataset (by `review_order`) and writes them, with a
 balanced shuffle, to `data/new/reviewed.jsonl` (Level 3).
 
-Run from this folder on the API laptop:
+Run from this folder:
     python 05_generate_new.py
     python 05_generate_new.py --apply-review
 """

@@ -15,7 +15,7 @@ distinct and the old answer not among the wrong ones. Passing swaps go to
 `--retry-failed` regenerates failed ones (up to MAX_ATTEMPTS), never the
 ones the model called not swappable.
 
-Run from this folder on the API laptop:
+Run from this folder:
     python 11a_mmlu_swap.py
     python 11a_mmlu_swap.py --retry-failed
 """

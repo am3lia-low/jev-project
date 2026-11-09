@@ -60,7 +60,7 @@ flowchart TD
     end
 
     %% ---------- Sampling (scripted) ----------
-    SRC --> SAMPLE["02_sample.py (API laptop)<br/>sample · split by question · stable IDs<br/>labels to A-E · dedupe SWAG vs HellaSwag<br/>drop duplicate-option items + test stems in train/val<br/>store original + balanced-shuffle order"]
+    SRC --> SAMPLE["02_sample.py<br/>sample · split by question · stable IDs<br/>labels to A-E · dedupe SWAG vs HellaSwag<br/>drop duplicate-option items + test stems in train/val<br/>store original + balanced-shuffle order"]
     SAMPLE --> TRV["Train 1,100 + Val 200 per dataset<br/>5,500 + 1,000 in total"]
     SAMPLE --> TEST["Test 400 per dataset<br/>2,000 in total"]
 
@@ -69,20 +69,20 @@ flowchart TD
     TEST --> L1["Level 1<br/>original wording, balanced shuffle"]
 
     %% ---------- Synthetic: paraphrases ----------
-    TRV --> PARA["SYNTHETIC: 03_paraphrase.py (API laptop)<br/>openai/gpt-6-luna, chosen by 30-item pilot<br/>not the same family as any LLM baseline<br/>rephrase question + options, reshuffle"]
+    TRV --> PARA["SYNTHETIC: 03_paraphrase.py<br/>openai/gpt-6-luna, chosen by 30-item pilot<br/>not the same family as any LLM baseline<br/>rephrase question + options, reshuffle"]
     TEST --> PARA
     PARA --> VPARA["04_validate.py<br/>auto: answer kept, option count, text changed<br/>manual: 50 items, meaning + difficulty rating"]
     VPARA --> L2["Level 2<br/>paraphrased + shuffled<br/>2,000"]
     VPARA --> TRAINSET["BERT training set<br/>originals + paraphrases<br/>train 11,000 · val 2,000"]
 
     %% ---------- Synthetic: brand-new questions ----------
-    GEN["SYNTHETIC: 05_generate_new.py (API laptop)<br/>Claude Sonnet 5.5 drafts new questions<br/>in each paper dataset's style<br/>near-copy screen: similarity ≥ 0.75 replaced,<br/>0.6-0.75 flagged for review"] --> HNEW["Human check<br/>answer correct · exactly one right option<br/>not a near-copy · light rewording to match style"]
+    GEN["SYNTHETIC: 05_generate_new.py<br/>Claude Sonnet 5.5 drafts new questions<br/>in each paper dataset's style<br/>near-copy screen: similarity ≥ 0.75 replaced,<br/>0.6-0.75 flagged for review"] --> HNEW["Human check<br/>answer correct · exactly one right option<br/>not a near-copy · light rewording to match style"]
     HNEW --> L3["Level 3<br/>200 brand-new<br/>50 x 4 paper datasets"]
 
     %% ---------- Synthetic: memorisation quiz ----------
     TEST --> QSEL["Quiz benchmark items<br/>400 = 100 x 4 paper datasets<br/>Level 0 wording"]
     L3 --> QCTRL["Quiz control items<br/>100 = 25 x 4, taken from Level 3"]
-    QSEL --> SWAP["SYNTHETIC: 06a_swap.py (API laptop)<br/>openai/gpt-6-luna<br/>3 synonym-swap versions per item<br/>word-level only, same structure + answer"]
+    QSEL --> SWAP["SYNTHETIC: 06a_swap.py<br/>openai/gpt-6-luna<br/>3 synonym-swap versions per item<br/>word-level only, same structure + answer"]
     QCTRL --> SWAP
     SWAP --> VSWAP["06b_validate_swaps.py<br/>auto: all distinct, word count within 2,<br/>word-level edits only · manual: 30 items"]
     VSWAP --> QUIZ["Quiz, 500 items<br/>A-D = original + 3 swaps, position balanced<br/>E = none of the provided options"]
@@ -92,8 +92,8 @@ flowchart TD
         BERTU["Untrained BERT-base<br/>chance floor"]
         BERTFT["Fine-tuned bert-base-uncased<br/>5 seeds (Kaggle T4; no Colab GPU)"]
         OPT["Optional: BERT-large 1 seed ·<br/>RoBERTa-base · RACE pre-training ·<br/>originals-only ablation (done)"]
-        JEV["Jev typesafe/jev-1.13<br/>(API laptop)"]
-        LLM["LLM baselines: Qwen3.8-27B,<br/>Gemma-4-26B-A4B (API laptop)"]
+        JEV["Jev typesafe/jev-1.13"]
+        LLM["LLM baselines: Qwen3.8-27B,<br/>Gemma-4-26B-A4B"]
     end
     TRAINSET --> BERTFT
     BERTFT --> VALID["BERT above-chance rule<br/>val originals only<br/>CI low > chance + 10 pts, per dataset"]
@@ -168,7 +168,7 @@ Rules:
 
 ### A3. Synthetic data
 
-Three LLM-generated datasets. All scripts run on the API laptop, are resumable and cache every response.
+Three LLM-generated datasets. All scripts are resumable and cache every response.
 
 **A3.1 Paraphrases — `03_paraphrase.py`**
 - Input: all 8,500 sampled questions (train, val and test).
@@ -291,13 +291,13 @@ Comparisons:
 
 1. [x] Repo setup (this plan, project structure, dependencies)
 2. [x] `02_sample.py` — download 5 datasets, dedupe SWAG vs HellaSwag, sample, split, normalise labels, store original + shuffled orders, assign IDs (run 2026-10-08)
-3. [x] `03_paraphrase.py` — pilot 2 models on 30 questions, choose (2026-10-14: gpt-6-luna), full run (2026-10-16: 8,500/8,500, $0.79) (API laptop)
+3. [x] `03_paraphrase.py` — pilot 2 models on 30 questions, choose (2026-10-14: gpt-6-luna), full run (2026-10-16: 8,500/8,500, $0.79)
 4. [x] `04_validate.py` — automatic checks + manual 50 (automatic checks done 2026-10-16; `paraphrase_50.csv` filled 2026-10-17: 50/50 meaning kept, same difficulty)
-5. [x] `05_generate_new.py` — 400 drafts, 200 Level 3 questions kept after the human check (API laptop)
-6. [x] `06a_swap.py` + `06b_validate_swaps.py` — quiz versions for 400 benchmark + 100 control items (API laptop); `06c_build_quiz.py` — assemble the quiz (all run 2026-10-16/17; `swaps_30.csv` filled 2026-10-17: 6 of 30 flagged and dropped by 06b, quiz rebuilt with 494 items: 396 benchmark + 98 control)
+5. [x] `05_generate_new.py` — 400 drafts, 200 Level 3 questions kept after the human check
+6. [x] `06a_swap.py` + `06b_validate_swaps.py` — quiz versions for 400 benchmark + 100 control items; `06c_build_quiz.py` — assemble the quiz (all run 2026-10-16/17; `swaps_30.csv` filled 2026-10-17: 6 of 30 flagged and dropped by 06b, quiz rebuilt with 494 items: 396 benchmark + 98 control)
 7. [x] `07a_build_bert_data.py` — originals + paraphrases for the notebook; `notebooks/07b_bert_colab.ipynb` — untrained BERT; fine-tune BERT-base (5 seeds); above-chance rule; evaluate Levels 0–3; optional fallbacks (run on Kaggle: smoke test and originals-only ablation 2026-10-15, main run with paraphrases 2026-10-17; fallbacks not needed yet)
-8. [x] `08_run_jev.py` (API laptop): 8a sanity check · 8b repeatability · 8c Levels 0–3 · 8d quiz (8a done 2026-10-09: Level 0 within the paper's CI on all 4 paper datasets; 8b done 2026-10-17: 99.5% agreement, single runs; 8c Levels 0, 1, 3 done 2026-10-17, Level 2 2026-10-18; 8d done 2026-10-18 on the 494-item quiz)
-9. [x] `09_run_llm.py` (API laptop): LLM baselines, Levels 0–3 + quiz (Levels 0, 1, 3 done for both 2026-10-17; Level 2 and quiz 2026-10-18)
+8. [x] `08_run_jev.py`: 8a sanity check · 8b repeatability · 8c Levels 0–3 · 8d quiz (8a done 2026-10-09: Level 0 within the paper's CI on all 4 paper datasets; 8b done 2026-10-17: 99.5% agreement, single runs; 8c Levels 0, 1, 3 done 2026-10-17, Level 2 2026-10-18; 8d done 2026-10-18 on the 494-item quiz)
+9. [x] `09_run_llm.py`: LLM baselines, Levels 0–3 + quiz (Levels 0, 1, 3 done for both 2026-10-17; Level 2 and quiz 2026-10-18)
 10. [x] `10_analyse.py` — tables, plots, McNemar, log-odds comparison, quiz scoring, verdict (run on all results 2026-10-18; reading in [`results/memorisation_findings.md`](../01-jev-benchmarks/results/memorisation_findings.md); verdict drafted 2026-10-27 and confirmed by hand 2026-11-08 in `memorisation_findings.md` → Verdict)
 11. [x] MMLU number-swap sub-experiment ([A11](#a11-mmlu-number-swap-sub-experiment)): `11a_mmlu_swap.py` → `11b_mmlu_build.py` (writes the manual-check sheet; re-run after filling it) → `11c_run_mmlu.py` → `11d_analyse_mmlu.py` (all written and dry-run on a fake model 2026-10-18; `11a` and `11b` run 2026-10-19/20, manual check done 2026-10-24; `11c` and `11d` run 2026-10-27, [`mmlu_findings.md`](../01-jev-benchmarks/results/mmlu_findings.md))
 
@@ -373,7 +373,7 @@ Two conditions per benchmark: **no persona** (actual ability) and **"pretend to 
 ### B3. Order of work
 
 1. [x] Helpers: `ipip.py`, `reliability.py`, IPIP-NEO-120 items
-2. [x] `01_run_bigfive.py` (API laptop; baseline + personas run 2026-10-15, $0.49): `check` (done 2026-10-15: Jev's `score` is a probability-weighted 0–4 position) → `baseline` → `personas`, Jev + LLMs (B1 steps 1–3). Written and dry-run 2026-10-15; persona adjectives verified against Goldberg's 100 unipolar markers; baseline run 2026-10-15
+2. [x] `01_run_bigfive.py` (baseline + personas run 2026-10-15, $0.49): `check` (done 2026-10-15: Jev's `score` is a probability-weighted 0–4 position) → `baseline` → `personas`, Jev + LLMs (B1 steps 1–3). Written and dry-run 2026-10-15; persona adjectives verified against Goldberg's 100 unipolar markers; baseline run 2026-10-15
 3. [x] `02_analyse_bigfive.py`: scores, α, acquiescence, Jev's baseline noise, persona shifts (B1 steps 1–3). Dry-run on fake results 2026-10-15
 4. [x] IPIP paraphrases for the contamination check (B1 step 4). Written and dry-run on a fake model 2026-10-19: `05_paraphrase_ipip.py` (PARAPHRASE_MODEL rewords each item; automatic checks flag kept key words, added negations and length; all 120 reviewed by hand in `data/reviews/ipip_paraphrases.csv`), `01_run_bigfive.py --items paraphrased` (same conditions as B1, results in `bigfive_paraphrased/`), `06_analyse_paraphrase.py` (item-level agreement vs Jev's run-to-run noise, trait-score differences, persona pull on each wording, alpha). Descriptive, no pre-registered threshold. `05` run 2026-10-20 ($0.006, 23 flagged); sheet filled 2026-10-24 (110 same meaning, 10 replaced by an edit; `ipip-053` keeps its original wording); `--apply-review` wrote `data/ipip/ipip_neo_120_paraphrased.json`. `01_run_bigfive.py --items paraphrased` and `06` run 2026-11-08 ($0.44, 0 failed): no sign of answering from memory (finding 6 in `02-jevlet-personas/results/bigfive_findings.md`)
 5. [x] Scenario questions per trait for the behaviour check (B1 step 5). Written and dry-run 2026-10-19: `07_make_scenarios.py` (NEW_QUESTION_MODEL writes 5 drafts per IPIP facet, each an everyday situation with a high-facet and a low-facet action, both acceptable; reviewed by hand; the first 4 kept per facet = 120 scenarios; which action is shown as A is balanced per trait), `08_run_scenarios.py` (Jev `choice`, the B1 conditions; score = P(high action)), `09_analyse_scenarios.py` (behaviour shift next to the self-report shift, both on 0-1; "moves" = CI above 0). `07` run 2026-10-20 ($0.20, 18 flagged); sheet filled 2026-10-24 (all 150 kept); `--apply-review` wrote 120 scenarios to `data/scenarios/scenarios.json`. `08` and `09` run 2026-11-08 ($0.40, 0 failed): every persona moves behaviour as well as self-report, for all 3 models; the halo shows up in behaviour too (finding 7)
@@ -406,14 +406,14 @@ Do personas fade as a history grows in front of the question? Added 2026-10-18, 
 
 ## Environment
 
-| Machine | GPU | OpenRouter access | Use for |
-|---|---|---|---|
-| Work laptop | None (AMD integrated) | Blocked by network filter | Code, sampling, validation, analysis |
-| API laptop | None | Yes | Paraphrasing, swaps, new questions, Jev, LLM calls |
-| Kaggle (planned: Google Colab) | T4 (free tier) | — | BERT fine-tuning and evaluation; no Colab GPU was available |
+| Where | GPU | Use for |
+|---|---|---|
+| Local machine | None | Code, sampling, every OpenRouter call (paraphrasing, swaps, new questions, Jev, LLMs), validation, analysis |
+| Kaggle (planned: Google Colab) | T4 (free tier) | BERT fine-tuning and evaluation; no Colab GPU was available |
 
 - Python ≥ 3.12, managed with `uv`.
 - API keys via environment variables (`OPENROUTER_API_KEY`), never committed.
+- **API details checked live (2026-10-07 to 10-09):** Jev (`POST /api/alpha/decisions`) returns a probability per option and `usage.cost`. It rounds probabilities to 2 decimals, so ties are broken with Jev's own `choice` (`helpers/evaluation.py`), and most answers have some letter at exactly 0 (bear this in mind when reading ECE). The LLMs return option-letter logprobs with `max_tokens=1` and reasoning off (`{"effort": "none"}`). Each is pinned to one provider (`order` takes lowercase slugs), and the call log records `provider`.
 - Re-render the flow diagram after editing A0 (needs Node):
   `sed -n '/^```mermaid/,/^```$/p' docs/PLAN.md | sed '1d;$d' > docs/experiment-flow.mmd && npx -y @mermaid-js/mermaid-cli -i docs/experiment-flow.mmd -o docs/experiment-flow.png -s 2 -b white`
 

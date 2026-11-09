@@ -7,8 +7,8 @@ high in an IPIP facet would take, one a person low in it would take.
 
 Two steps:
     generate        NEW_QUESTION_MODEL writes N_SCENARIO_DRAFTS_PER_FACET drafts
-                    per facet (prompts/scenarios.txt; 30 calls, about $0.30, API
-                    laptop). Automatic checks flag problems; the review sheet
+                    per facet (prompts/scenarios.txt; 30 calls, about $0.30).
+                    Automatic checks flag problems; the review sheet
                     data/reviews/scenarios.csv lists every draft.
     --apply-review  After you fill in the sheet: keeps the first
                     N_SCENARIOS_PER_FACET kept drafts per facet, balances which
@@ -22,8 +22,8 @@ situation/high/low cells; the edited text is used. A sheet is never
 overwritten once written; delete it to start again.
 
 Run from this folder:
-    python 07_make_scenarios.py                  # API laptop
-    python 07_make_scenarios.py --apply-review   # any laptop
+    python 07_make_scenarios.py
+    python 07_make_scenarios.py --apply-review   # no API calls
 """
 
 import argparse
@@ -163,7 +163,7 @@ def apply_review() -> None:
     high_a = Counter(s["domain"] for s in scenarios if s["high_letter"] == "A")
     print(f"{len(scenarios)} scenarios -> {SCENARIOS_PATH}; per trait (high action shown as A): "
           + ", ".join(f"{d} {per_domain[d]} ({high_a[d]})" for d in DOMAINS))
-    print("Next (API laptop): python 08_run_scenarios.py estimate, then check, baseline, personas")
+    print("Next: python 08_run_scenarios.py estimate, then check, baseline, personas")
 
 
 def main() -> None:

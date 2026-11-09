@@ -6,7 +6,7 @@ to the original order. Splitting happens here, by original question, before
 any LLM step. Questions that list the same option twice are dropped, and so
 are train/val candidates whose question text matches a sampled test question. A summary goes to `data/sampling_report.json`.
 
-Run from this folder (needs HuggingFace access, e.g. on the API laptop):
+Run from this folder (needs HuggingFace access):
     python 02_sample.py
     python 02_sample.py --datasets arce arcc
 """

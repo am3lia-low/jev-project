@@ -14,9 +14,8 @@ data/ladder/<benchmark>.jsonl:
                  the question text after "Answer Choices:"; they are split out
                  here, and questions whose options can't be parsed are dropped.
 
-The HuggingFace field names for GPQA and HLE are as documented on their
-dataset cards; unchecked here (HuggingFace needs a login for both). The
-loaders fail loudly on a missing field; confirm on the API laptop.
+GPQA and HLE are gated on HuggingFace (login needed). Their field names were
+confirmed by the 2026-11-09 build; the loaders fail loudly on a missing field.
 
 A line: {"id", "benchmark", "question", "options": [...], "answer": letter, "meta": {...}}
 

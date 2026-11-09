@@ -1,6 +1,6 @@
 # Memorisation: findings (Part A, Levels 0–3, quiz and MMLU number swap)
 
-Main runs finished 2026-10-18 on the API laptop; BERT sensitivity run 2026-10-21; MMLU number swap 2026-10-27. Written up 2026-10-18, updated as each run finished; verdict confirmed 2026-11-08. The design is in [PLAN A6–A8](../../docs/PLAN.md#a6-test-sets-and-the-memorisation-ladder). This file is written by hand. The numbers come from `10_analyse.py`; its automatic draft is [`verdict.md`](verdict.md) (overwritten on every run) and the full tables are in [`tables/`](tables/). The BERT side is in [`bert_summary.md`](bert_summary.md).
+Main runs finished 2026-10-18; BERT sensitivity run 2026-10-21; MMLU number swap 2026-10-27. Written up 2026-10-18, updated as each run finished; verdict confirmed 2026-11-08. The design is in [PLAN A6–A8](../../docs/PLAN.md#a6-test-sets-and-the-memorisation-ladder). This file is written by hand. The numbers come from `10_analyse.py`; its automatic draft is [`verdict.md`](verdict.md) (overwritten on every run) and the full tables are in [`tables/`](tables/). The BERT side is in [`bert_summary.md`](bert_summary.md).
 
 ## What was run
 

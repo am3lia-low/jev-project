@@ -65,7 +65,7 @@ def main() -> None:
         }
         print(f"{config.DATASETS[key].name}: {len(extra)} extra train questions (of {len(pool)} left) -> {out}")
     report_path.write_text(json.dumps(report, indent=2), encoding="utf-8")
-    print(f"Updated {report_path}. Next (API laptop): python 03_paraphrase.py, then python 04_validate.py")
+    print(f"Updated {report_path}. Next: python 03_paraphrase.py, then python 04_validate.py")
 
 
 if __name__ == "__main__":

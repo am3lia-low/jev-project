@@ -6,9 +6,9 @@ Working notes for the repo itself (not the experiment plan, which is in [`docs/P
 
 `01-jev-benchmarks/helpers/`: `config.py`, `schema.py`, `ids.py`, `labels.py`, `shuffle.py`, `loaders.py`, `dedupe.py`, `text_checks.py`, `__init__.py`; plus `cache.py` and `stats.py` (now in `src/jev_common/`).
 
-Check correctness against PLAN.md, edge cases, naming and formatting. The loaders' HuggingFace field names are unverified (HuggingFace is blocked on the work network); confirm them on the API laptop.
+Check correctness against PLAN.md, edge cases, naming and formatting. The loaders' HuggingFace field names were unverified at first.
 
-Done 2026-10-07 on the API laptop:
+Done 2026-10-07:
 
 - [x] Loader field names checked against the live HuggingFace datasets; all match. Pool sizes and option counts match A1 (ARC has a few 3- and 5-option items, as expected).
 - [x] **Fixed: SWAG vs HellaSwag video-ID dedupe never matched.** SWAG stores `anetv_<id>` lowercased, HellaSwag `activitynet~v_<ID>` in original case, so 0 SWAG questions were dropped by video. Both are now normalised to the bare, casefolded YouTube ID; HellaSwag WikiHow rows get no video ID. Result: 324 SWAG training questions dropped against the 400 sampled HellaSwag test questions.
@@ -58,19 +58,18 @@ Create the folders the layout needs, delete the ones it doesn't, and move every 
 
 ## 6. [x] Docs out of date
 
-- [x] `docs/api-laptop-checks.md` replaced with a record of the done checks and the on-hold list (2026-10-08).
-- [x] All Markdown files brought in line with each other after merging both laptops' work (2026-10-14).
+- [x] All Markdown files brought in line with each other (2026-10-14).
 
-## 7. [x] Experiment scripts (2026-10-08, work laptop)
+## 7. [x] Experiment scripts (2026-10-08)
 
 - [x] `helpers/evaluation.py` (tasks, LLM prompt rendering copied from decision-index, run loop, result records), `prompts/llm_system.txt`.
 - [x] `07a_build_bert_data.py`, `notebooks/07b_bert_colab.ipynb`, `08_run_jev.py`, `09_run_llm.py`, `10_analyse.py`. 08/09 dry-run with a fake API; 10 run on synthetic results (recovers planted effects). Notebook syntax-checked only.
 - [x] `PAPER_JEV_ACCURACY` in `config.py`, incl. CommonsenseQA 0.882 (paper Table 2).
 - [x] Decided 2026-10-09: LLM baselines stay on OpenRouter (top-20 logprobs; a letter outside them counts as 0%), no self-hosting for full probabilities. BERT's above-chance rule uses val originals only. Both recorded in PLAN A5/A9.
 
-## 8. [x] On hold for the API laptop / Colab (1-4 done 2026-10-09; notebook run on Kaggle 2026-10-15)
+## 8. [x] Live checks before the full runs (1-4 done 2026-10-09; notebook run on Kaggle 2026-10-15)
 
-Details in [`docs/api-laptop-checks.md`](../docs/api-laptop-checks.md).
+The API details found are in PLAN → Environment.
 
 - [x] Pin LLM providers (Qwen → `dekallm`, Gemma → `makora`).
 - [x] Confirm the request fields (reasoning off is now `effort: "none"`).
@@ -80,7 +79,7 @@ Details in [`docs/api-laptop-checks.md`](../docs/api-laptop-checks.md).
 
 ## 9. [x] Full runs (after 5 and 8)
 
-Same order as [`docs/api-laptop-checks.md` → Run order](../docs/api-laptop-checks.md#run-order-both-reviews-done-2026-10-14-paraphrase_model--gpt-6-luna) and PLAN A10:
+Same order as PLAN A10:
 
 - [x] `03_paraphrase.py` + `04_validate.py` full run (2026-10-16): 8,500/8,500 pass, $0.79.
 - [x] Fill in `data/reviews/paraphrase_50.csv` (manual paraphrase check, 2026-10-17).
@@ -93,7 +92,7 @@ Same order as [`docs/api-laptop-checks.md` → Run order](../docs/api-laptop-che
 ## 9b. [x] BERT learning curve (2026-10-18; decided 2026-10-20, sensitivity run done 2026-10-21)
 
 - [x] `LEARNING_CURVE` option in `notebooks/07b_bert_colab.ipynb` (nested 25/50/100% subsets per dataset, original + paraphrase kept together, 2 seeds, ~80 min on a T4). Subset logic and summary cell tested locally on `data/bert/train.jsonl`; training not run here (no GPU).
-- [x] Run on Kaggle from the API laptop (2026-10-18): `results/bert_learning_curve/`, summary in `results/bert_summary.md` → Learning curve. HellaSwag flat; ARC-Challenge rising (Level 0 24.9 → 32.4%) but below the threshold; SWAG / ARC-Easy / CommonsenseQA still rising at 100%.
+- [x] Run on Kaggle (2026-10-18): `results/bert_learning_curve/`, summary in `results/bert_summary.md` → Learning curve. HellaSwag flat; ARC-Challenge rising (Level 0 24.9 → 32.4%) but below the threshold; SWAG / ARC-Easy / CommonsenseQA still rising at 100%.
 - [x] Decided 2026-10-20: **enlarge the pool, as a sensitivity analysis** (option A: the verdict stays on the original BERT run; pre-registered in PLAN A8 before anything was drawn). All 3 passing datasets: ARC-Easy +950 (all that was left), CommonsenseQA and SWAG +1,100 each. No RACE fallback: ARC-Challenge stays out of the pool.
 - [x] `02b_sample_extra.py` (new; no overlap with any existing split, existing files untouched) → `03_paraphrase.py` ($0.25) → `04_validate.py` (3,150/3,150 pass after 1 retry; existing paraphrase files byte-identical) → `07a_build_bert_data.py --extra-train` → `data/bert_bigpool/` (train 17,300 rows; val and levels byte-identical to `data/bert/`).
 - [x] Uploaded as the private Kaggle dataset `shiyalow/jev-bert-data-bigpool`; notebook pushed as the private kernel `shiyalow/jev-bert-bigpool` (repo notebook with `RESULTS_NAME = "results_bigpool"`, `RUN_UNTRAINED = False`; 5 seeds, T4). Started 2026-10-20.

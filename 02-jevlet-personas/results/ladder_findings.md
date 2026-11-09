@@ -1,6 +1,6 @@
 # Difficulty ladder: findings (B2)
 
-Run 2026-11-09 on the API laptop ($0.16, 0 failed). The design is in [PLAN B2](../../docs/PLAN.md#b2-intellectual-axis--difficulty-ladder). This file is written by hand. The numbers come from `12_analyse_ladder.py`; its automatic summary is [`ladder_summary.md`](ladder_summary.md) and the tables are `tables/ladder_*.csv`.
+Run 2026-11-09 ($0.16, 0 failed). The design is in [PLAN B2](../../docs/PLAN.md#b2-intellectual-axis--difficulty-ladder). This file is written by hand. The numbers come from `12_analyse_ladder.py`; its automatic summary is [`ladder_summary.md`](ladder_summary.md) and the tables are `tables/ladder_*.csv`.
 
 ## What was run
 

@@ -16,7 +16,7 @@ nothing for what is already done.
 --items paraphrased runs the reworded items from 05_paraphrase_ipip.py instead
 (B1 step 4, contamination check) and writes to bigfive_paraphrased/.
 
-Run from this folder on the API laptop:
+Run from this folder:
     python 01_run_bigfive.py check
     python 01_run_bigfive.py baseline
     python 01_run_bigfive.py personas [--domains E A] [--placements state] [--models typesafe/jev-1.13]

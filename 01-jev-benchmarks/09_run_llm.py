@@ -14,7 +14,7 @@ from the same deployment.
 
 Writes results/raw/<model slug>/<run>.jsonl (format in helpers/evaluation.py).
 
-Run from this folder on the API laptop, after 08_run_jev.py:
+Run from this folder, after 08_run_jev.py:
     python 09_run_llm.py levels [--models qwen/qwen3.8-27b] [--levels 0 1]
     python 09_run_llm.py quiz
 """

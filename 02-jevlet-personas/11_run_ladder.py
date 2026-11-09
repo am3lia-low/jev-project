@@ -12,7 +12,7 @@ Needs data/ladder/ (10_build_ladder.py). Writes
 results/raw/<model slug>/ladder/<benchmark>/<condition>.jsonl (format in
 helpers/ladder.py). Every request is cached.
 
-Run from this folder (check and run on the API laptop):
+Run from this folder (check and run make API calls):
     python 11_run_ladder.py estimate
     python 11_run_ladder.py check
     python 11_run_ladder.py run [--benchmarks arce gpqa] [--models typesafe/jev-1.13] [--max-cost 5]

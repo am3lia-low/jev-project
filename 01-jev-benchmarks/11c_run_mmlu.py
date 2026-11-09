@@ -9,7 +9,7 @@ Writes results/mmlu/raw/<model slug>/{original,swapped}.jsonl (record format
 in helpers/evaluation.py; `answer` is the correct letter of that version).
 Kept out of results/raw/ so 10_analyse.py never reads it.
 
-Run from this folder on the API laptop, after 11b_mmlu_build.py:
+Run from this folder, after 11b_mmlu_build.py:
     python 11c_run_mmlu.py [--models typesafe/jev-1.13 qwen/qwen3.8-27b]
 """
 

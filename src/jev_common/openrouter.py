@@ -92,7 +92,7 @@ class OpenRouterClient:
         load_dotenv(REPO_ROOT / ".env")
         self.api_key = api_key or os.environ.get("OPENROUTER_API_KEY", "")
         if not self.api_key:
-            raise RuntimeError("OPENROUTER_API_KEY is not set; add it to .env (API laptop only)")
+            raise RuntimeError("OPENROUTER_API_KEY is not set; add it to .env")
         self.cache = cache
         self.log_path = Path(log_dir) / "openrouter.jsonl" if log_dir is not None else None
         self.max_cost_usd = max_cost_usd

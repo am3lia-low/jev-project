@@ -11,7 +11,7 @@ Swaps: PARAPHRASE_MODEL writes 3 versions per item in one request, written to
 `06b_validate_swaps.py` checks them; `--retry-failed` regenerates rejected
 items (up to MAX_ATTEMPTS).
 
-Run from this folder on the API laptop:
+Run from this folder:
     python 06a_swap.py
     python 06a_swap.py --retry-failed      # after 06b_validate_swaps.py
 """

@@ -25,7 +25,7 @@ jev-project/
 │   ├── cache.py             # on-disk response cache, so API scripts can resume
 │   ├── parallel.py          # threaded run loop that stops at the spending cap
 │   └── stats.py             # bootstrap CI, McNemar, log-odds, ECE, binomial, two-proportion
-├── docs/                    # PLAN.md, experiment flow diagram, API-laptop checklist
+├── docs/                    # PLAN.md, experiment flow diagram
 ├── dev_notes/               # to-do list and build lists for the repo itself
 ├── 01-jev-benchmarks/       # Part A
 └── 02-jevlet-personas/      # Part B
@@ -35,17 +35,16 @@ jev-project/
 
 - **Scripts are numbered by their step** in the plan's order of work (Part A: [A10](docs/PLAN.md#a10-order-of-work)), e.g. `02_sample.py`, `06a_swap.py`. Run them from their part's folder.
 - **Each data file is written by exactly one script** and only read by later ones, so any step can be re-run on its own.
-- **Committed:** `data/` and `results/` (small JSONL / CSV files). Git is how data moves between the API laptop and the work laptop.
+- **Committed:** `data/` and `results/` (small JSONL / CSV files), except the gated GPQA and HLE question files (see `.gitignore`).
 - **Not committed:** `.env`, `cache/` (raw API responses) and `logs/`.
 - **Prompts live in `prompts/`** as text files, so the frozen versions are tracked in git.
 
 ## Where things run
 
-| Machine | GPU | OpenRouter / HuggingFace | Use for |
-|---|---|---|---|
-| Work laptop | None | Blocked | Writing code; validation and analysis on data pulled from git |
-| API laptop | None | Yes | Dataset downloads, every OpenRouter call (paraphrases, swaps, new questions, Jev, LLMs) |
-| Kaggle (planned: Colab) | T4 (free) | — | BERT fine-tuning and evaluation; no Colab GPU was available |
+| Where | Runs |
+|---|---|
+| Local machine (no GPU) | Everything except BERT training: dataset downloads, OpenRouter calls (paraphrases, swaps, new questions, Jev, LLMs), validation and analysis |
+| Kaggle (planned: Colab) | BERT fine-tuning and evaluation on a free T4; no Colab GPU was available |
 
 ## Setup
 
@@ -53,7 +52,7 @@ Python ≥ 3.12, managed with [`uv`](https://docs.astral.sh/uv/).
 
 ```
 uv sync                 # creates .venv, installs dependencies + src/jev_common
-cp .env.example .env    # then add OPENROUTER_API_KEY (API laptop only)
+cp .env.example .env    # then add OPENROUTER_API_KEY
 ```
 
 Dependencies live in `pyproject.toml`. After changing them, regenerate `requirements.txt` (used on Colab/Kaggle) with `uv export --no-hashes -o requirements.txt`.

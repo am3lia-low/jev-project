@@ -20,7 +20,7 @@ Run `estimate` with the same arguments first; the long arm is the costly one.
 Design and file formats: helpers/decay.py. Every request is cached, so
 re-running a step costs nothing for what is already done.
 
-Run from this folder (check and run on the API laptop):
+Run from this folder (check and run make API calls):
     python 03_run_decay.py estimate
     python 03_run_decay.py check
     python 03_run_decay.py run [--arms own quiz] [--models typesafe/jev-1.13] [--max-cost 5]

@@ -14,7 +14,7 @@ Needs data/scenarios/scenarios.json (07_make_scenarios.py --apply-review).
 Writes results/raw/<model slug>/scenarios/<condition>.jsonl (format in
 helpers/scenarios.py). Every request is cached.
 
-Run from this folder (check, baseline and personas on the API laptop):
+Run from this folder (check, baseline and personas make API calls):
     python 08_run_scenarios.py estimate
     python 08_run_scenarios.py check
     python 08_run_scenarios.py baseline

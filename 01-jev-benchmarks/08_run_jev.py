@@ -14,7 +14,7 @@ Writes results/raw/typesafe__jev-1.13/<run>.jsonl (format in
 helpers/evaluation.py). Every request is cached, so re-running a step costs
 nothing for what is already done.
 
-Run from this folder on the API laptop:
+Run from this folder:
     python 08_run_jev.py sanity
     python 08_run_jev.py repeat
     python 08_run_jev.py levels [--levels 1 2 3] [--runs 3]

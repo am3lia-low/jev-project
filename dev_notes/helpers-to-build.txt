@@ -22,12 +22,12 @@ CORE DATA (needed by every script)
 
 DATASETS
 [x] 5. loaders.py     Load the 5 datasets from HuggingFace into the shared format (A1).
-                      Field names checked on the API laptop 2026-10-07.
+                      Field names checked 2026-10-07.
 [x] 6. dedupe.py      Drop SWAG training questions that share a video ID or context
                       with any HellaSwag test question (A1).
 
-WRITTEN ON THE API LAPTOP
-[x] 7. openrouter.py  src/jev_common/. Written on the API laptop from the OpenRouter
+WRITTEN AFTER LIVE ACCESS
+[x] 7. openrouter.py  src/jev_common/. Written from the OpenRouter
                       docs: Jev on POST /api/alpha/decisions, LLMs on chat completions.
                       Retry with backoff, JSONL call log, cache via cache.py (8),
                       per-run spending cap (max_cost_usd). Tested live 2026-10-08:

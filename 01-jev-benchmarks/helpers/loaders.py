@@ -1,8 +1,7 @@
 """Load the five datasets from HuggingFace into the shared question format (A1).
 
 Each dataset has a pure `parse_*` function (one raw row -> `Question`) and
-`load_questions` does the download. Run the download on the API laptop if
-HuggingFace needs a login or is blocked on the work network.
+`load_questions` does the download.
 
 Row fields below were checked against the HuggingFace datasets on 2026-10-07.
 If a dataset changes its schema, `_require` fails with the missing field name

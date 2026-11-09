@@ -1,6 +1,6 @@
 # MMLU number swap: findings (PLAN A11)
 
-Run 2026-10-27 on the API laptop; written up 2026-10-27. The design is in [PLAN A11](../../docs/PLAN.md#a11-mmlu-number-swap-sub-experiment). This file is written by hand. The numbers come from `11d_analyse_mmlu.py`; its automatic draft is [`mmlu/summary.md`](mmlu/summary.md) and the full tables are in [`mmlu/tables/`](mmlu/tables/).
+Run 2026-10-27; written up 2026-10-27. The design is in [PLAN A11](../../docs/PLAN.md#a11-mmlu-number-swap-sub-experiment). This file is written by hand. The numbers come from `11d_analyse_mmlu.py`; its automatic draft is [`mmlu/summary.md`](mmlu/summary.md) and the full tables are in [`mmlu/tables/`](mmlu/tables/).
 
 ## What was run
 

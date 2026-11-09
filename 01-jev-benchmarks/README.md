@@ -6,13 +6,10 @@ The full design is in [`docs/PLAN.md` → Part A](../docs/PLAN.md#part-a--jev-be
 
 ## Where things run
 
-| Machine | Runs |
+| Where | Runs |
 |---|---|
-| Work laptop | Writing all code; validation and analysis on data pulled from git |
-| API laptop | Dataset downloads (`02_sample.py`) and anything that calls OpenRouter (paraphrases, new questions, swaps, Jev, LLM baselines) |
+| Local machine | Everything except BERT training: dataset downloads (`02_sample.py`), anything that calls OpenRouter (paraphrases, new questions, swaps, Jev, LLM baselines), validation and analysis |
 | Kaggle (T4; planned: Colab) | BERT fine-tuning and evaluation (`notebooks/07b_bert_colab.ipynb` runs on either) |
-
-Code that needs the API laptop is still written on the work laptop; it just gets run there. Results come back through git.
 
 ## Layout
 
@@ -44,22 +41,22 @@ Scripts are numbered by their step in [A10](../docs/PLAN.md#a10-order-of-work) a
 │   ├── generate_new/<dataset>.txt
 │   └── eval/<dataset>.txt    # decision-index templates (A9)
 │
-├── 02_sample.py              # A2: download, dedupe, sample, split, shuffle  [API laptop]
-├── 03_paraphrase.py          # A3.1: pilot (--pilot) and full run         [API laptop]
+├── 02_sample.py              # A2: download, dedupe, sample, split, shuffle
+├── 03_paraphrase.py          # A3.1: pilot (--pilot) and full run
 ├── 04_validate.py            # A3.1: automatic checks + manual 50
-├── 05_generate_new.py        # A3.2: 400 drafts -> 200 Level 3 questions  [API laptop]
-├── 06a_swap.py               # A3.3: 3 synonym swaps per quiz item         [API laptop]
+├── 05_generate_new.py        # A3.2: 400 drafts -> 200 Level 3 questions
+├── 06a_swap.py               # A3.3: 3 synonym swaps per quiz item
 ├── 06b_validate_swaps.py     # A3.3: automatic checks + manual 30
 ├── 06c_build_quiz.py         # A7: original + 3 swaps, balanced positions, option E
 ├── 07a_build_bert_data.py    # A5: originals + paraphrases for the notebook
 ├── notebooks/
 │   └── 07b_bert_colab.ipynb  # A4-A5: untrained + fine-tuned BERT, Levels 0-3   [Kaggle]
-├── 08_run_jev.py             # A9: sanity check, repeatability, Levels 0-3, quiz   [API laptop]
-├── 09_run_llm.py             # A9: LLM baselines, Levels 0-3 + quiz        [API laptop]
+├── 08_run_jev.py             # A9: sanity check, repeatability, Levels 0-3, quiz
+├── 09_run_llm.py             # A9: LLM baselines, Levels 0-3 + quiz
 ├── 10_analyse.py             # A8: tables, figures, McNemar, log-odds, quiz, verdict
-├── 11a_mmlu_swap.py          # A11: MMLU maths number swaps + solve() code check   [API laptop]
+├── 11a_mmlu_swap.py          # A11: MMLU maths number swaps + solve() code check
 ├── 11b_mmlu_build.py         # A11: pick 200, original + swapped (trap) versions, manual 30
-├── 11c_run_mmlu.py           # A11: Jev + LLMs on both versions                [API laptop]
+├── 11c_run_mmlu.py           # A11: Jev + LLMs on both versions
 ├── 11d_analyse_mmlu.py       # A11: accuracy, log-odds drop, trap rate, pass rule
 │
 ├── data/                     # committed

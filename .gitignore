@@ -17,7 +17,7 @@ cache/
 # API call logs
 logs/
 
-# data/ and results/ ARE committed: git moves them between the API and work laptops
+# data/ and results/ ARE committed
 
 # Notebooks / editors / OS
 .ipynb_checkpoints/

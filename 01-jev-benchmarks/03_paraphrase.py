@@ -12,7 +12,7 @@ checks them; `--retry-failed` regenerates what it rejected (up to
 MAX_ATTEMPTS per question). Responses are cached, so re-runs only pay for
 what is missing.
 
-Run from this folder on the API laptop:
+Run from this folder:
     python 03_paraphrase.py --pilot
     python 03_paraphrase.py --pilot-results
     python 03_paraphrase.py                     # full run

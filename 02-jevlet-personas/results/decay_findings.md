@@ -1,6 +1,6 @@
 # Persona decay: findings (B4)
 
-Run 2026-10-18 on the API laptop; written up 2026-10-19. The design is in [PLAN B4](../../docs/PLAN.md#b4-persona-decay). This file is written by hand. The numbers come from `04_analyse_decay.py`; its automatic summary is [`decay_summary.md`](decay_summary.md) and the full tables are in [`tables/`](tables/) (`decay_*.csv`).
+Run 2026-10-18; written up 2026-10-19. The design is in [PLAN B4](../../docs/PLAN.md#b4-persona-decay). This file is written by hand. The numbers come from `04_analyse_decay.py`; its automatic summary is [`decay_summary.md`](decay_summary.md) and the full tables are in [`tables/`](tables/) (`decay_*.csv`).
 
 ## What was run
 

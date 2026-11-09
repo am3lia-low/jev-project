@@ -14,12 +14,7 @@ The full design is in [`docs/PLAN.md` → Part B](../docs/PLAN.md#part-b--jevlet
 
 ## Where things run
 
-| Machine | Runs |
-|---|---|
-| Work laptop | Writing all code; scoring and analysis |
-| API laptop | Every Jev and LLM call, and dataset downloads if HuggingFace needs a login or is blocked on the work network |
-
-Code that needs the API laptop is still written on the work laptop; it just gets run there.
+Everything runs on one local machine: every Jev and LLM call (OpenRouter), the dataset downloads (GPQA and HLE need a HuggingFace login) and the analysis.
 
 ## Layout
 
@@ -28,9 +23,9 @@ Shared code (pinned model IDs, OpenRouter client, cache, parallel runner, stats)
 ```
 02-jevlet-personas/
 ├── README.md
-├── 01_run_bigfive.py       # B1 steps 1-3: check -> baseline -> personas (API laptop)
+├── 01_run_bigfive.py       # B1 steps 1-3: check -> baseline -> personas
 ├── 02_analyse_bigfive.py   # B1 steps 1-3: scores, alpha, acquiescence, noise, persona shifts
-├── 03_run_decay.py         # B4: estimate (local) -> check -> run (API laptop)
+├── 03_run_decay.py         # B4: estimate (local) -> check -> run
 ├── 04_analyse_decay.py     # B4: shift and retention per checkpoint, figure
 ├── 05_paraphrase_ipip.py   # B1 step 4: reword the IPIP items -> review sheet -> --apply-review
 ├── 06_analyse_paraphrase.py  # B1 step 4: original vs paraphrased answers
@@ -94,7 +89,7 @@ About 12,600 Jev calls and 12,120 per LLM in total.
 python 01_run_bigfive.py check       # one item on every model; prints Jev's raw score answer
 python 01_run_bigfive.py baseline
 python 01_run_bigfive.py personas    # refuses to run until markers.json is marked verified
-python 02_analyse_bigfive.py         # any laptop
+python 02_analyse_bigfive.py         # no API calls
 ```
 
 ## Persona decay runs (B4)
@@ -103,9 +98,9 @@ Our script builds each conversation's history and sends it in the state with eve
 
 ```
 python 03_run_decay.py estimate      # local only, no API calls: call counts and cost
-python 03_run_decay.py check         # API laptop, < $0.01: 2 turns + 1 probe per model
-python 03_run_decay.py run           # API laptop, about $2.45 for all models and both arms
-python 04_analyse_decay.py           # any laptop
+python 03_run_decay.py check         # < $0.01: 2 turns + 1 probe per model
+python 03_run_decay.py run           # about $2.45 for all models and both arms
+python 04_analyse_decay.py           # no API calls
 ```
 
 Follow-up arms (2026-10-19), opt-in: `long` (quiz Q&A to 256 turns) and `appdata` (unrelated order records in the state). Run `estimate` with the same arguments first.
@@ -121,7 +116,7 @@ python 03_run_decay.py run --arms long --placements state
 Does a model answer the original items from memory? Reword them and compare.
 
 ```
-python 05_paraphrase_ipip.py                     # API laptop, ~$0.01; writes data/reviews/ipip_paraphrases.csv
+python 05_paraphrase_ipip.py                     # ~$0.01; writes data/reviews/ipip_paraphrases.csv
 python 05_paraphrase_ipip.py --apply-review      # after filling in same_meaning (and edit) for all 120
 python 01_run_bigfive.py baseline --items paraphrased
 python 01_run_bigfive.py personas --items paraphrased
@@ -133,7 +128,7 @@ python 06_analyse_paraphrase.py
 Does a persona move behaviour, not only self-report? Each scenario has a high-trait and a low-trait action.
 
 ```
-python 07_make_scenarios.py                      # API laptop, ~$0.30; writes data/reviews/scenarios.csv
+python 07_make_scenarios.py                      # ~$0.30; writes data/reviews/scenarios.csv
 python 07_make_scenarios.py --apply-review       # after filling in keep (y/n) for every draft
 python 08_run_scenarios.py estimate              # local, no API calls
 python 08_run_scenarios.py check

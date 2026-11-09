@@ -9,7 +9,7 @@ Two steps:
     generate        PARAPHRASE_MODEL rewords each item (prompts/ipip_paraphrase.txt),
                     automatic checks flag suspect ones, and the review sheet
                     data/reviews/ipip_paraphrases.csv is written (all 120 rows).
-                    About 120 short calls, around $0.01 (API laptop).
+                    About 120 short calls, around $0.01.
     --apply-review  After you fill in the sheet: writes
                     data/ipip/ipip_neo_120_paraphrased.json, marked verified.
                     01_run_bigfive.py --items paraphrased refuses to run before this.
@@ -19,8 +19,8 @@ direction as the original); if n, write a replacement in `edit` (used as is).
 A sheet is never overwritten once written; delete it to start again.
 
 Run from this folder:
-    python 05_paraphrase_ipip.py                  # API laptop
-    python 05_paraphrase_ipip.py --apply-review   # any laptop
+    python 05_paraphrase_ipip.py
+    python 05_paraphrase_ipip.py --apply-review   # no API calls
 """
 
 import argparse
@@ -141,7 +141,7 @@ def apply_review() -> None:
            "originals": {item["id"]: item["text"] for item in instrument["items"]}, "items": paraphrased}
     IPIP_PARAPHRASED_PATH.write_text(json.dumps(out, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
     print(f"{len(paraphrased)} items ({edited} replaced by your edit) -> {IPIP_PARAPHRASED_PATH}")
-    print("Next (API laptop): python 01_run_bigfive.py baseline --items paraphrased, then personas --items paraphrased")
+    print("Next: python 01_run_bigfive.py baseline --items paraphrased, then personas --items paraphrased")
 
 
 def main() -> None:

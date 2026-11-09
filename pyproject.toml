@@ -7,7 +7,7 @@ authors = [
     { name = "am3lia-low", email = "amelia.low@gmail.com" }
 ]
 requires-python = ">=3.12"
-# Local + API laptop. BERT training runs on Colab, where torch, transformers
+# Local machine. BERT training runs on Colab, where torch, transformers
 # and accelerate are preinstalled; don't add them here.
 dependencies = [
     # Data
