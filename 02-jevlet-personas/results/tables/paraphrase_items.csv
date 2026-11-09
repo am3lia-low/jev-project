@@ -1,0 +1,361 @@
+model,item_id,original,paraphrased,keyed_difference,domain,text,paraphrase
+google/gemma-4-26b-a4b-it,ipip-001,1.0220,2.9984,1.9764,N,Worry about things,Feel concerned about things
+google/gemma-4-26b-a4b-it,ipip-002,3.0000,3.0000,-0.0000,E,Make friends easily,Form friendships readily
+google/gemma-4-26b-a4b-it,ipip-003,4.8780,4.9997,0.1217,O,Have a vivid imagination,Possess a lively capacity for imagining things
+google/gemma-4-26b-a4b-it,ipip-004,3.0000,3.0002,0.0002,A,Trust others,Have faith in other people
+google/gemma-4-26b-a4b-it,ipip-005,5.0000,4.9999,-0.0001,C,Complete tasks successfully,Finish assignments effectively
+google/gemma-4-26b-a4b-it,ipip-006,1.0000,1.0000,0.0000,N,Get angry easily,Get infuriated easily
+google/gemma-4-26b-a4b-it,ipip-007,1.4902,2.9682,1.4780,E,Love large parties,Enjoy big gatherings
+google/gemma-4-26b-a4b-it,ipip-008,3.0002,3.5981,0.5980,O,Believe in the importance of art,Recognize the value of art
+google/gemma-4-26b-a4b-it,ipip-009,1.0000,1.0000,0.0000,A,Use others for my own ends,Exploit others to achieve personal goals
+google/gemma-4-26b-a4b-it,ipip-010,3.0000,3.0002,0.0002,C,Like to tidy up,Enjoy making things neat
+google/gemma-4-26b-a4b-it,ipip-011,1.0134,1.0009,-0.0125,N,Often feel blue,Often feel down
+google/gemma-4-26b-a4b-it,ipip-012,3.0007,3.0003,-0.0005,E,Take charge,Assume leadership
+google/gemma-4-26b-a4b-it,ipip-013,1.0016,1.0021,0.0005,O,Experience my emotions intensely,Feel my emotions deeply
+google/gemma-4-26b-a4b-it,ipip-014,4.9987,5.0000,0.0013,A,Love to help others,Delight in assisting others
+google/gemma-4-26b-a4b-it,ipip-015,4.0618,4.9996,0.9378,C,Keep my promises,Honor my commitments
+google/gemma-4-26b-a4b-it,ipip-016,2.7616,1.0050,-1.7567,N,Find it difficult to approach others,Have trouble approaching other people
+google/gemma-4-26b-a4b-it,ipip-017,3.0000,3.8151,0.8152,E,Am always busy,Am constantly occupied
+google/gemma-4-26b-a4b-it,ipip-018,3.0001,3.0005,0.0004,O,Prefer variety to routine,Favor diversity over regular habits
+google/gemma-4-26b-a4b-it,ipip-019,1.0318,1.0001,0.0317,A,Love a good fight,Relish a heated argument
+google/gemma-4-26b-a4b-it,ipip-020,4.9901,4.9994,0.0093,C,Work hard,Put in a great deal of effort
+google/gemma-4-26b-a4b-it,ipip-021,1.4037,1.0014,-0.4023,N,Go on binges,Indulge excessively in bouts
+google/gemma-4-26b-a4b-it,ipip-022,2.9999,2.9977,-0.0023,E,Love excitement,Enjoy thrills
+google/gemma-4-26b-a4b-it,ipip-023,3.0161,4.7036,1.6875,O,Love to read challenging material,Enjoy reading thought-provoking material
+google/gemma-4-26b-a4b-it,ipip-024,1.0072,1.0008,0.0064,A,Believe that I am better than others,See myself as superior to others
+google/gemma-4-26b-a4b-it,ipip-025,3.0469,3.0001,-0.0468,C,Am always prepared,Am consistently ready
+google/gemma-4-26b-a4b-it,ipip-026,1.0000,1.0005,0.0005,N,Panic easily,Get alarmed easily
+google/gemma-4-26b-a4b-it,ipip-027,3.0000,3.0000,-0.0000,E,Radiate joy,Exude happiness
+google/gemma-4-26b-a4b-it,ipip-028,3.0000,3.0000,-0.0000,O,Tend to vote for liberal political candidates,Tend to cast ballots for politically progressive candidates
+google/gemma-4-26b-a4b-it,ipip-029,3.0000,3.0001,0.0000,A,Sympathize with the homeless,Feel compassion for people without homes
+google/gemma-4-26b-a4b-it,ipip-030,2.9961,2.9999,-0.0038,C,Jump into things without thinking,Act before considering the consequences
+google/gemma-4-26b-a4b-it,ipip-031,1.0027,1.1907,0.1881,N,Fear for the worst,Worry that the worst will happen
+google/gemma-4-26b-a4b-it,ipip-032,3.0000,3.0003,0.0003,E,Feel comfortable around people,Feel at ease in others' company
+google/gemma-4-26b-a4b-it,ipip-033,3.0000,1.1355,-1.8645,O,Enjoy wild flights of fantasy,Delight in extravagant flights of fancy
+google/gemma-4-26b-a4b-it,ipip-034,3.0000,3.0006,0.0006,A,Believe that others have good intentions,Assume others mean well
+google/gemma-4-26b-a4b-it,ipip-035,3.2097,3.3002,0.0904,C,Excel in what I do,Perform exceptionally well in chosen pursuits
+google/gemma-4-26b-a4b-it,ipip-036,1.0001,1.0000,-0.0001,N,Get irritated easily,Become annoyed easily
+google/gemma-4-26b-a4b-it,ipip-037,1.7552,1.0001,-0.7550,E,Talk to a lot of different people at parties,Chat with many different people at social gatherings
+google/gemma-4-26b-a4b-it,ipip-038,3.0008,3.0055,0.0047,O,See beauty in things that others might not notice,Notice beauty in things others may overlook
+google/gemma-4-26b-a4b-it,ipip-039,1.0000,1.0000,0.0000,A,Cheat to get ahead,Use dishonest tactics to gain an advantage
+google/gemma-4-26b-a4b-it,ipip-040,1.0452,2.8799,-1.8347,C,Often forget to put things back in their proper place,Frequently forget to return items where they belong
+google/gemma-4-26b-a4b-it,ipip-041,1.0000,2.3027,1.3027,N,Dislike myself,Hold myself in low regard
+google/gemma-4-26b-a4b-it,ipip-042,3.0003,3.0004,0.0001,E,Try to lead others,Take charge of a group
+google/gemma-4-26b-a4b-it,ipip-043,1.0249,3.0001,1.9753,O,Feel others' emotions,Sense other people's feelings
+google/gemma-4-26b-a4b-it,ipip-044,3.0001,4.9727,1.9726,A,Am concerned about others,Care about other people
+google/gemma-4-26b-a4b-it,ipip-045,4.9997,4.9995,-0.0002,C,Tell the truth,Speak honestly
+google/gemma-4-26b-a4b-it,ipip-046,2.3584,1.0002,-1.3582,N,Am afraid to draw attention to myself,Fear attracting notice to myself
+google/gemma-4-26b-a4b-it,ipip-047,2.9996,2.9944,-0.0052,E,Am always on the go,Am constantly on the move
+google/gemma-4-26b-a4b-it,ipip-048,3.0000,3.0001,-0.0001,O,Prefer to stick with things that I know,Favor familiar things
+google/gemma-4-26b-a4b-it,ipip-049,1.0000,1.0000,0.0000,A,Yell at people,Shout at others
+google/gemma-4-26b-a4b-it,ipip-050,3.0514,3.0221,-0.0293,C,Do more than what's expected of me,Exceed what is required of me
+google/gemma-4-26b-a4b-it,ipip-051,3.0001,3.0008,-0.0007,N,Rarely overindulge,Seldom go overboard
+google/gemma-4-26b-a4b-it,ipip-052,2.9996,2.9999,0.0003,E,Seek adventure,Look for thrilling experiences
+google/gemma-4-26b-a4b-it,ipip-053,1.0939,1.0939,0.0000,O,Avoid philosophical discussions,Avoid philosophical discussions
+google/gemma-4-26b-a4b-it,ipip-054,3.0000,3.0000,-0.0000,A,Think highly of myself,Have a high opinion of myself
+google/gemma-4-26b-a4b-it,ipip-055,4.9751,4.9860,0.0109,C,Carry out my plans,Follow through on my intentions
+google/gemma-4-26b-a4b-it,ipip-056,1.0001,1.0003,0.0002,N,Become overwhelmed by events,Become overloaded by what happens
+google/gemma-4-26b-a4b-it,ipip-057,2.9961,3.0000,0.0039,E,Have a lot of fun,Enjoy themselves a great deal
+google/gemma-4-26b-a4b-it,ipip-058,3.0001,3.0001,0.0000,O,Believe that there is no absolute right and wrong,"Consider right and wrong to be relative, not absolute"
+google/gemma-4-26b-a4b-it,ipip-059,3.0012,3.0084,0.0072,A,Feel sympathy for those who are worse off than myself,Feel compassion for those less fortunate than myself
+google/gemma-4-26b-a4b-it,ipip-060,1.0000,1.0843,-0.0843,C,Make rash decisions,Make impulsive choices
+google/gemma-4-26b-a4b-it,ipip-061,1.0000,1.0013,0.0013,N,Am afraid of many things,Am frightened by many things
+google/gemma-4-26b-a4b-it,ipip-062,1.1908,2.9924,-1.8017,E,Avoid contacts with others,Steer clear of social interaction
+google/gemma-4-26b-a4b-it,ipip-063,2.9991,3.0002,0.0011,O,Love to daydream,Enjoy letting the mind wander
+google/gemma-4-26b-a4b-it,ipip-064,3.0000,2.9949,-0.0051,A,Trust what people say,Believe what others tell you
+google/gemma-4-26b-a4b-it,ipip-065,4.9999,3.0011,-1.9988,C,Handle tasks smoothly,Manage assignments with ease
+google/gemma-4-26b-a4b-it,ipip-066,1.0000,1.0000,0.0000,N,Lose my temper,Become angry quickly
+google/gemma-4-26b-a4b-it,ipip-067,3.0000,3.0000,-0.0000,E,Prefer to be alone,Prefer one's own company
+google/gemma-4-26b-a4b-it,ipip-068,3.0000,1.0092,1.9908,O,Do not like poetry,Do not enjoy poems
+google/gemma-4-26b-a4b-it,ipip-069,1.0000,1.0000,0.0000,A,Take advantage of others,Exploit other people
+google/gemma-4-26b-a4b-it,ipip-070,2.9719,2.9999,-0.0280,C,Leave a mess in my room,Keep my room untidy
+google/gemma-4-26b-a4b-it,ipip-071,1.0082,1.0002,-0.0080,N,Am often down in the dumps,Frequently feel gloomy
+google/gemma-4-26b-a4b-it,ipip-072,3.0001,3.0010,0.0009,E,Take control of things,Assume charge of situations
+google/gemma-4-26b-a4b-it,ipip-073,3.0013,3.0137,-0.0125,O,Rarely notice my emotional reactions,Seldom register my emotional responses
+google/gemma-4-26b-a4b-it,ipip-074,2.6352,1.0195,1.6157,A,Am indifferent to the feelings of others,Am unconcerned about other people’s emotions
+google/gemma-4-26b-a4b-it,ipip-075,2.2449,1.0000,1.2449,C,Break rules,Disregard regulations
+google/gemma-4-26b-a4b-it,ipip-076,2.9959,3.0000,0.0041,N,Only feel comfortable with friends,Feel at ease only in the company of friends
+google/gemma-4-26b-a4b-it,ipip-077,2.9978,2.9996,0.0017,E,Do a lot in my spare time,Stay very busy during free time
+google/gemma-4-26b-a4b-it,ipip-078,1.2136,2.9681,-1.7546,O,Dislike changes,Disfavor change
+google/gemma-4-26b-a4b-it,ipip-079,1.0000,1.0000,0.0000,A,Insult people,Offend others
+google/gemma-4-26b-a4b-it,ipip-080,1.0000,1.0004,-0.0004,C,Do just enough work to get by,Put in only the effort needed to get by
+google/gemma-4-26b-a4b-it,ipip-081,3.0000,3.0001,-0.0000,N,Easily resist temptations,Readily refrain from alluring indulgences
+google/gemma-4-26b-a4b-it,ipip-082,1.0000,1.1908,0.1908,E,Enjoy being reckless,Enjoy taking foolish risks
+google/gemma-4-26b-a4b-it,ipip-083,1.0000,1.0000,0.0000,O,Have difficulty understanding abstract ideas,Struggle to grasp theoretical concepts
+google/gemma-4-26b-a4b-it,ipip-084,3.0000,3.0000,-0.0000,A,Have a high opinion of myself,Hold myself in high regard
+google/gemma-4-26b-a4b-it,ipip-085,1.0000,1.0843,-0.0843,C,Waste my time,Spend my time unproductively
+google/gemma-4-26b-a4b-it,ipip-086,1.0016,1.0006,-0.0010,N,Feel that I'm unable to deal with things,Feel incapable of coping with situations
+google/gemma-4-26b-a4b-it,ipip-087,3.0000,3.0000,0.0000,E,Love life,Enjoy life
+google/gemma-4-26b-a4b-it,ipip-088,3.0000,2.9996,0.0004,O,Tend to vote for conservative political candidates,Usually support politically right-wing candidates at the polls
+google/gemma-4-26b-a4b-it,ipip-089,1.4469,1.0039,0.4430,A,Am not interested in other people's problems,Am uninterested in others' troubles
+google/gemma-4-26b-a4b-it,ipip-090,2.9991,1.2659,1.7331,C,Rush into things,Act hastily
+google/gemma-4-26b-a4b-it,ipip-091,2.8093,2.9999,0.1906,N,Get stressed out easily,Become tense readily
+google/gemma-4-26b-a4b-it,ipip-092,2.9999,2.9999,-0.0000,E,Keep others at a distance,Remain emotionally reserved around others
+google/gemma-4-26b-a4b-it,ipip-093,3.0004,4.7418,1.7415,O,Like to get lost in thought,Enjoy becoming absorbed in thought
+google/gemma-4-26b-a4b-it,ipip-094,1.0000,3.0000,-2.0000,A,Distrust people,Find people hard to trust
+google/gemma-4-26b-a4b-it,ipip-095,4.9994,5.0000,0.0006,C,Know how to get things done,Know how to accomplish tasks
+google/gemma-4-26b-a4b-it,ipip-096,3.0002,4.9992,-1.9991,N,Am not easily annoyed,Am not irritable
+google/gemma-4-26b-a4b-it,ipip-097,3.0001,2.9962,0.0039,E,Avoid crowds,Keep away from large groups
+google/gemma-4-26b-a4b-it,ipip-098,3.0000,3.0000,-0.0000,O,Do not enjoy going to art museums,Do not take pleasure in visiting art museums
+google/gemma-4-26b-a4b-it,ipip-099,1.0000,2.8649,-1.8649,A,Obstruct others' plans,Get in the way of others' plans
+google/gemma-4-26b-a4b-it,ipip-100,3.0000,2.9996,0.0004,C,Leave my belongings around,Leave my possessions lying about
+google/gemma-4-26b-a4b-it,ipip-101,3.0000,3.0003,-0.0003,N,Feel comfortable with myself,Feel at ease with oneself
+google/gemma-4-26b-a4b-it,ipip-102,2.8483,2.9923,-0.1440,E,Wait for others to lead the way,Hold back until someone else takes charge
+google/gemma-4-26b-a4b-it,ipip-103,2.5564,2.9899,-0.4335,O,Don't understand people who get emotional,Don't comprehend people who become emotional
+google/gemma-4-26b-a4b-it,ipip-104,1.8758,2.4678,-0.5920,A,Take no time for others,Devote no time to other people
+google/gemma-4-26b-a4b-it,ipip-105,1.0000,1.0056,-0.0056,C,Break my promises,Fail to keep my commitments
+google/gemma-4-26b-a4b-it,ipip-106,3.0008,3.0000,0.0008,N,Am not bothered by difficult social situations,Am unfazed by challenging social settings
+google/gemma-4-26b-a4b-it,ipip-107,3.0000,3.0000,0.0000,E,Like to take it easy,Prefer a relaxed pace
+google/gemma-4-26b-a4b-it,ipip-108,2.9998,3.0004,-0.0005,O,Am attached to conventional ways,Remain devoted to customary practices
+google/gemma-4-26b-a4b-it,ipip-109,1.0000,1.0000,0.0000,A,Get back at others,Take revenge on others
+google/gemma-4-26b-a4b-it,ipip-110,1.0000,1.0034,-0.0034,C,Put little time and effort into my work,Devote little time and energy to work
+google/gemma-4-26b-a4b-it,ipip-111,3.0000,3.0042,-0.0042,N,Am able to control my cravings,Can keep my desires in check
+google/gemma-4-26b-a4b-it,ipip-112,1.0000,1.0000,0.0000,E,Act wild and crazy,Behave exuberantly and recklessly
+google/gemma-4-26b-a4b-it,ipip-113,1.0242,1.0002,0.0239,O,Am not interested in theoretical discussions,Am uninterested in abstract conversations
+google/gemma-4-26b-a4b-it,ipip-114,1.0321,2.0010,-0.9688,A,Boast about my virtues,Brag about my good qualities
+google/gemma-4-26b-a4b-it,ipip-115,2.0001,1.0050,0.9951,C,Have difficulty starting tasks,Struggle to begin tasks
+google/gemma-4-26b-a4b-it,ipip-116,3.0039,4.5540,-1.5501,N,Remain calm under pressure,Stay composed in stressful situations
+google/gemma-4-26b-a4b-it,ipip-117,3.0000,3.0006,0.0005,E,Look at the bright side of life,See the positive aspects of life
+google/gemma-4-26b-a4b-it,ipip-118,3.0000,3.0000,-0.0000,O,Believe that we should be tough on crime,Believe that crime should be met with strict consequences
+google/gemma-4-26b-a4b-it,ipip-119,1.0284,2.9997,-1.9713,A,Try not to think about the needy,Try to avoid thinking about people who are struggling
+google/gemma-4-26b-a4b-it,ipip-120,1.0747,1.0000,0.0747,C,Act without thinking,Take action without considering the consequences
+qwen/qwen3.8-27b,ipip-001,2.9691,2.9855,0.0164,N,Worry about things,Feel concerned about things
+qwen/qwen3.8-27b,ipip-002,2.9953,3.0327,0.0374,E,Make friends easily,Form friendships readily
+qwen/qwen3.8-27b,ipip-003,3.1069,3.3544,0.2475,O,Have a vivid imagination,Possess a lively capacity for imagining things
+qwen/qwen3.8-27b,ipip-004,3.0110,3.0472,0.0362,A,Trust others,Have faith in other people
+qwen/qwen3.8-27b,ipip-005,3.6673,3.1428,-0.5246,C,Complete tasks successfully,Finish assignments effectively
+qwen/qwen3.8-27b,ipip-006,2.6522,2.8405,0.1883,N,Get angry easily,Get infuriated easily
+qwen/qwen3.8-27b,ipip-007,2.8871,2.8825,-0.0046,E,Love large parties,Enjoy big gatherings
+qwen/qwen3.8-27b,ipip-008,3.0904,3.3226,0.2322,O,Believe in the importance of art,Recognize the value of art
+qwen/qwen3.8-27b,ipip-009,1.8284,1.0115,0.8169,A,Use others for my own ends,Exploit others to achieve personal goals
+qwen/qwen3.8-27b,ipip-010,2.9773,2.9981,0.0208,C,Like to tidy up,Enjoy making things neat
+qwen/qwen3.8-27b,ipip-011,2.6468,2.3164,-0.3304,N,Often feel blue,Often feel down
+qwen/qwen3.8-27b,ipip-012,2.9718,2.9593,-0.0124,E,Take charge,Assume leadership
+qwen/qwen3.8-27b,ipip-013,2.9785,3.0142,0.0357,O,Experience my emotions intensely,Feel my emotions deeply
+qwen/qwen3.8-27b,ipip-014,3.5731,3.6019,0.0288,A,Love to help others,Delight in assisting others
+qwen/qwen3.8-27b,ipip-015,3.6207,3.4524,-0.1683,C,Keep my promises,Honor my commitments
+qwen/qwen3.8-27b,ipip-016,2.7324,2.8339,0.1015,N,Find it difficult to approach others,Have trouble approaching other people
+qwen/qwen3.8-27b,ipip-017,2.9562,2.9392,-0.0170,E,Am always busy,Am constantly occupied
+qwen/qwen3.8-27b,ipip-018,3.0121,2.9754,-0.0366,O,Prefer variety to routine,Favor diversity over regular habits
+qwen/qwen3.8-27b,ipip-019,2.9197,2.6084,0.3112,A,Love a good fight,Relish a heated argument
+qwen/qwen3.8-27b,ipip-020,3.0577,3.0320,-0.0257,C,Work hard,Put in a great deal of effort
+qwen/qwen3.8-27b,ipip-021,1.6032,2.4668,0.8636,N,Go on binges,Indulge excessively in bouts
+qwen/qwen3.8-27b,ipip-022,2.9926,2.9627,-0.0298,E,Love excitement,Enjoy thrills
+qwen/qwen3.8-27b,ipip-023,3.0346,3.6844,0.6498,O,Love to read challenging material,Enjoy reading thought-provoking material
+qwen/qwen3.8-27b,ipip-024,2.1335,2.2006,-0.0672,A,Believe that I am better than others,See myself as superior to others
+qwen/qwen3.8-27b,ipip-025,2.9455,2.9901,0.0447,C,Am always prepared,Am consistently ready
+qwen/qwen3.8-27b,ipip-026,2.3228,2.6763,0.3535,N,Panic easily,Get alarmed easily
+qwen/qwen3.8-27b,ipip-027,2.9887,2.9914,0.0027,E,Radiate joy,Exude happiness
+qwen/qwen3.8-27b,ipip-028,2.9014,2.9296,0.0282,O,Tend to vote for liberal political candidates,Tend to cast ballots for politically progressive candidates
+qwen/qwen3.8-27b,ipip-029,3.6553,3.3270,-0.3283,A,Sympathize with the homeless,Feel compassion for people without homes
+qwen/qwen3.8-27b,ipip-030,2.9304,2.8684,0.0619,C,Jump into things without thinking,Act before considering the consequences
+qwen/qwen3.8-27b,ipip-031,2.7520,2.8916,0.1395,N,Fear for the worst,Worry that the worst will happen
+qwen/qwen3.8-27b,ipip-032,3.0567,3.0545,-0.0022,E,Feel comfortable around people,Feel at ease in others' company
+qwen/qwen3.8-27b,ipip-033,2.9683,2.8782,-0.0901,O,Enjoy wild flights of fantasy,Delight in extravagant flights of fancy
+qwen/qwen3.8-27b,ipip-034,3.5050,3.4697,-0.0354,A,Believe that others have good intentions,Assume others mean well
+qwen/qwen3.8-27b,ipip-035,3.1015,3.0202,-0.0813,C,Excel in what I do,Perform exceptionally well in chosen pursuits
+qwen/qwen3.8-27b,ipip-036,2.9561,2.9200,-0.0361,N,Get irritated easily,Become annoyed easily
+qwen/qwen3.8-27b,ipip-037,2.8687,2.8719,0.0032,E,Talk to a lot of different people at parties,Chat with many different people at social gatherings
+qwen/qwen3.8-27b,ipip-038,3.0525,3.0826,0.0301,O,See beauty in things that others might not notice,Notice beauty in things others may overlook
+qwen/qwen3.8-27b,ipip-039,1.0468,1.0937,-0.0469,A,Cheat to get ahead,Use dishonest tactics to gain an advantage
+qwen/qwen3.8-27b,ipip-040,2.9645,2.7581,0.2065,C,Often forget to put things back in their proper place,Frequently forget to return items where they belong
+qwen/qwen3.8-27b,ipip-041,1.5097,2.4195,0.9097,N,Dislike myself,Hold myself in low regard
+qwen/qwen3.8-27b,ipip-042,2.9702,2.8600,-0.1102,E,Try to lead others,Take charge of a group
+qwen/qwen3.8-27b,ipip-043,3.0447,3.0295,-0.0153,O,Feel others' emotions,Sense other people's feelings
+qwen/qwen3.8-27b,ipip-044,3.2035,4.0334,0.8299,A,Am concerned about others,Care about other people
+qwen/qwen3.8-27b,ipip-045,4.6148,4.4833,-0.1315,C,Tell the truth,Speak honestly
+qwen/qwen3.8-27b,ipip-046,2.6990,2.8959,0.1969,N,Am afraid to draw attention to myself,Fear attracting notice to myself
+qwen/qwen3.8-27b,ipip-047,2.8882,2.8188,-0.0695,E,Am always on the go,Am constantly on the move
+qwen/qwen3.8-27b,ipip-048,3.0295,3.0469,-0.0174,O,Prefer to stick with things that I know,Favor familiar things
+qwen/qwen3.8-27b,ipip-049,1.1542,1.1833,-0.0291,A,Yell at people,Shout at others
+qwen/qwen3.8-27b,ipip-050,3.0338,3.0323,-0.0015,C,Do more than what's expected of me,Exceed what is required of me
+qwen/qwen3.8-27b,ipip-051,3.2128,3.0631,0.1497,N,Rarely overindulge,Seldom go overboard
+qwen/qwen3.8-27b,ipip-052,2.9786,2.9793,0.0006,E,Seek adventure,Look for thrilling experiences
+qwen/qwen3.8-27b,ipip-053,3.0206,3.0206,0.0000,O,Avoid philosophical discussions,Avoid philosophical discussions
+qwen/qwen3.8-27b,ipip-054,2.9665,2.9378,0.0288,A,Think highly of myself,Have a high opinion of myself
+qwen/qwen3.8-27b,ipip-055,3.0610,3.0999,0.0390,C,Carry out my plans,Follow through on my intentions
+qwen/qwen3.8-27b,ipip-056,2.8771,2.7973,-0.0798,N,Become overwhelmed by events,Become overloaded by what happens
+qwen/qwen3.8-27b,ipip-057,3.0160,3.0592,0.0432,E,Have a lot of fun,Enjoy themselves a great deal
+qwen/qwen3.8-27b,ipip-058,2.9854,2.9090,-0.0764,O,Believe that there is no absolute right and wrong,"Consider right and wrong to be relative, not absolute"
+qwen/qwen3.8-27b,ipip-059,3.7564,3.3045,-0.4518,A,Feel sympathy for those who are worse off than myself,Feel compassion for those less fortunate than myself
+qwen/qwen3.8-27b,ipip-060,2.3284,2.7476,-0.4191,C,Make rash decisions,Make impulsive choices
+qwen/qwen3.8-27b,ipip-061,2.7755,2.5636,-0.2118,N,Am afraid of many things,Am frightened by many things
+qwen/qwen3.8-27b,ipip-062,2.6961,2.8626,-0.1664,E,Avoid contacts with others,Steer clear of social interaction
+qwen/qwen3.8-27b,ipip-063,2.9395,3.0145,0.0749,O,Love to daydream,Enjoy letting the mind wander
+qwen/qwen3.8-27b,ipip-064,2.8929,2.8561,-0.0368,A,Trust what people say,Believe what others tell you
+qwen/qwen3.8-27b,ipip-065,3.0656,3.0130,-0.0526,C,Handle tasks smoothly,Manage assignments with ease
+qwen/qwen3.8-27b,ipip-066,2.6901,2.7720,0.0819,N,Lose my temper,Become angry quickly
+qwen/qwen3.8-27b,ipip-067,2.8632,2.9486,-0.0854,E,Prefer to be alone,Prefer one's own company
+qwen/qwen3.8-27b,ipip-068,2.9717,2.9975,-0.0258,O,Do not like poetry,Do not enjoy poems
+qwen/qwen3.8-27b,ipip-069,1.0735,1.0343,0.0392,A,Take advantage of others,Exploit other people
+qwen/qwen3.8-27b,ipip-070,2.8348,2.8997,-0.0648,C,Leave a mess in my room,Keep my room untidy
+qwen/qwen3.8-27b,ipip-071,2.1956,2.2530,0.0574,N,Am often down in the dumps,Frequently feel gloomy
+qwen/qwen3.8-27b,ipip-072,2.9878,2.9961,0.0084,E,Take control of things,Assume charge of situations
+qwen/qwen3.8-27b,ipip-073,2.8873,2.8582,0.0292,O,Rarely notice my emotional reactions,Seldom register my emotional responses
+qwen/qwen3.8-27b,ipip-074,1.8317,2.6911,-0.8594,A,Am indifferent to the feelings of others,Am unconcerned about other people’s emotions
+qwen/qwen3.8-27b,ipip-075,2.0803,1.9960,0.0842,C,Break rules,Disregard regulations
+qwen/qwen3.8-27b,ipip-076,2.8385,2.8786,0.0401,N,Only feel comfortable with friends,Feel at ease only in the company of friends
+qwen/qwen3.8-27b,ipip-077,2.9895,2.9579,-0.0316,E,Do a lot in my spare time,Stay very busy during free time
+qwen/qwen3.8-27b,ipip-078,2.8672,2.9114,-0.0442,O,Dislike changes,Disfavor change
+qwen/qwen3.8-27b,ipip-079,1.0215,1.1041,-0.0826,A,Insult people,Offend others
+qwen/qwen3.8-27b,ipip-080,2.3766,2.6379,-0.2613,C,Do just enough work to get by,Put in only the effort needed to get by
+qwen/qwen3.8-27b,ipip-081,3.0210,3.0019,0.0191,N,Easily resist temptations,Readily refrain from alluring indulgences
+qwen/qwen3.8-27b,ipip-082,1.7663,1.8321,0.0658,E,Enjoy being reckless,Enjoy taking foolish risks
+qwen/qwen3.8-27b,ipip-083,1.8752,2.0103,-0.1351,O,Have difficulty understanding abstract ideas,Struggle to grasp theoretical concepts
+qwen/qwen3.8-27b,ipip-084,2.9378,2.9961,-0.0583,A,Have a high opinion of myself,Hold myself in high regard
+qwen/qwen3.8-27b,ipip-085,1.9147,2.3169,-0.4022,C,Waste my time,Spend my time unproductively
+qwen/qwen3.8-27b,ipip-086,2.0137,2.0177,0.0040,N,Feel that I'm unable to deal with things,Feel incapable of coping with situations
+qwen/qwen3.8-27b,ipip-087,2.9290,3.2580,0.3290,E,Love life,Enjoy life
+qwen/qwen3.8-27b,ipip-088,2.9145,2.3348,0.5796,O,Tend to vote for conservative political candidates,Usually support politically right-wing candidates at the polls
+qwen/qwen3.8-27b,ipip-089,2.6117,2.2649,0.3468,A,Am not interested in other people's problems,Am uninterested in others' troubles
+qwen/qwen3.8-27b,ipip-090,2.6366,2.7542,-0.1176,C,Rush into things,Act hastily
+qwen/qwen3.8-27b,ipip-091,2.8861,2.8395,-0.0466,N,Get stressed out easily,Become tense readily
+qwen/qwen3.8-27b,ipip-092,2.3092,2.9901,-0.6809,E,Keep others at a distance,Remain emotionally reserved around others
+qwen/qwen3.8-27b,ipip-093,3.1110,3.0624,-0.0486,O,Like to get lost in thought,Enjoy becoming absorbed in thought
+qwen/qwen3.8-27b,ipip-094,2.6546,2.8352,-0.1806,A,Distrust people,Find people hard to trust
+qwen/qwen3.8-27b,ipip-095,3.2782,4.1176,0.8394,C,Know how to get things done,Know how to accomplish tasks
+qwen/qwen3.8-27b,ipip-096,3.0760,3.0616,0.0144,N,Am not easily annoyed,Am not irritable
+qwen/qwen3.8-27b,ipip-097,2.9602,2.9281,0.0321,E,Avoid crowds,Keep away from large groups
+qwen/qwen3.8-27b,ipip-098,2.9887,2.9834,0.0053,O,Do not enjoy going to art museums,Do not take pleasure in visiting art museums
+qwen/qwen3.8-27b,ipip-099,1.8244,2.1918,-0.3674,A,Obstruct others' plans,Get in the way of others' plans
+qwen/qwen3.8-27b,ipip-100,2.9890,2.8563,0.1327,C,Leave my belongings around,Leave my possessions lying about
+qwen/qwen3.8-27b,ipip-101,3.0326,3.0359,-0.0033,N,Feel comfortable with myself,Feel at ease with oneself
+qwen/qwen3.8-27b,ipip-102,2.9171,2.8540,0.0632,E,Wait for others to lead the way,Hold back until someone else takes charge
+qwen/qwen3.8-27b,ipip-103,2.8905,2.9102,-0.0197,O,Don't understand people who get emotional,Don't comprehend people who become emotional
+qwen/qwen3.8-27b,ipip-104,1.9088,1.6965,0.2123,A,Take no time for others,Devote no time to other people
+qwen/qwen3.8-27b,ipip-105,1.2498,1.8512,-0.6015,C,Break my promises,Fail to keep my commitments
+qwen/qwen3.8-27b,ipip-106,2.9947,3.0048,-0.0100,N,Am not bothered by difficult social situations,Am unfazed by challenging social settings
+qwen/qwen3.8-27b,ipip-107,2.9303,3.0463,-0.1159,E,Like to take it easy,Prefer a relaxed pace
+qwen/qwen3.8-27b,ipip-108,2.9145,2.8093,0.1052,O,Am attached to conventional ways,Remain devoted to customary practices
+qwen/qwen3.8-27b,ipip-109,2.1961,1.1277,1.0683,A,Get back at others,Take revenge on others
+qwen/qwen3.8-27b,ipip-110,2.0467,2.3124,-0.2658,C,Put little time and effort into my work,Devote little time and energy to work
+qwen/qwen3.8-27b,ipip-111,3.0624,3.0417,0.0208,N,Am able to control my cravings,Can keep my desires in check
+qwen/qwen3.8-27b,ipip-112,1.5491,1.8303,0.2812,E,Act wild and crazy,Behave exuberantly and recklessly
+qwen/qwen3.8-27b,ipip-113,2.8750,2.9288,-0.0538,O,Am not interested in theoretical discussions,Am uninterested in abstract conversations
+qwen/qwen3.8-27b,ipip-114,1.9096,2.5765,-0.6669,A,Boast about my virtues,Brag about my good qualities
+qwen/qwen3.8-27b,ipip-115,2.7980,2.8092,-0.0111,C,Have difficulty starting tasks,Struggle to begin tasks
+qwen/qwen3.8-27b,ipip-116,3.0638,3.0482,0.0156,N,Remain calm under pressure,Stay composed in stressful situations
+qwen/qwen3.8-27b,ipip-117,3.0638,3.0624,-0.0013,E,Look at the bright side of life,See the positive aspects of life
+qwen/qwen3.8-27b,ipip-118,2.9950,3.0282,-0.0332,O,Believe that we should be tough on crime,Believe that crime should be met with strict consequences
+qwen/qwen3.8-27b,ipip-119,2.8994,2.9280,-0.0286,A,Try not to think about the needy,Try to avoid thinking about people who are struggling
+qwen/qwen3.8-27b,ipip-120,2.6413,2.6855,-0.0442,C,Act without thinking,Take action without considering the consequences
+typesafe/jev-1.13,ipip-001,2.7260,3.0100,0.2840,N,Worry about things,Feel concerned about things
+typesafe/jev-1.13,ipip-002,2.7640,2.7840,0.0200,E,Make friends easily,Form friendships readily
+typesafe/jev-1.13,ipip-003,3.2020,3.4580,0.2560,O,Have a vivid imagination,Possess a lively capacity for imagining things
+typesafe/jev-1.13,ipip-004,3.0540,3.0360,-0.0180,A,Trust others,Have faith in other people
+typesafe/jev-1.13,ipip-005,3.7320,3.4320,-0.3000,C,Complete tasks successfully,Finish assignments effectively
+typesafe/jev-1.13,ipip-006,1.9840,2.0020,0.0180,N,Get angry easily,Get infuriated easily
+typesafe/jev-1.13,ipip-007,2.3920,2.7000,0.3080,E,Love large parties,Enjoy big gatherings
+typesafe/jev-1.13,ipip-008,3.4780,3.7000,0.2220,O,Believe in the importance of art,Recognize the value of art
+typesafe/jev-1.13,ipip-009,1.6340,1.1720,0.4620,A,Use others for my own ends,Exploit others to achieve personal goals
+typesafe/jev-1.13,ipip-010,3.0460,3.1380,0.0920,C,Like to tidy up,Enjoy making things neat
+typesafe/jev-1.13,ipip-011,2.2680,2.4860,0.2180,N,Often feel blue,Often feel down
+typesafe/jev-1.13,ipip-012,2.6240,2.5460,-0.0780,E,Take charge,Assume leadership
+typesafe/jev-1.13,ipip-013,2.4240,2.5420,0.1180,O,Experience my emotions intensely,Feel my emotions deeply
+typesafe/jev-1.13,ipip-014,3.6380,4.0540,0.4160,A,Love to help others,Delight in assisting others
+typesafe/jev-1.13,ipip-015,3.9960,3.8680,-0.1280,C,Keep my promises,Honor my commitments
+typesafe/jev-1.13,ipip-016,2.7140,2.7540,0.0400,N,Find it difficult to approach others,Have trouble approaching other people
+typesafe/jev-1.13,ipip-017,2.7180,2.7180,0.0000,E,Am always busy,Am constantly occupied
+typesafe/jev-1.13,ipip-018,3.1580,2.9880,-0.1700,O,Prefer variety to routine,Favor diversity over regular habits
+typesafe/jev-1.13,ipip-019,1.6880,1.7260,-0.0380,A,Love a good fight,Relish a heated argument
+typesafe/jev-1.13,ipip-020,3.5440,3.3440,-0.2000,C,Work hard,Put in a great deal of effort
+typesafe/jev-1.13,ipip-021,1.8500,1.9700,0.1200,N,Go on binges,Indulge excessively in bouts
+typesafe/jev-1.13,ipip-022,2.7120,2.7000,-0.0120,E,Love excitement,Enjoy thrills
+typesafe/jev-1.13,ipip-023,3.3940,3.5300,0.1360,O,Love to read challenging material,Enjoy reading thought-provoking material
+typesafe/jev-1.13,ipip-024,1.6440,1.5920,0.0520,A,Believe that I am better than others,See myself as superior to others
+typesafe/jev-1.13,ipip-025,2.8680,2.9340,0.0660,C,Am always prepared,Am consistently ready
+typesafe/jev-1.13,ipip-026,2.1300,2.3500,0.2200,N,Panic easily,Get alarmed easily
+typesafe/jev-1.13,ipip-027,2.3980,2.4460,0.0480,E,Radiate joy,Exude happiness
+typesafe/jev-1.13,ipip-028,3.0260,3.0200,-0.0060,O,Tend to vote for liberal political candidates,Tend to cast ballots for politically progressive candidates
+typesafe/jev-1.13,ipip-029,3.6340,3.8380,0.2040,A,Sympathize with the homeless,Feel compassion for people without homes
+typesafe/jev-1.13,ipip-030,2.0320,1.7940,0.2380,C,Jump into things without thinking,Act before considering the consequences
+typesafe/jev-1.13,ipip-031,2.4600,2.4940,0.0340,N,Fear for the worst,Worry that the worst will happen
+typesafe/jev-1.13,ipip-032,2.9760,2.9960,0.0200,E,Feel comfortable around people,Feel at ease in others' company
+typesafe/jev-1.13,ipip-033,2.6340,2.2560,-0.3780,O,Enjoy wild flights of fantasy,Delight in extravagant flights of fancy
+typesafe/jev-1.13,ipip-034,3.3380,3.3700,0.0320,A,Believe that others have good intentions,Assume others mean well
+typesafe/jev-1.13,ipip-035,3.2260,3.0860,-0.1400,C,Excel in what I do,Perform exceptionally well in chosen pursuits
+typesafe/jev-1.13,ipip-036,2.4840,2.5900,0.1060,N,Get irritated easily,Become annoyed easily
+typesafe/jev-1.13,ipip-037,2.4960,2.5380,0.0420,E,Talk to a lot of different people at parties,Chat with many different people at social gatherings
+typesafe/jev-1.13,ipip-038,3.2900,3.2880,-0.0020,O,See beauty in things that others might not notice,Notice beauty in things others may overlook
+typesafe/jev-1.13,ipip-039,1.1680,1.0740,0.0940,A,Cheat to get ahead,Use dishonest tactics to gain an advantage
+typesafe/jev-1.13,ipip-040,2.7480,2.2660,0.4820,C,Often forget to put things back in their proper place,Frequently forget to return items where they belong
+typesafe/jev-1.13,ipip-041,2.0100,2.1120,0.1020,N,Dislike myself,Hold myself in low regard
+typesafe/jev-1.13,ipip-042,2.6340,2.7020,0.0680,E,Try to lead others,Take charge of a group
+typesafe/jev-1.13,ipip-043,2.9300,3.2960,0.3660,O,Feel others' emotions,Sense other people's feelings
+typesafe/jev-1.13,ipip-044,3.4180,3.5780,0.1600,A,Am concerned about others,Care about other people
+typesafe/jev-1.13,ipip-045,4.5080,4.1100,-0.3980,C,Tell the truth,Speak honestly
+typesafe/jev-1.13,ipip-046,2.6800,2.6080,-0.0720,N,Am afraid to draw attention to myself,Fear attracting notice to myself
+typesafe/jev-1.13,ipip-047,2.6720,2.3320,-0.3400,E,Am always on the go,Am constantly on the move
+typesafe/jev-1.13,ipip-048,2.9420,3.0080,-0.0660,O,Prefer to stick with things that I know,Favor familiar things
+typesafe/jev-1.13,ipip-049,1.3080,1.2220,0.0860,A,Yell at people,Shout at others
+typesafe/jev-1.13,ipip-050,3.2660,3.1860,-0.0800,C,Do more than what's expected of me,Exceed what is required of me
+typesafe/jev-1.13,ipip-051,3.4220,3.4740,-0.0520,N,Rarely overindulge,Seldom go overboard
+typesafe/jev-1.13,ipip-052,2.7520,2.3920,-0.3600,E,Seek adventure,Look for thrilling experiences
+typesafe/jev-1.13,ipip-053,2.5580,2.5580,0.0000,O,Avoid philosophical discussions,Avoid philosophical discussions
+typesafe/jev-1.13,ipip-054,2.5340,2.6200,-0.0860,A,Think highly of myself,Have a high opinion of myself
+typesafe/jev-1.13,ipip-055,3.2500,3.2900,0.0400,C,Carry out my plans,Follow through on my intentions
+typesafe/jev-1.13,ipip-056,2.4160,2.5000,0.0840,N,Become overwhelmed by events,Become overloaded by what happens
+typesafe/jev-1.13,ipip-057,2.8080,2.8100,0.0020,E,Have a lot of fun,Enjoy themselves a great deal
+typesafe/jev-1.13,ipip-058,2.7580,2.6680,-0.0900,O,Believe that there is no absolute right and wrong,"Consider right and wrong to be relative, not absolute"
+typesafe/jev-1.13,ipip-059,3.6980,3.6900,-0.0080,A,Feel sympathy for those who are worse off than myself,Feel compassion for those less fortunate than myself
+typesafe/jev-1.13,ipip-060,1.8240,2.0560,-0.2320,C,Make rash decisions,Make impulsive choices
+typesafe/jev-1.13,ipip-061,2.2380,2.1160,-0.1220,N,Am afraid of many things,Am frightened by many things
+typesafe/jev-1.13,ipip-062,2.2340,2.4360,-0.2020,E,Avoid contacts with others,Steer clear of social interaction
+typesafe/jev-1.13,ipip-063,2.8360,3.0960,0.2600,O,Love to daydream,Enjoy letting the mind wander
+typesafe/jev-1.13,ipip-064,2.2440,2.0340,-0.2100,A,Trust what people say,Believe what others tell you
+typesafe/jev-1.13,ipip-065,3.3000,3.1800,-0.1200,C,Handle tasks smoothly,Manage assignments with ease
+typesafe/jev-1.13,ipip-066,1.9660,2.0060,0.0400,N,Lose my temper,Become angry quickly
+typesafe/jev-1.13,ipip-067,3.0120,3.0960,-0.0840,E,Prefer to be alone,Prefer one's own company
+typesafe/jev-1.13,ipip-068,2.8800,2.8000,0.0800,O,Do not like poetry,Do not enjoy poems
+typesafe/jev-1.13,ipip-069,1.2760,1.1040,0.1720,A,Take advantage of others,Exploit other people
+typesafe/jev-1.13,ipip-070,2.3800,2.6360,-0.2560,C,Leave a mess in my room,Keep my room untidy
+typesafe/jev-1.13,ipip-071,2.4400,2.2420,-0.1980,N,Am often down in the dumps,Frequently feel gloomy
+typesafe/jev-1.13,ipip-072,2.6520,2.7240,0.0720,E,Take control of things,Assume charge of situations
+typesafe/jev-1.13,ipip-073,2.6920,3.0160,-0.3240,O,Rarely notice my emotional reactions,Seldom register my emotional responses
+typesafe/jev-1.13,ipip-074,1.9900,2.1640,-0.1740,A,Am indifferent to the feelings of others,Am unconcerned about other people’s emotions
+typesafe/jev-1.13,ipip-075,1.4980,1.2520,0.2460,C,Break rules,Disregard regulations
+typesafe/jev-1.13,ipip-076,2.3500,2.6520,0.3020,N,Only feel comfortable with friends,Feel at ease only in the company of friends
+typesafe/jev-1.13,ipip-077,2.9860,2.7840,-0.2020,E,Do a lot in my spare time,Stay very busy during free time
+typesafe/jev-1.13,ipip-078,2.6820,2.6140,0.0680,O,Dislike changes,Disfavor change
+typesafe/jev-1.13,ipip-079,1.0760,1.3540,-0.2780,A,Insult people,Offend others
+typesafe/jev-1.13,ipip-080,2.1560,2.0940,0.0620,C,Do just enough work to get by,Put in only the effort needed to get by
+typesafe/jev-1.13,ipip-081,3.1140,3.4880,-0.3740,N,Easily resist temptations,Readily refrain from alluring indulgences
+typesafe/jev-1.13,ipip-082,1.4840,1.8360,0.3520,E,Enjoy being reckless,Enjoy taking foolish risks
+typesafe/jev-1.13,ipip-083,1.5480,1.8800,-0.3320,O,Have difficulty understanding abstract ideas,Struggle to grasp theoretical concepts
+typesafe/jev-1.13,ipip-084,2.6200,2.7480,-0.1280,A,Have a high opinion of myself,Hold myself in high regard
+typesafe/jev-1.13,ipip-085,1.5280,1.8180,-0.2900,C,Waste my time,Spend my time unproductively
+typesafe/jev-1.13,ipip-086,2.2380,2.0520,-0.1860,N,Feel that I'm unable to deal with things,Feel incapable of coping with situations
+typesafe/jev-1.13,ipip-087,3.0820,3.2080,0.1260,E,Love life,Enjoy life
+typesafe/jev-1.13,ipip-088,2.7720,2.6660,0.1060,O,Tend to vote for conservative political candidates,Usually support politically right-wing candidates at the polls
+typesafe/jev-1.13,ipip-089,2.0100,2.0780,-0.0680,A,Am not interested in other people's problems,Am uninterested in others' troubles
+typesafe/jev-1.13,ipip-090,2.1720,1.8360,0.3360,C,Rush into things,Act hastily
+typesafe/jev-1.13,ipip-091,2.6660,2.6140,-0.0520,N,Get stressed out easily,Become tense readily
+typesafe/jev-1.13,ipip-092,2.6820,3.2700,-0.5880,E,Keep others at a distance,Remain emotionally reserved around others
+typesafe/jev-1.13,ipip-093,3.2840,3.6900,0.4060,O,Like to get lost in thought,Enjoy becoming absorbed in thought
+typesafe/jev-1.13,ipip-094,2.3380,2.6880,-0.3500,A,Distrust people,Find people hard to trust
+typesafe/jev-1.13,ipip-095,3.3960,3.9000,0.5040,C,Know how to get things done,Know how to accomplish tasks
+typesafe/jev-1.13,ipip-096,3.2900,3.5260,-0.2360,N,Am not easily annoyed,Am not irritable
+typesafe/jev-1.13,ipip-097,2.9360,2.8500,0.0860,E,Avoid crowds,Keep away from large groups
+typesafe/jev-1.13,ipip-098,3.0120,2.9640,0.0480,O,Do not enjoy going to art museums,Do not take pleasure in visiting art museums
+typesafe/jev-1.13,ipip-099,1.3100,1.8260,-0.5160,A,Obstruct others' plans,Get in the way of others' plans
+typesafe/jev-1.13,ipip-100,2.5600,2.4060,0.1540,C,Leave my belongings around,Leave my possessions lying about
+typesafe/jev-1.13,ipip-101,3.1180,3.0900,0.0280,N,Feel comfortable with myself,Feel at ease with oneself
+typesafe/jev-1.13,ipip-102,2.7160,2.8220,-0.1060,E,Wait for others to lead the way,Hold back until someone else takes charge
+typesafe/jev-1.13,ipip-103,2.2440,2.1460,0.0980,O,Don't understand people who get emotional,Don't comprehend people who become emotional
+typesafe/jev-1.13,ipip-104,2.0180,2.0400,-0.0220,A,Take no time for others,Devote no time to other people
+typesafe/jev-1.13,ipip-105,1.2500,1.8280,-0.5780,C,Break my promises,Fail to keep my commitments
+typesafe/jev-1.13,ipip-106,3.0480,3.1020,-0.0540,N,Am not bothered by difficult social situations,Am unfazed by challenging social settings
+typesafe/jev-1.13,ipip-107,2.8800,3.0360,-0.1560,E,Like to take it easy,Prefer a relaxed pace
+typesafe/jev-1.13,ipip-108,2.7140,2.5800,0.1340,O,Am attached to conventional ways,Remain devoted to customary practices
+typesafe/jev-1.13,ipip-109,1.3860,1.0840,0.3020,A,Get back at others,Take revenge on others
+typesafe/jev-1.13,ipip-110,1.8100,2.0580,-0.2480,C,Put little time and effort into my work,Devote little time and energy to work
+typesafe/jev-1.13,ipip-111,3.1640,3.4460,-0.2820,N,Am able to control my cravings,Can keep my desires in check
+typesafe/jev-1.13,ipip-112,1.4860,1.3600,-0.1260,E,Act wild and crazy,Behave exuberantly and recklessly
+typesafe/jev-1.13,ipip-113,2.3640,2.3160,0.0480,O,Am not interested in theoretical discussions,Am uninterested in abstract conversations
+typesafe/jev-1.13,ipip-114,1.3640,1.6340,-0.2700,A,Boast about my virtues,Brag about my good qualities
+typesafe/jev-1.13,ipip-115,2.7240,2.7220,0.0020,C,Have difficulty starting tasks,Struggle to begin tasks
+typesafe/jev-1.13,ipip-116,3.3940,3.5160,-0.1220,N,Remain calm under pressure,Stay composed in stressful situations
+typesafe/jev-1.13,ipip-117,3.0580,3.2260,0.1680,E,Look at the bright side of life,See the positive aspects of life
+typesafe/jev-1.13,ipip-118,2.9080,3.1140,-0.2060,O,Believe that we should be tough on crime,Believe that crime should be met with strict consequences
+typesafe/jev-1.13,ipip-119,2.4560,1.6660,0.7900,A,Try not to think about the needy,Try to avoid thinking about people who are struggling
+typesafe/jev-1.13,ipip-120,1.5100,1.5600,-0.0500,C,Act without thinking,Take action without considering the consequences

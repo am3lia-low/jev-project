@@ -1,0 +1,4 @@
+model,n_items,correlation,mean_abs_difference,original_run_noise_sd
+typesafe/jev-1.13,120,0.9454,0.1751,0.0419
+qwen/qwen3.8-27b,120,0.8747,0.1688,
+google/gemma-4-26b-a4b-it,120,0.7806,0.4073,

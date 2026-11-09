@@ -1,4 +1,4 @@
-# Big Five personas: findings (B1 steps 1–3)
+# Big Five personas: findings (B1 steps 1–5)
 
 Run 2026-10-15 on the API laptop; written up 2026-10-16. The design is in [PLAN B1](../../docs/PLAN.md#b1-behavioural-axis--big-five). This file is written by hand. The numbers come from `02_analyse_bigfive.py`; its automatic summary is [`bigfive_summary.md`](bigfive_summary.md) and the full tables are in [`tables/`](tables/).
 
@@ -72,17 +72,51 @@ Cronbach's α per trait is 0.96–0.97 for Jev and Qwen and 0.95–0.97 for Gemm
 - None leans towards agreeing with every statement. All three lean slightly the other way.
 - **Jev is very repeatable:** across its 5 baseline repeats, the average spread per item is 0.04 on the 1–5 scale, and the SD of each trait score across repeats is at most 0.01.
 
+### 6. No sign of answering from memory (B1 step 4, paraphrased items)
+
+Run 2026-11-08 ($0.44, 0 failed). Same conditions as steps 1–3, but on the 120 reviewed paraphrases (`data/ipip/ipip_neo_120_paraphrased.json`). Automatic summary: [`paraphrase_summary.md`](paraphrase_summary.md). A model answering from memory should change its answers more when the wording changes.
+
+| Baseline, original vs paraphrased | Jev | Qwen | Gemma |
+|---|---|---|---|
+| Item-level correlation | 0.95 | 0.87 | 0.78 |
+| Mean absolute difference (1–5) | 0.18 | 0.17 | 0.41 |
+| Largest trait-score change | 0.04 | 0.10 | 0.17 |
+| Persona pull, paraphrased ÷ original | 0.98–1.05 | 0.92–1.01 | 0.90–1.06 |
+
+- **Trait scores barely move.** Every baseline trait change has a 95% CI that includes 0 (Qwen's N, +0.10 [+0.00, +0.22], is at the edge).
+- **Personas pull just as hard on new wording.** All persona pulls on the paraphrases are within 10% of the originals. So keyword matching between the marker adjectives and the original items is not what drives the pull.
+- **Jev is the most stable** of the three. Gemma changes most per item (the 10 largest item moves, 1.9–2.0 points, are all Gemma's), but its trait scores don't shift, so this looks like item-level noise, not memory. Some of those items may also have changed meaning slightly (e.g. "Distrust people" → "Find people hard to trust").
+- This is descriptive; there was no pre-registered threshold.
+
+### 7. Personas change behaviour, not only self-report (B1 step 5, scenarios)
+
+Run 2026-11-08 ($0.40, 0 failed). 120 everyday scenarios (24 per trait), each with a high-trait and a low-trait action; the model picks one with Jev `choice` (LLMs: A/B logprobs). Behaviour = probability of the high action. Both measures are put on 0–1 (self-report = (trait score − 1) / 4). Automatic summary: [`scenarios_summary.md`](scenarios_summary.md).
+
+| Target shift, high − low (0–1) | Jev | Qwen | Gemma |
+|---|---|---|---|
+| Self-report (state / instructions) | 0.85 / 0.75 | 0.93 / 0.80 | 0.93 / 0.89 |
+| Behaviour (state / instructions) | 0.83 / 0.82 | 0.83 / 0.81 | 0.84 / 0.86 |
+
+(Means over the 5 traits.)
+
+- **Every persona moves behaviour, for all 3 models and both placements.** No 95% CI comes near 0. Jev's behaviour shifts (0.64–0.98) are as large as the LLMs'.
+- **By trait:** E and O move behaviour almost to the maximum (0.93–0.98). C (0.68–0.71) and N (0.64–0.79) move less, and their CIs are wide, so some C and N scenarios don't separate the two actions well.
+- **Placement matters for self-report, not for behaviour.** In the state a persona moves self-report more (finding 2), but behaviour is about the same in both placements.
+- **The halo shows up in behaviour too.** An A persona also moves O (+0.55 for Jev) and N (−0.45); an E persona moves O (+0.60); an O persona moves C (+0.48) and E (+0.45). A C persona *lowers* O behaviour (−0.32 for Jev), i.e. the conscientious persona picks the conventional option. So the side effects from finding 3 are not only in how models describe themselves. Part of this may come from the scenarios themselves: a "high O" action can also read as sociable or kind.
+- **No persona:** all three choose the calm option nearly always (behaviour N 0.13–0.17, below their self-reported N of 0.22–0.41). Otherwise the default behaviour matches the default self-report profile (agreeable, conscientious, middling E).
+- **Jev and the LLMs look almost the same** on this check: same ranking of traits, same halo pattern.
+
 ## Caveats
 
 - **Every call was stateless.** One item per request, with no conversation history: the LLMs got a fresh system + user message each time, and Jev's Decisions API has no history. No model saw its earlier answers or knew it was taking a questionnaire. So the persona was always fresh and right next to the question, which is close to the best case for persona strength, and there were no order or self-consistency effects. These results say nothing about whether a persona *decays* over a conversation or a growing state; that needs its own experiment.
-- **Self-report only.** These are answers about the persona's description of itself; B1 step 5 checks behaviour.
-- **Contamination is untested.** IPIP items are public, and a model may know which answers go with which trait. B1 step 4 (paraphrased items) checks this.
-- **Persona wording names trait words.** The markers are adjectives, not trait names, but some are close to the items (e.g. "talkative" vs the item "Talk to a lot of different people at parties"). A model can then match keywords without adopting anything. This is part of what step 4 tests.
+- **Self-report and short scenarios only.** Findings 1–6 are self-report; finding 7 checks behaviour, but only as a single A/B choice in a one-line scenario, not in a longer task.
+- **Contamination:** IPIP items are public. Step 4 (finding 6) found no sign that models answer from memory, but a paraphrase can't rule out that a model knows which kind of answer goes with which trait.
+- **Persona wording names trait words.** The markers are adjectives, not trait names, but some are close to the items (e.g. "talkative" vs the item "Talk to a lot of different people at parties"). Step 4 suggests this doesn't drive the pull (same pull on reworded items).
 - **Low-Neuroticism personas** draw from only 6 Goldberg markers, so their 5 wordings overlap heavily.
 - **LLMs at temperature 0** have no repeat noise measured; their answers are probability-weighted means over the top-20 first-token logprobs.
 
 ## Next
 
-1. B1 step 4: paraphrase the 120 IPIP items (gpt-6-luna) and re-run the baseline and personas on them.
-2. B1 step 5: scenario questions per trait (Jev `choice`), to see whether personas change behaviour as well as self-report.
-3. B2: the difficulty ladder.
+1. ~~B1 step 4: paraphrased items~~ (done 2026-11-08, finding 6).
+2. ~~B1 step 5: scenario questions~~ (done 2026-11-08, finding 7).
+3. B2: the difficulty ladder (needs the HuggingFace login for GPQA and HLE).

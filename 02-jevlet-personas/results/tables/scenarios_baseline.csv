@@ -1,0 +1,7 @@
+model,measure,A,C,E,N,O
+typesafe/jev-1.13,behaviour,0.7928,0.7510,0.5582,0.1504,0.7061
+typesafe/jev-1.13,self_report,0.7417,0.6869,0.4399,0.3653,0.5531
+qwen/qwen3.8-27b,behaviour,0.8080,0.7226,0.5287,0.1299,0.8212
+qwen/qwen3.8-27b,self_report,0.6946,0.6108,0.4810,0.4131,0.5208
+google/gemma-4-26b-a4b-it,behaviour,0.7884,0.7253,0.4668,0.1665,0.7076
+google/gemma-4-26b-a4b-it,self_report,0.8015,0.8021,0.4500,0.2226,0.5628
