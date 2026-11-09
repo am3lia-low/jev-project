@@ -61,7 +61,7 @@ Shared code (pinned model IDs, OpenRouter client, cache, parallel runner, stats)
 ├── data/                   # committed
 │   ├── ipip/               # IPIP-NEO-120 items; paraphrased items after review (B1 step 4)
 │   ├── scenarios/          # drafts and the reviewed scenarios.json (B1 step 5)
-│   ├── ladder/             # <benchmark>.jsonl and build_report.json (B2)
+│   ├── ladder/             # <benchmark>.jsonl and build_report.json (B2); gpqa/hle.jsonl are gitignored (gated), rebuild with 10
 │   └── reviews/            # sheets filled in by hand: ipip_paraphrases.csv, scenarios.csv
 ├── results/                # committed
 │   ├── raw/<model slug>/bigfive/<condition>.jsonl   # 01
@@ -165,4 +165,5 @@ python 12_analyse_ladder.py
 - 2026-10-24: both review sheets filled; `--apply-review` wrote `data/ipip/ipip_neo_120_paraphrased.json` (10 items replaced by an edit) and `data/scenarios/scenarios.json` (120 scenarios).
 - B4 persona decay is complete (main run and both follow-up arms).
 - 2026-11-08: B1 step 4 (`01_run_bigfive.py --items paraphrased` → `06`, $0.44) and step 5 (`08_run_scenarios.py` → `09`, $0.40) run; findings 6 and 7 in [`results/bigfive_findings.md`](results/bigfive_findings.md). B1 is complete.
-- Next: B2 (needs a HuggingFace login for GPQA and HLE). Optional, not started: the active support-chat decay arm (to design after the scenarios run).
+- 2026-11-09: B2 difficulty ladder built and run ($0.16); findings in [`results/ladder_findings.md`](results/ladder_findings.md). Part B is complete.
+- Optional, not started: the active support-chat decay arm (B4 extension).

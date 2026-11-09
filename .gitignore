@@ -25,3 +25,8 @@ logs/
 .idea/
 .DS_Store
 Thumbs.db
+
+# Gated benchmarks (GPQA, HLE): their terms ask that questions not be republished,
+# and this repo is public. Rebuild locally with 02-jevlet-personas/10_build_ladder.py.
+02-jevlet-personas/data/ladder/gpqa.jsonl
+02-jevlet-personas/data/ladder/hle.jsonl
